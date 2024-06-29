@@ -53,7 +53,7 @@ class EncounterPF2e extends Combat {
             return inEncounter.length > 0 ? inEncounter : partyMembers;
         })();
 
-        const opposition = R.uniq(
+        const opposition = R.unique(
             this.combatants
                 .filter(
                     (c) =>
@@ -233,13 +233,10 @@ class EncounterPF2e extends Combat {
      * `async` since this is usually called from CRUD hooks, which are called prior to encounter/combatant data resets
      */
     async resetActors(): Promise<void> {
-        const actors: ActorPF2e[] = R.uniq(
-            R.compact(
-                this.combatants.contents.flatMap((c) => [
-                    c.actor,
-                    c.actor?.isOfType("character") ? c.actor.familiar : null,
-                ]),
-            ),
+        const actors: ActorPF2e[] = R.unique(
+            this.combatants.contents
+                .flatMap((c) => [c.actor, c.actor?.isOfType("character") ? c.actor.familiar : null])
+                .filter(R.isTruthy),
         );
         resetActors(actors, { sheets: false, tokens: true });
     }

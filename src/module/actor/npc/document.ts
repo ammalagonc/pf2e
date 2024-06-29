@@ -250,7 +250,7 @@ class NPCPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | nul
         this.prepareSkills();
 
         // Process strikes
-        const syntheticWeapons = R.uniqBy(R.compact(synthetics.strikes.map((s) => s())), (w) => w.slug);
+        const syntheticWeapons = R.uniqueBy(synthetics.strikes.map((s) => s()).filter(R.isTruthy), (w) => w.slug);
         const generatedMelee = syntheticWeapons.flatMap((w) => w.toNPCAttacks({ keepId: true }));
         const meleeItems = R.sortBy(
             [this.itemTypes.melee, generatedMelee].flat(),
@@ -386,7 +386,7 @@ class NPCPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | nul
             const data = fu.mergeObject(baseData, {
                 ...statistic.getTraceData(),
                 mod: statistic.check.mod,
-                itemID: loreItem?.id ?? null,
+                itemId: loreItem?.id ?? null,
                 lore: !!statistic.lore,
                 visible: statistic.proficient,
             });
