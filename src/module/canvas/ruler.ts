@@ -15,6 +15,10 @@ class RulerPF2e<TToken extends TokenPF2e | null = TokenPF2e | null> extends Rule
         return setting === "always" || (setting === "encounters" && !!game.combat?.active);
     }
 
+    static get hasModuleConflict(): boolean {
+        return ["elevationruler", "pf2e-ruler"].some((id) => game.modules.get(id)?.active);
+    }
+
     /** The footprint of the drag-measured token relative to the origin center */
     #footprint: GridOffset[] = [];
 
@@ -69,13 +73,8 @@ class RulerPF2e<TToken extends TokenPF2e | null = TokenPF2e | null> extends Rule
         if (!this.dragMeasurement || !token || game.activeTool === "ruler") {
             return;
         }
-
         token.document.locked = true;
-        const originPoint = token.center;
-        const offset = canvas.grid.getOffset(originPoint);
-        this.#footprint = token.footprint.map((o) => ({ i: o.i - offset.i, j: o.j - offset.j }));
-
-        return this._startMeasurement(originPoint, { snap: !event.shiftKey, token });
+        return this._startMeasurement(token.center, { snap: !event.shiftKey, token });
     }
 
     /**
@@ -94,12 +93,22 @@ class RulerPF2e<TToken extends TokenPF2e | null = TokenPF2e | null> extends Rule
                     lastSegment.ray = new Ray(R.pick(this.token, ["x", "y"]), exactDestination);
                 }
             }
-            return this.moveToken().then(() => {
-                this.#exactDestination = null;
-            });
+            return this.moveToken();
         }
 
         return this._endMeasurement();
+    }
+
+    /** Acquire the token's footprint for drag measurement. */
+    override measure(
+        destination: Point,
+        options?: { snap?: boolean; force?: boolean },
+    ): void | RulerMeasurementSegment[] {
+        if (this.dragMeasurement && this.token && this.origin) {
+            const offset = canvas.grid.getOffset(this.origin);
+            this.#footprint = this.token.footprint.map((o) => ({ i: o.i - offset.i, j: o.j - offset.j }));
+        }
+        return super.measure(destination, options);
     }
 
     /** Allow GMs to move tokens through walls when drag-measuring. */
@@ -221,10 +230,10 @@ class RulerPF2e<TToken extends TokenPF2e | null = TokenPF2e | null> extends Rule
         segment: RulerMeasurementSegment,
         destination: Point,
     ): Promise<unknown> {
-        if (this.dragMeasurement && this.#exactDestination && token && token.w < canvas.grid.sizeX) {
+        if (this.dragMeasurement && this.#exactDestination && segment === this.segments.at(-1)) {
             const exactDestination = this.#exactDestination;
-            const adjustedDestination = exactDestination ? exactDestination : destination;
-            return super._animateSegment(token, segment, adjustedDestination);
+            this.#exactDestination = null;
+            return super._animateSegment(token, segment, exactDestination);
         }
         return super._animateSegment(token, segment, destination);
     }
