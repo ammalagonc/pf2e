@@ -1351,13 +1351,13 @@
                         "uuid": "Compendium.pf2e.classfeatures.Item.Indomitable Will"
                     },
                     "g3k30": {
-                        "img": "systems/pf2e/icons/features/classes/quick-rage.webp",
+                        "img": "icons/magic/air/wind-vortex-swirl-red.webp",
                         "level": 17,
                         "name": "Quick Rage",
-                        "uuid": "Compendium.pf2e.classfeatures.Item.Quick Rage"
+                        "uuid": "Compendium.pf2e.classfeatures.Item.Revitalizing Rage"
                     },
                     "gfxqm": {
-                        "img": "systems/pf2e/icons/features/classes/juggerenaut.webp",
+                        "img": "icons/creatures/mammals/bull-horned-blue.webp",
                         "level": 7,
                         "name": "Juggernaut",
                         "uuid": "Compendium.pf2e.classfeatures.Item.Juggernaut"
@@ -1378,7 +1378,7 @@
                         "img": "icons/skills/melee/blade-tip-chipped-blood-red.webp",
                         "level": 13,
                         "name": "Weapon Fury",
-                        "uuid": "Compendium.pf2e.classfeatures.Item.Weapon Fury"
+                        "uuid": "Compendium.pf2e.classfeatures.Item.Weapon Mastery"
                     },
                     "p941e": {
                         "img": "icons/environment/settlement/watchtower-silhouette-yellow.webp",
@@ -1405,7 +1405,7 @@
                         "uuid": "Compendium.pf2e.classfeatures.Item.Weapon Specialization"
                     },
                     "tp5pg": {
-                        "img": "systems/pf2e/icons/features/classes/raging-resistance.webp",
+                        "img": "icons/skills/social/intimidation-impressing.webp",
                         "level": 9,
                         "name": "Raging Resistance",
                         "uuid": "Compendium.pf2e.classfeatures.Item.Raging Resistance"
