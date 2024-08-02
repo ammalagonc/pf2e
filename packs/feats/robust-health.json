@@ -36,6 +36,7 @@
                     }
                 ],
                 "selector": "healing-received",
+                "type": "circumstance",
                 "value": "@actor.level"
             }
         ],
