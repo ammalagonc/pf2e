@@ -1,19 +1,19 @@
 {
-    "_id": "GFLiTESBmoyQ3sLx",
-    "img": "systems/pf2e/icons/spells/dancing-shield.webp",
-    "name": "Effect: Exalted Reaction (Redemption)",
+    "_id": "rnkQKEwUxrGruE1e",
+    "img": "icons/weapons/sickles/sickle-hooked-silver.webp",
+    "name": "Effect: Revel in Retribution (Temp HP)",
     "system": {
         "description": {
-            "value": "<p>Granted by @UUID[Compendium.pf2e.classfeatures.Item.Exalted Reaction]</p>\n<p>You grant the resistance to yourself and all allies in your champion's aura, including the triggering ally. If you do, the resistance is reduced by 2 for all.</p>"
+            "value": "<p>Granted by @UUID[Compendium.pf2e.spells-srd.Item.Revel in Retribution]</p>\n<p>Whenever you successfully hit with a @UUID[Compendium.pf2e.actionspf2e.Item.Reactive Strike], you are granted temporary Hit Points.</p>"
         },
         "duration": {
             "expiry": "turn-start",
             "sustained": false,
-            "unit": "rounds",
+            "unit": "minutes",
             "value": 1
         },
         "level": {
-            "value": 1
+            "value": 6
         },
         "publication": {
             "license": "ORC",
@@ -22,9 +22,8 @@
         },
         "rules": [
             {
-                "key": "Resistance",
-                "type": "all-damage",
-                "value": "@item.origin.level"
+                "key": "TempHP",
+                "value": "@actor.flags.pf2e.revelInRetribution"
             }
         ],
         "start": {
