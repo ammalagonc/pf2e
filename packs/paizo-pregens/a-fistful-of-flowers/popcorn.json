@@ -236,8 +236,8 @@
                                 ]
                             }
                         ],
-                       "itemType": "weapon",
-                       "key": "ItemAlteration",
+                        "itemType": "weapon",
+                        "key": "ItemAlteration",
                         "mode": "add",
                         "predicate": [
                             "grasping-reach"
@@ -251,7 +251,6 @@
                             "downgrade": true
                         },
                         "predicate": [
-                            "item:melee",
                             "item:usage:hands:2",
                             "grasping-reach",
                             {
@@ -261,7 +260,7 @@
                                 ]
                             }
                         ],
-                        "selector": "strike-damage"
+                        "selector": "melee-strike-damage"
                     }
                 ],
                 "slug": "grasping-reach",
