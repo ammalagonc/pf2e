@@ -227,7 +227,8 @@
                 "slug": null,
                 "traits": {
                     "value": [
-                        "finesse"
+                        "finesse",
+                        "unarmed"
                     ]
                 }
             },
@@ -337,9 +338,6 @@
         }
     ],
     "name": "Lesser Shadow Scamp",
-    "prototypeToken": {
-        "name": "Air Scamp"
-    },
     "system": {
         "abilities": {
             "cha": {

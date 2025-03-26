@@ -79,7 +79,7 @@ class ChoiceSetRuleElement extends RuleElementPF2e<ChoiceSetSchema> {
             for (const ruleData of this.item.system.rules) {
                 ruleData.ignored = true;
             }
-        } else if (this.selection !== null) {
+        } else if (this.selection !== undefined) {
             this.#setRollOption(this.selection);
 
             // Assign the selection to a flag on the parent item so that it may be referenced by other rules elements on
@@ -386,7 +386,7 @@ class ChoiceSetRuleElement extends RuleElementPF2e<ChoiceSetSchema> {
                 ...this.actor.itemTypes.weapon
                     .filter(
                         (i) =>
-                            i.slug === "handwraps-of-mighty-blows" &&
+                            i.system.traits.otherTags.includes("handwraps-of-mighty-blows") &&
                             predicate.test([...actorRollOptions, ...i.getRollOptions("item")]),
                     )
                     .map((h) => ({ img: h.img, label: h.name, value: "unarmed" })),
