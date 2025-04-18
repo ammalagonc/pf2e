@@ -117,7 +117,6 @@ export function registerTemplates(): void {
         "systems/pf2e/templates/items/partials/duration.hbs",
         "systems/pf2e/templates/items/partials/other-tags.hbs",
         "systems/pf2e/templates/items/partials/self-applied-effect.hbs",
-        "systems/pf2e/templates/items/partials/staff-spells.hbs",
 
         // Loot partials
         "systems/pf2e/templates/actors/loot/inventory.hbs",

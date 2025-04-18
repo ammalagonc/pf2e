@@ -501,14 +501,6 @@ class ItemSheetPF2e<TItem extends ItemPF2e> extends ItemSheet<TItem, ItemSheetOp
             });
         }
 
-        // Handle contenteditable fields
-        for (const input of htmlQueryAll(html, "span[contenteditable][data-property]")) {
-            const propertyPath = input.dataset.property ?? "";
-            input.addEventListener("blur", () => {
-                this.item.update({ [propertyPath]: input.textContent });
-            });
-        }
-
         // Add a link to add GM notes
         if (
             this.isEditable &&
