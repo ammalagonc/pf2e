@@ -1,3 +1,4 @@
+import type { CollectionGetOptions } from "@common/utils/collection.d.mts";
 import type { ConditionPF2e } from "@item";
 import type { ConditionSlug, PersistentDamagePF2e } from "@item/condition/index.ts";
 import { DelegatedCollection } from "@util";
@@ -6,7 +7,7 @@ import type { ActorPF2e } from "./base.ts";
 /** A wrapper for collections of conditions on an actor, filterable by whether they're active or stored/temporary */
 class ActorConditions<TActor extends ActorPF2e> extends DelegatedCollection<ConditionPF2e<TActor>> {
     /** A secondary map by condition slug */
-    #slugMap = new Collection<ConditionPF2e<TActor>[]>();
+    #slugMap = new Collection<string, ConditionPF2e<TActor>[]>();
 
     /** Whether this collection is finalized following actor data preparation */
     #finalized = false;

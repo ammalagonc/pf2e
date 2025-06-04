@@ -4,6 +4,13 @@
             margin-top: 1em;
         }
 
+        &.expanded .dice-result .dice-tooltip {
+            margin-bottom: 0.25rem;
+            .wrapper {
+                margin-bottom: 0.25rem;
+            }
+        }
+
         .dice-result {
             .dice-formula {
                 align-items: center;
@@ -25,7 +32,7 @@
                     padding: 0 2ch;
 
                     .increased-from {
-                        color: var(--color-text-dark-2);
+                        color: var(--color-dark-2);
                         font-size: var(--font-size-16);
                         font-weight: normal;
                         vertical-align: 15%;
@@ -50,10 +57,11 @@
             }
 
             .dice-tooltip {
-                display: flex;
-                flex-direction: column;
-                gap: 0.25em;
-                margin-bottom: 0.25em;
+                .wrapper {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0.25rem;
+                }
 
                 .instance {
                     border-radius: 2px;
@@ -70,7 +78,7 @@
                     .dice {
                         .part-formula,
                         .part-total {
-                            color: var(--color-text-dark-secondary);
+                            color: var(--color-text-secondary);
                         }
                     }
 
@@ -109,30 +117,34 @@
 
     .damage-application {
         display: flex;
+        gap: 0.25rem;
         justify-content: center;
         margin-top: 3px;
         order: 3;
 
         button {
+            --button-size: 2em;
             align-items: center;
             display: flex;
             flex-direction: column;
+            flex-grow: 1;
             font-size: var(--font-size-18);
-            height: 2em;
+            gap: var(--space-2);
             justify-content: space-around;
-            line-height: unset;
-            padding: 0;
-
+            padding: 1px 0 0;
             &.half-damage {
                 position: relative;
-
-                i.fa-heart-broken {
+                > i {
                     -moz-background-clip: text;
                     -moz-text-fill-color: transparent;
                     -webkit-background-clip: text;
                     -webkit-text-fill-color: transparent;
                     background-clip: text;
-                    background-image: linear-gradient(to right, var(--text-dark) 50%, var(--color-text-light-6) 50%);
+                    background-image: linear-gradient(to right, var(--button-text-color) 50%, #999 50%);
+                }
+
+                &:hover > i {
+                    background-image: linear-gradient(to right, var(--button-hover-text-color) 50%, #999 50%);
                 }
             }
 
@@ -147,11 +159,15 @@
                 text-transform: uppercase;
             }
 
-            &.apply-healing .fa-stack {
-                font-size: 0.5em;
+            &.apply-healing {
+                .fa-stack {
+                    font-size: 0.5em;
 
-                i.fa-plus {
-                    font-size: var(--font-size-11);
+                    i.fa-plus {
+                        --fa-inverse: #aaa;
+                        font-size: var(--font-size-10);
+                        top: -1px;
+                    }
                 }
             }
 
@@ -164,6 +180,7 @@
                     font-size: 0.5em;
 
                     i.fa-plus {
+                        --fa-inverse: #aaa;
                         font-size: var(--font-size-11);
                     }
                 }
@@ -196,7 +213,9 @@
             background: var(--bg-dark);
             display: inline-flex;
             justify-content: center;
+            min-height: unset;
             width: 3ch;
+            height: 3ch;
             margin-left: 2px;
 
             // Upstream adds a margin that pushes the FA icon off center
@@ -208,5 +227,9 @@
         .reverted {
             text-decoration: line-through;
         }
+    }
+
+    .persistent-damage-recovery button {
+        width: 100%;
     }
 }

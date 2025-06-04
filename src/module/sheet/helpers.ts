@@ -1,4 +1,8 @@
 import { ActorPF2e } from "@actor";
+import type Application from "@client/appv1/api/application-v1.d.mts";
+import type { TooltipDirection } from "@client/helpers/interaction/tooltip-manager.d.mts";
+import type { RollMode } from "@common/constants.d.mts";
+import type { ItemUUID } from "@common/documents/_module.d.mts";
 import { ItemPF2e, ItemProxyPF2e } from "@item";
 import { htmlClosest, htmlQuery, sortLabeledRecord } from "@util";
 import * as R from "remeda";
@@ -122,17 +126,12 @@ async function getItemFromDragEvent(event: DragEvent): Promise<ItemPF2e | null> 
 /** Returns statistic dialog roll parameters based on held keys */
 type ParamsFromEvent = { skipDialog: boolean; rollMode?: RollMode | "roll" };
 
-function isRelevantEvent(
-    event: Maybe<JQuery.TriggeredEvent | Event>,
-): event is MouseEvent | TouchEvent | KeyboardEvent | WheelEvent | JQuery.TriggeredEvent {
+function isRelevantEvent(event: Maybe<Event>): event is MouseEvent | TouchEvent | KeyboardEvent | WheelEvent {
     return !!event && "ctrlKey" in event && "metaKey" in event && "shiftKey" in event;
 }
 
 /** Set roll mode and dialog skipping from a user's input */
-function eventToRollParams(
-    event: Maybe<JQuery.TriggeredEvent | Event>,
-    rollType: { type: "check" | "damage" },
-): ParamsFromEvent {
+function eventToRollParams(event: Maybe<Event>, rollType: { type: "check" | "damage" }): ParamsFromEvent {
     const key = rollType.type === "check" ? "showCheckDialogs" : "showDamageDialogs";
     const skipDefault = !game.user.settings[key];
     if (!isRelevantEvent(event)) return { skipDialog: skipDefault };
@@ -172,30 +171,37 @@ function createTooltipListener(
         /** If given, the tooltip will spawn on elements that match this selector */
         selector?: string;
         locked?: boolean;
-        direction?: TooltipActivationOptions["direction"];
+        themeGroup?: "applications" | "interface";
+        direction?: TooltipDirection;
         cssClass?: string;
         render: (element: HTMLElement) => Promise<HTMLElement | null>;
     },
 ): void {
-    const tooltipOptions = R.pick(options, ["cssClass", "direction", "locked"]);
+    const tooltipOptions = R.pick(options, ["direction", "locked"]);
 
     element.addEventListener(
         "pointerenter",
         async (event) => {
             const target = options.selector ? htmlClosest(event.target, options.selector) : element;
             if (!target) return;
-            const content = await options.render(target);
-            if (!content) return;
+            const html = await options.render(target);
+            if (!html) return;
 
             if (options.locked) {
                 game.tooltip.dismissLockedTooltips();
             }
-            game.tooltip.activate(target, { content, ...tooltipOptions });
+            game.tooltip.activate(target, {
+                html,
+                ...tooltipOptions,
+                cssClass: options.themeGroup
+                    ? `${(options.cssClass ?? "").trim()} ${getCurrentTheme(options.themeGroup)}`.trim()
+                    : options.cssClass,
+            });
 
             // A very crude implementation only designed for align top. Make it more flexible if we need to later
             if (options.align === "top") {
-                const pad = TooltipManager.TOOLTIP_MARGIN_PX;
-                const actualTooltip = options.locked ? content.closest("aside") : game.tooltip.tooltip;
+                const pad = fh.interaction.TooltipManager.TOOLTIP_MARGIN_PX;
+                const actualTooltip = options.locked ? html.closest("aside") : game.tooltip.tooltip;
                 if (actualTooltip) {
                     const bounds = target.getBoundingClientRect();
                     const maxH = window.innerHeight - actualTooltip.offsetHeight;
@@ -205,6 +211,13 @@ function createTooltipListener(
         },
         true,
     );
+}
+
+/** Returns the currently active color scheme as `theme-dark` or `theme-light` */
+function getCurrentTheme(group: "applications" | "interface"): string {
+    const setting = game.settings.get("core", "uiConfig").colorScheme[group];
+    const browserDefault = window.matchMedia("(prefers-color-scheme: dark)").matches ? "theme-dark" : "theme-light";
+    return setting ? `theme-${setting}` : browserDefault;
 }
 
 interface SheetOption {

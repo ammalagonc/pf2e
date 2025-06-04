@@ -1,12 +1,13 @@
 import type { ActorPF2e } from "@actor";
 import type { FeatGroup } from "@actor/character/feats/index.ts";
+import type { DocumentHTMLEmbedConfig } from "@client/applications/ux/text-editor.d.mts";
+import type { DatabaseCreateCallbackOptions, DatabaseUpdateCallbackOptions } from "@common/abstract/_types.d.mts";
 import { ItemPF2e } from "@item";
 import { normalizeActionChangeData } from "@item/ability/helpers.ts";
-import { ActionCost, Frequency } from "@item/base/data/index.ts";
-import type { UserPF2e } from "@module/user/index.ts";
+import type { ActionCost, Frequency } from "@item/base/data/index.ts";
 import { sluggify, tupleHasValue } from "@util";
 import * as R from "remeda";
-import { CampaignFeatureSource, CampaignFeatureSystemData } from "./data.ts";
+import type { CampaignFeatureSource, CampaignFeatureSystemData } from "./data.ts";
 import type { BehaviorType, KingmakerCategory, KingmakerTrait } from "./types.ts";
 import { CategoryData, KINGDOM_CATEGORY_DATA, KINGMAKER_CATEGORY_TYPES } from "./values.ts";
 
@@ -109,8 +110,8 @@ class CampaignFeaturePF2e<TParent extends ActorPF2e | null = ActorPF2e | null> e
 
     protected override async _preCreate(
         data: this["_source"],
-        operation: DatabaseCreateOperation<TParent>,
-        user: UserPF2e,
+        options: DatabaseCreateCallbackOptions,
+        user: fd.BaseUser,
     ): Promise<boolean | void> {
         // In case this was copied from an actor, clear the location if there's no parent.
         if (!this.parent) {
@@ -120,13 +121,13 @@ class CampaignFeaturePF2e<TParent extends ActorPF2e | null = ActorPF2e | null> e
             }
         }
 
-        return super._preCreate(data, operation, user);
+        return super._preCreate(data, options, user);
     }
 
     protected override async _preUpdate(
-        changed: DeepPartial<CampaignFeatureSource>,
-        operation: DatabaseUpdateOperation<TParent>,
-        user: UserPF2e,
+        changed: DeepPartial<this["_source"]>,
+        options: DatabaseUpdateCallbackOptions,
+        user: fd.BaseUser,
     ): Promise<boolean | void> {
         // Ensure an empty-string `location` property is null
         if (typeof changed.system?.location === "string") {
@@ -148,15 +149,15 @@ class CampaignFeaturePF2e<TParent extends ActorPF2e | null = ActorPF2e | null> e
             system.level = { value: level };
         }
 
-        await super._preUpdate(changed, operation, user);
+        await super._preUpdate(changed, options, user);
     }
 
-    protected override embedHTMLString(_config: DocumentHTMLEmbedConfig, _options: EnrichmentOptions): string {
+    protected override embedHTMLString(config: DocumentHTMLEmbedConfig & { hr?: boolean }): string {
         const list = this.system.prerequisites?.value?.map((item) => item.value).join(", ") ?? "";
         return (
             (list
                 ? `<p><strong>${game.i18n.localize("PF2E.FeatPrereqLabel")}</strong> ${list}</p>` +
-                  (_config.hr === false ? "" : "<hr>")
+                  (config.hr === false ? "" : "<hr>")
                 : "") + this.description
         );
     }

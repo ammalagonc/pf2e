@@ -1,3 +1,4 @@
+import type { CompendiumUUID } from "@client/utils/helpers.d.mts";
 import type { ConditionSource } from "@item/base/data/index.ts";
 import { svelte as sveltePlugin } from "@sveltejs/vite-plugin-svelte";
 import { execSync } from "child_process";
@@ -10,9 +11,9 @@ import * as Vite from "vite";
 import checker from "vite-plugin-checker";
 import { viteStaticCopy } from "vite-plugin-static-copy";
 import tsconfigPaths from "vite-tsconfig-paths";
-import packageJSON from "./package.json";
+import packageJSON from "./package.json" with { type: "json" };
 import { sluggify } from "./src/util/misc.ts";
-import systemJSON from "./static/system.json";
+import systemJSON from "./static/system.json" with { type: "json" };
 
 const CONDITION_SOURCES = ((): ConditionSource[] => {
     const output = execSync("npm run build:conditions", { encoding: "utf-8" });
@@ -65,7 +66,19 @@ const config = Vite.defineConfig(({ command, mode }): Vite.UserConfig => {
               })()
             : { foundryPort: 30000, serverPort: 30001 };
 
-    const plugins = [checker({ typescript: true }), tsconfigPaths({ loose: true }), sveltePlugin()];
+    // Add system layer to svelte CSS in HMR
+    const hmrPreprocess = {
+        name: "svelte-hmr-layer",
+        style: ({ content }: { content: string }) => ({ code: `@layer system { ${content} }` }),
+    };
+
+    const plugins = [
+        checker({ typescript: false }),
+        tsconfigPaths({ loose: true }),
+        sveltePlugin({
+            preprocess: command === "serve" ? hmrPreprocess : undefined,
+        }),
+    ];
     // Handle minification after build to allow for tree-shaking and whitespace minification
     // "Note the build.minify option does not minify whitespaces when using the 'es' format in lib mode, as it removes
     // pure annotations and breaks tree-shaking."
@@ -116,7 +129,7 @@ const config = Vite.defineConfig(({ command, mode }): Vite.UserConfig => {
 
                     if (context.file.endsWith("en.json")) {
                         const basePath = context.file.slice(context.file.indexOf("lang/"));
-                        console.log(`Updating lang file at ${basePath}`);
+                        console.debug(`Updating lang file at ${basePath}`);
                         fs.promises.copyFile(context.file, `${outDir}/${basePath}`).then(() => {
                             context.server.ws.send({
                                 type: "custom",
@@ -126,7 +139,7 @@ const config = Vite.defineConfig(({ command, mode }): Vite.UserConfig => {
                         });
                     } else if (context.file.endsWith(".hbs")) {
                         const basePath = context.file.slice(context.file.indexOf("templates/"));
-                        console.log(`Updating template file at ${basePath}`);
+                        console.debug(`Updating template file at ${basePath}`);
                         fs.promises.copyFile(context.file, `${outDir}/${basePath}`).then(() => {
                             context.server.ws.send({
                                 type: "custom",
@@ -138,6 +151,21 @@ const config = Vite.defineConfig(({ command, mode }): Vite.UserConfig => {
                 },
             },
         );
+
+        // Add system CSS layer for HMR
+        const mainCss = path.resolve(__dirname, "src/pf2e.ts").split(path.sep).join("/");
+        plugins.push({
+            name: "hmr-layers",
+            apply: "serve",
+            transform: (code, id) => {
+                if (id === mainCss) {
+                    return code.replace("styles/main.scss", "styles/vite-hmr.scss");
+                } else if (/node_modules\/.+\.css$/.test(id)) {
+                    return `@layer system { ${code} }`;
+                }
+                return;
+            },
+        });
     }
 
     // Create dummy files for vite dev server
@@ -161,6 +189,11 @@ const config = Vite.defineConfig(({ command, mode }): Vite.UserConfig => {
             EN_JSON: JSON.stringify(EN_JSON),
             ROLL_PARSER: JSON.stringify(ROLL_PARSER),
             UUID_REDIRECTS: JSON.stringify(getUuidRedirects()),
+            fa: "foundry.applications",
+            fav1: "foundry.appv1",
+            fc: "foundry.canvas",
+            fd: "foundry.documents",
+            fh: "foundry.helpers",
             fu: "foundry.utils",
         },
         esbuild: { keepNames: true },

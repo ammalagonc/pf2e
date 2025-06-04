@@ -1,6 +1,7 @@
 @import "recall-knowledge", "skills-editor";
 
 .actor.npc.sheet form {
+    --font-primary: var(--sans-serif);
     --faded-border-color: #7a7971;
     display: flex;
     flex-direction: row;
@@ -83,7 +84,8 @@
         flex: auto;
 
         .tab {
-            overflow: hidden scroll;
+            overflow: hidden auto;
+            scrollbar-gutter: stable;
 
             .identification-skills {
                 ul {

@@ -1,5 +1,6 @@
 import type { ActorPF2e } from "@actor";
 import { FormulaPicker } from "@actor/character/apps/formula-picker/app.ts";
+import type { RollMode } from "@common/constants.mjs";
 import { AbilityItemPF2e, FeatPF2e } from "@item";
 import { extractEphemeralEffects } from "@module/rules/helpers.ts";
 import { DamageRoll } from "@system/damage/roll.ts";
@@ -33,15 +34,9 @@ async function createUseActionMessage(
     const consumeResources = !!resource?.value;
     const craftedItem = await (async () => {
         if (!isCraftingAction) return null;
-
         const picker = new FormulaPicker({ actor, item, ability: craftingAbility, mode: "craft" });
         const selection = await picker.resolveSelection();
-        return selection
-            ? craftingAbility.craft(selection, {
-                  consume: consumeResources,
-                  destination: "hand",
-              })
-            : null;
+        return selection ? craftingAbility.craft(selection, { consume: consumeResources, destination: "hand" }) : null;
     })();
     if (!craftedItem && isCraftingAction) return null;
 
@@ -51,7 +46,7 @@ async function createUseActionMessage(
     }
 
     const speaker = ChatMessagePF2e.getSpeaker({ actor, token });
-    const flavor = await renderTemplate("systems/pf2e/templates/chat/action/flavor.hbs", {
+    const flavor = await fa.handlebars.renderTemplate("systems/pf2e/templates/chat/action/flavor.hbs", {
         action: { title: item.name, glyph: getActionGlyph(actionCost) },
         item,
         traits: item.system.traits.value.map((t) => traitSlugToObject(t, CONFIG.PF2E.actionTraits)),
@@ -68,7 +63,7 @@ async function createUseActionMessage(
 
         return tempDiv.innerText.slice(0, previewLength);
     })();
-    const content = await renderTemplate("systems/pf2e/templates/chat/action/collapsed.hbs", {
+    const content = await fa.handlebars.renderTemplate("systems/pf2e/templates/chat/action/collapsed.hbs", {
         actor: item.actor,
         description: {
             full: descriptionPreview && descriptionPreview.length < previewLength ? item.description : null,
@@ -99,7 +94,7 @@ async function applyDamageFromMessage({
 }: ApplyDamageFromMessageParams): Promise<void> {
     if (promptModifier) return shiftAdjustDamage(message, multiplier, rollIndex);
 
-    const html = htmlQuery(ui.chat.element[0], `li.chat-message[data-message-id="${message.id}"]`);
+    const html = htmlQuery(ui.chat.element, `li.chat-message[data-message-id="${message.id}"]`);
     const tokens = html?.dataset.actorIsTarget && message.token ? [message.token] : game.user.getActiveTokens();
     if (tokens.length === 0) {
         ui.notifications.error("PF2E.ErrorMessage.NoTokenSelected", { localize: true });
@@ -176,8 +171,8 @@ interface ApplyDamageFromMessageParams {
 }
 
 async function shiftAdjustDamage(message: ChatMessagePF2e, multiplier: number, rollIndex: number): Promise<void> {
-    const content = await renderTemplate("systems/pf2e/templates/chat/damage/adjustment-dialog.hbs");
-    const AdjustmentDialog = class extends Dialog {
+    const content = await fa.handlebars.renderTemplate("systems/pf2e/templates/chat/damage/adjustment-dialog.hbs");
+    const AdjustmentDialog = class extends foundry.appv1.api.Dialog {
         override activateListeners($html: JQuery): void {
             super.activateListeners($html);
             $html[0].querySelector("input")?.focus();
@@ -232,7 +227,7 @@ function toggleClearTemplatesButton(message: ChatMessagePF2e | null): void {
     if (!message || !canvas.ready) return;
 
     const selector = `li[data-message-id="${message.id}"] button[data-action=spell-template-clear]`;
-    for (const chatLogDOM of htmlQueryAll(document.body, "#chat-log, #chat-popout")) {
+    for (const chatLogDOM of htmlQueryAll(document.body, "#chat, #chat-popout")) {
         const clearTemplatesButton = htmlQuery(chatLogDOM, selector);
         if (!clearTemplatesButton) continue;
         const hasMeasuredTemplates = !!canvas.scene?.templates.some((t) => t.message === message && t.isOwner);

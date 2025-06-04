@@ -1,8 +1,13 @@
 import { ActorPF2e } from "@actor";
+import type {
+    DatabaseCreateCallbackOptions,
+    DatabaseDeleteCallbackOptions,
+    DataModelConstructionContext,
+} from "@common/abstract/_types.d.mts";
 import { ItemPF2e } from "@item";
 import type { EffectAreaShape } from "@item/spell/types.ts";
 import type { MeasuredTemplatePF2e } from "@module/canvas/measured-template.ts";
-import { ItemOriginFlag } from "@module/chat-message/data.ts";
+import type { ItemOriginFlag } from "@module/chat-message/data.ts";
 import type { ChatMessagePF2e } from "@module/chat-message/document.ts";
 import { toggleClearTemplatesButton } from "@module/chat-message/helpers.ts";
 import type { ScenePF2e } from "./document.ts";
@@ -46,7 +51,7 @@ class MeasuredTemplateDocumentPF2e<
     /** Ensure the source has a `pf2e` flag along with an `areaShape` if directly inferable. */
     protected override _initializeSource(
         data: object,
-        options?: DataModelConstructionOptions<TParent>,
+        options?: DataModelConstructionContext<TParent>,
     ): this["_source"] {
         const initialized = super._initializeSource(data, options);
         const areaShape = initialized.t === "cone" ? "cone" : initialized.t === "ray" ? "line" : null;
@@ -55,18 +60,14 @@ class MeasuredTemplateDocumentPF2e<
     }
 
     /** If present, show the clear-template button on the message from which this template was spawned */
-    protected override _onCreate(
-        data: this["_source"],
-        operation: DatabaseCreateOperation<TParent>,
-        userId: string,
-    ): void {
-        super._onCreate(data, operation, userId);
+    protected override _onCreate(data: this["_source"], options: DatabaseCreateCallbackOptions, userId: string): void {
+        super._onCreate(data, options, userId);
         toggleClearTemplatesButton(this.message);
     }
 
     /** If present, hide the clear-template button on the message from which this template was spawned */
-    protected override _onDelete(operation: DatabaseDeleteOperation<TParent>, userId: string): void {
-        super._onDelete(operation, userId);
+    protected override _onDelete(options: DatabaseDeleteCallbackOptions, userId: string): void {
+        super._onDelete(options, userId);
         toggleClearTemplatesButton(this.message);
     }
 }

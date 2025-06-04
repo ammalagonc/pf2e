@@ -1,13 +1,16 @@
+import type { TokenAnimationOptions, TokenResourceData, TokenShape } from "@client/canvas/placeables/token.d.mts";
+import type { TokenUpdateCallbackOptions } from "@client/documents/token.d.mts";
+import type { Point } from "@common/_types.d.mts";
 import { EffectPF2e } from "@item";
 import type { UserPF2e } from "@module/user/document.ts";
 import type { TokenDocumentPF2e } from "@scene";
 import * as R from "remeda";
 import type { CanvasPF2e, TokenLayerPF2e } from "../index.ts";
-import { RulerPF2e, measureDistanceCuboid, squareAtPoint } from "../index.ts";
+import { measureDistanceCuboid, squareAtPoint } from "../index.ts";
 import { AuraRenderers } from "./aura/index.ts";
 import { FlankingHighlightRenderer } from "./flanking-highlight/renderer.ts";
 
-class TokenPF2e<TDocument extends TokenDocumentPF2e = TokenDocumentPF2e> extends Token<TDocument> {
+class TokenPF2e<TDocument extends TokenDocumentPF2e = TokenDocumentPF2e> extends fc.placeables.Token<TDocument> {
     /** Visual representation and proximity-detection facilities for auras */
     readonly auras: AuraRenderers;
 
@@ -16,7 +19,6 @@ class TokenPF2e<TDocument extends TokenDocumentPF2e = TokenDocumentPF2e> extends
 
     constructor(document: TDocument) {
         super(document);
-
         this.auras = new AuraRenderers(this);
         Object.defineProperty(this, "auras", { configurable: false, writable: false }); // It's ours, Kim!
         this.flankingHighlight = new FlankingHighlightRenderer(this);
@@ -68,12 +70,9 @@ class TokenPF2e<TDocument extends TokenDocumentPF2e = TokenDocumentPF2e> extends
         return offsets.sort((a, b) => a.j - b.j).sort((a, b) => a.i - b.i);
     }
 
-    get #isDragMeasuring(): boolean {
-        const ruler = canvas.controls.ruler;
-        return !!ruler.isDragMeasuring && ruler.token === this;
-    }
-
-    /** Increase center-to-center point tolerance to be more compliant with 2e rules */
+    /**
+     * Is this Token visible to the user? Increase center-to-center point tolerance to be more compliant with 2e rules.
+     */
     override get isVisible(): boolean {
         // Clear the detection filter
         this.detectionFilter = null;
@@ -92,7 +91,11 @@ class TokenPF2e<TDocument extends TokenDocumentPF2e = TokenDocumentPF2e> extends
 
     /** A reference to an animation that is currently in progress for this Token, if any */
     get animation(): Promise<boolean> | null {
-        return this.animationContexts.get(this.animationName)?.promise ?? null;
+        return (
+            this.animationContexts.get(this.animationName)?.promise ??
+            this.animationContexts.get(this.movementAnimationName)?.promise ??
+            null
+        );
     }
 
     /** Is this token currently animating? */
@@ -185,11 +188,13 @@ class TokenPF2e<TDocument extends TokenDocumentPF2e = TokenDocumentPF2e> extends
         const [centerA, centerB] = [flankerA.center, flankerB.center];
         const { bounds } = flankee;
 
+        const Ray = fc.geometry.Ray;
         const left = new Ray({ x: bounds.left, y: bounds.top }, { x: bounds.left, y: bounds.bottom });
         const right = new Ray({ x: bounds.right, y: bounds.top }, { x: bounds.right, y: bounds.bottom });
         const top = new Ray({ x: bounds.left, y: bounds.top }, { x: bounds.right, y: bounds.top });
         const bottom = new Ray({ x: bounds.left, y: bounds.bottom }, { x: bounds.right, y: bounds.bottom });
-        const intersectsSide = (side: Ray): boolean => fu.lineSegmentIntersects(centerA, centerB, side.A, side.B);
+        const intersectsSide = (side: fc.geometry.Ray): boolean =>
+            fu.lineSegmentIntersects(centerA, centerB, side.A, side.B);
 
         return (intersectsSide(left) && intersectsSide(right)) || (intersectsSide(top) && intersectsSide(bottom));
     }
@@ -500,8 +505,6 @@ class TokenPF2e<TDocument extends TokenDocumentPF2e = TokenDocumentPF2e> extends
             const currentRotation = this.document.rotation;
             const rotationAngle = this.x <= this.document.x ? 360 : -360;
             options.ontick = (_frame, data) => {
-                // Temporarily unlock rotation
-                this.document.lockRotation = false;
                 if (!attributeAdded && data.attributes.length > 0) {
                     const duration = (data.duration ?? 1000) / 1000;
                     data.attributes.push({
@@ -517,9 +520,6 @@ class TokenPF2e<TDocument extends TokenDocumentPF2e = TokenDocumentPF2e> extends
         }
 
         await super.animate(updateData, options);
-
-        // Restore `lockRotation` to source value in case it was unlocked for spin animation
-        this.document.lockRotation = this.document._source.lockRotation;
     }
 
     /** Obscure the token's sprite if a hearing or tremorsense detection filter is applied to it */
@@ -528,12 +528,12 @@ class TokenPF2e<TDocument extends TokenDocumentPF2e = TokenDocumentPF2e> extends
         if (!this.mesh) return;
 
         const configuredTint = this.document.texture.tint ?? Color.fromString("#FFFFFF");
-        if (this.mesh.tint !== 0 && this.detectionFilter instanceof OutlineOverlayFilter) {
+        if (this.mesh.tint !== 0 && this.detectionFilter instanceof fc.rendering.filters.OutlineOverlayFilter) {
             this.mesh.tint = 0;
         } else if (
             this.mesh.tint === 0 &&
             configuredTint.toString() !== "#000000" &&
-            !(this.detectionFilter instanceof OutlineOverlayFilter)
+            !(this.detectionFilter instanceof fc.rendering.filters.OutlineOverlayFilter)
         ) {
             this.mesh.tint = Number(configuredTint);
         }
@@ -550,19 +550,12 @@ class TokenPF2e<TDocument extends TokenDocumentPF2e = TokenDocumentPF2e> extends
     /* -------------------------------------------- */
 
     /** Players can view an actor's sheet if the actor is lootable. */
-    protected override _canView(user: UserPF2e, event: PIXI.FederatedPointerEvent): boolean {
+    protected override _canView(user: User, event: PIXI.FederatedPointerEvent): boolean {
         return super._canView(user, event) || !!this.actor?.isLootableBy(user);
     }
 
-    protected override _canDrag(user: UserPF2e, event?: TokenPointerEvent<this>): boolean {
-        if (super._canDrag(user, event)) return true;
-        if (!this.controlled || event?.ctrlKey || event?.metaKey) return false;
-        const setting = game.pf2e.settings.dragMeasurement;
-        return setting === "always" || (setting === "encounters" && !!game.combat?.active);
-    }
-
     /** Prevent players from controlling an NPC when it's lootable */
-    protected override _canControl(user: UserPF2e, event?: PIXI.FederatedPointerEvent): boolean {
+    protected override _canControl(user: User, event?: PIXI.FederatedPointerEvent): boolean {
         if (!this.observer && this.actor?.isOfType("npc") && this.actor.isLootableBy(user)) return false;
         return super._canControl(user, event);
     }
@@ -579,64 +572,22 @@ class TokenPF2e<TDocument extends TokenDocumentPF2e = TokenDocumentPF2e> extends
         return super._onRelease(options);
     }
 
-    /** Initiate token drag measurement unless using the ruler tool. */
-    protected override _onDragLeftStart(event: TokenPointerEvent<this>): void {
-        event.interactionData.clones ??= [];
-        const hasModuleConflict = RulerPF2e.hasModuleConflict;
-        if (game.activeTool !== "ruler" || hasModuleConflict) {
-            if (!hasModuleConflict) canvas.controls.ruler.startDragMeasurement(event);
-            return super._onDragLeftStart(event);
-        }
-    }
-
-    protected override _onDragLeftMove(event: TokenPointerEvent<this>): void {
-        if (this.#isDragMeasuring) {
-            canvas.controls.ruler.onDragMeasureMove(event);
-        }
-        return super._onDragLeftMove(event);
-    }
-
-    protected override async _onDragLeftDrop(event: TokenPointerEvent<this>): Promise<void | TDocument[]> {
-        if (this.#isDragMeasuring) {
-            // Pass along exact destination coordinates if this token is tiny
-            const destination =
-                this.isTiny && event.interactionData.clones?.length
-                    ? R.pick(event.interactionData.clones[0], ["x", "y"])
-                    : null;
-            canvas.controls.ruler.finishDragMeasurement(event, destination);
-            this.layer.clearPreviewContainer();
-        } else {
-            super._onDragLeftDrop(event);
-        }
-    }
-
-    protected override _onDragLeftCancel(event: TokenPointerEvent<this>): void {
-        if (this.#isDragMeasuring) {
-            canvas.controls.ruler.onDragLeftCancel(event);
-            if (!this.#isDragMeasuring) {
-                super._onDragLeftCancel(event);
-            }
-        } else {
-            super._onDragLeftCancel(event);
-        }
-    }
-
     /** Handle system-specific status effects (upstream handles invisible and blinded) */
     override _onApplyStatusEffect(statusId: string, active: boolean): void {
         super._onApplyStatusEffect(statusId, active);
 
         if (["undetected", "unnoticed"].includes(statusId)) {
-            canvas.perception.update({ refreshVision: true, refreshLighting: true }, true);
+            canvas.perception.update({ refreshVision: true, refreshLighting: true });
         }
     }
 
     /** Reset aura renders when token size or GM hidden changes. */
     override _onUpdate(
         changed: DeepPartial<TDocument["_source"]>,
-        operation: TokenUpdateOperation<TDocument["parent"]>,
+        options: TokenUpdateCallbackOptions,
         userId: string,
     ): void {
-        super._onUpdate(changed, operation, userId);
+        super._onUpdate(changed, options, userId);
 
         if (changed.width || "hidden" in changed) {
             if (this.animation) {
@@ -650,7 +601,7 @@ class TokenPF2e<TDocument extends TokenDocumentPF2e = TokenDocumentPF2e> extends
     }
 }
 
-interface TokenPF2e<TDocument extends TokenDocumentPF2e = TokenDocumentPF2e> extends Token<TDocument> {
+interface TokenPF2e<TDocument extends TokenDocumentPF2e = TokenDocumentPF2e> extends fc.placeables.Token<TDocument> {
     get layer(): TokenLayerPF2e<this>;
 }
 

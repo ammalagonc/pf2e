@@ -11,20 +11,11 @@ export const CanvasReady = {
                     game.pf2e.effectTracker.register(effect);
                 }
             }
-
-            // Work around `MouseInteractionManager` preventing right-click propagation to ruler
-            document.body.addEventListener("contextmenu", (event) => {
-                const ruler = canvas.controls.ruler;
-                if (canvas.ready && game.activeTool === "ruler" && ruler.dragMeasurement && ruler.isMeasuring) {
-                    event.preventDefault();
-                    canvas.controls.ruler.onDragLeftCancel();
-                }
-            });
         });
 
         Hooks.on("canvasReady", () => {
             // Effect Panel singleton application
-            game.pf2e.effectPanel.render(true);
+            game.pf2e.effectPanel.render({ force: true });
             if (!canvas.scene) return;
 
             if (game.ready) canvas.scene.reset();

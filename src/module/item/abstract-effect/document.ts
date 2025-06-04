@@ -1,13 +1,11 @@
 import type { ActorPF2e } from "@actor";
+import type { DatabaseCreateCallbackOptions, DatabaseDeleteCallbackOptions } from "@common/abstract/_types.d.mts";
 import { ItemPF2e } from "@item";
-import type { AfflictionSource, AfflictionSystemData } from "@item/affliction/data.ts";
-import type { ConditionSource, ConditionSystemData } from "@item/condition/data.ts";
-import type { EffectSource, EffectSystemData } from "@item/effect/data.ts";
+import type { AbstractEffectSource } from "@item/base/data/index.ts";
 import type { ShowFloatyEffectParams } from "@module/canvas/token/object.ts";
-import type { UserPF2e } from "@module/user/document.ts";
 import { TokenDocumentPF2e } from "@scene";
 import { ErrorPF2e, sluggify } from "@util";
-import type { EffectBadge } from "./data.ts";
+import type { AbstractEffectSystemData, EffectBadge } from "./data.ts";
 import { calculateRemainingDuration } from "./helpers.ts";
 import type { EffectTrait } from "./types.ts";
 import { DURATION_UNITS } from "./values.ts";
@@ -153,8 +151,8 @@ abstract class AbstractEffectPF2e<TParent extends ActorPF2e | null = ActorPF2e |
     /** Log whether this effect originated from a spell */
     protected override _preCreate(
         data: this["_source"],
-        operation: DatabaseCreateOperation<TParent>,
-        user: UserPF2e,
+        options: DatabaseCreateCallbackOptions,
+        user: fd.BaseUser,
     ): Promise<boolean | void> {
         data.system.fromSpell ??= ((): boolean => {
             const slug = this.slug ?? sluggify(this.name);
@@ -167,20 +165,16 @@ abstract class AbstractEffectPF2e<TParent extends ActorPF2e | null = ActorPF2e |
             );
         })();
 
-        return super._preCreate(data, operation, user);
+        return super._preCreate(data, options, user);
     }
 
-    protected override _onCreate(
-        data: this["_source"],
-        operation: DatabaseCreateOperation<TParent>,
-        userId: string,
-    ): void {
-        super._onCreate(data, operation, userId);
+    protected override _onCreate(data: this["_source"], options: DatabaseCreateCallbackOptions, userId: string): void {
+        super._onCreate(data, options, userId);
         this.handleChange({ create: this });
     }
 
-    protected override _onDelete(operation: DatabaseDeleteOperation<TParent>, userId: string): void {
-        super._onDelete(operation, userId);
+    protected override _onDelete(options: DatabaseDeleteCallbackOptions, userId: string): void {
+        super._onDelete(options, userId);
         this.handleChange({ delete: { name: this._source.name } });
     }
 
@@ -212,8 +206,8 @@ abstract class AbstractEffectPF2e<TParent extends ActorPF2e | null = ActorPF2e |
 }
 
 interface AbstractEffectPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends ItemPF2e<TParent> {
-    readonly _source: AfflictionSource | ConditionSource | EffectSource;
-    system: AfflictionSystemData | ConditionSystemData | EffectSystemData;
+    readonly _source: AbstractEffectSource;
+    system: AbstractEffectSystemData;
 }
 
 export { AbstractEffectPF2e };

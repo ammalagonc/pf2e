@@ -2,6 +2,8 @@ import { ActorPF2e } from "@actor";
 import { TraitViewData } from "@actor/data/base.ts";
 import type { CheckModifier } from "@actor/modifiers.ts";
 import type { RollOrigin, RollTarget } from "@actor/roll-context/types.ts";
+import type { Rolled } from "@client/dice/_module.d.mts";
+import type Die from "@client/dice/terms/die.d.mts";
 import { createActionRangeLabel } from "@item/ability/helpers.ts";
 import { reduceItemName } from "@item/helpers.ts";
 import { ActorTokenFlag, ChatMessageSourcePF2e, CheckContextChatFlag } from "@module/chat-message/data.ts";
@@ -24,12 +26,12 @@ import {
 } from "@util";
 import { traitSlugToObject } from "@util/tags.ts";
 import * as R from "remeda";
-import type { Die } from "types/foundry/client-esm/dice/terms/die.d.ts";
 import {
     DEGREE_OF_SUCCESS_STRINGS,
     DegreeAdjustmentsRecord,
     DegreeOfSuccess,
     DegreeOfSuccessString,
+    type CheckDC,
 } from "../degree-of-success.ts";
 import { TextEditorPF2e } from "../text-editor.ts";
 import { CheckModifiersDialog } from "./dialog.ts";
@@ -53,7 +55,7 @@ class CheckPF2e {
     static async roll(
         check: CheckModifier,
         context: CheckCheckContext = {},
-        event: JQuery.TriggeredEvent | Event | null = null,
+        event: Event | null = null,
         callback?: CheckRollCallback,
     ): Promise<Rolled<CheckRoll> | null> {
         if (context.origin === undefined && context.actor) {
@@ -329,8 +331,7 @@ class CheckPF2e {
 
         if (callback) {
             const msg = message instanceof ChatMessagePF2e ? message : new ChatMessagePF2e(message);
-            const evt = !!event && event instanceof Event ? event : (event?.originalEvent ?? null);
-            await callback(roll, context.outcome, msg, evt);
+            await callback(roll, context.outcome, msg, event);
         }
 
         // Consume one unit of the weapon if it has the consumable trait
@@ -524,7 +525,7 @@ class CheckPF2e {
         }
 
         const degree = ((): DegreeOfSuccess | null => {
-            const dc = context.dc;
+            const dc = context.dc as Maybe<CheckDC>;
             if (!dc) return null;
             if (["ac", "armor"].includes(dc.slug ?? "")) {
                 const targetActor = ((): ActorPF2e | null => {
@@ -784,7 +785,7 @@ class CheckPF2e {
         })();
 
         // Render the template and replace quasi-XML nodes with visibility-data-containing HTML elements
-        const rendered = await renderTemplate("systems/pf2e/templates/chat/check/target-dc-result.hbs", {
+        const rendered = await fa.handlebars.renderTemplate("systems/pf2e/templates/chat/check/target-dc-result.hbs", {
             dc: dcData,
             result: resultData,
         });

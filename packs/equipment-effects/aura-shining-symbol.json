@@ -1,6 +1,6 @@
 {
     "_id": "NNxguHneoM3NvW1S",
-    "img": "icons/commodities/treasure/broach-jewel-gold-blue.webp",
+    "img": "icons/commodities/treasure/brooch-jewel-gold-blue.webp",
     "name": "Aura: Shining Symbol",
     "system": {
         "description": {
@@ -36,8 +36,7 @@
                 "radius": 20,
                 "slug": "shining-symbol",
                 "traits": [
-                    "light",
-                    "revelation"
+                    "light"
                 ]
             }
         ],

@@ -1,5 +1,6 @@
 import { PartyPF2e } from "@actor";
 import { ItemTransfer, ItemTransferData } from "@actor/item-transfer.ts";
+import type { AppV1RenderOptions } from "@client/appv1/api/application-v1.d.mts";
 import { ErrorPF2e } from "@util";
 
 function activateSocketListener(): void {
@@ -14,9 +15,9 @@ function activateSocketListener(): void {
                 }
                 break;
             case "refreshSceneControls":
-                if (!game.user.isGM && message.data.layer === ui.controls.control?.layer) {
+                if (!game.user.isGM && message.data.layer === ui.controls.control?.name) {
                     console.debug("PF2e System | Refreshing Scene Controls");
-                    ui.controls.initialize({ layer: message.data.layer });
+                    ui.controls.render();
                 }
                 break;
             case "showSheet": {
@@ -32,7 +33,7 @@ function activateSocketListener(): void {
                     return document.campaign?.renderSheet?.({ tab, type });
                 }
 
-                document.sheet.render(true, { tab } as RenderOptions);
+                document.sheet.render(true, { tab } as AppV1RenderOptions);
 
                 break;
             }

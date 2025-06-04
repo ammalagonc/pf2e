@@ -1,6 +1,11 @@
 .chat-message {
     @import "action", "check", "damage", "reroll";
 
+    hr {
+        border-top: 2px groove white;
+        margin: 0.5em 0;
+    }
+
     .message-header.with-image {
         display: grid;
         grid-template:
@@ -19,10 +24,9 @@
             padding: 0.125rem 0.125rem 0.125rem 0;
             img {
                 border: none;
-                height: 2.25rem;
+                height: 36px;
                 object-fit: contain;
-                pointer-events: none;
-                width: 2.25rem;
+                width: 36px;
             }
 
             &.actor-image {
@@ -34,21 +38,19 @@
         }
 
         h4.message-sender {
-            grid-area: name;
-            color: var(--color-text-dark-primary);
-            line-height: 1;
-            font-size: var(--font-size-15);
+            align-self: end;
+            color: var(--color-text-secondary);
             font-weight: 500;
-            margin-top: auto;
+            grid-area: name;
+            line-height: 1;
             overflow: hidden;
             text-overflow: ellipsis;
         }
 
         .user {
+            align-self: center;
             grid-area: user;
             font-size: var(--font-size-12);
-            line-height: 1;
-            padding-top: var(--space-2);
         }
 
         .message-metadata {
@@ -115,11 +117,15 @@
         .dice-roll {
             .dice-result > [data-visibility="gm"] {
                 background: var(--visibility-gm-bg);
-                border: 1px dotted rgba(75, 74, 68, 0.5);
+                outline: 1px dotted rgba(75, 74, 68, 0.5);
             }
 
-            .dice-tooltip[data-visibility="gm"] {
-                padding: var(--space-2) var(--space-2) 0;
+            &.expanded .dice-tooltip[data-visibility="gm"] .wrapper {
+                padding: var(--space-2) var(--space-3) 0;
+            }
+            &:not(.expanded) .dice-tooltip {
+                background: transparent;
+                outline-color: transparent;
             }
         }
     }

@@ -5,6 +5,12 @@ import { CreatureSource } from "@actor/data/index.ts";
 import { MODIFIER_TYPES, ModifierPF2e, RawModifier, StatisticModifier } from "@actor/modifiers.ts";
 import { ActorSpellcasting } from "@actor/spellcasting.ts";
 import { MovementType, SaveType, SkillSlug } from "@actor/types.ts";
+import type { Rolled } from "@client/dice/_module.d.mts";
+import type {
+    DatabaseDeleteCallbackOptions,
+    DatabaseDeleteOperation,
+    DatabaseUpdateOperation,
+} from "@common/abstract/_types.d.mts";
 import { ArmorPF2e, ItemPF2e, type PhysicalItemPF2e, type ShieldPF2e } from "@item";
 import { ArmorSource, ItemType } from "@item/base/data/index.ts";
 import { isContainerCycle } from "@item/container/helpers.ts";
@@ -21,7 +27,6 @@ import { RollNotePF2e } from "@module/notes.ts";
 import { extractModifiers } from "@module/rules/helpers.ts";
 import { BaseSpeedSynthetic } from "@module/rules/synthetics.ts";
 import { eventToRollParams } from "@module/sheet/helpers.ts";
-import type { UserPF2e } from "@module/user/index.ts";
 import type { TokenDocumentPF2e } from "@scene";
 import { LightLevels } from "@scene/data.ts";
 import type { CheckRoll } from "@system/check/index.ts";
@@ -40,7 +45,14 @@ import {
     VisionLevels,
 } from "./data.ts";
 import { imposeEncumberedCondition, setImmunitiesFromTraits } from "./helpers.ts";
-import { CreatureTrait, CreatureType, CreatureUpdateOperation, GetReachParameters, ResourceData } from "./types.ts";
+import type {
+    CreatureTrait,
+    CreatureType,
+    CreatureUpdateCallbackOptions,
+    CreatureUpdateOperation,
+    GetReachParameters,
+    ResourceData,
+} from "./types.ts";
 
 /** An "actor" in a Pathfinder sense rather than a Foundry one: all should contain attributes and abilities */
 abstract class CreaturePF2e<
@@ -248,9 +260,6 @@ abstract class CreaturePF2e<
     }
 
     override prepareData(): void {
-        if (game.release.generation === 12 && (this.initialized || (this.parent && !this.parent.initialized))) {
-            return;
-        }
         super.prepareData();
 
         // Add spell collections from spell consumables if a matching spellcasting ability is found
@@ -811,8 +820,8 @@ abstract class CreaturePF2e<
 
     protected override async _preUpdate(
         changed: DeepPartial<this["_source"]>,
-        options: CreatureUpdateOperation<TParent>,
-        user: UserPF2e,
+        options: CreatureUpdateCallbackOptions,
+        user: fd.BaseUser,
     ): Promise<boolean | void> {
         const isFullReplace = !((options.diff ?? true) && (options.recursive ?? true));
         if (!changed.system || isFullReplace) {
@@ -866,8 +875,8 @@ abstract class CreaturePF2e<
     }
 
     /** Overriden to notify the party that an update is required */
-    protected override _onDelete(operation: DatabaseDeleteOperation<TParent>, userId: string): void {
-        super._onDelete(operation, userId);
+    protected override _onDelete(options: DatabaseDeleteCallbackOptions, userId: string): void {
+        super._onDelete(options, userId);
 
         for (const party of this.parties) {
             const updater = party.primaryUpdater;

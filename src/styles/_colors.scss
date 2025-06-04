@@ -23,20 +23,14 @@ $sub-color: #605856;
 $text-dark-color: #1c1c1c !default;
 
 /* ----------------------------------------- */
-/* Color schemes                             */
-/* ----------------------------------------- */
-
-/* Degrees of success */
-$degree-success-critical: rgb(0, 128, 0);
-$degree-success: rgb(0, 0, 255);
-$degree-failure: rgb(255, 69, 0);
-$degree-failure-critical: rgb(255, 0, 0);
-
-/* ----------------------------------------- */
 /* CSS Custom Properties                     */
 /* ----------------------------------------- */
 
-:root {
+body,
+.app,
+.themed.theme-light {
+    --color-text-tertiary: var(--color-dark-4);
+
     /* Global */
     --color-pf-primary: #{$primary-color};
     --color-pf-primary-dark: #{color.adjust($primary-color, $lightness: -5%)};
@@ -65,11 +59,9 @@ $degree-failure-critical: rgb(255, 0, 0);
     --bg: #{$light-background-color};
     --bg-dark: #{$less-light-background-color};
     --sub: #{$sub-color};
-    --color-disabled: var(--color-text-dark-4);
+    --color-disabled: var(--color-text-subtle);
 
     // Inline links and user visibility
-    --inline-link-bg: #ddd;
-    --inline-repost-bg: #{color.adjust(#ddd, $lightness: 5%)};
     --visibility-gm-bg: #e8e8ef;
     --visibility-owner-bg: #ddebe1;
     --blind-roll: #f5eaf5;
@@ -81,11 +73,17 @@ $degree-failure-critical: rgb(255, 0, 0);
     --tertiary-light: var(--color-pf-tertiary-light);
 
     /* Text */
-    --text-dark: var(--color-text-dark-primary);
-    --text-light: #f5efe0;
+    --text-dark: var(--color-cool-4);
+    --text-light: var(--color-light-1);
     --text-light-disabled: #a6a092;
     --color-text-dark-input: #333;
     --color-text-dark-improved: #006644;
+
+    /* Degrees of success */
+    --color-pf-text-critical-success: rgb(0, 128, 0);
+    --color-pf-text-success: rgb(0, 0, 255);
+    --color-pf-text-failure: rgb(255, 69, 0);
+    --color-pf-text-critical-failure: rgb(255, 0, 0);
 
     /* Borders */
     --color-border-divider: #baa991;
@@ -356,7 +354,7 @@ $degree-failure-critical: rgb(255, 0, 0);
                 background-color: var(--color-bg-physical); // Improve contrast with bright color
                 border-color: var(--color-border-vitality);
                 color: var(--color-text-vitality);
-                text-shadow: 1px 1px var(--color-text-dark-1);
+                text-shadow: 1px 1px var(--color-shadow-dark);
 
                 i[class^="fa-"] {
                     color: var(--color-border-vitality);
@@ -376,23 +374,13 @@ $degree-failure-critical: rgb(255, 0, 0);
     }
 }
 
-.theme-dark .application {
+body.theme-dark .application,
+.themed.theme-dark {
+    --color-text-tertiary: var(--color-light-4);
     --visibility-gm-bg: var(--color-cool-4);
-}
 
-/**
-* Color properties backported from V13.
-* @todo remove in V13
-*/
-.application {
-    --color-text-secondary: var(--color-dark-3);
-    --color-text-subtle: var(--color-dark-4);
-    --table-row-color-even: rgba(0, 0, 0, 0.1);
-    --table-row-color-odd: transparent;
-
-    .theme-dark & {
-        --color-text-secondary: var(--color-light-3);
-        --color-text-subtle: var(--color-light-5);
-        --table-row-color-even: rgba(255, 255, 255, 0.1);
+    .tagify {
+        --tags-border-color: var(--color-dark-6);
+        --tag-remove-btn-color: unset;
     }
 }

@@ -1,15 +1,15 @@
 import { resetActors } from "@actor/helpers.ts";
 import { ActorSheetPF2e } from "@actor/sheet/base.ts";
 import { ItemSheetPF2e, type ItemPF2e } from "@item";
-import { RulerPF2e } from "@module/canvas/ruler.ts";
 import { StatusEffects } from "@module/canvas/status-effects.ts";
 import { MigrationRunner } from "@module/migration/runner/index.ts";
-import { isImageOrVideoPath, tupleHasValue } from "@util";
+import { isImageOrVideoPath } from "@util";
 import { AutomationSettings } from "./automation.ts";
 import { HomebrewElements } from "./homebrew/menu.ts";
 import { MetagameSettings } from "./metagame.ts";
 import { VariantRulesSettings } from "./variant-rules.ts";
 import { WorldClockSettings } from "./world-clock.ts";
+import fields = foundry.data.fields;
 
 export function registerSettings(): void {
     if (BUILD_MODE === "development") {
@@ -251,14 +251,6 @@ export function registerSettings(): void {
     });
     HomebrewElements.registerSettings();
 
-    game.settings.registerMenu("pf2e", "worldClock", {
-        name: game.i18n.localize(CONFIG.PF2E.SETTINGS.worldClock.name),
-        label: game.i18n.localize(CONFIG.PF2E.SETTINGS.worldClock.label),
-        hint: game.i18n.localize(CONFIG.PF2E.SETTINGS.worldClock.hint),
-        icon: "fa-regular fa-clock",
-        type: WorldClockSettings,
-        restricted: true,
-    });
     WorldClockSettings.registerSettings();
 
     // Secret for now until the user side is complete and a UI is built
@@ -287,42 +279,18 @@ export function registerSettings(): void {
             game.pf2e.settings.gmVision = !!value;
             const color = value ? CONFIG.PF2E.Canvas.darkness.gmVision : CONFIG.PF2E.Canvas.darkness.default;
             CONFIG.Canvas.darknessColor = color;
-            if (ui.controls && canvas.activeLayer) {
-                ui.controls.initialize({ layer: canvas.activeLayer.constructor.layerOptions.name });
-            }
+            if (canvas.activeLayer) ui.controls.render({ reset: true });
             canvas.environment.initialize();
-            canvas.perception.update({ initializeVision: true }, true);
+            for (const token of canvas.tokens.placeables) {
+                token.initializeVisionSource();
+            }
+            canvas.perception.update({
+                refreshLighting: true,
+                refreshVision: true,
+                refreshSounds: true,
+                refreshOcclusion: true,
+            });
         },
-    });
-
-    // Called from hook to ensure keybindings are available
-    Hooks.once("canvasInit", () => {
-        if (RulerPF2e.hasModuleConflict) return;
-
-        const placeWaypointKey = ((): string => {
-            const action = game.keybindings.bindings.get("pf2e.placeWaypoint")?.at(0);
-            return action ? KeybindingsConfig._humanizeBinding(action) : "";
-        })();
-        game.settings.register("pf2e", "dragMeasurement", {
-            name: game.i18n.localize("PF2E.SETTINGS.DragMeasurement.Name"),
-            hint: game.i18n.format("PF2E.SETTINGS.DragMeasurement.Hint", { key: placeWaypointKey }),
-            scope: "world",
-            config: true,
-            type: String,
-            default: "never",
-            choices: {
-                always: "PF2E.SETTINGS.DragMeasurement.Always",
-                encounters: "PF2E.SETTINGS.DragMeasurement.Encounters",
-                never: "PF2E.SETTINGS.DragMeasurement.Never",
-            },
-            onChange: (value) => {
-                const options = ["always", "encounters", "never"] as const;
-                game.pf2e.settings.dragMeasurement = tupleHasValue(options, value)
-                    ? value
-                    : game.pf2e.settings.dragMeasurement;
-            },
-        });
-        game.pf2e.settings.dragMeasurement = game.settings.get("pf2e", "dragMeasurement");
     });
 
     game.settings.register("pf2e", "seenLastStopMessage", {
@@ -358,7 +326,7 @@ function registerTrackingSettings(): void {
         type: String,
         default: "",
         onChange: () => {
-            ui.actors.render(true);
+            ui.actors.render({ parts: ["parties"] });
         },
     });
 
@@ -367,8 +335,7 @@ function registerTrackingSettings(): void {
         name: "Active Party Opened or closed",
         scope: "client",
         config: false,
-        type: Boolean,
-        default: true,
+        type: new fields.BooleanField({ required: true, nullable: false, initial: true }),
     });
 
     game.settings.register("pf2e", "worldSystemVersion", {

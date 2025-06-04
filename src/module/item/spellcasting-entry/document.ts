@@ -1,11 +1,11 @@
 import type { ActorPF2e } from "@actor";
 import { ModifierPF2e } from "@actor/modifiers.ts";
 import { AttributeString } from "@actor/types.ts";
+import type { DatabaseUpdateCallbackOptions } from "@common/abstract/_types.d.mts";
 import { ItemPF2e, PhysicalItemPF2e, type SpellPF2e } from "@item";
 import { MagicTradition } from "@item/spell/types.ts";
 import { MAGIC_TRADITIONS } from "@item/spell/values.ts";
 import { OneToTen, ZeroToFour, ZeroToTen } from "@module/data.ts";
-import type { UserPF2e } from "@module/user/index.ts";
 import { Statistic } from "@system/statistic/index.ts";
 import { ErrorPF2e, ordinalString, setHasElement, sluggify } from "@util";
 import * as R from "remeda";
@@ -361,15 +361,6 @@ class SpellcastingEntryPF2e<TParent extends ActorPF2e | null = ActorPF2e | null>
         return result ? this : null;
     }
 
-    /** @deprecated Removes the spell slot and updates the spellcasting entry */
-    async unprepareSpell(groupId: SpellSlotGroupId, slotId: number): Promise<Maybe<this>> {
-        foundry.utils.logCompatibilityWarning(
-            "SpellcastingEntryPF2e#unprepareSpell() is deprecated. Use SpellcastingEntryPF2e#prepareSpell() with a null spell instead.",
-            { since: "6.11.2", until: "7.0.0" },
-        );
-        return this.prepareSpell(null, groupId, slotId);
-    }
-
     /** Sets the expended state of a spell slot and updates the spellcasting entry */
     async setSlotExpendedState(groupId: SpellSlotGroupId, slotId: number, value: boolean): Promise<Maybe<this>> {
         const result = this.spells?.setSlotExpendedState(groupId, slotId, value);
@@ -419,13 +410,13 @@ class SpellcastingEntryPF2e<TParent extends ActorPF2e | null = ActorPF2e | null>
     }
 
     /* -------------------------------------------- */
-    /*  Event Listeners and Handlers                */
+    /*  Event Handlers                              */
     /* -------------------------------------------- */
 
     protected override async _preUpdate(
         changed: DeepPartial<this["_source"]>,
-        options: DatabaseUpdateOperation<TParent>,
-        user: UserPF2e,
+        options: DatabaseUpdateCallbackOptions,
+        user: fd.BaseUser,
     ): Promise<boolean | void> {
         // Clamp slot updates
         if (changed.system?.slots) {
@@ -443,23 +434,7 @@ class SpellcastingEntryPF2e<TParent extends ActorPF2e | null = ActorPF2e | null>
                 }
             }
         }
-
         return super._preUpdate(changed, options, user);
-    }
-
-    /* -------------------------------------------- */
-    /*  Deprecations and Compatibility              */
-    /* -------------------------------------------- */
-
-    /**
-     * @deprecated
-     */
-    getSpellData(): Promise<SpellcastingSheetData> {
-        foundry.utils.logCompatibilityWarning(
-            "SpellcastingEntryPF2e#getSpellData() is deprecated. Use SpellcastingEntryPF2e#getSheetData() instead.",
-            { since: "6.7.1", until: "7.0.0" },
-        );
-        return this.getSheetData();
     }
 }
 

@@ -1,6 +1,7 @@
 import type { ActorPF2e } from "@actor";
 import { resetActors } from "@actor/helpers.ts";
-import { PersistentDialog } from "@item/condition/persistent-damage-dialog.ts";
+import type { PlaceableHUDContext } from "@client/applications/hud/placeable-hud.d.mts";
+import { PersistentDamageEditor } from "@item/condition/persistent-damage-editor.ts";
 import { ConditionSlug } from "@item/condition/types.ts";
 import { CONDITION_SLUGS } from "@item/condition/values.ts";
 import type { TokenPF2e } from "@module/canvas/token/index.ts";
@@ -8,7 +9,8 @@ import { ChatMessagePF2e } from "@module/chat-message/index.ts";
 import type { EncounterPF2e } from "@module/encounter/index.ts";
 import type { TokenDocumentPF2e } from "@scene";
 import { StatusEffectIconTheme } from "@scripts/config/index.ts";
-import { ErrorPF2e, fontAwesomeIcon, htmlQueryAll, objectHasKey, setHasElement } from "@util";
+import { TextEditorPF2e } from "@system/text-editor.ts";
+import { createHTMLElement, fontAwesomeIcon, htmlQueryAll, objectHasKey, setHasElement } from "@util";
 import * as R from "remeda";
 
 const debouncedRender = fu.debounce(() => {
@@ -107,12 +109,12 @@ export class StatusEffects {
         });
     }
 
-    static async onRenderTokenHUD(html: HTMLElement, tokenData: TokenHUDData): Promise<void> {
+    static async onRenderTokenHUD(html: HTMLElement, tokenData: PlaceableHUDContext): Promise<void> {
         const token = canvas.tokens.get(tokenData._id ?? "");
         if (!token) return;
 
         const iconGrid = html.querySelector<HTMLElement>(".status-effects");
-        if (!iconGrid) throw ErrorPF2e("Unexpected error retrieving status effects grid");
+        if (!iconGrid) return; // throw ErrorPF2e("Unexpected error retrieving status effects grid");
 
         const affectingConditions = token.actor?.conditions.active.filter((c) => c.isInHUD) ?? [];
 
@@ -124,30 +126,29 @@ export class StatusEffects {
         const deathIcon = game.settings.get("pf2e", "deathIcon");
 
         for (const icon of statusIcons) {
-            // Replace the img element with a picture element, which can display ::after content
-            const picture = document.createElement("picture");
-            picture.classList.add("effect-control");
-            picture.dataset.statusId = icon.dataset.statusId;
-            picture.title = icon.dataset.tooltip ?? "";
-            const iconSrc = icon.getAttribute("src") as ImageFilePath;
-            picture.setAttribute("src", iconSrc);
-            const newIcon = document.createElement("img");
-            newIcon.src = iconSrc;
-            picture.append(newIcon);
-            icon.replaceWith(picture);
+            // Replace the img element with anchor element, which can display ::after content
+            const newImg = document.createElement("img");
+            newImg.src = icon.src;
+            const anchor = createHTMLElement("a", {
+                classes: ["effect-control"],
+                dataset: { ...icon.dataset },
+                children: [newImg],
+            });
+            delete anchor.dataset.action;
+            icon.replaceWith(anchor);
 
-            const slug = picture.dataset.statusId ?? "";
+            const slug = anchor.dataset.statusId ?? "";
 
             // Show hidden for broken for loot/vehicles and hidden for all others
             const actorType = token.actor?.type ?? "";
             const hideIcon =
                 (slug === "hidden" && ["loot", "vehicle"].includes(actorType)) ||
                 (slug === "broken" && !["loot", "vehicle"].includes(actorType));
-            if (hideIcon) picture.style.display = "none";
+            if (hideIcon) anchor.style.display = "none";
 
             const affecting = affectingConditions.filter((c) => c.slug === slug);
-            if (affecting.length > 0 || (iconSrc === deathIcon && token.actor?.statuses.has("dead"))) {
-                picture.classList.add("active");
+            if (affecting.length > 0 || (icon.src === deathIcon && token.actor?.statuses.has("dead"))) {
+                anchor.classList.add("active");
             }
 
             if (affecting.length > 0) {
@@ -157,22 +158,20 @@ export class StatusEffects {
                 const hasValue = affecting.some((c) => c.value);
 
                 if (isOverridden) {
-                    picture.classList.add("overridden");
+                    anchor.classList.add("overridden");
                     const badge = fontAwesomeIcon("angle-double-down");
                     badge.classList.add("badge");
-                    picture.append(badge);
+                    anchor.append(badge);
                 } else if (isLocked) {
-                    picture.classList.add("locked");
+                    anchor.classList.add("locked");
                     const badge = fontAwesomeIcon("lock");
                     badge.classList.add("badge");
-                    picture.append(badge);
+                    anchor.append(badge);
                 } else if (hasValue) {
-                    picture.classList.add("valued");
-                    const badge = document.createElement("i");
-                    badge.classList.add("badge");
-                    const value = Math.max(...affecting.map((c) => c.value ?? 1));
-                    badge.innerText = value.toString();
-                    picture.append(badge);
+                    anchor.classList.add("valued");
+                    const value = Math.max(...affecting.map((c) => c.value ?? 1)).toString();
+                    const badge = createHTMLElement("i", { classes: ["badge"], children: [value] });
+                    anchor.append(badge);
                 }
             }
         }
@@ -230,7 +229,7 @@ export class StatusEffects {
         for (const [token, actor] of tokensAndActors) {
             // Persistent damage goes through a dialog instead
             if (slug === "persistent-damage") {
-                new PersistentDialog(actor).render(true);
+                new PersistentDamageEditor({ actor }).render({ force: true });
                 continue;
             }
 
@@ -299,12 +298,13 @@ export class StatusEffects {
         const conditions = await Promise.all(
             token.actor.conditions.active.map(async (c) => ({
                 ...R.pick(c, ["name", "img"]),
-                description: await TextEditor.enrichHTML(c.description),
+                description: await TextEditorPF2e.enrichHTML(c.description),
             })),
         );
         if (conditions.length === 0) return null;
 
-        const content = await renderTemplate("systems/pf2e/templates/chat/participant-conditions.hbs", { conditions });
+        const templatePath = "systems/pf2e/templates/chat/participant-conditions.hbs";
+        const content = await fa.handlebars.renderTemplate(templatePath, { conditions });
         const messageSource: Partial<foundry.documents.ChatMessageSource> = {
             author: game.user.id,
             speaker: ChatMessagePF2e.getSpeaker({ token }),

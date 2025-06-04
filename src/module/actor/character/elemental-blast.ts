@@ -3,12 +3,14 @@ import { AttackTraitHelpers } from "@actor/creature/helpers.ts";
 import { calculateMAPs } from "@actor/helpers.ts";
 import { ModifierPF2e, StatisticModifier } from "@actor/modifiers.ts";
 import { DamageContext } from "@actor/roll-context/damage.ts";
+import type { Rolled } from "@client/dice/roll.d.mts";
+import type { ImageFilePath } from "@common/constants.d.mts";
 import type { AbilityItemPF2e } from "@item";
-import { AbilityTrait } from "@item/ability/types.ts";
-import { EffectTrait } from "@item/abstract-effect/types.ts";
-import { RangeData } from "@item/types.ts";
-import { WeaponDamage } from "@item/weapon/data.ts";
-import { WeaponTrait } from "@item/weapon/types.ts";
+import type { AbilityTrait } from "@item/ability/types.ts";
+import type { EffectTrait } from "@item/abstract-effect/types.ts";
+import type { RangeData } from "@item/types.ts";
+import type { WeaponDamage } from "@item/weapon/data.ts";
+import type { WeaponTrait } from "@item/weapon/types.ts";
 import {
     extractDamageDice,
     extractModifierAdjustments,
@@ -23,7 +25,7 @@ import { DamageModifierDialog } from "@system/damage/dialog.ts";
 import { createDamageFormula } from "@system/damage/formula.ts";
 import { DamageCategorization, processBaseDamage } from "@system/damage/helpers.ts";
 import { DamageRoll } from "@system/damage/roll.ts";
-import {
+import type {
     BaseDamageData,
     DamageDamageContext,
     DamageDiceFaces,
@@ -33,18 +35,12 @@ import {
 } from "@system/damage/types.ts";
 import { DAMAGE_TYPE_ICONS } from "@system/damage/values.ts";
 import { DEGREE_OF_SUCCESS } from "@system/degree-of-success.ts";
-import { AttackRollParams, DamageRollParams } from "@system/rolls.ts";
+import type { AttackRollParams, DamageRollParams } from "@system/rolls.ts";
 import { Statistic } from "@system/statistic/index.ts";
 import { ErrorPF2e, objectHasKey, signedInteger } from "@util";
 import * as R from "remeda";
-import type {
-    ArrayField,
-    FilePathField,
-    NumberField,
-    SchemaField,
-    StringField,
-} from "types/foundry/common/data/fields.d.ts";
 import type { CharacterPF2e } from "./document.ts";
+import fields = foundry.data.fields;
 
 class ElementalBlast {
     actor: CharacterPF2e;
@@ -70,9 +66,7 @@ class ElementalBlast {
         this.configs = this.#prepareBlastConfigs();
     }
 
-    static #blastConfigSchema = ((): SchemaField<BlastConfigSchema> => {
-        const { fields } = foundry.data;
-
+    static #blastConfigSchema = ((): fields.SchemaField<BlastConfigSchema> => {
         return new fields.SchemaField({
             element: new fields.StringField<EffectTrait, EffectTrait, true, false, false>({
                 required: true,
@@ -106,9 +100,7 @@ class ElementalBlast {
         });
     })();
 
-    static #blastInfusionSchema = ((): SchemaField<BlastInfusionSchema> => {
-        const { fields } = foundry.data;
-
+    static #blastInfusionSchema = ((): fields.SchemaField<BlastInfusionSchema> => {
         return new fields.SchemaField({
             damageTypes: new fields.ArrayField(
                 new fields.StringField({ required: true, choices: () => CONFIG.PF2E.damageTypes, initial: undefined }),
@@ -340,7 +332,7 @@ class ElementalBlast {
         }
 
         const blastStatistic = this.#createAttackStatistic(statistic, item);
-        const label = await renderTemplate("systems/pf2e/templates/chat/action/header.hbs", {
+        const label = await fa.handlebars.renderTemplate("systems/pf2e/templates/chat/action/header.hbs", {
             title: item.name,
             glyph: actionCost.toString(),
             subtitle: game.i18n.format("PF2E.ActionsCheck.x-attack-roll", { type: statistic.label }),
@@ -581,20 +573,20 @@ interface BlastDamageParams extends DamageRollParams {
 }
 
 type BlastConfigSchema = {
-    element: StringField<EffectTrait, EffectTrait, true, false, false>;
-    label: StringField<string, string, true, false, false>;
-    img: FilePathField<ImageFilePath, ImageFilePath, true, false, true>;
-    damageTypes: ArrayField<StringField<DamageType, DamageType, true, false, false>>;
-    range: NumberField<number, number, true, false, false>;
-    dieFaces: NumberField<6 | 8, 6 | 8, true, false, false>;
+    element: fields.StringField<EffectTrait, EffectTrait, true, false, false>;
+    label: fields.StringField<string, string, true, false, false>;
+    img: fields.FilePathField<ImageFilePath, ImageFilePath, true, false, true>;
+    damageTypes: fields.ArrayField<fields.StringField<DamageType, DamageType, true, false, false>>;
+    range: fields.NumberField<number, number, true, false, false>;
+    dieFaces: fields.NumberField<6 | 8, 6 | 8, true, false, false>;
 };
 
 type BlastInfusionSchema = {
-    damageTypes: ArrayField<StringField<DamageType, DamageType, true, false, false>>;
-    range: SchemaField<
+    damageTypes: fields.ArrayField<fields.StringField<DamageType, DamageType, true, false, false>>;
+    range: fields.SchemaField<
         {
-            increment: NumberField<number, number, true, false, false>;
-            max: NumberField<number, number, true, false, false>;
+            increment: fields.NumberField<number, number, true, false, false>;
+            max: fields.NumberField<number, number, true, false, false>;
         },
         { increment: number; max: number },
         { increment: number; max: number },
@@ -602,15 +594,15 @@ type BlastInfusionSchema = {
         true,
         true
     >;
-    traits: SchemaField<{
-        melee: ArrayField<StringField<WeaponTrait, WeaponTrait, true, false, false>>;
-        ranged: ArrayField<StringField<WeaponTrait, WeaponTrait, true, false, false>>;
+    traits: fields.SchemaField<{
+        melee: fields.ArrayField<fields.StringField<WeaponTrait, WeaponTrait, true, false, false>>;
+        ranged: fields.ArrayField<fields.StringField<WeaponTrait, WeaponTrait, true, false, false>>;
     }>;
 };
 
-type BlastInfusionData = ModelPropsFromSchema<BlastInfusionSchema>;
+type BlastInfusionData = fields.ModelPropsFromSchema<BlastInfusionSchema>;
 
-interface ElementalBlastConfig extends Omit<ModelPropsFromSchema<BlastConfigSchema>, "damageTypes" | "range"> {
+interface ElementalBlastConfig extends Omit<fields.ModelPropsFromSchema<BlastConfigSchema>, "damageTypes" | "range"> {
     damageTypes: BlastConfigDamageType[];
     range: RangeData & { label: string };
     statistic: Statistic;

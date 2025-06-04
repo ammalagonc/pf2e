@@ -1,10 +1,12 @@
 import type { ActorPF2e } from "@actor";
+import type UserTargets from "@client/canvas/placeables/tokens/targets.d.mts";
+import type { DatabaseUpdateCallbackOptions } from "@common/abstract/_types.d.mts";
 import type { TokenPF2e } from "@module/canvas/index.ts";
 import type { ScenePF2e, TokenDocumentPF2e } from "@scene";
 import * as R from "remeda";
-import { UserFlagsPF2e, UserSourcePF2e } from "./data.ts";
+import type { UserFlagsPF2e, UserSettingsPF2e, UserSourcePF2e } from "./data.ts";
 
-class UserPF2e extends User<ActorPF2e<null>> {
+class UserPF2e extends User {
     override prepareData(): void {
         super.prepareData();
         if (canvas.ready && canvas.tokens.controlled.length > 0) {
@@ -43,17 +45,17 @@ class UserPF2e extends User<ActorPF2e<null>> {
         return canvas.tokens.controlled.filter((t) => t.isOwner).map((t) => t.document);
     }
 
-    /** Alternative to calling `#updateTokenTargets()` with no argument or an empty array */
+    /** Alternative to calling `updateTokenTargets` with no argument or an empty array */
     clearTargets(): void {
-        this.updateTokenTargets();
+        this._onUpdateTokenTargets();
     }
 
     protected override _onUpdate(
         changed: DeepPartial<this["_source"]>,
-        operation: DatabaseUpdateOperation<null>,
+        options: DatabaseUpdateCallbackOptions,
         userId: string,
     ): void {
-        super._onUpdate(changed, operation, userId);
+        super._onUpdate(changed, options, userId);
         if (game.user.id !== userId) return;
 
         const keys = Object.keys(fu.flattenObject(changed));
@@ -62,23 +64,16 @@ class UserPF2e extends User<ActorPF2e<null>> {
         }
         if (keys.includes("flags.pf2e.settings.monochromeDarkvision") && canvas.ready) {
             canvas.scene?.reset();
-            canvas.perception.update({ initializeVision: true, refreshLighting: true }, true);
+            canvas.perception.update({ initializeVision: true, refreshLighting: true });
         }
     }
 }
 
-interface UserPF2e extends User<ActorPF2e<null>> {
+interface UserPF2e extends User {
+    character: ActorPF2e<null> | null;
     targets: UserTargets<TokenPF2e<TokenDocumentPF2e<ScenePF2e>>>;
     flags: UserFlagsPF2e;
     readonly _source: UserSourcePF2e;
 }
 
-interface UserSettingsPF2e {
-    showEffectPanel: boolean;
-    showCheckDialogs: boolean;
-    showDamageDialogs: boolean;
-    monochromeDarkvision: boolean;
-    searchPackContents: boolean;
-}
-
-export { UserPF2e, type UserSettingsPF2e };
+export { UserPF2e };

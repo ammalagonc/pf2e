@@ -1,18 +1,21 @@
 import type { ActorPF2e, ActorType } from "@actor";
+import type { ClientDocument } from "@client/documents/abstract/_module.d.mts";
+import type { DatabaseCreateOperation } from "@common/abstract/_module.d.mts";
+import type { SourceFromSchema } from "@common/data/fields.d.mts";
 import { ConditionPF2e, ItemPF2e, ItemProxyPF2e } from "@item";
 import type { ItemSourcePF2e } from "@item/base/data/index.ts";
-import { ItemGrantDeleteAction, ItemGranterSource, ItemSourceFlagsPF2e } from "@item/base/data/system.ts";
+import type { ItemGrantDeleteAction, ItemGranterSource, ItemSourceFlagsPF2e } from "@item/base/data/system.ts";
 import { PHYSICAL_ITEM_TYPES } from "@item/physical/values.ts";
 import { SlugField, StrictArrayField } from "@system/schema-data-fields.ts";
 import { ErrorPF2e, isObject, setHasElement, sluggify, tupleHasValue } from "@util";
 import { UUIDUtils } from "@util/uuid.ts";
 import * as R from "remeda";
 import { RuleElementOptions, RuleElementPF2e } from "../base.ts";
-import { ChoiceSetSource } from "../choice-set/data.ts";
+import type { ChoiceSetSource } from "../choice-set/data.ts";
 import { ChoiceSetRuleElement } from "../choice-set/rule-element.ts";
-import { ModelPropsFromRESchema, RuleElementSource } from "../data.ts";
+import type { ModelPropsFromRESchema, RuleElementSource } from "../data.ts";
 import { ItemAlteration } from "../item-alteration/alteration.ts";
-import { GrantItemSchema } from "./schema.ts";
+import type { GrantItemSchema } from "./schema.ts";
 
 class GrantItemRuleElement extends RuleElementPF2e<GrantItemSchema> {
     static override validActorTypes: ActorType[] = ["army", "character", "npc", "familiar"];
@@ -180,7 +183,7 @@ class GrantItemRuleElement extends RuleElementPF2e<GrantItemSchema> {
         }
 
         // Create a temporary owned item and run its actor-data preparation and early-stage rule-element callbacks
-        const tempGranted = new ItemProxyPF2e(fu.deepClone(grantedSource), { parent: this.actor });
+        const tempGranted = new ItemProxyPF2e<ActorPF2e>(fu.deepClone(grantedSource), { parent: this.actor });
         tempGranted.grantedBy = this.item;
 
         // Check for immunity and bail if a match
@@ -308,7 +311,7 @@ class GrantItemRuleElement extends RuleElementPF2e<GrantItemSchema> {
 
     /** Set flags on granting and grantee items to indicate relationship between the two */
     #setGrantFlags(
-        granter: PreCreate<ItemSourcePF2e>,
+        granter: ItemSourcePF2e,
         grantee: ItemSourcePF2e | ItemPF2e<ActorPF2e>,
         itemUpdates: EmbeddedDocumentUpdateData[],
     ): void {
@@ -392,7 +395,7 @@ class GrantItemRuleElement extends RuleElementPF2e<GrantItemSchema> {
         }
 
         const flags = { pf2e: { grantedBy: { id: this.item.id, onDelete: "cascade" } } };
-        const condition = new ConditionPF2e(
+        const condition = new ConditionPF2e<ActorPF2e>(
             fu.mergeObject(conditionSource, {
                 _id: fu.randomID(),
                 flags,

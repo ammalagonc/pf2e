@@ -1,4 +1,5 @@
 import { DamageDicePF2e, MODIFIER_TYPES, ModifierPF2e, applyStackingRules } from "@actor/modifiers.ts";
+import type { RollMode } from "@common/constants.d.mts";
 import { DEGREE_OF_SUCCESS, DEGREE_OF_SUCCESS_STRINGS, DegreeOfSuccessIndex } from "@system/degree-of-success.ts";
 import {
     ErrorPF2e,
@@ -21,7 +22,7 @@ import { DAMAGE_CATEGORIES_UNIQUE, DAMAGE_TYPE_ICONS } from "./values.ts";
  * Dialog for excluding certain modifiers before rolling damage.
  * @category Other
  */
-class DamageModifierDialog extends Application {
+class DamageModifierDialog extends fav1.api.Application {
     formulaData: DamageFormulaData;
     context: DamageDamageContext;
 
@@ -54,7 +55,7 @@ class DamageModifierDialog extends Application {
         };
     }
 
-    static override get defaultOptions(): ApplicationOptions {
+    static override get defaultOptions(): fav1.api.ApplicationV1Options {
         return {
             ...super.defaultOptions,
             template: "systems/pf2e/templates/chat/damage/damage-modifier-dialog.hbs",

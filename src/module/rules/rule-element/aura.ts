@@ -1,8 +1,10 @@
 import { userColorForActor } from "@actor/helpers.ts";
 import type { AuraAppearanceData, AuraData, AuraEffectData, SaveType } from "@actor/types.ts";
 import { SAVE_TYPES } from "@actor/values.ts";
+import type { HexColorString, ImageFilePath, VideoFilePath } from "@common/constants.d.mts";
+import { ItemUUID } from "@common/documents/_module.mjs";
 import type { EffectTrait } from "@item/abstract-effect/types.ts";
-import { DataUnionField, PredicateField, StrictArrayField } from "@system/schema-data-fields.ts";
+import { DataUnionField, LaxArrayField, PredicateField, StrictArrayField } from "@system/schema-data-fields.ts";
 import { isImageOrVideoPath, sluggify } from "@util";
 import * as R from "remeda";
 import { RuleElementOptions, RuleElementPF2e } from "./base.ts";
@@ -33,7 +35,7 @@ class AuraRuleElement extends RuleElementPF2e<AuraSchema> {
             required: true,
             nullable: false,
             initial: undefined,
-            choices: { ...CONFIG.PF2E.spellTraits, ...CONFIG.PF2E.actionTraits },
+            choices: CONFIG.PF2E.effectTraits,
         });
 
         const effectSchemaField: fields.SchemaField<AuraEffectSchema> = new fields.SchemaField({
@@ -75,7 +77,7 @@ class AuraRuleElement extends RuleElementPF2e<AuraSchema> {
                 },
                 { required: true, nullable: true, initial: null, label: "PF2E.SavesHeader" },
             ),
-            predicate: new PredicateField({ required: false, nullable: false }),
+            predicate: new PredicateField(),
             removeOnExit: new fields.BooleanField({
                 required: true,
                 nullable: false,
@@ -180,7 +182,7 @@ class AuraRuleElement extends RuleElementPF2e<AuraSchema> {
                         required: true,
                         nullable: false,
                         initial: undefined,
-                        label: "TOKEN.ImagePath",
+                        label: "TOKEN.FIELDS.texture.src.label",
                     }),
                     alpha: new fields.AlphaField({
                         required: true,
@@ -238,7 +240,7 @@ class AuraRuleElement extends RuleElementPF2e<AuraSchema> {
                 label: "PF2E.RuleEditor.Aura.Basics.Level.Label",
                 hint: "PF2E.RuleEditor.Aura.Basics.Level.Hint",
             }),
-            traits: new StrictArrayField(auraTraitField, {
+            traits: new LaxArrayField(auraTraitField, {
                 required: true,
                 nullable: false,
                 label: "PF2E.TraitsLabel",
@@ -378,8 +380,8 @@ type AuraSchema = RuleElementSchema & {
     /** References to effects included in this aura */
     effects: StrictArrayField<
         fields.SchemaField<AuraEffectSchema>,
-        SourceFromSchema<AuraEffectSchema>[],
-        ModelPropsFromSchema<AuraEffectSchema>[],
+        fields.SourceFromSchema<AuraEffectSchema>[],
+        fields.ModelPropsFromSchema<AuraEffectSchema>[],
         true,
         false,
         true
@@ -390,8 +392,8 @@ type AuraSchema = RuleElementSchema & {
      */
     appearance: fields.SchemaField<
         AuraAppearanceSchema,
-        SourceFromSchema<AuraAppearanceSchema>,
-        ModelPropsFromSchema<AuraAppearanceSchema>,
+        fields.SourceFromSchema<AuraAppearanceSchema>,
+        fields.ModelPropsFromSchema<AuraAppearanceSchema>,
         true,
         false,
         true
@@ -481,8 +483,8 @@ type AuraAppearanceSchema = {
     /** Configuration for a texture (image or video) drawn as part of the aura */
     texture: fields.SchemaField<
         AuraTextureSchema,
-        SourceFromSchema<AuraTextureSchema>,
-        ModelPropsFromSchema<AuraTextureSchema>,
+        fields.SourceFromSchema<AuraTextureSchema>,
+        fields.ModelPropsFromSchema<AuraTextureSchema>,
         false,
         true,
         true
@@ -498,8 +500,8 @@ type AuraTextureSchema = {
     /** A manual x/y translation of the texture resource */
     translation: fields.SchemaField<
         XYPairSchema,
-        SourceFromSchema<XYPairSchema>,
-        ModelPropsFromSchema<XYPairSchema>,
+        fields.SourceFromSchema<XYPairSchema>,
+        fields.ModelPropsFromSchema<XYPairSchema>,
         false,
         true,
         true
@@ -515,7 +517,7 @@ type XYPairSchema = {
     y: fields.NumberField<number, number, true, false, false>;
 };
 
-interface AuraEffectREData extends ModelPropsFromSchema<AuraEffectSchema> {
+interface AuraEffectREData extends fields.ModelPropsFromSchema<AuraEffectSchema> {
     includesSelf: boolean;
     removeOnExit: boolean;
 }

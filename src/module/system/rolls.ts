@@ -1,5 +1,6 @@
 import type { ModifierPF2e } from "@actor/modifiers.ts";
 import type { RollOrigin, RollTarget } from "@actor/roll-context/types.ts";
+import type { RollMode } from "@common/constants.d.mts";
 import type { AbilityTrait } from "@item/ability/types.ts";
 import type { TokenPF2e } from "@module/canvas/index.ts";
 import type { CheckContextChatFlag } from "@module/chat-message/index.ts";
@@ -7,8 +8,9 @@ import type { ZeroToTwo } from "@module/data.ts";
 import type { RollNotePF2e, RollNoteSource } from "@module/notes.ts";
 import type { RollTwiceOption } from "./check/index.ts";
 import type { CheckDC, DEGREE_OF_SUCCESS_STRINGS } from "./degree-of-success.ts";
+import dice = foundry.dice;
 
-interface RollDataPF2e extends RollOptions {
+interface DiceRollOptionsPF2e extends dice.RollOptions {
     rollerId?: string;
     totalModifier?: number;
     /** Whether to show roll formula and tooltip to players */
@@ -18,13 +20,13 @@ interface RollDataPF2e extends RollOptions {
 /** Possible parameters of a RollFunction */
 interface RollParameters {
     /** The triggering event */
-    event?: MouseEvent | JQuery.TriggeredEvent;
+    event?: MouseEvent;
     /** Any options which should be used in the roll. */
     options?: string[] | Set<string>;
     /** Optional DC data for the roll */
     dc?: CheckDC | null;
     /** Callback called when the roll occurs. */
-    callback?: (roll: Rolled<Roll>) => void | Promise<void>;
+    callback?: (roll: dice.Rolled<Roll>) => void | Promise<void>;
     /** Additional modifiers */
     modifiers?: ModifierPF2e[];
     /** Whether to create a message from the roll */
@@ -72,4 +74,11 @@ interface BaseRollContext {
     skipDialog?: boolean;
 }
 
-export type { AttackRollParams, BaseRollContext, DamageRollParams, RollDataPF2e, RollParameters, RollTwiceOption };
+export type {
+    AttackRollParams,
+    BaseRollContext,
+    DamageRollParams,
+    DiceRollOptionsPF2e,
+    RollParameters,
+    RollTwiceOption,
+};

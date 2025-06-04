@@ -1,15 +1,15 @@
-import { DurationData } from "./data.ts";
-import type { AbstractEffectPF2e } from "./document.ts";
+import type { AbstractEffectPF2e } from "@item/index.ts";
+import type { DurationData } from "./data.ts";
 import { DURATION_UNITS } from "./values.ts";
 
 export function calculateRemainingDuration(
     effect: AbstractEffectPF2e,
-    durationData: DurationData | { unit: "unlimited" },
+    durationData: DurationData,
 ): { expired: boolean; remaining: number } {
     if (durationData.unit === "encounter") {
         const isExpired = effect.system.expired;
         return { expired: !!isExpired, remaining: isExpired ? 0 : Infinity };
-    } else if (durationData.unit === "unlimited" || !("start" in effect.system)) {
+    } else if (durationData.unit === "unlimited" || !effect.system.start) {
         return { expired: false, remaining: Infinity };
     }
 

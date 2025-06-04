@@ -1,5 +1,6 @@
 import { AutomaticBonusProgression as ABP } from "@actor/character/automatic-bonus-progression.ts";
-import { ItemSheetOptions } from "@item/base/sheet/sheet.ts";
+import type { FormSelectOption } from "@client/applications/forms/fields.d.mts";
+import type { ItemSheetOptions } from "@item/base/sheet/sheet.ts";
 import {
     MATERIAL_DATA,
     MaterialSheetData,
@@ -11,7 +12,7 @@ import {
 import { SheetOptions, createSheetTags } from "@module/sheet/helpers.ts";
 import { ErrorPF2e, htmlQueryAll, objectHasKey, setHasElement, sortStringRecord, tupleHasValue } from "@util";
 import * as R from "remeda";
-import { ComboWeaponMeleeUsage, SpecificWeaponData, WeaponPersistentDamage } from "./data.ts";
+import type { ComboWeaponMeleeUsage, SpecificWeaponData, WeaponPersistentDamage } from "./data.ts";
 import type { WeaponPF2e } from "./document.ts";
 import { MANDATORY_RANGED_GROUPS, WEAPON_RANGES } from "./values.ts";
 
@@ -166,11 +167,8 @@ export class WeaponSheetPF2e extends PhysicalItemSheetPF2e<WeaponPF2e> {
     }
 
     protected override async _updateObject(event: Event, formData: Record<string, unknown>): Promise<void> {
-        const weapon = this.item;
-
-        formData["system.bonusDamage.value"] ||= 0;
         formData["system.splashDamage.value"] ||= 0;
-
+        const weapon = this.item;
         // Ensure melee usage is absent if not a combination weapon
         if (weapon.system.meleeUsage && !this.item.traits.has("combination")) {
             formData["system.-=meleeUsage"] = null;

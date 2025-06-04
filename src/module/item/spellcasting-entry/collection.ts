@@ -6,7 +6,7 @@ import * as R from "remeda";
 import { getSpellRankLabel, spellSlotGroupIdToNumber } from "./helpers.ts";
 import { BaseSpellcastingEntry, SpellPrepEntry, SpellcastingSlotGroup } from "./types.ts";
 
-class SpellCollection<TActor extends ActorPF2e> extends Collection<SpellPF2e<TActor>> {
+class SpellCollection<TActor extends ActorPF2e> extends Collection<string, SpellPF2e<TActor>> {
     readonly entry: BaseSpellcastingEntry<TActor>;
 
     readonly actor: TActor;
@@ -133,15 +133,6 @@ class SpellCollection<TActor extends ActorPF2e> extends Collection<SpellPF2e<TAc
         slots[slotIndex] = { id: spell?.id ?? null, expended };
         const result = await this.entry.update({ [`system.slots.slot${groupNumber}.prepared`]: slots });
         return result ? this : null;
-    }
-
-    /** @deprecated Clear the spell slot and updates the spellcasting entry */
-    async unprepareSpell(groupId: SpellSlotGroupId, slotIndex: number): Promise<this | null> {
-        foundry.utils.logCompatibilityWarning(
-            "SpellCollection#unprepareSpell() is deprecated. Use SpellCollection#prepareSpell() with a null spell instead.",
-            { since: "6.11.2", until: "7.0.0" },
-        );
-        return this.prepareSpell(null, groupId, slotIndex);
     }
 
     /** Sets the expended state of a spell slot and updates the spellcasting entry */

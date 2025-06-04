@@ -94,7 +94,7 @@ interface SpellHeightenLayer {
 }
 
 interface SpellOverlayOverride {
-    system?: DeepPartial<SpellSystemSource>;
+    system?: Partial<Omit<SpellSystemSource, "overlays">>;
     name?: string;
     overlayType: "override";
     sort: number;
@@ -127,7 +127,7 @@ type SpellOverlayType = SpellOverlay["overlayType"];
 interface RitualData {
     /** Details of the primary check for the ritual */
     primary: { check: string };
-    /** Details of the secondary check(s) for the ritual and maximum number of casters */
+    /** Details of the secondary check(s) for the ritual and minimum number of casters */
     secondary: { checks: string; casters: number };
 }
 

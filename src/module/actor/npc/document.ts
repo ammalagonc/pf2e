@@ -1,20 +1,22 @@
 import { CreaturePF2e } from "@actor";
 import type { Abilities } from "@actor/creature/data.ts";
-import type { CreatureUpdateOperation } from "@actor/creature/index.ts";
+import type { CreatureUpdateCallbackOptions } from "@actor/creature/index.ts";
+import { ActorSizePF2e } from "@actor/data/size.ts";
 import { setHitPointsRollOptions, strikeFromMeleeItem } from "@actor/helpers.ts";
 import { ActorInitiative } from "@actor/initiative.ts";
 import { ModifierPF2e, StatisticModifier } from "@actor/modifiers.ts";
 import type { SaveType } from "@actor/types.ts";
 import { SAVE_TYPES } from "@actor/values.ts";
+import type { UserAction } from "@common/constants.d.mts";
 import type { ItemPF2e, MeleePF2e } from "@item";
 import type { ItemType } from "@item/base/data/index.ts";
 import { calculateDC } from "@module/dc.ts";
 import { RollNotePF2e } from "@module/notes.ts";
 import { CreatureIdentificationData, creatureIdentificationDCs } from "@module/recall-knowledge.ts";
 import { extractModifierAdjustments, extractModifiers } from "@module/rules/helpers.ts";
-import type { UserPF2e } from "@module/user/document.ts";
 import type { TokenDocumentPF2e } from "@scene";
 import { ArmorStatistic, PerceptionStatistic, Statistic } from "@system/statistic/index.ts";
+import { TextEditorPF2e } from "@system/text-editor.ts";
 import { createHTMLElement, signedInteger, sluggify } from "@util";
 import * as R from "remeda";
 import type { NPCFlags, NPCSource, NPCSystemData } from "./data.ts";
@@ -65,7 +67,7 @@ class NPCPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | nul
     }
 
     /** Non-owning users may be able to loot a dead NPC. */
-    override canUserModify(user: User, action: UserAction): boolean {
+    override canUserModify(user: fd.BaseUser, action: UserAction): boolean {
         return (
             super.canUserModify(user, action) ||
             (action === "update" &&
@@ -437,7 +439,7 @@ class NPCPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | nul
         const formatNoteText = (item: ItemPF2e<this | null>): Promise<string> => {
             // Call enrichHTML with the correct item context
             const rollData = item.getRollData();
-            return TextEditor.enrichHTML(item.description, { rollData });
+            return TextEditorPF2e.enrichHTML(item.description, { rollData });
         };
 
         for (const attackEffect of attack.attackEffects) {
@@ -577,14 +579,17 @@ class NPCPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | nul
     }
 
     protected override async _preUpdate(
-        changed: DeepPartial<NPCSource>,
-        operation: CreatureUpdateOperation<TParent>,
-        user: UserPF2e,
+        changed: DeepPartial<this["_source"]>,
+        options: CreatureUpdateCallbackOptions,
+        user: fd.BaseUser,
     ): Promise<boolean | void> {
-        const isFullReplace = !((operation.diff ?? true) && (operation.recursive ?? true));
-        if (isFullReplace) return super._preUpdate(changed, operation, user);
+        const result = await super._preUpdate(changed, options, user);
+        const isFullReplace = !((options.diff ?? true) && (options.recursive ?? true));
+        if (isFullReplace || result === false || !changed.system) return result;
 
-        if (changed.system?.skills) {
+        this.#updatePrototypeToken(changed);
+
+        if (changed.system.skills) {
             for (const [key, skill] of Object.entries(changed.system.skills)) {
                 if (key.startsWith("-=") || !skill) continue;
 
@@ -594,8 +599,20 @@ class NPCPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | nul
                 }
             }
         }
+    }
 
-        return super._preUpdate(changed, operation, user);
+    /** Update the prototype token dimensions along with this actor's size category. */
+    async #updatePrototypeToken(changes: DeepPartial<this["_source"]>): Promise<void> {
+        if (this.isToken || !this.prototypeToken.flags.pf2e.linkToActorSize || !changes.system?.traits?.size?.value) {
+            return;
+        }
+        const newSize = new ActorSizePF2e({ value: changes.system.traits.size.value });
+        const currentSize = this.system.traits.size;
+        if (newSize.width !== currentSize.width || newSize.length !== currentSize.length) {
+            const prototypeToken = (changes.prototypeToken ??= {});
+            prototypeToken.width = newSize.width / 5;
+            prototypeToken.height = newSize.length / 5;
+        }
     }
 }
 

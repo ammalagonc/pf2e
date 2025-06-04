@@ -1,4 +1,5 @@
 import { ActorProxyPF2e } from "@actor";
+import type { DataField, SourceFromSchema } from "@common/data/fields.d.mts";
 import { ItemPF2e, ItemProxyPF2e } from "@item";
 import { isBracketedValue } from "@module/rules/helpers.ts";
 import { RuleElements, type RuleElementPF2e, type RuleElementSource } from "@module/rules/index.ts";
@@ -8,7 +9,6 @@ import type { LaxSchemaField } from "@system/schema-data-fields.ts";
 import { createHTMLElement, fontAwesomeIcon, htmlClosest, htmlQuery, htmlQueryAll, isObject } from "@util";
 import { tagify } from "@util/tags.ts";
 import * as R from "remeda";
-import type { DataField } from "types/foundry/common/data/fields.d.ts";
 import type { ItemSheetPF2e } from "../index.ts";
 
 interface RuleElementFormOptions<TSource extends RuleElementSource, TObject extends RuleElementPF2e | null> {
@@ -138,11 +138,15 @@ class RuleElementForm<
     }
 
     async #getFormHelpers(rule: TSource): Promise<Record<string, unknown>> {
-        const valueTemplate = await getTemplate("systems/pf2e/templates/items/rules/partials/resolvable-value.hbs");
-        const bracketsTemplate = await getTemplate(
+        const valueTemplate = await fa.handlebars.getTemplate(
+            "systems/pf2e/templates/items/rules/partials/resolvable-value.hbs",
+        );
+        const bracketsTemplate = await fa.handlebars.getTemplate(
             "systems/pf2e/templates/items/rules/partials/resolvable-brackets.hbs",
         );
-        const dropZoneTemplate = await getTemplate("systems/pf2e/templates/items/rules/partials/drop-zone.hbs");
+        const dropZoneTemplate = await fa.handlebars.getTemplate(
+            "systems/pf2e/templates/items/rules/partials/drop-zone.hbs",
+        );
 
         const getResolvableData = (property: string) => {
             const value = fu.getProperty(rule, property);
@@ -177,9 +181,9 @@ class RuleElementForm<
 
     async render(): Promise<string> {
         const data = await this.getData();
-        return renderTemplate("systems/pf2e/templates/items/rules/partials/outer.hbs", {
+        return fa.handlebars.renderTemplate("systems/pf2e/templates/items/rules/partials/outer.hbs", {
             ...data,
-            template: await renderTemplate(this.template, data),
+            template: await fa.handlebars.renderTemplate(this.template, data),
         });
     }
 

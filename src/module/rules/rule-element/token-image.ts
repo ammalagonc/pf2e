@@ -1,3 +1,5 @@
+import type { TextureTransitionType } from "@client/canvas/rendering/filters/transition.d.mts";
+import { HexColorString, ImageFilePath, VideoFilePath } from "@common/constants.mjs";
 import { isImageOrVideoPath } from "@util";
 import { RuleElementPF2e } from "./base.ts";
 import { ModelPropsFromRESchema, RuleElementSchema } from "./data.ts";
@@ -15,9 +17,9 @@ class TokenImageRuleElement extends RuleElementPF2e<TokenImageRuleSchema> {
                 required: true,
                 nullable: false,
                 initial: undefined,
-                label: "TOKEN.ImagePath",
+                label: "TOKEN.FIELDS.texture.src.label",
             }),
-            tint: new fields.ColorField({ label: "TOKEN.TintColor" }),
+            tint: new fields.ColorField({ label: "TOKEN.FIELDS.texture.tint.label" }),
             alpha: new fields.AlphaField({
                 label: "PF2E.RuleEditor.General.Opacity",
                 required: false,
@@ -93,13 +95,14 @@ class TokenImageRuleElement extends RuleElementPF2e<TokenImageRuleSchema> {
                         required: false,
                         blank: false,
                         nullable: false,
-                        choices: Object.values(TextureTransitionFilter.TYPES),
+                        choices: Object.values(fc.rendering.filters.TextureTransitionFilter.TYPES),
                         initial: undefined,
                     }),
                     easing: new fields.StringField({
                         required: false,
                         blank: false,
                         nullable: false,
+                        choices: ["easeInOutCosine", "easeOutCircle", "easeInCircle"] as const,
                         initial: undefined,
                     }),
                     name: new fields.StringField({
@@ -131,7 +134,7 @@ class TokenImageRuleElement extends RuleElementPF2e<TokenImageRuleSchema> {
         this.actor.synthetics.tokenOverrides.texture = texture;
 
         const subjectTexture = this.resolveInjectedProperties(this.ring?.subject.texture ?? "");
-        if (this.ring && ImageHelper.hasImageExtension(subjectTexture)) {
+        if (this.ring && fh.media.ImageHelper.hasImageExtension(subjectTexture)) {
             this.actor.synthetics.tokenOverrides.ring = {
                 subject: {
                     scale: this.ring.subject.scale,
@@ -206,19 +209,25 @@ type TokenImageRuleSchema = RuleElementSchema & {
         {
             duration: fields.NumberField<number, number, false, false, false>;
             transition: fields.StringField<TextureTransitionType, TextureTransitionType, false, false, false>;
-            easing: fields.StringField<string, string, false, false, false>;
+            easing: fields.StringField<
+                "easeInOutCosine" | "easeOutCircle" | "easeInCircle",
+                "easeInOutCosine" | "easeOutCircle" | "easeInCircle",
+                false,
+                false,
+                false
+            >;
             name: fields.StringField<string, string, false, false, false>;
         },
         {
             duration: number | undefined;
             transition: TextureTransitionType | undefined;
-            easing: string | undefined;
+            easing: "easeInOutCosine" | "easeOutCircle" | "easeInCircle" | undefined;
             name: string | undefined;
         },
         {
             duration: number | undefined;
             transition: TextureTransitionType | undefined;
-            easing: string | undefined;
+            easing: "easeInOutCosine" | "easeOutCircle" | "easeInCircle" | undefined;
             name: string | undefined;
         },
         false,

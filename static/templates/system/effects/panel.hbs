@@ -1,26 +1,24 @@
-<article id="effects-panel">
-    <div class="effects-list">
-        {{#each afflictions as |affliction|}}
-            {{> effect this=affliction}}
-        {{/each}}
+<article>
+    {{#each afflictions as |affliction|}}
+        {{> effect this=affliction}}
+    {{/each}}
 
-        {{#if (and afflictions.length conditions.length)}}<hr />{{/if}}
+    {{#if (and afflictions.length conditions.length)}}<hr />{{/if}}
 
-        {{#each conditions as |condition|}}
-            {{> effect this=condition}}
-        {{/each}}
+    {{#each conditions as |condition|}}
+        {{> effect this=condition}}
+    {{/each}}
 
-        {{#if (and conditions.length effects.length)}}<hr />{{/if}}
+    {{#if (and conditions.length effects.length)}}<hr />{{/if}}
 
-        {{#each effects as |effect|}}
-            {{> effect this=effect}}
-        {{/each}}
-    </div>
+    {{#each effects as |effect|}}
+        {{> effect this=effect}}
+    {{/each}}
 </article>
 
 {{#*inline "effect"}}
 {{#if (or effect.isIdentified @root.user.isGM)}}
-    <div class="effect-item" data-item-id="{{effect.id}}" data-item-uuid="{{effect.uuid}}" data-badge-type="{{effect.badge.type}}">
+    <div class="effect-item" data-action="handleClick" data-item-id="{{effect.id}}" data-item-uuid="{{effect.uuid}}" data-badge-type="{{effect.badge.type}}">
         <div class="icon{{#if effect.isAura}} aura{{/if}}{{#unless effect.isIdentified}} unidentified{{/unless}}" data-locked="{{#if effect.isLocked}}true{{/if}}" style="background-image: url({{effect.img}})">
             {{#if effect.isLocked}}
                 <div class="linked"><i class="fa-solid fa-link"></i></div>

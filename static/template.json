@@ -218,6 +218,7 @@
         "types": [
             "action",
             "ancestry",
+            "affliction",
             "armor",
             "background",
             "backpack",
@@ -389,9 +390,6 @@
             "equipped": {
                 "handsHeld": 0
             },
-            "bonusDamage": {
-                "value": 0
-            },
             "splashDamage": {
                 "value": 0
             },
@@ -405,17 +403,7 @@
                 "property": []
             },
             "specific": null,
-            "subitems": [],
-            "property1": {
-                "value": "",
-                "dice": 0,
-                "die": "",
-                "damageType": "",
-                "critDice": 0,
-                "critDie": "",
-                "critDamage": "",
-                "critDamageType": ""
-            }
+            "subitems": []
         },
         "armor": {
             "templates": [
@@ -536,105 +524,6 @@
             "trainedSkills": {
                 "value": [],
                 "lore": []
-            }
-        },
-        "class": {
-            "templates": [
-                "common",
-                "traits",
-                "rarity"
-            ],
-            "keyAbility": {
-                "value": []
-            },
-            "items": {},
-            "hp": 0,
-            "trainedSkills": {
-                "value": [],
-                "additional": 0
-            },
-            "perception": 0,
-            "savingThrows": {
-                "fortitude": 0,
-                "reflex": 0,
-                "will": 0
-            },
-            "attacks": {
-                "simple": 0,
-                "martial": 0,
-                "advanced": 0,
-                "unarmed": 0,
-                "other": {
-                    "name": "",
-                    "rank": 0
-                }
-            },
-            "defenses": {
-                "unarmored": 0,
-                "light": 0,
-                "medium": 0,
-                "heavy": 0
-            },
-            "spellcasting": 0,
-            "ancestryFeatLevels": {
-                "value": [
-                    1,
-                    5,
-                    9,
-                    13,
-                    17
-                ]
-            },
-            "classFeatLevels": {
-                "value": [
-                    1,
-                    2,
-                    4,
-                    6,
-                    8,
-                    10,
-                    12,
-                    14,
-                    16,
-                    18,
-                    20
-                ]
-            },
-            "generalFeatLevels": {
-                "value": [
-                    3,
-                    7,
-                    11,
-                    15,
-                    19
-                ]
-            },
-            "skillFeatLevels": {
-                "value": [
-                    2,
-                    4,
-                    6,
-                    8,
-                    10,
-                    12,
-                    14,
-                    16,
-                    18,
-                    20
-                ]
-            },
-            "skillIncreaseLevels": {
-                "value": [
-                    3,
-                    5,
-                    7,
-                    9,
-                    11,
-                    13,
-                    15,
-                    17,
-                    19
-                ]
             }
         },
         "lore": {
@@ -787,50 +676,6 @@
             "autoHeightenLevel": {
                 "value": null
             }
-        },
-        "condition": {
-            "templates": [
-                "common",
-                "traits"
-            ],
-            "group": null,
-            "duration": {
-                "value": -1,
-                "unit": "unlimited",
-                "expiry": null
-            },
-            "value": {
-                "isValued": false,
-                "value": 0
-            },
-            "references": {
-                "children": [],
-                "overrides": [],
-                "overriddenBy": []
-            },
-            "overrides": []
-        },
-        "effect": {
-            "templates": [
-                "common",
-                "itemLevel",
-                "traits"
-            ],
-            "duration": {
-                "value": -1,
-                "unit": "unlimited",
-                "expiry": null,
-                "sustained": false
-            },
-            "start": {
-                "value": 0,
-                "initiative": null
-            },
-            "tokenIcon": {
-                "show": true
-            },
-            "badge": null,
-            "context": null
         },
         "deity": {
             "templates": [

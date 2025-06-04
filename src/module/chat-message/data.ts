@@ -1,12 +1,15 @@
 import type { RawDamageDice, RawModifier } from "@actor/modifiers.ts";
-import { ItemType, SpellSource } from "@item/base/data/index.ts";
-import { MagicTradition } from "@item/spell/types.ts";
-import { ZeroToTwo } from "@module/data.ts";
-import { RollNoteSource } from "@module/notes.ts";
-import { CheckCheckContext } from "@system/check/index.ts";
-import { DamageDamageContext } from "@system/damage/types.ts";
-import { DegreeAdjustmentsRecord, DegreeOfSuccessString } from "@system/degree-of-success.ts";
-import type { ChatMessageFlags } from "types/foundry/common/documents/chat-message.d.ts";
+import type { ActorUUID, TokenDocumentUUID } from "@client/documents/_module.d.mts";
+import type { DocumentUUID } from "@client/utils/_module.d.mts";
+import type { RollMode } from "@common/constants.d.mts";
+import type { ChatMessageFlags } from "@common/documents/chat-message.d.mts";
+import type { ItemType, SpellSource } from "@item/base/data/index.ts";
+import type { MagicTradition } from "@item/spell/types.ts";
+import type { ZeroToTwo } from "@module/data.ts";
+import type { RollNoteSource } from "@module/notes.ts";
+import type { CheckCheckContext } from "@system/check/index.ts";
+import type { DamageDamageContext } from "@system/damage/types.ts";
+import type { CheckDC, DegreeAdjustmentsRecord, DegreeOfSuccessString } from "@system/degree-of-success.ts";
 
 type ChatMessageSourcePF2e = foundry.documents.ChatMessageSource & {
     flags: ChatMessageFlagsPF2e;
@@ -30,7 +33,6 @@ type ChatMessageFlagsPF2e = ChatMessageFlags & {
         casting?: { id: string; tradition: MagicTradition; embeddedSpell?: SpellSource } | null;
         modifiers?: RawModifier[];
         dice?: RawDamageDice[];
-        preformatted?: "flavor" | "content" | "both";
         journalEntry?: DocumentUUID;
         appliedDamage?: AppliedDamageFlag | null;
         treatWoundsMacroFlag?: { bonus: number };
@@ -71,6 +73,7 @@ type ContextFlagOmission =
     | "altUsage"
     | "createMessage"
     | "damaging"
+    | "dc"
     | "dosAdjustments"
     | "item"
     | "mapIncreases"
@@ -89,6 +92,7 @@ interface CheckContextChatFlag extends Required<Omit<CheckCheckContext, ContextF
     actor: string | null;
     token: string | null;
     item?: string;
+    dc?: Omit<CheckDC, "statistic"> | null;
     dosAdjustments?: DegreeAdjustmentsRecord;
     roller?: "origin" | "target";
     origin: ActorTokenFlag | null;

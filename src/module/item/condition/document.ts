@@ -1,10 +1,10 @@
 import type { ActorPF2e } from "@actor";
+import type { DatabaseUpdateOperation } from "@common/abstract/_module.d.mts";
 import type { ItemPF2e } from "@item";
 import { AbstractEffectPF2e, EffectBadge } from "@item/abstract-effect/index.ts";
 import { reduceItemName } from "@item/helpers.ts";
 import { ChatMessagePF2e } from "@module/chat-message/index.ts";
 import { RuleElementOptions, RuleElementPF2e } from "@module/rules/index.ts";
-import type { UserPF2e } from "@module/user/index.ts";
 import type { TokenDocumentPF2e } from "@scene/index.ts";
 import { DamageCategorization } from "@system/damage/helpers.ts";
 import { DamageRoll } from "@system/damage/roll.ts";
@@ -23,18 +23,12 @@ class ConditionPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends
 
     override get badge(): EffectBadge | null {
         if (this.system.persistent) {
-            return { type: "formula", value: this.system.persistent.formula, label: null };
+            return { type: "formula", value: this.system.persistent.formula, label: null, reevaluate: null };
+        } else if (typeof this.system.value.value === "number") {
+            return { type: "counter", min: 0, max: Infinity, label: null, value: this.system.value.value };
         }
 
-        return typeof this.system.value.value === "number"
-            ? {
-                  type: "counter",
-                  min: 0,
-                  max: Infinity,
-                  label: null,
-                  value: this.system.value.value,
-              }
-            : null;
+        return null;
     }
 
     /** Retrieve this condition's origin from its granting effect, if any */
@@ -145,7 +139,7 @@ class ConditionPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends
                 if (traits.length === 0) {
                     return createHTMLElement("strong", { children: [this.name] }).outerHTML;
                 }
-                return renderTemplate("systems/pf2e/templates/chat/action/flavor.hbs", {
+                return fa.handlebars.renderTemplate("systems/pf2e/templates/chat/action/flavor.hbs", {
                     action: { title: this.name },
                     traits: traits.map((t) => traitSlugToObject(t, CONFIG.PF2E.effectTraits)),
                 });
@@ -190,11 +184,6 @@ class ConditionPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends
 
         const systemData = this.system;
         systemData.value.value = systemData.value.isValued ? Number(systemData.value.value) || 1 : null;
-        systemData.duration = fu.mergeObject(systemData.duration, {
-            value: -1,
-            unit: "unlimited",
-            expiry: null,
-        });
 
         // Append numeric badge value to condition name, set item image according to configured style
         if (this.isEmbedded && typeof this.badge?.value === "number") {
@@ -299,7 +288,7 @@ class ConditionPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends
     protected override async _preUpdate(
         changed: DeepPartial<this["_source"]>,
         operation: ConditionUpdateOperation<TParent>,
-        user: UserPF2e,
+        user: fd.BaseUser,
     ): Promise<boolean | void> {
         operation.conditionValue = this.value;
         return super._preUpdate(changed, operation, user);
@@ -337,7 +326,7 @@ interface ConditionPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> ext
 }
 
 interface PersistentDamagePF2e<TParent extends ActorPF2e | null> extends ConditionPF2e<TParent> {
-    system: Omit<ConditionSystemData, "persistent"> & { persistent: PersistentDamageData };
+    system: ConditionSystemData & { persistent: PersistentDamageData };
 }
 
 interface ConditionUpdateOperation<TParent extends ActorPF2e | null> extends DatabaseUpdateOperation<TParent> {

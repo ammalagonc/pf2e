@@ -1,12 +1,14 @@
+import type { InteractionLayer } from "@client/canvas/layers/_module.mjs";
+import type { PlaceablesLayerPointerEvent } from "@client/canvas/layers/base/placeables-layer.mjs";
+import type { Point } from "@common/_types.mjs";
 import type { MeasuredTemplatePF2e } from "../measured-template.ts";
 
-export class TemplateLayerPF2e<
-    TObject extends MeasuredTemplatePF2e = MeasuredTemplatePF2e,
-> extends TemplateLayer<TObject> {
+class TemplateLayerPF2e<TObject extends MeasuredTemplatePF2e = MeasuredTemplatePF2e> extends fc.layers
+    .TemplateLayer<TObject> {
     /** Preview event listeners that can be referenced across methods */
     #previewListeners: TemplatePreviewEventListeners | null = null;
 
-    async createPreview(createData: Record<string, unknown>): Promise<TObject> {
+    async createPreview(createData: DeepPartial<TObject["document"]["_source"]>): Promise<TObject> {
         const initialLayer = canvas.activeLayer;
         const preview = await this._createPreview({ ...createData, ...canvas.mousePosition }, { renderSheet: false });
         this.#activatePreviewListeners(preview, initialLayer);
@@ -15,7 +17,7 @@ export class TemplateLayerPF2e<
 
     /** Overriden to snap according to the dragged template's type */
     override getSnappedPoint(point: Point): Point {
-        const template = this.preview.children.at(0);
+        const template = this.preview?.children.at(0);
         if (!template || !canvas.grid.isSquare) {
             return super.getSnappedPoint(point);
         }
@@ -36,7 +38,11 @@ export class TemplateLayerPF2e<
         }
 
         const { destination, preview: template, origin } = event.interactionData;
-        if (!template || template.destroyed) return;
+        if (!template || template.destroyed) {
+            return;
+        } else if (template.document.t === "rect") {
+            return super._onDragLeftMove(event);
+        }
 
         const dimensions = canvas.dimensions;
 
@@ -44,7 +50,7 @@ export class TemplateLayerPF2e<
         const { x, y } = canvas.grid.getSnappedPoint(destination, { mode: template.snappingMode });
         destination.x = x;
         destination.y = y;
-        const ray = new Ray(origin, destination);
+        const ray = new fc.geometry.Ray(origin, destination);
         const ratio = dimensions.size / dimensions.distance;
         const document = template.document;
 
@@ -81,90 +87,111 @@ export class TemplateLayerPF2e<
         return template.rotate(template.document.direction + delta, snap);
     }
 
+    protected override _onDragLeftStart(event: PlaceablesLayerPointerEvent<TObject>): void {
+        // Prevent normal drag operations when a preview is active
+        if (this.#previewListeners) return;
+        return super._onDragLeftStart(event);
+    }
+
+    protected override _onDragLeftCancel(event: PlaceablesLayerPointerEvent<TObject>): void {
+        // Prevent normal drag operations when a preview is active
+        if (this.#previewListeners) return;
+        return super._onDragLeftCancel(event);
+    }
+
     #activatePreviewListeners(preview: TObject, initialLayer: InteractionLayer | null): void {
-        let lastMove = Date.now(); // Throttle 25ms
+        let lastMove = Date.now(); // Throttle 50ms
 
         const listeners: TemplatePreviewEventListeners = (this.#previewListeners = {
+            lockedInPlace: false,
             mousemove: (event: PIXI.FederatedPointerEvent): void => {
                 event.stopPropagation();
                 const now = Date.now();
-                if (now - lastMove <= 25) return;
+                if (now - lastMove <= 50) return;
 
                 canvas._onDragCanvasPan(event);
                 const destination = event.getLocalPosition(this);
-                const dx = destination.x - preview.document.x;
-                const dy = destination.y - preview.document.y;
-                preview.document.updateSource({ x: preview.document.x + dx, y: preview.document.y + dy });
+
+                if (this.#previewListeners?.lockedInPlace) {
+                    const origin = preview.position;
+                    const ray = new fc.geometry.Ray(origin, destination);
+                    if (ray.distance < canvas.grid.size / 4) return;
+                    if (preview.document.t === "cone" && !(event.ctrlKey || event.metaKey)) {
+                        const snapAngle = Math.PI / (canvas.grid.isHexagonal ? 6 : 4);
+                        preview.document.updateSource({
+                            direction: Math.toDegrees(Math.floor(ray.angle / snapAngle + 0.5) * snapAngle),
+                        });
+                    } else if (preview.document.t === "ray" && !(event.ctrlKey || event.metaKey)) {
+                        // Snap lines in 5 degree increments
+                        const snapAngle = 0.08726646259971647; // = Math.toRadians(5)
+                        preview.document.updateSource({
+                            direction: Math.toDegrees(Math.floor(ray.angle / snapAngle) * snapAngle),
+                        });
+                    } else {
+                        preview.document.updateSource({ direction: Math.toDegrees(ray.angle) });
+                    }
+                } else {
+                    const dx = destination.x - preview.document.x;
+                    const dy = destination.y - preview.document.y;
+                    preview.document.updateSource({ x: preview.document.x + dx, y: preview.document.y + dy });
+                }
                 preview.renderFlags.set({ refresh: true });
                 lastMove = now;
             },
-            wheel: (event: Event): void => {
-                if (!(event instanceof WheelEvent)) return;
-                event.preventDefault();
-                event.stopPropagation();
-                const now = Date.now();
-                if (now - lastMove <= 25) return;
-
-                const { direction } = preview.document;
-                const distance = preview.document.distance ?? 5;
-
-                if (event.ctrlKey) {
-                    const snap = event.shiftKey || distance <= 30 ? 15 : 5;
-                    preview.document.updateSource({ direction: direction + snap * Math.sign(event.deltaY) });
-                    preview.renderFlags.set({ refresh: true });
-                } else if (event.shiftKey) {
-                    const snap = canvas.grid.isHexagonal ? 60 : 45;
-                    preview.document.updateSource({ direction: direction + snap * Math.sign(event.deltaY) });
-                    preview.renderFlags.set({ refresh: true });
-                }
-                lastMove = now;
-            },
-            wheelAbortController: new AbortController(),
             mousedown: (event: PIXI.FederatedPointerEvent): void => {
                 event.stopPropagation();
-                const { document, position } = preview;
-                this.#deactivatePreviewListeners(initialLayer, event);
-                document.updateSource(
-                    canvas.grid.isSquare
-                        ? canvas.grid.getSnappedPoint(position, {
-                              mode: preview.snappingMode,
-                          })
-                        : super.getSnappedPoint(position),
-                );
-                canvas.scene?.createEmbeddedDocuments("MeasuredTemplate", [document.toObject()]);
+                const point = this.getSnappedPoint(preview.position);
+                preview.document.updateSource({ x: point.x, y: point.y });
+                if (
+                    this.#previewListeners?.lockedInPlace ||
+                    event.shiftKey ||
+                    !["ray", "cone"].includes(preview.document.t)
+                ) {
+                    this.#deactivatePreviewListeners(initialLayer, event);
+                    canvas.scene?.createEmbeddedDocuments("MeasuredTemplate", [preview.document.toObject()]);
+                } else if (this.#previewListeners) {
+                    this.#previewListeners.lockedInPlace = true;
+                    preview.renderFlags.set({ refresh: true });
+                }
             },
             rightdown: (event: PIXI.FederatedPointerEvent): void => {
                 event.stopPropagation();
-                this.#deactivatePreviewListeners(initialLayer, event);
+                if (this.#previewListeners?.lockedInPlace) {
+                    this.#previewListeners.lockedInPlace = false;
+                    preview.document.updateSource({ direction: 0 });
+                    this.#previewListeners.mousemove(event);
+                } else {
+                    this.#deactivatePreviewListeners(initialLayer, event);
+                }
             },
         });
 
         canvas.stage.on("mousemove", listeners.mousemove);
-        canvas.app.view.addEventListener?.("wheel", listeners.wheel, {
-            passive: false,
-            signal: listeners.wheelAbortController.signal,
-        });
-        canvas.stage.once("mousedown", listeners.mousedown);
-        canvas.stage.once("rightdown", listeners.rightdown);
+        canvas.stage.on("mousedown", listeners.mousedown);
+        canvas.stage.on("rightdown", listeners.rightdown);
     }
 
-    #deactivatePreviewListeners(initialLayer: InteractionLayer | null, event: PIXI.FederatedPointerEvent): void {
-        this._onDragLeftCancel(event);
+    #deactivatePreviewListeners(
+        initialLayer: InteractionLayer | null,
+        event: PIXI.FederatedPointerEvent | PlaceablesLayerPointerEvent<TObject>,
+    ): void {
         if (this.#previewListeners) {
             canvas.stage.off("mousemove", this.#previewListeners.mousemove);
             canvas.stage.off("mousedown", this.#previewListeners.mousedown);
             canvas.stage.off("rightdown", this.#previewListeners.rightdown);
-            this.#previewListeners.wheelAbortController.abort();
             this.#previewListeners = null;
         }
+        if ("interactionData" in event) this._onDragLeftCancel(event);
         if (initialLayer !== this) initialLayer?.activate();
     }
 }
 
 interface TemplatePreviewEventListeners {
+    /** Whether the preview position is locked in place on the canvas */
+    lockedInPlace: boolean;
     mousemove: (event: PIXI.FederatedPointerEvent) => void;
-    wheel: (event: Event) => void;
-    wheelAbortController: AbortController;
     mousedown: (event: PIXI.FederatedPointerEvent) => void;
     rightdown: (event: PIXI.FederatedPointerEvent) => void;
 }
+
+export { TemplateLayerPF2e };

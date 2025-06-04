@@ -126,8 +126,10 @@ class ArmySystemData extends ActorSystemModel<ArmyPF2e, ArmySystemSchema> {
     }
 }
 
-interface ArmySystemData extends ActorSystemModel<ArmyPF2e, ArmySystemSchema>, ModelPropsFromSchema<ArmySystemSchema> {
-    attributes: ModelPropsFromSchema<ArmyAttributesSchema> & {
+interface ArmySystemData
+    extends ActorSystemModel<ArmyPF2e, ArmySystemSchema>,
+        fields.ModelPropsFromSchema<ArmySystemSchema> {
+    attributes: fields.ModelPropsFromSchema<ArmyAttributesSchema> & {
         hp: {
             max: number;
             negativeHealing: boolean;
@@ -140,11 +142,11 @@ interface ArmySystemData extends ActorSystemModel<ArmyPF2e, ArmySystemSchema>, M
         flanking: never;
     };
     initiative: InitiativeTraceData;
-    details: ModelPropsFromSchema<ArmyDetailsSchema> & {
+    details: fields.ModelPropsFromSchema<ArmyDetailsSchema> & {
         alliance: ActorAlliance;
     };
     perception: Pick<PerceptionTraceData, "senses">;
-    traits: ModelPropsFromSchema<ArmyTraitsSchema> & {
+    traits: fields.ModelPropsFromSchema<ArmyTraitsSchema> & {
         size?: never;
     };
     resources: {
@@ -176,16 +178,16 @@ type ArmySystemSchema = Omit<ActorSystemSchema, "attributes" | "traits" | "resou
     weapons: fields.SchemaField<{
         ranged: fields.SchemaField<
             ArmyWeaponSchema,
-            SourceFromSchema<ArmyWeaponSchema>,
-            ModelPropsFromSchema<ArmyWeaponSchema>,
+            fields.SourceFromSchema<ArmyWeaponSchema>,
+            fields.ModelPropsFromSchema<ArmyWeaponSchema>,
             true,
             true,
             true
         >;
         melee: fields.SchemaField<
             ArmyWeaponSchema,
-            SourceFromSchema<ArmyWeaponSchema>,
-            ModelPropsFromSchema<ArmyWeaponSchema>,
+            fields.SourceFromSchema<ArmyWeaponSchema>,
+            fields.ModelPropsFromSchema<ArmyWeaponSchema>,
             true,
             true,
             true
@@ -232,19 +234,23 @@ type ArmyWeaponSchema = {
     potency: fields.NumberField<number, number, true, false, true>;
 };
 
-type ArmySystemSource = SourceFromSchema<ArmySystemSchema> & {
-    attributes: {
-        immunities?: ImmunitySource[];
-        weaknesses?: WeaknessSource[];
-        resistances?: ResistanceSource[];
-        flanking: never;
-        hp: {
-            details: string;
-        };
-    };
+interface ArmyAttributesSource extends fields.SourceFromSchema<ArmyAttributesSchema> {
+    immunities?: ImmunitySource[];
+    weaknesses?: WeaknessSource[];
+    resistances?: ResistanceSource[];
+    flanking?: never;
+}
+
+interface ArmyTraitSource extends fields.SourceFromSchema<ArmyTraitsSchema> {
+    size?: never;
+}
+
+interface ArmySystemSource extends fields.SourceFromSchema<ArmySystemSchema> {
+    attributes: ArmyAttributesSource;
+    traits: ArmyTraitSource;
     /** Legacy location of `MigrationRecord` */
     schema?: ActorSystemSource["schema"];
-};
+}
 
 type ArmySource = BaseActorSourcePF2e<"army", ArmySystemSource>;
 

@@ -1,14 +1,14 @@
+import type { SchemaField } from "@common/data/fields.d.mts";
+import type { ActorSchema } from "@common/documents/actor.d.mts";
 import { MystifiedTraits } from "@item/base/data/values.ts";
-import { HotbarPF2e } from "@module/apps/hotbar.ts";
 import {
     ActorDirectoryPF2e,
     ChatLogPF2e,
     CompendiumDirectoryPF2e,
-    EncounterTrackerPF2e,
+    EncounterTracker,
     ItemDirectoryPF2e,
 } from "@module/apps/sidebar/index.ts";
 import { setPerceptionModes } from "@module/canvas/perception/modes.ts";
-import { RulerPF2e } from "@module/canvas/ruler.ts";
 import { TokenConfigPF2e } from "@scene/token-document/sheet.ts";
 import { PF2ECONFIG } from "@scripts/config/index.ts";
 import { registerHandlebarsHelpers } from "@scripts/handlebars.ts";
@@ -17,6 +17,7 @@ import { registerKeybindings } from "@scripts/register-keybindings.ts";
 import { registerTemplates } from "@scripts/register-templates.ts";
 import { SetGamePF2e } from "@scripts/set-game-pf2e.ts";
 import { registerSettings } from "@system/settings/index.ts";
+import { TextEditorPF2e } from "@system/text-editor.ts";
 import { htmlQueryAll } from "@util";
 import * as R from "remeda";
 
@@ -24,6 +25,11 @@ export const Init = {
     listen: (): void => {
         Hooks.once("init", () => {
             console.log("PF2e System | Initializing Pathfinder 2nd Edition System");
+
+            // Remove afflictions from the system document types if production
+            if (BUILD_MODE === "production") {
+                delete game.system.documentTypes.Item.affliction;
+            }
 
             CONFIG.PF2E = PF2ECONFIG;
             CONFIG.debug.ruleElement ??= false;
@@ -38,17 +44,13 @@ export const Init = {
             // Assign the PF2e Sidebar subclasses
             CONFIG.ui.actors = ActorDirectoryPF2e;
             CONFIG.ui.items = ItemDirectoryPF2e;
-            CONFIG.ui.combat = EncounterTrackerPF2e;
+            CONFIG.ui.chat = ChatLogPF2e;
+            CONFIG.ui.combat = EncounterTracker;
             CONFIG.ui.compendium = CompendiumDirectoryPF2e;
-            CONFIG.ui.hotbar = HotbarPF2e;
 
             if (game.release.generation === 12) {
-                CONFIG.ui.chat = ChatLogPF2e;
                 CONFIG.Token.prototypeSheetClass = TokenConfigPF2e;
             }
-
-            // Set after load in case of module conflicts
-            if (!RulerPF2e.hasModuleConflict) CONFIG.Canvas.rulerClass = RulerPF2e;
 
             // The condition in Pathfinder 2e is "blinded" rather than "blind"
             CONFIG.specialStatusEffects.BLIND = "blinded";
@@ -130,21 +132,22 @@ export const Init = {
             });
 
             // Register custom enricher
+            CONFIG.ux.TextEditor = TextEditorPF2e;
             CONFIG.TextEditor.enrichers.push({
                 pattern: /@(Check|Localize|Template)\[([^\]]+)\](?:{([^}]+)})?/g,
-                enricher: (match, options) => game.pf2e.TextEditor.enrichString(match, options),
+                enricher: (match, options) => TextEditorPF2e.enrichString(match, options),
             });
 
             // Register damage enricher, which is more complicated and needs an extra level of nesting
             // Derived from https://stackoverflow.com/questions/17759004/how-to-match-string-within-parentheses-nested-in-java/17759264#17759264
             CONFIG.TextEditor.enrichers.push({
                 pattern: /@(Damage)\[((?:[^[\]]|\[[^[\]]*\])*)\](?:{([^}]+)})?/g,
-                enricher: (match, options) => game.pf2e.TextEditor.enrichString(match, options),
+                enricher: (match, options) => TextEditorPF2e.enrichString(match, options),
             });
 
             CONFIG.TextEditor.enrichers.push({
                 pattern: /\[\[\/(act)\s+(?<slug>[-a-z]+)(?:\s+(?<options>[^\]]+))?\]\](?:\{(?<label>[^}]+)\})?/g,
-                enricher: (match, options) => game.pf2e.TextEditor.enrichString(match, options),
+                enricher: (match, options) => TextEditorPF2e.enrichString(match, options),
             });
 
             // Soft-set system-preferred core settings until they've been explicitly set by the GM
@@ -162,6 +165,13 @@ export const Init = {
 
             // Create and populate initial game.pf2e interface
             SetGamePF2e.onInit();
+
+            // Set Hover by Owner and rotation locked in PrototypeToken schema initial values
+            const prototypeFields = (foundry.documents.BaseActor.schema as SchemaField<ActorSchema>).fields
+                .prototypeToken.fields;
+            prototypeFields.displayName.initial = CONST.TOKEN_DISPLAY_MODES.OWNER_HOVER;
+            prototypeFields.displayBars.initial = CONST.TOKEN_DISPLAY_MODES.OWNER_HOVER;
+            prototypeFields.lockRotation.initial = true;
 
             // Disable tagify style sheets from modules
             for (const element of htmlQueryAll(document.head, "link[rel=stylesheet]")) {

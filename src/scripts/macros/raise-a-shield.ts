@@ -1,6 +1,6 @@
 import { EffectPF2e } from "@item";
 import { ChatMessagePF2e } from "@module/chat-message/index.ts";
-import { ActionDefaultOptions } from "@system/action-macros/index.ts";
+import type { ActionDefaultOptions } from "@system/action-macros/index.ts";
 import { ErrorPF2e, localizer } from "@util";
 
 /** Effect: Raise a Shield */
@@ -65,11 +65,11 @@ export async function raiseAShield(options: ActionDefaultOptions): Promise<void>
         const [actionType, glyph] =
             combatActor && combatActor !== actor ? (["Reaction", "R"] as const) : (["SingleAction", "1"] as const);
 
-        const content = await renderTemplate(TEMPLATES.content, {
+        const content = await fa.handlebars.renderTemplate(TEMPLATES.content, {
             imgPath: shield.img,
             message: localize("Content", { actor: speaker.alias, shield: game.i18n.localize("TYPES.Item.shield") }),
         });
-        const flavor = await renderTemplate(TEMPLATES.flavor, {
+        const flavor = await fa.handlebars.renderTemplate(TEMPLATES.flavor, {
             action: { title: localize(`${actionType}Title`), glyph },
         });
 

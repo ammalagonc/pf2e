@@ -42,8 +42,8 @@ import { sluggify } from "@util";
 export const SetGamePF2e = {
     onInit: (): void => {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
-        type ActionCollection = Record<string, Function> & Collection<Action>;
-        const actions = new Collection<Action>(
+        type ActionCollection = Record<string, Function> & Collection<string, Action>;
+        const actions = new Collection<string, Action>(
             SystemActions.map((action) => [action.slug, action]),
         ) as ActionCollection;
         // keep the old action functions around until everything has been converted
@@ -109,6 +109,7 @@ export const SetGamePF2e = {
         game.pf2e.settings = {
             automation: {
                 flanking: game.settings.get("pf2e", "automation.flankingDetection"),
+                removeEffects: game.settings.get("pf2e", "automation.removeExpiredEffects"),
             },
             campaign: {
                 feats: {
@@ -123,7 +124,6 @@ export const SetGamePF2e = {
                 buttons: game.settings.get("pf2e", "critFumbleButtons"),
                 cards: game.settings.get("pf2e", "drawCritFumble"),
             },
-            dragMeasurement: "never", // set in canvasInit hook
             encumbrance: game.settings.get("pf2e", "automation.encumbrance"),
             gmVision: game.settings.get("pf2e", "gmVision"),
             iwr: game.settings.get("pf2e", "automation.iwr"),
@@ -158,6 +158,7 @@ export const SetGamePF2e = {
                 },
                 stamina: game.settings.get("pf2e", "staminaVariant"),
             },
+            worldClock: game.settings.get("pf2e", "worldClock"),
         };
     },
 

@@ -1,4 +1,5 @@
 import { CharacterPF2e } from "@actor";
+import type { Rolled } from "@client/dice/_module.d.mts";
 import { ChatMessagePF2e } from "@module/chat-message/index.ts";
 import { ActionDefaultOptions } from "@system/action-macros/index.ts";
 import type { Statistic } from "@system/statistic/index.ts";
@@ -69,7 +70,7 @@ export function encouragingWords(options: ActionDefaultOptions): void {
         roll();
     };
 
-    const dialog = new Dialog({
+    const dialog = new foundry.appv1.api.Dialog({
         title: localize("Title"),
         content: `
     <div>${localize("ContentMain")}</div>

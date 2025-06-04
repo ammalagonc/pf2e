@@ -5,8 +5,7 @@ import { createHTMLElement, htmlQuery } from "@util";
 
 export class RenderTokenHUD {
     static listen(): void {
-        Hooks.on("renderTokenHUD", (_app, $html, data) => {
-            const html = $html[0];
+        Hooks.on("renderTokenHUD", (_app, html, data) => {
             game.pf2e.StatusEffects.onRenderTokenHUD(html, data);
 
             const token = canvas.scene?.tokens.get(data._id ?? "")?.object;
@@ -14,7 +13,7 @@ export class RenderTokenHUD {
 
             // Remove conditions hud from army. Once Foundry supports replacing these by actor type we'll add them back in
             if (token?.actor?.isOfType("army")) {
-                htmlQuery(html, ".control-icon[data-action=effects]")?.remove();
+                htmlQuery(html, ".control-icon[data-palette=effects]")?.remove();
             }
         });
     }
@@ -60,6 +59,6 @@ export class RenderTokenHUD {
             }
         });
 
-        htmlQuery(html, "[data-action=effects]")?.replaceWith(controlButton);
+        htmlQuery(html, "[data-palette=effects]")?.replaceWith(controlButton);
     }
 }

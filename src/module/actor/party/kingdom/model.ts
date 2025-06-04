@@ -38,10 +38,9 @@ import {
     KINGDOM_SKILL_LABELS,
     VACANCY_PENALTIES,
 } from "./values.ts";
-import DataModel = foundry.abstract.DataModel;
 
 /** Model for the Kingmaker campaign data type, which represents a Kingdom */
-class Kingdom extends DataModel<PartySystemData, KingdomSchema> implements PartyCampaign {
+class Kingdom extends foundry.abstract.DataModel<PartySystemData, KingdomSchema> implements PartyCampaign {
     declare nationType: KingdomNationType;
     declare features: FeatGroup<PartyPF2e, CampaignFeaturePF2e>;
     declare feats: FeatGroup<PartyPF2e, CampaignFeaturePF2e>;
@@ -83,10 +82,10 @@ class Kingdom extends DataModel<PartySystemData, KingdomSchema> implements Party
         // Do not show kingdom to party members until building starts or it becomes activated.
         if (!(this.active || game.user.isGM) || game.pf2e.settings.campaign.type !== "kingmaker") return [];
 
-        const hoverIcon = this.active === "building" ? "wrench" : !this.active ? "plus" : null;
-        const icon = createHTMLElement("a", {
-            classes: ["create-button"],
-            children: [fontAwesomeIcon("crown"), hoverIcon ? fontAwesomeIcon(hoverIcon) : null].filter(R.isNonNull),
+        const hoverIcon = this.active === "building" ? ["icon-plus", "icon-wrench"] : !this.active ? ["icon-plus"] : [];
+        const icon = createHTMLElement("button", {
+            classes: ["create-button", "icon", ...hoverIcon],
+            children: [fontAwesomeIcon("crown")],
             dataset: {
                 tooltip: game.i18n.localize(
                     `PF2E.Kingmaker.SIDEBAR.${this.active === true ? "OpenSheet" : "CreateKingdom"}`,
@@ -98,8 +97,8 @@ class Kingdom extends DataModel<PartySystemData, KingdomSchema> implements Party
             event.stopPropagation();
 
             if (!this.active) {
-                const startBuilding = await Dialog.confirm({
-                    title: game.i18n.localize("PF2E.Kingmaker.KingdomBuilder.Title"),
+                const startBuilding = await foundry.applications.api.DialogV2.confirm({
+                    window: { title: "PF2E.Kingmaker.KingdomBuilder.Title", icon: "fa-solid fa-castle" },
                     content: `<p>${game.i18n.localize("PF2E.Kingmaker.KingdomBuilder.ActivationMessage")}</p>`,
                 });
                 if (startBuilding) {
@@ -201,8 +200,8 @@ class Kingdom extends DataModel<PartySystemData, KingdomSchema> implements Party
     }, 50);
 
     prepareBaseData(): void {
-        const { synthetics } = this.actor;
-        const { build } = this;
+        const synthetics = this.actor.synthetics;
+        const build = this.build;
 
         // All friendly armies are gathered to determine consumption
         this.armies = game.actors.filter((a): a is ArmyPF2e<null> => a.isOfType("army") && a.alliance === "party");
@@ -364,7 +363,7 @@ class Kingdom extends DataModel<PartySystemData, KingdomSchema> implements Party
     }
 
     prepareDerivedData(): void {
-        const { synthetics } = this.actor;
+        const synthetics = this.actor.synthetics;
         const { consumption, resources } = this;
 
         // Assign Ability modifiers base on values
@@ -587,6 +586,6 @@ class Kingdom extends DataModel<PartySystemData, KingdomSchema> implements Party
     }
 }
 
-interface Kingdom extends DataModel<PartySystemData, KingdomSchema>, KingdomData {}
+interface Kingdom extends foundry.abstract.DataModel<PartySystemData, KingdomSchema>, KingdomData {}
 
 export { Kingdom };

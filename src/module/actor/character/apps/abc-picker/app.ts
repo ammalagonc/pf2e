@@ -1,4 +1,6 @@
 import type { CharacterPF2e } from "@actor";
+import type { ImageFilePath } from "@common/constants.d.mts";
+import type { ItemUUID } from "@common/documents/_module.mts";
 import type { ABCItemPF2e, DeityPF2e, HeritagePF2e, ItemPF2e } from "@item";
 import type { ItemType } from "@item/base/data/index.ts";
 import { RARITIES, Rarity } from "@module/data.ts";
@@ -6,13 +8,11 @@ import { SvelteApplicationMixin, type SvelteApplicationRenderContext } from "@mo
 import { sluggify } from "@util";
 import { UUIDUtils } from "@util/uuid.ts";
 import * as R from "remeda";
-import type { ApplicationConfiguration } from "types/foundry/client-esm/applications/_types.d.ts";
-import type { ApplicationV2 } from "types/foundry/client-esm/applications/api/module.d.ts";
 import Root from "./app.svelte";
 
 type AhBCDType = Extract<ItemType, "ancestry" | "heritage" | "background" | "class" | "deity">;
 
-interface ABCPickerConfiguration extends ApplicationConfiguration {
+interface ABCPickerConfiguration extends fa.ApplicationConfiguration {
     actor: CharacterPF2e;
     itemType: AhBCDType;
 }
@@ -39,13 +39,13 @@ interface ABCPickerContext extends SvelteApplicationRenderContext {
 
 /** A `Compendium`-like application for presenting A(H)BCD options for a character */
 class ABCPicker extends SvelteApplicationMixin<
-    AbstractConstructorOf<ApplicationV2> & { DEFAULT_OPTIONS: DeepPartial<ABCPickerConfiguration> }
->(foundry.applications.api.ApplicationV2) {
+    AbstractConstructorOf<fa.api.ApplicationV2> & { DEFAULT_OPTIONS: DeepPartial<ABCPickerConfiguration> }
+>(fa.api.ApplicationV2) {
     static override DEFAULT_OPTIONS: DeepPartial<ABCPickerConfiguration> = {
         id: "{id}",
         classes: ["abc-picker"],
         position: { width: 350, height: 650 },
-        window: { icon: "fa-solid fa-book-atlas", contentClasses: ["standard-form", "compact"] },
+        window: { contentClasses: ["standard-form", "compact"] },
     };
 
     declare options: ABCPickerConfiguration;
@@ -59,7 +59,7 @@ class ABCPicker extends SvelteApplicationMixin<
 
     protected override _initializeApplicationOptions(options: Partial<ABCPickerConfiguration>): ABCPickerConfiguration {
         const initialized = super._initializeApplicationOptions(options) as ABCPickerConfiguration;
-        initialized.window.icon = `fa-solid ${CONFIG.Item.typeIcons[initialized.itemType]}`;
+        initialized.window.icon = CONFIG.Item.typeIcons[initialized.itemType];
         initialized.uniqueId = `abc-picker-${initialized.itemType}-${initialized.actor.uuid}`;
         return initialized;
     }

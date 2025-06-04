@@ -75,7 +75,6 @@ export function registerTemplates(): void {
         // Item Sheet Partials
         "systems/pf2e/templates/items/action-details.hbs",
         "systems/pf2e/templates/items/action-sidebar.hbs",
-        "systems/pf2e/templates/items/activation-panel.hbs",
         "systems/pf2e/templates/items/affliction-details.hbs",
         "systems/pf2e/templates/items/affliction-sidebar.hbs",
         "systems/pf2e/templates/items/ancestry-details.hbs",
@@ -142,11 +141,6 @@ export function registerTemplates(): void {
         "systems/pf2e/templates/system/actions/repair/repair-result-partial.hbs",
         "systems/pf2e/templates/system/actions/repair/item-heading-partial.hbs",
 
-        // TokenConfig partials
-        "systems/pf2e/templates/scene/token/partials/appearance.hbs",
-        "systems/pf2e/templates/scene/token/partials/identity.hbs",
-        "systems/pf2e/templates/scene/token/partials/lighting.hbs",
-
         // Partials for multiple document types
         "systems/pf2e/templates/partials/publication-data.hbs",
 
@@ -154,5 +148,5 @@ export function registerTemplates(): void {
         "systems/pf2e/templates/system/settings/basic-setting.hbs",
     ];
 
-    loadTemplates(templatePaths);
+    fa.handlebars.loadTemplates(templatePaths);
 }

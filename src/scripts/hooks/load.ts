@@ -10,7 +10,11 @@ import { ActorSheetPF2e } from "@actor/sheet/base.ts";
 import { VehicleSystemData } from "@actor/vehicle/data.ts";
 import { ItemProxyPF2e } from "@item";
 import { AbilitySystemData } from "@item/ability/index.ts";
+import { AfflictionSystemData } from "@item/affliction/data.ts";
 import { CampaignFeatureSystemData } from "@item/campaign-feature/data.ts";
+import { ClassSystemData } from "@item/class/data.ts";
+import { ConditionSystemData } from "@item/condition/data.ts";
+import { EffectSystemData } from "@item/effect/data.ts";
 import { FeatSystemData } from "@item/feat/data.ts";
 import { HeritageSystemData } from "@item/heritage/data.ts";
 import { KitSystemData } from "@item/kit/data.ts";
@@ -44,7 +48,6 @@ import {
     TileDocumentPF2e,
     TokenDocumentPF2e,
 } from "@scene/index.ts";
-import { ActorDeltaPF2e } from "@scene/token-document/actor-delta.ts";
 import { monkeyPatchFoundry } from "@scripts/🐵🩹.ts";
 import { CheckRoll, StrikeAttackRoll } from "@system/check/roll.ts";
 import { ClientDatabaseBackendPF2e } from "@system/client-backend.ts";
@@ -63,7 +66,6 @@ export const Load = {
         CONFIG.ActiveEffect.documentClass = ActiveEffectPF2e;
         CONFIG.Actor.collection = ActorsPF2e;
         CONFIG.Actor.documentClass = ActorProxyPF2e;
-        CONFIG.ActorDelta.documentClass = ActorDeltaPF2e;
         CONFIG.AmbientLight.documentClass = AmbientLightDocumentPF2e;
         CONFIG.AmbientLight.objectClass = AmbientLightPF2e;
         CONFIG.ChatMessage.documentClass = ChatMessagePF2e;
@@ -99,15 +101,20 @@ export const Load = {
         CONFIG.Actor.dataModels.vehicle = VehicleSystemData;
 
         // Item system data models
+        if (BUILD_MODE !== "production") {
+            CONFIG.Item.dataModels.affliction = AfflictionSystemData;
+        }
         CONFIG.Item.dataModels.action = AbilitySystemData;
         CONFIG.Item.dataModels.campaignFeature = CampaignFeatureSystemData;
+        CONFIG.Item.dataModels.class = ClassSystemData;
+        CONFIG.Item.dataModels.condition = ConditionSystemData;
+        CONFIG.Item.dataModels.effect = EffectSystemData;
         CONFIG.Item.dataModels.feat = FeatSystemData;
         CONFIG.Item.dataModels.heritage = HeritageSystemData;
         CONFIG.Item.dataModels.kit = KitSystemData;
         CONFIG.Item.dataModels.melee = MeleeSystemData;
 
         // Assign canvas layer and placeable classes
-        CONFIG.Canvas.darknessColor = 0x2d2d52; // Lightness increased by ~0.4/10 (Munsell value)
         CONFIG.Canvas.exploredColor = 0x262626; // Increased from 0 (black)
         CONFIG.Canvas.groups.effects.groupClass = EffectsCanvasGroupPF2e;
         CONFIG.Canvas.groups.environment.groupClass = EnvironmentCanvasGroupPF2e;
@@ -180,7 +187,7 @@ export const Load = {
         });
 
         function rerenderApps(path: string): void {
-            const apps = [...Object.values(ui.windows), ...foundry.applications.instances.values(), ui.sidebar];
+            const apps = [...Object.values(ui.windows), ...foundry.applications.instances.values()];
             for (const app of apps) {
                 if (path.endsWith(".json") && app instanceof ActorSheetPF2e) {
                     resetActors([app.actor]);
@@ -191,7 +198,7 @@ export const Load = {
             if (path.includes("system/effects")) game.pf2e.effectPanel.render();
         }
 
-        // HMR for template files
+        // HMR for localization and template files
         if (import.meta.hot) {
             import.meta.hot.on("lang-update", async ({ path }: { path: string }): Promise<void> => {
                 const lang = await fu.fetchJsonWithTimeout(path);
@@ -213,7 +220,7 @@ export const Load = {
             import.meta.hot.on("template-update", async ({ path }: { path: string }): Promise<void> => {
                 const apply = async (): Promise<void> => {
                     delete Handlebars.partials[path];
-                    await getTemplate(path);
+                    await fa.handlebars.getTemplate(path);
                     rerenderApps(path);
                 };
                 if (game.ready) {

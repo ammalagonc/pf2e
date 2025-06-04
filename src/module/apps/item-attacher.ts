@@ -6,12 +6,16 @@ import { ErrorPF2e } from "@util";
 
 /** A prompt for the user to select an item to receive an attachment */
 class ItemAttacher<TItem extends PhysicalItemPF2e> extends PickAThingPrompt<TItem, PhysicalItemPF2e> {
-    static override get defaultOptions(): ApplicationOptions {
-        return {
-            ...super.defaultOptions,
-            template: "systems/pf2e/templates/items/item-attacher.hbs",
-        };
-    }
+    static override DEFAULT_OPTIONS: DeepPartial<fa.ApplicationConfiguration> = {
+        id: "item-attacher",
+        window: {
+            contentClasses: ["standard-form"],
+        },
+    };
+
+    static override PARTS: Record<string, fa.api.HandlebarsTemplatePart> = {
+        base: { template: "systems/pf2e/templates/items/item-attacher.hbs", root: true },
+    };
 
     constructor({ item }: { item: TItem }) {
         if (!item.isAttachable) {
@@ -26,11 +30,6 @@ class ItemAttacher<TItem extends PhysicalItemPF2e> extends PickAThingPrompt<TIte
             .sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang));
 
         super({ item, choices });
-    }
-
-    /** Only allow one of these dialogs to be open. */
-    override get id(): string {
-        return "item-attacher";
     }
 
     override get title(): string {
@@ -54,9 +53,9 @@ class ItemAttacher<TItem extends PhysicalItemPF2e> extends PickAThingPrompt<TIte
         return super.resolveSelection();
     }
 
-    override activateListeners($html: JQuery<HTMLElement>): void {
-        super.activateListeners($html);
-        const html = $html[0];
+    protected override async _onRender(context: object, options: fa.ApplicationRenderOptions): Promise<void> {
+        await super._onRender(context, options);
+        const html = this.element;
 
         const attachButton = html.querySelector<HTMLButtonElement>("button[data-action=pick]");
         const selectEl = html.querySelector<HTMLSelectElement>("select[data-choices]");
@@ -74,8 +73,7 @@ class ItemAttacher<TItem extends PhysicalItemPF2e> extends PickAThingPrompt<TIte
      * failure.
      */
     async #attach(attachmentTarget: PhysicalItemPF2e): Promise<boolean> {
-        const checkRequested =
-            !!this.element[0]?.querySelector<HTMLInputElement>("input[data-crafting-check]")?.checked;
+        const checkRequested = !!this.element?.querySelector<HTMLInputElement>("input[data-crafting-check]")?.checked;
         if (checkRequested && !(await this.#craftingCheck(attachmentTarget))) return false;
 
         const targetSource = attachmentTarget.toObject();
@@ -107,7 +105,7 @@ class ItemAttacher<TItem extends PhysicalItemPF2e> extends PickAThingPrompt<TIte
         const dc = { value: 10, visible: true };
         const args: StatisticRollParameters = {
             dc,
-            label: await renderTemplate("systems/pf2e/templates/chat/action/header.hbs", {
+            label: await fa.handlebars.renderTemplate("systems/pf2e/templates/chat/action/header.hbs", {
                 glyph: null,
                 subtitle: game.i18n.format("PF2E.ActionsCheck.x", { type: statistic.label }),
                 title: this.title,

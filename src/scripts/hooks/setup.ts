@@ -20,17 +20,14 @@ export const Setup = {
 
             // Forced panning is intrinsically annoying: change default to false
             game.settings.settings.get("core.chatBubblesPan").default = false;
-            // Improve discoverability of map notes
-            game.settings.settings.get("core.notesDisplayToggle").default = true;
-            // Use grid fit mode
-            if (game.release.generation >= 12 && game.release.build >= 331) {
-                game.settings.settings.get("core.dynamicTokenRingFitMode").default = "grid";
-            }
-
-            // Set Hover by Owner as defaults for Default Token Configuration
-            const defaultTokenSettingsDefaults = game.settings.settings.get("core.defaultToken").default;
-            defaultTokenSettingsDefaults.displayName = CONST.TOKEN_DISPLAY_MODES.OWNER_HOVER;
-            defaultTokenSettingsDefaults.displayBars = CONST.TOKEN_DISPLAY_MODES.OWNER_HOVER;
+            // Skipping defeated combatants is broadly desirable
+            game.settings.settings.get("core.combatTrackerConfig").default.skipDefeated = true;
+            // Bronze ring is more pf2e-y
+            game.settings.settings.get("core.dynamicTokenRing").default = "coreBronze";
+            // Use grid fit mode to allow for informative small-size scaling
+            game.settings.settings.get("core.dynamicTokenRingFitMode").default = "grid";
+            // PF2E has no directional facing rules, and top-down tokens are rare
+            game.settings.settings.get("core.tokenAutoRotate").default = false;
         });
     },
 };

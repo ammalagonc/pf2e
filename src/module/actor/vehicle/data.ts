@@ -24,11 +24,17 @@ class VehicleSystemData extends ActorSystemModel<VehiclePF2e, VehicleSystemSchem
         const vehicleTraits: Record<VehicleTrait, string> = CONFIG.PF2E.vehicleTraits;
         const sizes: Record<Size, string> = CONFIG.PF2E.actorSizes;
         const requiredInteger = ({ min, initial = min }: { min: number; initial?: number }) =>
-            new fields.NumberField({ required: true, nullable: false, integer: true, min, initial });
+            new fields.NumberField<number, number, true, false, boolean>({
+                required: true,
+                nullable: false,
+                integer: true,
+                min,
+                initial,
+            });
         const blankableString = () =>
             new fields.StringField({ required: true, nullable: false, blank: true, initial: "" });
         const spaceDimension = () =>
-            new fields.NumberField({
+            new fields.NumberField<number, number, true, false, true>({
                 required: true,
                 nullable: false,
                 integer: true,
@@ -59,7 +65,7 @@ class VehicleSystemData extends ActorSystemModel<VehiclePF2e, VehicleSystemSchem
             }),
             attributes: new fields.SchemaField<
                 VehicleAttributesSchema,
-                SourceFromSchema<VehicleAttributesSchema>,
+                fields.SourceFromSchema<VehicleAttributesSchema>,
                 VehicleAttributes
             >({
                 hp: new fields.SchemaField({
@@ -198,7 +204,7 @@ class VehicleSystemData extends ActorSystemModel<VehiclePF2e, VehicleSystemSchem
 
 interface VehicleSystemData
     extends ActorSystemModel<VehiclePF2e, VehicleSystemSchema>,
-        ModelPropsFromSchema<VehicleSystemSchema> {
+        fields.ModelPropsFromSchema<VehicleSystemSchema> {
     traits: VehicleTraits;
     attributes: VehicleAttributes;
     details: VehicleDetails;
@@ -208,7 +214,7 @@ type VehicleSystemSchema = ActorSystemSchema & {
     traits: fields.SchemaField<VehicleTraitsSchema>;
     attributes: fields.SchemaField<
         VehicleAttributesSchema,
-        SourceFromSchema<VehicleAttributesSchema>,
+        fields.SourceFromSchema<VehicleAttributesSchema>,
         VehicleAttributes
     >;
     details: fields.SchemaField<VehicleDetailsSchema>;
@@ -227,12 +233,12 @@ type VehicleTraitsSchema = {
     }>;
 };
 
-interface VehicleTraits extends ModelPropsFromSchema<VehicleTraitsSchema> {
+interface VehicleTraits extends fields.ModelPropsFromSchema<VehicleTraitsSchema> {
     size: ActorSizePF2e;
 }
 
 type VehicleAttributesSchema = {
-    hp: fields.SchemaField<ActorHitPointsSchema, SourceFromSchema<ActorHitPointsSchema>, VehicleHitPoints>;
+    hp: fields.SchemaField<ActorHitPointsSchema, fields.SourceFromSchema<ActorHitPointsSchema>, VehicleHitPoints>;
     ac: fields.SchemaField<{
         value: fields.NumberField<number, number, true, false, true>;
     }>;
@@ -273,7 +279,7 @@ type VehicleAttributesSchema = {
     >;
 };
 
-type VehicleAttributesSource = SourceFromSchema<VehicleAttributesSchema>;
+type VehicleAttributesSource = fields.SourceFromSchema<VehicleAttributesSchema>;
 
 type VehicleDetailsSchema = {
     description: fields.StringField<string, string, true, false, true>;
@@ -295,7 +301,7 @@ type VehicleDetailsSchema = {
     publication: PublicationField;
 };
 
-interface VehicleSystemSource extends SourceFromSchema<VehicleSystemSchema> {
+interface VehicleSystemSource extends fields.SourceFromSchema<VehicleSystemSchema> {
     schema?: never;
 }
 
@@ -315,7 +321,7 @@ interface VehicleAttributes extends ActorAttributes, Omit<VehicleAttributesSourc
 
 type AttributesSourceOmission = "immunities" | "weaknesses" | "resistances";
 
-interface VehicleDetails extends ActorDetails, SourceFromSchema<VehicleDetailsSchema> {}
+interface VehicleDetails extends ActorDetails, fields.SourceFromSchema<VehicleDetailsSchema> {}
 
 interface TokenDimensions {
     width: number;

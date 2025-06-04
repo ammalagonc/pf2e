@@ -1,25 +1,29 @@
 import type { ActorPF2e } from "@actor";
 import type { SkillSlug } from "@actor/types.ts";
+import type {
+    DatabaseCreateOperation,
+    DatabaseDeleteCallbackOptions,
+    DatabaseUpdateCallbackOptions,
+} from "@common/abstract/_types.d.mts";
+import type Document from "@common/abstract/document.d.mts";
+import { DocumentFlags } from "@common/data/_module.mjs";
+import type { CombatantSource } from "@common/documents/combatant.d.mts";
 import type { TokenDocumentPF2e } from "@scene/index.ts";
 import { ErrorPF2e } from "@util";
-import type { CombatantSource } from "types/foundry/common/documents/combatant.d.ts";
 import type { EncounterPF2e } from "./index.ts";
 
 class CombatantPF2e<
     TParent extends EncounterPF2e | null = EncounterPF2e | null,
     TTokenDocument extends TokenDocumentPF2e | null = TokenDocumentPF2e | null,
 > extends Combatant<TParent, TTokenDocument> {
-    /** Has this document completed `DataModel` initialization? */
-    declare initialized: boolean;
-
-    static override async createDocuments<TDocument extends foundry.abstract.Document>(
+    static override async createDocuments<TDocument extends Document>(
         this: ConstructorOf<TDocument>,
         data?: (TDocument | PreCreate<TDocument["_source"]>)[],
         operation?: Partial<DatabaseCreateOperation<TDocument["parent"]>>,
     ): Promise<TDocument[]>;
     static override async createDocuments(
         data: (CombatantPF2e | PreCreate<CombatantSource>)[] = [],
-        operation: Partial<DatabaseCreateOperation<EncounterPF2e>> = {},
+        operation: Partial<DatabaseCreateOperation<EncounterPF2e | null>> = {},
     ): Promise<Combatant[]> {
         this.#swapPartyForMembers(data, operation);
         return super.createDocuments(data, operation);
@@ -28,7 +32,7 @@ class CombatantPF2e<
     /** Remove any party to be added to an encounter and instead add its members */
     static #swapPartyForMembers(
         data: (CombatantPF2e | PreCreate<CombatantSource>)[],
-        operation: Partial<DatabaseCreateOperation<EncounterPF2e>>,
+        operation: Partial<DatabaseCreateOperation<EncounterPF2e | null>>,
     ): void {
         for (const datum of [...data]) {
             const actor = game.actors.get(datum.actorId ?? "");
@@ -167,27 +171,9 @@ class CombatantPF2e<
         Hooks.callAll("pf2e.endTurn", this, encounter, game.user.id);
     }
 
-    protected override _initialize(options?: Record<string, unknown>): void {
-        this.initialized = false;
-        super._initialize(options);
-    }
-
-    /**
-     * If embedded, don't prepare data if the parent hasn't finished initializing.
-     * @todo remove in V13
-     */
-    override prepareData(): void {
-        if (game.release.generation === 12 && (this.initialized || (this.parent && !this.parent.initialized))) {
-            return;
-        }
-        this.initialized = true;
-        super.prepareData();
-    }
-
     override prepareBaseData(): void {
         super.prepareBaseData();
-
-        this.flags.pf2e = fu.mergeObject(this.flags.pf2e ?? {}, { overridePriority: {} });
+        this.flags.pf2e = Object.assign(this.flags.pf2e ?? {}, { overridePriority: {} });
         this.flags.pf2e.roundOfLastTurn ??= null;
         this.flags.pf2e.initiativeStatistic ??= null;
     }
@@ -266,10 +252,10 @@ class CombatantPF2e<
 
     protected override _onUpdate(
         changed: DeepPartial<this["_source"]>,
-        operation: DatabaseUpdateOperation<TParent>,
+        options: DatabaseUpdateCallbackOptions,
         userId: string,
     ): void {
-        super._onUpdate(changed, operation, userId);
+        super._onUpdate(changed, options, userId);
 
         if (typeof changed.initiative === "number") {
             // Reset actor data in case initiative order changed
@@ -295,8 +281,8 @@ class CombatantPF2e<
         }
     }
 
-    protected override _onDelete(operation: DatabaseDeleteOperation<TParent>, userId: string): void {
-        super._onDelete(operation, userId);
+    protected override _onDelete(options: DatabaseDeleteCallbackOptions, userId: string): void {
+        super._onDelete(options, userId);
 
         // Reset actor data in case initiative order changed
         if (this.encounter?.started) {
@@ -312,14 +298,14 @@ interface CombatantPF2e<
     flags: CombatantFlags;
 }
 
-interface CombatantFlags extends DocumentFlags {
+type CombatantFlags = DocumentFlags & {
     pf2e: {
         initiativeStatistic: SkillSlug | "perception" | null;
         roundOfLastTurn: number | null;
         roundOfLastTurnEnd: number | null;
         overridePriority: Record<number, number | null | undefined>;
     };
-}
+};
 
 type RolledCombatant<TEncounter extends EncounterPF2e> = CombatantPF2e<TEncounter, TokenDocumentPF2e> & {
     initiative: number;

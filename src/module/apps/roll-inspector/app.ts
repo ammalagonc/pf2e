@@ -1,16 +1,12 @@
 import type { RawDamageDice, RawModifier } from "@actor/modifiers.ts";
+import type { ApplicationConfiguration } from "@client/applications/_types.d.mts";
 import type { ChatContextFlag } from "@module/chat-message/data.ts";
 import { ChatMessagePF2e } from "@module/chat-message/document.ts";
 import { SvelteApplicationMixin, SvelteApplicationRenderContext } from "@module/sheet/mixin.svelte.ts";
 import * as R from "remeda";
-import type { ApplicationConfiguration } from "types/foundry/client-esm/applications/_types.js";
 import Root from "./app.svelte";
 
-interface RollInspectorConfiguration extends ApplicationConfiguration {
-    message: ChatMessagePF2e;
-}
-
-class RollInspector extends SvelteApplicationMixin(foundry.applications.api.ApplicationV2) {
+class RollInspector extends SvelteApplicationMixin(fa.api.ApplicationV2) {
     static override DEFAULT_OPTIONS = {
         position: {
             width: 650,
@@ -23,16 +19,13 @@ class RollInspector extends SvelteApplicationMixin(foundry.applications.api.Appl
         },
     };
 
-    declare options: RollInspectorConfiguration;
+    protected override root = Root;
 
-    override root = Root;
+    message: ChatMessagePF2e;
 
-    get message(): ChatMessagePF2e {
-        return this.options.message;
-    }
-
-    constructor(options: Partial<RollInspectorConfiguration>) {
+    constructor(options: DeepPartial<ApplicationConfiguration> & { message: ChatMessagePF2e }) {
         super(options);
+        this.message = options.message;
     }
 
     protected override async _prepareContext(): Promise<RollInspectorContext> {

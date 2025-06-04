@@ -1,50 +1,46 @@
-import { ItemPF2e } from "@item";
+import type { HandlebarsRenderOptions } from "@client/applications/api/handlebars-application.d.mts";
+import type { ContextMenuEntry } from "@client/applications/ux/context-menu.d.mts";
+import type { ItemPF2e } from "@item";
 import { fontAwesomeIcon, htmlQuery, htmlQueryAll } from "@util";
 import { ItemAttacher } from "../item-attacher.ts";
 
 /** Extend ItemDirectory to show more information */
-export class ItemDirectoryPF2e<TItem extends ItemPF2e<null>> extends ItemDirectory<TItem> {
-    static override entryPartial = "systems/pf2e/templates/sidebar/item-document-partial.hbs";
+export class ItemDirectoryPF2e<TItem extends ItemPF2e<null>> extends fa.sidebar.tabs.ItemDirectory<TItem> {
+    protected static override _entryPartial = "systems/pf2e/templates/sidebar/item-document-partial.hbs";
 
-    static override get defaultOptions(): SidebarDirectoryOptions {
-        const options = super.defaultOptions;
-        options.renderUpdateKeys.push("system.level.value");
-        return options;
-    }
+    static override DEFAULT_OPTIONS: Partial<fa.sidebar.DocumentDirectoryConfiguration> = {
+        renderUpdateKeys: ["system.level.value"],
+    };
 
-    override activateListeners($html: JQuery<HTMLElement>): void {
-        super.activateListeners($html);
-        const html = $html[0];
-
-        for (const element of htmlQueryAll(html, "li.directory-item.item")) {
+    protected override async _onRender(context: object, options: HandlebarsRenderOptions): Promise<void> {
+        await super._onRender(context, options);
+        for (const element of htmlQueryAll(this.element, "li.directory-item.item")) {
             const item = game.items.get(element.dataset.documentId ?? "");
             if (!item?.testUserPermission(game.user, "OBSERVER")) {
                 element.querySelector("span.item-level")?.remove();
             }
         }
 
-        this.#appendBrowseButton(html);
+        this.#appendBrowseButton();
     }
 
-    /** Add `EntryContextOption` to attach physical items */
-    protected override _getEntryContextOptions(): EntryContextOption[] {
+    /** Add `ContextMenuEntry` to attach physical items */
+    protected override _getEntryContextOptions(): ContextMenuEntry[] {
         const options = super._getEntryContextOptions();
 
         options.push({
             name: "PF2E.Item.Physical.Attach.SidebarContextMenuOption",
             icon: fontAwesomeIcon("paperclip").outerHTML,
-            condition: ($li) => {
-                const row = $li[0];
-                const item = game.items.get(row.dataset.documentId, { strict: true });
+            condition: (li: HTMLElement) => {
+                const item = game.items.get(li.dataset.entryId, { strict: true });
                 return (
                     item.isOwner &&
                     item.isOfType("physical") &&
                     game.items.some((i) => i !== item && i.isOwner && i.isOfType("physical") && i.acceptsSubitem(item))
                 );
             },
-            callback: ($li) => {
-                const row = $li[0];
-                const item = game.items.get(row.dataset.documentId, { strict: true });
+            callback: (li: HTMLElement) => {
+                const item = game.items.get(li.dataset.entryId, { strict: true });
                 if (
                     item.isOwner &&
                     item.isOfType("physical") &&
@@ -59,7 +55,7 @@ export class ItemDirectoryPF2e<TItem extends ItemPF2e<null>> extends ItemDirecto
     }
 
     /** Append a button to open the compendium browser */
-    #appendBrowseButton(html: HTMLElement): void {
+    #appendBrowseButton(): void {
         const browseButton = document.createElement("button");
         browseButton.type = "button";
         browseButton.append(
@@ -70,6 +66,6 @@ export class ItemDirectoryPF2e<TItem extends ItemPF2e<null>> extends ItemDirecto
         browseButton.addEventListener("click", () => {
             game.pf2e.compendiumBrowser.render({ force: true });
         });
-        htmlQuery(html, "footer.directory-footer")?.append(browseButton);
+        htmlQuery(this.element, "footer.directory-footer")?.append(browseButton);
     }
 }

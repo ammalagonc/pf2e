@@ -1,3 +1,5 @@
+import type { ItemUUID } from "@client/documents/_module.d.mts";
+import type { ImageFilePath } from "@common/constants.d.mts";
 import type { KitPF2e } from "@item";
 import { ItemSystemModel, ItemSystemSchema } from "@item/base/data/model.ts";
 import type { BaseItemSourcePF2e, ItemSystemSource } from "@item/base/data/system.ts";
@@ -98,7 +100,7 @@ class KitSystemData extends ItemSystemModel<KitPF2e, KitSystemSchema> {
 
 interface KitSystemData
     extends ItemSystemModel<KitPF2e, KitSystemSchema>,
-        Omit<ModelPropsFromSchema<KitSystemSchema>, "description"> {}
+        Omit<fields.ModelPropsFromSchema<KitSystemSchema>, "description"> {}
 
 type KitEntryData = NonNullable<KitSystemData["items"][string]>;
 
@@ -127,7 +129,7 @@ type KitSystemSchema = Omit<ItemSystemSchema, "traits"> & {
     price: PriceField;
 };
 
-type KitSystemSource = SourceFromSchema<KitSystemSchema> & {
+type KitSystemSource = fields.SourceFromSchema<KitSystemSchema> & {
     level?: never;
     schema?: ItemSystemSource["schema"];
 };

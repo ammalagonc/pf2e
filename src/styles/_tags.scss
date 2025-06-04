@@ -1,7 +1,7 @@
 // Note: tags html element is tagify, and .tags is paizo tag/traits styling. They are not mutually exclusive.
 
-// Temporary measure since V12 introduced core `.tags > .tag` styling
-.tags:not(.form-fields) {
+// Prevent affecting upstream `.tags > .tag` introduced in V12
+.tags:not(.package-overview) {
     align-items: center;
     display: flex;
     flex-wrap: wrap;
@@ -194,17 +194,16 @@ tags.tagify {
     box-shadow: none;
     color: var(--tag-color);
     display: flex;
-    font: 700 var(--font-size-14) / 1.5em var(--sans-serif);
-    font-variant: all-small-caps;
+    font: 700 var(--font-size-10) / normal var(--sans-serif);
+    height: var(--space-21);
     letter-spacing: normal;
-    height: 1.5em;
     margin: 0;
     padding: 0 var(--space-4);
     white-space: nowrap;
     width: auto;
 
     .theme-dark & {
-        --tag-color: var(--color-form-hint);
+        --tag-color: var(--color-text-tertiary);
     }
 }
 
@@ -388,4 +387,9 @@ tagify-tags {
     .pf2e-tagify {
         width: calc(100% - 2px);
     }
+}
+
+// Ensure tagify text color even in dark theme
+.tagify__dropdown {
+    color: var(--color-dark-1);
 }

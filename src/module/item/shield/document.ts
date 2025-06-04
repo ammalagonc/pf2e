@@ -1,17 +1,18 @@
 import type { ActorPF2e } from "@actor";
+import type { DatabaseUpdateCallbackOptions } from "@common/abstract/_types.d.mts";
 import { ItemProxyPF2e, type WeaponPF2e } from "@item";
-import { RawItemChatData } from "@item/base/data/index.ts";
+import type { RawItemChatData } from "@item/base/data/index.ts";
 import { PhysicalItemPF2e, RUNE_DATA, getMaterialValuationData } from "@item/physical/index.ts";
 import { MAGIC_TRADITIONS } from "@item/spell/values.ts";
-import { WeaponMaterialSource, WeaponSource, WeaponSystemSource, WeaponTraitsSource } from "@item/weapon/data.ts";
-import { WeaponTrait } from "@item/weapon/types.ts";
-import type { UserPF2e } from "@module/user/document.ts";
-import { DamageType } from "@system/damage/types.ts";
+import type { WeaponMaterialSource, WeaponSource, WeaponSystemSource, WeaponTraitsSource } from "@item/weapon/data.ts";
+import type { WeaponTrait } from "@item/weapon/types.ts";
+import type { DamageType } from "@system/damage/types.ts";
+import type { EnrichmentOptionsPF2e } from "@system/text-editor.ts";
 import { ErrorPF2e, objectHasKey, setHasElement, signedInteger } from "@util";
 import * as R from "remeda";
-import { IntegratedWeaponData, ShieldSource, ShieldSystemData } from "./data.ts";
+import type { IntegratedWeaponData, ShieldSource, ShieldSystemData } from "./data.ts";
 import { setActorShieldData } from "./helpers.ts";
-import { BaseShieldType, ShieldTrait } from "./types.ts";
+import type { BaseShieldType, ShieldTrait } from "./types.ts";
 
 class ShieldPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends PhysicalItemPF2e<TParent> {
     static override get validTraits(): Record<ShieldTrait, string> {
@@ -190,7 +191,7 @@ class ShieldPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ph
 
     override async getChatData(
         this: ShieldPF2e<ActorPF2e>,
-        htmlOptions: EnrichmentOptions = {},
+        htmlOptions: EnrichmentOptionsPF2e = {},
     ): Promise<RawItemChatData> {
         const properties = [
             `${signedInteger(this.acBonus)} ${game.i18n.localize("PF2E.ArmorArmorLabel")}`,
@@ -276,10 +277,10 @@ class ShieldPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ph
 
     protected override _preUpdate(
         changed: DeepPartial<this["_source"]>,
-        operation: DatabaseUpdateOperation<TParent>,
-        user: UserPF2e,
+        options: DatabaseUpdateCallbackOptions,
+        user: fd.BaseUser,
     ): Promise<boolean | void> {
-        if (!changed.system) return super._preUpdate(changed, operation, user);
+        if (!changed.system) return super._preUpdate(changed, options, user);
 
         if (changed.system.acBonus !== undefined) {
             const integerValue = Math.floor(Number(changed.system.acBonus)) || 0;
@@ -301,7 +302,7 @@ class ShieldPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ph
             changed.system.traits.integrated = null;
         }
 
-        return super._preUpdate(changed, operation, user);
+        return super._preUpdate(changed, options, user);
     }
 }
 

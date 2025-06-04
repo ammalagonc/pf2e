@@ -1,18 +1,25 @@
 import type { ActorPF2e } from "@actor";
+import type { ItemUUID } from "@client/documents/_module.d.mts";
+import type { DocumentConstructionContext } from "@common/_types.d.mts";
+import type {
+    DatabaseCreateCallbackOptions,
+    DatabaseDeleteCallbackOptions,
+    DatabaseDeleteOperation,
+    DatabaseUpdateCallbackOptions,
+    DatabaseUpdateOperation,
+} from "@common/abstract/_types.d.mts";
 import { ItemPF2e, ItemProxyPF2e, type ContainerPF2e } from "@item";
 import type { ItemSourcePF2e, PhysicalItemSource, RawItemChatData, TraitChatData } from "@item/base/data/index.ts";
 import { MystifiedTraits } from "@item/base/data/values.ts";
 import { isContainerCycle } from "@item/container/helpers.ts";
 import type { Rarity, Size, ZeroToTwo } from "@module/data.ts";
 import type { EffectSpinoff } from "@module/rules/rule-element/effect-spinoff/spinoff.ts";
-import type { UserPF2e } from "@module/user/document.ts";
 import { ErrorPF2e, isObject, tupleHasValue } from "@util";
 import * as R from "remeda";
 import { getUnidentifiedPlaceholderImage } from "../identification.ts";
 import { Bulk } from "./bulk.ts";
 import type {
     IdentificationStatus,
-    ItemActivation,
     ItemCarryType,
     ItemMaterialData,
     MystifiedData,
@@ -42,7 +49,7 @@ abstract class PhysicalItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | n
     declare private _container?: ContainerPF2e<ActorPF2e> | null;
 
     /** Doubly-embedded adjustments, attachments, talismans etc. */
-    declare subitems: Collection<PhysicalItemPF2e<TParent>>;
+    declare subitems: Collection<string, PhysicalItemPF2e<TParent>>;
 
     /** A map of effect spinoff objects, which can be used to create new effects from using certain items */
     effectSpinoffs: Map<string, EffectSpinoff>;
@@ -213,21 +220,6 @@ abstract class PhysicalItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | n
         return new Bulk(this.system.bulk.value)
             .convertToSize(this.size, actorSize ?? this.size)
             .times(bulkRelevantQuantity);
-    }
-
-    get activations(): (ItemActivation & { componentsLabel: string })[] {
-        return Object.values(this.system.activations ?? {}).map((action) => {
-            const components: string[] = [];
-            if (action.components.cast) components.push(game.i18n.localize("PF2E.Item.Activation.Cast"));
-            if (action.components.command) components.push(game.i18n.localize("PF2E.Item.Activation.Command"));
-            if (action.components.envision) components.push(game.i18n.localize("PF2E.Item.Activation.Envision"));
-            if (action.components.interact) components.push(game.i18n.localize("PF2E.Item.Activation.Interact"));
-
-            return {
-                componentsLabel: components.join(", "),
-                ...action,
-            };
-        });
     }
 
     override get uuid(): ItemUUID {
@@ -553,7 +545,7 @@ abstract class PhysicalItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | n
             return;
         }
 
-        const sorting = SortingHelpers.performIntegerSort(this, {
+        const sorting = fu.performIntegerSort(this, {
             target: relativeTo,
             siblings,
             sortBefore,
@@ -676,7 +668,7 @@ abstract class PhysicalItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | n
     /** Redirect subitem updates to the parent item */
     override async update(
         data: Record<string, unknown>,
-        operation: Partial<DatabaseUpdateOperation<TParent>> = {},
+        operation: Partial<Omit<DatabaseUpdateOperation<null>, "parent" | "pack">> = {},
     ): Promise<this | undefined> {
         if (this.parentItem) {
             const parentItem = this.parentItem;
@@ -688,7 +680,7 @@ abstract class PhysicalItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | n
             if (updated) {
                 this._onUpdate(
                     data as DeepPartial<this["_source"]>,
-                    { broadcast: false, updates: [], ...operation },
+                    { action: "update", broadcast: false, updates: [], ...operation },
                     game.user.id,
                 );
                 return this;
@@ -700,13 +692,15 @@ abstract class PhysicalItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | n
     }
 
     /** Redirect subitem deletes to parent-item updates */
-    override async delete(operation: Partial<DatabaseDeleteOperation<TParent>> = {}): Promise<this | undefined> {
+    override async delete(
+        operation: Partial<Omit<DatabaseDeleteOperation<null>, "parent" | "pack">> = {},
+    ): Promise<this | undefined> {
         if (this.parentItem) {
             const parentItem = this.parentItem;
             const newSubitems = parentItem._source.system.subitems?.filter((i) => i._id !== this.id) ?? [];
-            const updated = await parentItem.update({ "system.subitems": newSubitems }, operation);
+            const updated = await parentItem.update({ "system.subitems": newSubitems }, R.omit(operation, ["action"]));
             if (updated) {
-                this._onDelete(operation as DatabaseDeleteOperation<TParent>, game.user.id);
+                this._onDelete(operation satisfies DatabaseDeleteCallbackOptions, game.user.id);
                 return this;
             }
             return undefined;
@@ -722,8 +716,8 @@ abstract class PhysicalItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | n
     /** Set to unequipped upon acquiring */
     protected override async _preCreate(
         data: this["_source"],
-        options: DatabaseCreateOperation<TParent>,
-        user: UserPF2e,
+        options: DatabaseCreateCallbackOptions,
+        user: fd.BaseUser,
     ): Promise<boolean | void> {
         if (!this.actor || this._source.system.containerId?.length !== 16) {
             this._source.system.containerId = null;
@@ -742,8 +736,8 @@ abstract class PhysicalItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | n
 
     protected override async _preUpdate(
         changed: DeepPartial<this["_source"]>,
-        operation: PhysicalItemUpdateOperation<TParent>,
-        user: UserPF2e,
+        operation: DatabaseUpdateCallbackOptions & { checkHP?: boolean },
+        user: fd.BaseUser,
     ): Promise<boolean | void> {
         if (!changed.system) return super._preUpdate(changed, operation, user);
 
@@ -816,10 +810,6 @@ interface PhysicalItemPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> 
 interface PhysicalItemConstructionContext<TParent extends ActorPF2e | null>
     extends DocumentConstructionContext<TParent> {
     parentItem?: PhysicalItemPF2e<TParent>;
-}
-
-interface PhysicalItemUpdateOperation<TParent extends ActorPF2e | null> extends DatabaseUpdateOperation<TParent> {
-    checkHP?: boolean;
 }
 
 export { PhysicalItemPF2e, type PhysicalItemConstructionContext };

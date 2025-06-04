@@ -2,10 +2,17 @@
 
 import type { ActorPF2e } from "@actor";
 import type { Action } from "@actor/actions/index.ts";
-import type { AutomaticBonusProgression } from "@actor/character/automatic-bonus-progression.ts";
+import type { AutomaticBonusProgression as ABP } from "@actor/character/automatic-bonus-progression.ts";
 import type { ElementalBlast } from "@actor/character/elemental-blast.ts";
 import type { FeatGroupData } from "@actor/character/feats/index.ts";
 import type { CheckModifier, ModifierPF2e, ModifierType, StatisticModifier } from "@actor/modifiers.ts";
+import type Hotbar from "@client/applications/ui/hotbar.d.mts";
+import type Config from "@client/config.d.mts";
+import type WallDocument from "@client/documents/wall.d.mts";
+import type { FoundryUI } from "@client/ui.d.mts";
+import type { CompendiumUUID } from "@client/utils/_module.d.mts";
+import type { SettingConfig } from "@common/_types.d.mts";
+import type { ImageFilePath, RollMode, UserRole } from "@common/constants.d.mts";
 import type { ItemPF2e, PhysicalItemPF2e } from "@item";
 import type { ConditionSource } from "@item/condition/data.ts";
 import type { CoinsPF2e } from "@item/physical/helpers.ts";
@@ -16,13 +23,12 @@ import type {
     CompendiumBrowserSources,
 } from "@module/apps/compendium-browser/browser.ts";
 import type { EffectsPanel } from "@module/apps/effects-panel.ts";
-import type { HotbarPF2e } from "@module/apps/hotbar.ts";
 import type { LicenseViewer } from "@module/apps/license-viewer/app.ts";
 import type {
     ActorDirectoryPF2e,
     ChatLogPF2e,
     CompendiumDirectoryPF2e,
-    EncounterTrackerPF2e,
+    EncounterTracker,
 } from "@module/apps/sidebar/index.ts";
 import type { WorldClock } from "@module/apps/world-clock/app.ts";
 import type { CanvasPF2e, EffectsCanvasGroupPF2e } from "@module/canvas/index.ts";
@@ -42,7 +48,6 @@ import type {
     TileDocumentPF2e,
     TokenDocumentPF2e,
 } from "@scene";
-import type { ActorDeltaPF2e } from "@scene/token-document/actor-delta.ts";
 import type { PF2ECONFIG, StatusEffectIconTheme } from "@scripts/config/index.ts";
 import type { DicePF2e } from "@scripts/dice.ts";
 import type {
@@ -68,9 +73,86 @@ import type {
     HomebrewTraitSettingsKey,
     LanguageSettings,
 } from "@system/settings/homebrew/index.ts";
+import type { WorldClockSettingData } from "@system/settings/world-clock.ts";
 import type { TextEditorPF2e } from "@system/text-editor.ts";
 import type { sluggify } from "@util";
-import type EnJSON from "static/lang/en.json";
+import type EnJSON from "../static/lang/en.json";
+import Game = foundry.Game;
+
+interface ClientSettingsPF2e extends fh.ClientSettings {
+    get(module: "core", key: "compendiumConfiguration"): Record<string, { private: boolean; locked: boolean }>;
+    get(module: "core", key: "fontSize"): number;
+    get(module: "core", key: "noCanvas"): boolean;
+    get(module: "core", key: "rollMode"): RollMode;
+    get(module: "core", key: "uiConfig"): { colorScheme: { applications: string; interface: string } };
+    get(module: "pf2e", setting: "automation.actorsDeadAtZero"): "neither" | "npcsOnly" | "pcsOnly" | "both";
+    get(module: "pf2e", setting: "automation.encumbrance"): boolean;
+    get(module: "pf2e", setting: "automation.flankingDetection"): boolean;
+    get(module: "pf2e", setting: "automation.iwr"): boolean;
+    get(module: "pf2e", setting: "automation.lootableNPCs"): boolean;
+    get(module: "pf2e", setting: "automation.removeExpiredEffects"): boolean;
+    get(module: "pf2e", setting: "automation.rulesBasedVision"): boolean;
+
+    get(module: "pf2e", setting: "gradualBoostsVariant"): boolean;
+    get(module: "pf2e", setting: "automaticBonusVariant"): "noABP" | "ABPFundamentalPotency" | "ABPRulesAsWritten";
+    get(module: "pf2e", setting: "freeArchetypeVariant"): boolean;
+    get(module: "pf2e", setting: "proficiencyVariant"): boolean;
+    get(module: "pf2e", setting: "staminaVariant"): boolean;
+
+    get(module: "pf2e", setting: "proficiencyUntrainedModifier"): number;
+    get(module: "pf2e", setting: "proficiencyTrainedModifier"): number;
+    get(module: "pf2e", setting: "proficiencyExpertModifier"): number;
+    get(module: "pf2e", setting: "proficiencyMasterModifier"): number;
+    get(module: "pf2e", setting: "proficiencyLegendaryModifier"): number;
+
+    get(module: "pf2e", setting: "metagame_partyVision"): boolean;
+    get(module: "pf2e", setting: "metagame_secretCondition"): boolean;
+    get(module: "pf2e", setting: "metagame_secretDamage"): boolean;
+    get(module: "pf2e", setting: "metagame_showBreakdowns"): boolean;
+    get(module: "pf2e", setting: "metagame_showDC"): boolean;
+    get(module: "pf2e", setting: "metagame_showPartyStats"): boolean;
+    get(module: "pf2e", setting: "metagame_showResults"): boolean;
+    get(module: "pf2e", setting: "metagame_tokenSetsNameVisibility"): boolean;
+    get(module: "pf2e", setting: "metagame_secretChecks"): boolean;
+
+    get(module: "pf2e", setting: "tokens.autoscale"): boolean;
+
+    get(module: "pf2e", setting: "worldClock"): WorldClockSettingData;
+
+    get(module: "pf2e", setting: "campaignFeats"): boolean;
+    get(module: "pf2e", setting: "campaignFeatSections"): FeatGroupData[];
+    get(module: "pf2e", setting: "campaignType"): string;
+    get(module: "pf2e", setting: "mythic"): "disabled" | "enabled" | "variant-tiers";
+
+    get(module: "pf2e", setting: "activeParty"): string;
+    get(module: "pf2e", setting: "activePartyFolderState"): boolean;
+    get(module: "pf2e", setting: "createdFirstParty"): boolean;
+
+    get(module: "pf2e", setting: "homebrew.languages"): HomebrewTag<"languages">[];
+    get(module: "pf2e", setting: "homebrew.weaponCategories"): HomebrewTag<"weaponCategories">[];
+    get(module: "pf2e", setting: HomebrewTraitSettingsKey): HomebrewTag[];
+    get(module: "pf2e", setting: "homebrew.damageTypes"): CustomDamageData[];
+    get(module: "pf2e", setting: "homebrew.languageRarities"): LanguageSettings;
+
+    get(module: "pf2e", setting: "compendiumBrowserPacks"): CompendiumBrowserSettings;
+    get(module: "pf2e", setting: "compendiumBrowserSources"): CompendiumBrowserSources;
+    get(module: "pf2e", setting: "critFumbleButtons"): boolean;
+    get(module: "pf2e", setting: "critRule"): "doubledamage" | "doubledice";
+    get(module: "pf2e", setting: "deathIcon"): ImageFilePath;
+    get(module: "pf2e", setting: "dragMeasurement"): "always" | "encounters" | "never";
+    get(module: "pf2e", setting: "drawCritFumble"): boolean;
+    get(module: "pf2e", setting: "gmVision"): boolean;
+    get(module: "pf2e", setting: "identifyMagicNotMatchingTraditionModifier"): 0 | 2 | 5 | 10;
+    get(module: "pf2e", setting: "minimumRulesUI"): Exclude<UserRole, 0>;
+    get(module: "pf2e", setting: "nathMode"): boolean;
+    get(module: "pf2e", setting: "seenRemasterJournalEntry"): boolean;
+    get(module: "pf2e", setting: "statusEffectType"): StatusEffectIconTheme;
+    get(module: "pf2e", setting: "totmToggles"): boolean;
+    get(module: "pf2e", setting: "worldSchemaVersion"): number;
+    get(module: "pf2e", setting: "worldSystemVersion"): string;
+
+    get(module: string, key: string): unknown;
+}
 
 interface GamePF2e
     extends Game<
@@ -85,7 +167,7 @@ interface GamePF2e
     > {
     pf2e: {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
-        actions: Record<string, Function> & Collection<Action>;
+        actions: Record<string, Function> & Collection<string, Action>;
         compendiumBrowser: CompendiumBrowser;
         licenseViewer: LicenseViewer;
         worldClock: WorldClock;
@@ -130,6 +212,7 @@ interface GamePF2e
             automation: {
                 /** Flanking detection */
                 flanking: boolean;
+                removeEffects: boolean;
             };
             /** Campaign feat slots */
             campaign: {
@@ -145,7 +228,6 @@ interface GamePF2e
                 buttons: boolean;
                 cards: boolean;
             };
-            dragMeasurement: "always" | "encounters" | "never";
             /** Encumbrance automation */
             encumbrance: boolean;
             gmVision: boolean;
@@ -188,22 +270,24 @@ interface GamePF2e
                 /** Stamina */
                 stamina: boolean;
             };
+            worldClock: WorldClockSettingData;
         };
     };
+    settings: ClientSettingsPF2e;
 }
 
 type ConfiguredConfig = Config<
     AmbientLightDocumentPF2e<ScenePF2e | null>,
     ActiveEffectPF2e<ActorPF2e | ItemPF2e | null>,
     ActorPF2e,
-    ActorDeltaPF2e<TokenDocumentPF2e>,
+    ActorDelta<TokenDocumentPF2e>,
     ChatLogPF2e,
     ChatMessagePF2e,
     EncounterPF2e,
     CombatantPF2e<EncounterPF2e | null, TokenDocumentPF2e>,
-    EncounterTrackerPF2e<EncounterPF2e | null>,
+    EncounterTracker<EncounterPF2e | null>,
     CompendiumDirectoryPF2e,
-    HotbarPF2e,
+    Hotbar<MacroPF2e>,
     ItemPF2e,
     MacroPF2e,
     MeasuredTemplateDocumentPF2e,
@@ -233,20 +317,24 @@ declare global {
     const canvas: CanvasPF2e;
 
     namespace globalThis {
-        // eslint-disable-next-line no-var
-        var game: GamePF2e;
-        // eslint-disable-next-line no-var
-        var fu: typeof foundry.utils;
+        const game: GamePF2e;
+        export import fa = foundry.applications;
+        export import fav1 = foundry.appv1;
+        export import fc = foundry.canvas;
+        export import fd = foundry.documents;
+        export import fh = foundry.helpers;
+        export import fu = foundry.utils;
 
-        // eslint-disable-next-line no-var
-        var ui: FoundryUI<
+        const ui: FoundryUI<
             ActorDirectoryPF2e,
-            ItemDirectory<ItemPF2e<null>>,
+            fa.sidebar.tabs.ItemDirectory<ItemPF2e<null>>,
             ChatLogPF2e,
             CompendiumDirectoryPF2e,
-            EncounterTrackerPF2e<EncounterPF2e | null>,
-            HotbarPF2e
+            EncounterTracker<EncounterPF2e | null>,
+            Hotbar<MacroPF2e>
         >;
+
+        const AutomaticBonusProgression: typeof ABP;
 
         // Add functions to the `Math` namespace for use in `Roll` formulas
         interface Math {
@@ -260,86 +348,10 @@ declare global {
         }
     }
 
-    interface Window {
-        AutomaticBonusProgression: typeof AutomaticBonusProgression;
-    }
-
-    interface ClientSettings {
-        get(module: "pf2e", setting: "automation.actorsDeadAtZero"): "neither" | "npcsOnly" | "pcsOnly" | "both";
-        get(module: "pf2e", setting: "automation.effectExpiration"): boolean;
-        get(module: "pf2e", setting: "automation.encumbrance"): boolean;
-        get(module: "pf2e", setting: "automation.flankingDetection"): boolean;
-        get(module: "pf2e", setting: "automation.iwr"): boolean;
-        get(module: "pf2e", setting: "automation.lootableNPCs"): boolean;
-        get(module: "pf2e", setting: "automation.removeExpiredEffects"): boolean;
-        get(module: "pf2e", setting: "automation.rulesBasedVision"): boolean;
-
-        get(module: "pf2e", setting: "gradualBoostsVariant"): boolean;
-        get(module: "pf2e", setting: "automaticBonusVariant"): "noABP" | "ABPFundamentalPotency" | "ABPRulesAsWritten";
-        get(module: "pf2e", setting: "freeArchetypeVariant"): boolean;
-        get(module: "pf2e", setting: "proficiencyVariant"): boolean;
-        get(module: "pf2e", setting: "staminaVariant"): boolean;
-
-        get(module: "pf2e", setting: "proficiencyUntrainedModifier"): number;
-        get(module: "pf2e", setting: "proficiencyTrainedModifier"): number;
-        get(module: "pf2e", setting: "proficiencyExpertModifier"): number;
-        get(module: "pf2e", setting: "proficiencyMasterModifier"): number;
-        get(module: "pf2e", setting: "proficiencyLegendaryModifier"): number;
-
-        get(module: "pf2e", setting: "metagame_partyVision"): boolean;
-        get(module: "pf2e", setting: "metagame_secretCondition"): boolean;
-        get(module: "pf2e", setting: "metagame_secretDamage"): boolean;
-        get(module: "pf2e", setting: "metagame_showBreakdowns"): boolean;
-        get(module: "pf2e", setting: "metagame_showDC"): boolean;
-        get(module: "pf2e", setting: "metagame_showPartyStats"): boolean;
-        get(module: "pf2e", setting: "metagame_showResults"): boolean;
-        get(module: "pf2e", setting: "metagame_tokenSetsNameVisibility"): boolean;
-        get(module: "pf2e", setting: "metagame_secretChecks"): boolean;
-
-        get(module: "pf2e", setting: "tokens.autoscale"): boolean;
-
-        get(module: "pf2e", setting: "worldClock.dateTheme"): "AR" | "IC" | "AD" | "CE";
-        get(module: "pf2e", setting: "worldClock.playersCanView"): boolean;
-        get(module: "pf2e", setting: "worldClock.showClockButton"): boolean;
-        get(module: "pf2e", setting: "worldClock.syncDarkness"): boolean;
-        get(module: "pf2e", setting: "worldClock.timeConvention"): 24 | 12;
-        get(module: "pf2e", setting: "worldClock.worldCreatedOn"): string;
-
-        get(module: "pf2e", setting: "campaignFeats"): boolean;
-        get(module: "pf2e", setting: "campaignFeatSections"): FeatGroupData[];
-        get(module: "pf2e", setting: "campaignType"): string;
-        get(module: "pf2e", setting: "mythic"): "disabled" | "enabled" | "variant-tiers";
-
-        get(module: "pf2e", setting: "activeParty"): string;
-        get(module: "pf2e", setting: "activePartyFolderState"): boolean;
-        get(module: "pf2e", setting: "createdFirstParty"): boolean;
-
-        get(module: "pf2e", setting: "homebrew.languages"): HomebrewTag<"languages">[];
-        get(module: "pf2e", setting: "homebrew.weaponCategories"): HomebrewTag<"weaponCategories">[];
-        get(module: "pf2e", setting: HomebrewTraitSettingsKey): HomebrewTag[];
-        get(module: "pf2e", setting: "homebrew.damageTypes"): CustomDamageData[];
-        get(module: "pf2e", setting: "homebrew.languageRarities"): LanguageSettings;
-
-        get(module: "pf2e", setting: "compendiumBrowserPacks"): CompendiumBrowserSettings;
-        get(module: "pf2e", setting: "compendiumBrowserSources"): CompendiumBrowserSources;
-        get(module: "pf2e", setting: "critFumbleButtons"): boolean;
-        get(module: "pf2e", setting: "critRule"): "doubledamage" | "doubledice";
-        get(module: "pf2e", setting: "deathIcon"): ImageFilePath;
-        get(module: "pf2e", setting: "dragMeasurement"): "always" | "encounters" | "never";
-        get(module: "pf2e", setting: "drawCritFumble"): boolean;
-        get(module: "pf2e", setting: "gmVision"): boolean;
-        get(module: "pf2e", setting: "identifyMagicNotMatchingTraditionModifier"): 0 | 2 | 5 | 10;
-        get(module: "pf2e", setting: "minimumRulesUI"): Exclude<UserRole, 0>;
-        get(module: "pf2e", setting: "nathMode"): boolean;
-        get(module: "pf2e", setting: "seenRemasterJournalEntry"): boolean;
-        get(module: "pf2e", setting: "statusEffectType"): StatusEffectIconTheme;
-        get(module: "pf2e", setting: "totmToggles"): boolean;
-        get(module: "pf2e", setting: "worldSchemaVersion"): number;
-        get(module: "pf2e", setting: "worldSystemVersion"): string;
-    }
-
-    interface ClientSettingsMap {
-        get(key: "pf2e.worldClock.worldCreatedOn"): SettingConfig & { default: string };
+    namespace foundry {
+        interface ClientSettingsMap {
+            get(key: "pf2e.worldClock"): SettingConfig & { default: WorldClockSettingData };
+        }
     }
 
     interface RollMathProxy {

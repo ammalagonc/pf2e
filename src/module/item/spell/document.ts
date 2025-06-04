@@ -1,8 +1,17 @@
 import type { ActorPF2e } from "@actor";
 import { DamageDicePF2e, ModifierPF2e } from "@actor/modifiers.ts";
 import { DamageContext } from "@actor/roll-context/damage.ts";
-import { AttributeString } from "@actor/types.ts";
+import type { AttributeString } from "@actor/types.ts";
 import { SAVE_TYPES } from "@actor/values.ts";
+import type { Rolled } from "@client/dice/roll.d.mts";
+import type { DocumentConstructionContext } from "@common/_types.d.mts";
+import type {
+    DatabaseCreateCallbackOptions,
+    DatabaseUpdateCallbackOptions,
+    DatabaseUpdateOperation,
+} from "@common/abstract/_types.d.mts";
+import type { MeasuredTemplateType, RollMode } from "@common/constants.d.mts";
+import type { ItemUUID } from "@common/documents/_module.d.mts";
 import type { ConsumablePF2e } from "@item";
 import { ItemPF2e } from "@item";
 import { processSanctification } from "@item/ability/helpers.ts";
@@ -25,7 +34,6 @@ import {
     processDamageCategoryStacking,
 } from "@module/rules/helpers.ts";
 import { eventToRollParams } from "@module/sheet/helpers.ts";
-import type { UserPF2e } from "@module/user/index.ts";
 import type { TokenDocumentPF2e } from "@scene";
 import { CheckRoll } from "@system/check/index.ts";
 import { DamagePF2e } from "@system/damage/damage.ts";
@@ -42,7 +50,7 @@ import {
 } from "@system/damage/types.ts";
 import { DEGREE_OF_SUCCESS_STRINGS } from "@system/degree-of-success.ts";
 import { StatisticRollParameters } from "@system/statistic/index.ts";
-import { EnrichmentOptionsPF2e, TextEditorPF2e } from "@system/text-editor.ts";
+import { type EnrichmentOptionsPF2e, type RollDataPF2e, TextEditorPF2e } from "@system/text-editor.ts";
 import {
     ErrorPF2e,
     createHTMLElement,
@@ -250,7 +258,7 @@ class SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ite
         return Math.max(this.baseRank, slotNumber ?? this.rank) as OneToTen;
     }
 
-    override getRollData(rollOptions: { castRank?: number | string } = {}): NonNullable<EnrichmentOptions["rollData"]> {
+    override getRollData(rollOptions: { castRank?: number | string } = {}): RollDataPF2e {
         const spellRank = Number(rollOptions?.castRank) || null;
         const castRank = Math.max(this.baseRank, spellRank || this.rank);
 
@@ -563,7 +571,7 @@ class SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ite
         const templateData: DeepPartial<foundry.documents.MeasuredTemplateSource> = {
             t: templateType,
             distance: (Number(area.value) / 5) * canvas.dimensions.distance,
-            fillColor: game.user.color,
+            fillColor: game.user.color.toString(),
             flags: {
                 pf2e: {
                     messageId: message?.id,
@@ -793,7 +801,7 @@ class SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ite
     }
 
     override async toMessage(
-        event?: Maybe<MouseEvent | JQuery.TriggeredEvent>,
+        event?: Maybe<MouseEvent>,
         { create = true, data, rollMode }: SpellToMessageOptions = {},
     ): Promise<ChatMessagePF2e | undefined> {
         // NOTE: The parent toMessage() pulls "contextual data" from the DOM dataset.
@@ -878,7 +886,9 @@ class SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ite
             )
             .sort((a, b) => a.sort - b.sort);
 
-        const rollData = htmlOptions.rollData ?? this.getRollData({ castRank });
+        const rollData =
+            (htmlOptions.rollData instanceof Function ? htmlOptions.rollData() : htmlOptions.rollData) ??
+            this.getRollData({ castRank });
         rollData.item ??= this;
 
         const systemData: SpellSystemData = this.system;
@@ -981,7 +991,7 @@ class SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ite
 
     async rollAttack(
         this: SpellPF2e<ActorPF2e>,
-        event: MouseEvent | JQuery.ClickEvent,
+        event: MouseEvent,
         attackNumber = 1,
         context: StatisticRollParameters = {},
     ): Promise<Rolled<CheckRoll> | null> {
@@ -1005,7 +1015,7 @@ class SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ite
 
     async rollDamage(
         this: SpellPF2e<ActorPF2e>,
-        event: MouseEvent | JQuery.ClickEvent,
+        event: MouseEvent,
         mapIncreases?: ZeroToTwo,
     ): Promise<Rolled<DamageRoll> | null> {
         const element = htmlClosest(event.target, "[data-cast-rank]");
@@ -1038,8 +1048,7 @@ class SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ite
     }
 
     /** Roll counteract check */
-    async rollCounteract(event?: MouseEvent | JQuery.ClickEvent): Promise<Rolled<CheckRoll> | null> {
-        event = event instanceof Event ? event : event?.originalEvent;
+    async rollCounteract(event?: MouseEvent): Promise<Rolled<CheckRoll> | null> {
         const actor: ActorPF2e | null = this.actor;
         if (!actor?.isOfType("character", "npc")) {
             return null;
@@ -1097,10 +1106,10 @@ class SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ite
 
     override async update(
         data: Record<string, unknown>,
-        operation: Partial<DatabaseUpdateOperation<TParent>> = {},
+        operation: Partial<Omit<DatabaseUpdateOperation<null>, "parent" | "pack">> = {},
     ): Promise<this | undefined> {
         // Redirect the update of override spell variants to the appropriate update method if the spell sheet is currently rendered
-        if (this.original && this.appliedOverlays!.has("override") && this.sheet.rendered) {
+        if (this.original && this.appliedOverlays?.has("override") && this.sheet.rendered) {
             return this.original.overlays.updateOverride(
                 this as SpellPF2e<ActorPF2e>,
                 data,
@@ -1112,8 +1121,8 @@ class SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ite
 
     protected override async _preCreate(
         data: this["_source"],
-        operation: DatabaseCreateOperation<TParent>,
-        user: UserPF2e,
+        options: DatabaseCreateCallbackOptions,
+        user: fd.BaseUser,
     ): Promise<boolean | void> {
         if (!this.actor) {
             this._source.system.location = { value: null };
@@ -1129,15 +1138,15 @@ class SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ite
             this._source.system.traits.traditions = [];
         }
 
-        return super._preCreate(data, operation, user);
+        return super._preCreate(data, options, user);
     }
 
     protected override async _preUpdate(
-        changed: DeepPartial<SpellSource>,
-        operation: DatabaseUpdateOperation<TParent>,
-        user: UserPF2e,
+        changed: DeepPartial<this["_source"]>,
+        options: DatabaseUpdateCallbackOptions,
+        user: fd.BaseUser,
     ): Promise<boolean | void> {
-        if (!changed.system) return super._preUpdate(changed, operation, user);
+        if (!changed.system) return super._preUpdate(changed, options, user);
 
         // Clean up location
         const newLocation = changed.system.location?.value ?? this._source.system.location.value;
@@ -1226,7 +1235,7 @@ class SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ite
             }
         }
 
-        return super._preUpdate(changed, operation, user);
+        return super._preUpdate(changed, options, user);
     }
 }
 

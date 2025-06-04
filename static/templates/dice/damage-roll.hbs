@@ -1,19 +1,18 @@
-<section class="dice-roll damage-roll" data-tooltip-class="pf2e">
+<section class="dice-roll damage-roll" data-action="expandRoll" data-tooltip-class="pf2e">
     {{#if flavor}}<div class="dice-flavor">{{flavor}}</div>{{/if}}
     <div class="dice-result">
-        <div
-            class="dice-formula"
-            {{!-- Indicate to the GM that that breakdown is hidden --}}
-            {{#if (and (not showBreakdown) user.isGM)}}data-visibility="gm"{{/if}}
-            {{!-- Instead of removing the element for players, show a special "formula" --}}
-            >{{#if (or showBreakdown user.isGM)}}{{{formula}}}{{else}}???{{/if}}</div>
+        {{!-- Indicate to the GM that that breakdown is hidden --}}
+        <div class="dice-formula"{{#if (and (not showBreakdown) user.isGM)}} data-visibility="gm"{{/if}}>
+             {{!-- Instead of removing the element for players, show a special "formula" --}}
+            {{#if (or showBreakdown user.isGM)}}{{{formula}}}{{else}}???{{/if}}
+        </div>
         {{{tooltip}}}
         {{#unless (and allPersistent (not persistentEvaluated))}}
             <h4 class="dice-total">
-                <span
-                    class="total"{{#if (isNumber increasedFrom)}}
-                    data-tooltip="{{localize "PF2E.Damage.IncreasedFrom" original=increasedFrom}}" data-tooltip-direction="LEFT"{{/if}}
-                >
+                <span class="total" data-tooltip-direction="LEFT"
+                      {{#if (isNumber increasedFrom)~}}
+                      data-tooltip aria-label="{{localize "PF2E.Damage.IncreasedFrom" original=increasedFrom}}"
+                      {{~/if}}>
                     {{~total}}
                     {{~#if (isNumber increasedFrom) ~}}
                         <span class="increased-from">*</span>
@@ -39,66 +38,63 @@
 </section>
 
 <section class="damage-application">
-    {{#if (and healingOnly showButtons)}}
-        <button
-            type="button"
-            class="healing-only"
-            data-action="apply-healing"
-            title="{{localize "PF2E.DamageButton.Healing"}}&#013;{{localize "PF2E.DamageButton.Adjust"}}"
-        >
-            <span class="fa-stack fa-fw">
-                <i class="fa-solid fa-heart fa-stack-2x"></i>
-                <i class="fa-solid fa-plus fa-inverse fa-stack-1x"></i>
-            </span>
-            <span class="label">{{localize "PF2E.Damage.Kind.Healing.Apply.Label"}}</span>
-        </button>
-    {{else if showButtons}}
-        <button type="button" data-action="apply-damage" title="{{localize "PF2E.DamageButton.Full"}}&#013;{{localize "PF2E.DamageButton.Adjust"}}">
-            <i class="fa-solid fa-heart-broken fa-fw"></i>
-            <span class="label">{{#if splashOnly}}{{localize "PF2E.TraitSplash"}}{{else}}{{localize "PF2E.DamageButton.FullShort"}}{{/if}}</span>
-        </button>
-        <button
-            type="button" class="half-damage"
-            data-action="half-damage"
-            title="{{localize "PF2E.DamageButton.Half"}}&#013;{{localize "PF2E.DamageButton.Adjust"}}"
-        >
-            <i class="fa-solid fa-heart-broken fa-fw"></i>
-            <span class="label">{{localize "PF2E.DamageButton.HalfShort"}}</span>
-        </button>
-        <button type="button" data-action="double-damage" title="{{localize "PF2E.DamageButton.Double"}}&#013;{{localize "PF2E.DamageButton.Adjust"}}">
-            <img src="systems/pf2e/icons/damage/double.svg" />
-            <span class="label">{{localize "PF2E.DamageButton.DoubleShort"}}</span>
-        </button>
-        {{#if showTripleDamage}}
-            <button
-                type="button"
-                data-action="triple-damage"
-                title="{{localize "PF2E.DamageButton.Triple"}}&#013;{{localize "PF2E.DamageButton.Adjust"}}"
-            >
-                <img src="systems/pf2e/icons/damage/triple.svg" />
-                <span class="label">{{localize "PF2E.DamageButton.TripleShort"}}</span>
-            </button>
-        {{/if}}
-        {{#unless (or allPersistent splashOnly)}}
-            <button type="button" data-action="shield-block" class="dice-total-shield-btn" title="{{localize "PF2E.DamageButton.ShieldBlock"}}">
-                <i class="fa-solid fa-shield-blank fa-fw"></i>
-                <span class="label">{{localize "PF2E.DamageButton.ShieldBlockShort"}}</span>
-            </button>
-        {{/unless}}
-        {{#unless damageOnly}}
-            <button
-                type="button"
-                class="apply-healing"
-                data-action="apply-healing"
-                title="{{localize "PF2E.DamageButton.Healing"}}&#013;{{localize "PF2E.DamageButton.Adjust"}}"
-            >
-                <span class="fa-stack fa-fw">
-                    <i class="fa-solid fa-heart fa-stack-2x"></i>
-                    <i class="fa-solid fa-plus fa-inverse fa-stack-1x"></i>
-                </span>
-                <span class="label">{{localize "PF2E.DamageButton.HealingShort"}}</span>
-            </button>
-        {{/unless}}
+    {{#if showButtons}}
+    {{#if healingOnly}}
+    <button type="button" class="healing-only" data-action="applyDamage" data-multiplier="-1"
+            title="{{localize "PF2E.DamageButton.Healing"}}&#013;{{localize "PF2E.DamageButton.Adjust"}}">
+        <span class="fa-stack fa-fw" inert>
+            <i class="fa-solid fa-heart fa-stack-2x"></i>
+            <i class="fa-solid fa-plus fa-inverse fa-stack-1x"></i>
+        </span>
+        <span class="label">{{localize "PF2E.Damage.Kind.Healing.Apply.Label"}}</span>
+    </button>
+    {{else}}
+    <button type="button" data-action="applyDamage" data-multiplier="1"
+            title="{{localize "PF2E.DamageButton.Full"}}&#013;{{localize "PF2E.DamageButton.Adjust"}}">
+        <i class="fa-solid fa-heart-crack fa-fw" inert></i>
+        <span class="label">
+            {{~#if splashOnly}}
+            {{~localize "PF2E.TraitSplash"~}}
+            {{~else~}}
+            {{~localize "PF2E.DamageButton.FullShort"~}}
+            {{~/if~}}
+        </span>
+    </button>
+    <button type="button" class="half-damage" data-action="applyDamage" data-multiplier="0.5"
+            title="{{localize "PF2E.DamageButton.Half"}}&#013;{{localize "PF2E.DamageButton.Adjust"}}">
+        <i class="fa-solid fa-heart-crack fa-fw" inert></i>
+        <span class="label">{{localize "PF2E.DamageButton.HalfShort"}}</span>
+    </button>
+    <button type="button" data-action="applyDamage" data-multiplier="2"
+            title="{{localize "PF2E.DamageButton.Double"}}&#013;{{localize "PF2E.DamageButton.Adjust"}}">
+        <img src="systems/pf2e/icons/damage/double.svg" />
+        <span class="label">{{localize "PF2E.DamageButton.DoubleShort"}}</span>
+    </button>
+    {{#if showTripleDamage}}
+    <button type="button" data-action="applyDamage" data-multiplier="3"
+            title="{{localize "PF2E.DamageButton.Triple"}}&#013;{{localize "PF2E.DamageButton.Adjust"}}">
+        <img src="systems/pf2e/icons/damage/triple.svg" />
+        <span class="label">{{localize "PF2E.DamageButton.TripleShort"}}</span>
+    </button>
+    {{/if}}
+    {{#unless (or allPersistent splashOnly)}}
+    <button type="button" data-action="shieldBlock" class="dice-total-shield-btn"
+            title="{{localize "PF2E.DamageButton.ShieldBlock"}}">
+        <i class="fa-solid fa-shield-blank fa-fw" inert></i>
+        <span class="label">{{localize "PF2E.DamageButton.ShieldBlockShort"}}</span>
+    </button>
+    {{/unless}}
+    {{#unless damageOnly}}
+    <button type="button" class="apply-healing" data-action="applyDamage" data-multiplier="-1"
+            title="{{localize "PF2E.DamageButton.Healing"}}&#013;{{localize "PF2E.DamageButton.Adjust"}}">
+        <span class="fa-stack fa-fw" inert>
+            <i class="fa-solid fa-heart fa-stack-2x"></i>
+        <i class="fa-solid fa-plus fa-inverse fa-stack-1x"></i>
+        </span>
+        <span class="label">{{localize "PF2E.DamageButton.HealingShort"}}</span>
+    </button>
+    {{/unless}}
+    {{/if}}
     {{/if}}
 </section>
 

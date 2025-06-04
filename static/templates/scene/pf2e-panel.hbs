@@ -1,0 +1,42 @@
+<section class="tab{{#if tab.active}} active{{/if}}" data-group="sheet" data-tab="pf2e">
+    <div class="form-group">
+        <label for="{{rootId}}-rules-based-vision">{{localize "PF2E.SETTINGS.Automation.RulesBasedVision.Name"}}</label>
+        <div class="form-fields">
+            <select id="{{rootId}}-rules-based-vision" name="flags.pf2e.rulesBasedVision">
+                {{selectOptions rbvOptions selected=scene.flags.pf2e.rulesBasedVision}}
+            </select>
+
+            <button type="button" class="icon fa-solid fa-robot" data-action="openAutomationSettings" data-tooltip
+                    aria-label="{{localize "PF2E.SETTINGS.Automation.RulesBasedVision.ViewWorldSetting"}}"></button>
+        </div>
+        <p class="hint">{{localize "PF2E.SETTINGS.Automation.RulesBasedVision.Hint"}}</p>
+    </div>
+
+    <div class="form-group">
+        <label for="{{rootId}}-hearing-range">{{localize "PF2E.Scene.HearingRange.Label"}}</label>
+        <div class="form-fields">
+            <input type="number" id="{{rootId}}-hearing-range" name="flags.pf2e.hearingRange"
+                   value="{{scene.flags.pf2e.hearingRange}}"
+                   placeholder="{{localize "PF2E.Scene.HearingRange.Unlimited"}}"
+            />
+        </div>
+        <p class="hint">{{localize "PF2E.Scene.HearingRange.Hint"}}</p>
+        <p class="hint caveat">{{localize "PF2E.Scene.HearingRange.Caveat"}}</p>
+    </div>
+
+    {{formGroup environmentTypes name="flags.pf2e.environmentTypes" value=document.flags.pf2e.environmentTypes
+                rootId=rootId localize=true}}
+
+    <div class="form-group slim">
+        <label for="{{rootId}}-sync-darkness">{{localize "PF2E.Scene.SyncDarkness.Label"}}</label>
+        <div class="form-fields">
+            <select id="{{rootId}}-sync-darkness" name="flags.pf2e.syncDarkness">
+                {{selectOptions syncDarknessOptions selected=scene.flags.pf2e.syncDarkness}}
+            </select>
+
+            <button type="button" class="icon fa-solid fa-clock" data-action="openWorldClockSettings" data-tooltip
+                    aria-label="{{localize "PF2E.SETTINGS.Automation.WorldClock.ViewSettings"}}"></button>
+        </div>
+        <p class="hint">{{localize "PF2E.Scene.SyncDarkness.Hint"}}</p>
+    </div>
+</section>

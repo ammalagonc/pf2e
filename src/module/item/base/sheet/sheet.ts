@@ -1,6 +1,10 @@
+import type { FormSelectOption } from "@client/applications/forms/fields.d.mts";
+import type { ProseMirrorEditor } from "@client/applications/ux/_module.d.mts";
+import type { ApplicationV1HeaderButton, AppV1RenderOptions } from "@client/appv1/api/application-v1.d.mts";
+import type { DataField } from "@common/data/fields.d.mts";
 import { ItemPF2e } from "@item";
-import { ItemSourcePF2e } from "@item/base/data/index.ts";
-import { Rarity } from "@module/data.ts";
+import type { ItemSourcePF2e } from "@item/base/data/index.ts";
+import type { Rarity } from "@module/data.ts";
 import { RuleElements, RuleElementSource } from "@module/rules/index.ts";
 import {
     createSheetTags,
@@ -31,16 +35,20 @@ import {
 } from "@util";
 import { createSortable } from "@util/destroyables.ts";
 import { tagify } from "@util/tags.ts";
+import type { Plugin } from "prosemirror-state";
 import * as R from "remeda";
-import type * as TinyMCE from "tinymce";
+import { ItemSystemModel } from "../data/model.ts";
 import { CodeMirror } from "./codemirror.ts";
 import { RULE_ELEMENT_FORMS, RuleElementForm } from "./rule-element-form/index.ts";
 
-class ItemSheetPF2e<TItem extends ItemPF2e> extends ItemSheet<TItem, ItemSheetOptions> {
-    constructor(item: TItem, options: Partial<ItemSheetOptions> = {}) {
+class ItemSheetPF2e<TItem extends ItemPF2e> extends fav1.sheets.ItemSheet<TItem, ItemSheetOptions> {
+    constructor(item: TItem, options: Partial<fav1.sheets.ItemSheetData<TItem>> = {}) {
         super(item, options);
         this.options.classes.push(this.item.type);
     }
+
+    /** Ignore deprecation warning */
+    protected static override _warnedAppV1 = true;
 
     static override get defaultOptions(): ItemSheetOptions {
         const options = super.defaultOptions;
@@ -132,7 +140,8 @@ class ItemSheetPF2e<TItem extends ItemPF2e> extends ItemSheet<TItem, ItemSheetOp
             item,
             isPhysical: false,
             data: item.system,
-            fieldRootId: this.item.collection.has(this.item.id) ? this.id : foundry.utils.randomID(),
+            systemFields: this.item.system instanceof ItemSystemModel ? this.item.system.schema.fields : {},
+            fieldRootId: this.item.collection?.has(this.item.id) ? this.id : fu.randomID(),
             fieldIdPrefix: `field-${this.appId}-`,
             enrichedContent,
             limited: this.item.limited,
@@ -258,9 +267,9 @@ class ItemSheetPF2e<TItem extends ItemPF2e> extends ItemSheet<TItem, ItemSheetOp
 
     override async activateEditor(
         name: string,
-        options: EditorCreateOptions = {},
+        options: { engine?: "prosemirror" | "tinymce" } = {},
         initialContent = "",
-    ): Promise<TinyMCE.Editor | ProseMirror.EditorView> {
+    ): Promise<TinyMCE.Editor | ProseMirrorEditor> {
         // Ensure the source description is edited rather than a prepared one
         const sourceContent =
             name === "system.description.value" ? this.item._source.system.description.value : initialContent;
@@ -286,13 +295,7 @@ class ItemSheetPF2e<TItem extends ItemPF2e> extends ItemSheet<TItem, ItemSheetOp
             htmlQuery(html, ".tab.description")?.classList.add("editing");
         }
 
-        // Prevent additional description content from some item types getting injected into the editor content
-        const instance = await super.activateEditor(name, options, sourceContent);
-        if ("startContent" in instance && sourceContent.trim() === "") {
-            instance.resetContent(sourceContent);
-        }
-
-        return instance;
+        return super.activateEditor(name, options, sourceContent);
     }
 
     override async close(options?: { force?: boolean }): Promise<void> {
@@ -303,7 +306,7 @@ class ItemSheetPF2e<TItem extends ItemPF2e> extends ItemSheet<TItem, ItemSheetOp
     protected override _configureProseMirrorPlugins(
         name: string,
         options: { remove?: boolean },
-    ): Record<string, ProseMirror.Plugin> {
+    ): Record<string, Plugin> {
         const plugins = super._configureProseMirrorPlugins(name, options);
         plugins.menu = foundry.prosemirror.ProseMirrorMenu.build(foundry.prosemirror.defaultSchema, {
             destroyOnSave: options.remove,
@@ -350,13 +353,14 @@ class ItemSheetPF2e<TItem extends ItemPF2e> extends ItemSheet<TItem, ItemSheetOp
         // Add implementation for viewing an item's roll options
         const viewRollOptionsElement = htmlQuery(rulesPanel, "a[data-action=view-roll-options]");
         viewRollOptionsElement?.addEventListener("click", async () => {
-            const content = await renderTemplate("systems/pf2e/templates/system/roll-options-tooltip.hbs", {
+            const path = "systems/pf2e/templates/system/roll-options-tooltip.hbs";
+            const content = await fa.handlebars.renderTemplate(path, {
                 description: game.i18n.localize("PF2E.Item.Rules.Hint.RollOptions"),
                 rollOptions: R.sortBy(this.item.getRollOptions("item").sort(), (o) => o.includes(":")),
             });
             game.tooltip.dismissLockedTooltips();
             game.tooltip.activate(viewRollOptionsElement, {
-                content: createHTMLElement("div", { innerHTML: content }),
+                html: createHTMLElement("div", { innerHTML: content }),
                 locked: true,
             });
         });
@@ -583,7 +587,7 @@ class ItemSheetPF2e<TItem extends ItemPF2e> extends ItemSheet<TItem, ItemSheetOp
     }
 
     /** Add button to refresh from compendium if setting is enabled. */
-    protected override _getHeaderButtons(): ApplicationHeaderButton[] {
+    protected override _getHeaderButtons(): ApplicationV1HeaderButton[] {
         const buttons = super._getHeaderButtons();
 
         if (
@@ -640,7 +644,7 @@ class ItemSheetPF2e<TItem extends ItemPF2e> extends ItemSheet<TItem, ItemSheetOp
     }
 
     /** Overriden _render to maintain focus on tagify elements */
-    protected override async _render(force?: boolean, options?: RenderOptions): Promise<void> {
+    protected override async _render(force?: boolean, options?: AppV1RenderOptions): Promise<void> {
         await maintainFocusInRender(this, () => super._render(force, options));
 
         // Maintain last rules panel scroll position when opening/closing the codemirror editor
@@ -655,7 +659,7 @@ class ItemSheetPF2e<TItem extends ItemPF2e> extends ItemSheet<TItem, ItemSheetOp
     }
 }
 
-interface ItemSheetDataPF2e<TItem extends ItemPF2e> extends ItemSheetData<TItem> {
+interface ItemSheetDataPF2e<TItem extends ItemPF2e> extends fav1.sheets.ItemSheetData<TItem> {
     /** The item type label that shows at the top right (for example, "Feat" for "Feat 6") */
     itemType: string | null;
     showTraits: boolean;
@@ -665,6 +669,7 @@ interface ItemSheetDataPF2e<TItem extends ItemPF2e> extends ItemSheetData<TItem>
     detailsTemplate: string;
     item: TItem;
     data: TItem["system"];
+    systemFields: Record<string, DataField>;
     /** The leading part of IDs used for label-input/select matching */
     fieldRootId: string;
     /** Legacy value of the above */
@@ -693,7 +698,7 @@ interface ItemSheetDataPF2e<TItem extends ItemPF2e> extends ItemSheetData<TItem>
     proficiencyRanks: typeof CONFIG.PF2E.proficiencyLevels;
 }
 
-interface ItemSheetOptions extends DocumentSheetOptions {
+interface ItemSheetOptions extends fav1.api.DocumentSheetV1Options {
     hasSidebar: boolean;
 }
 
