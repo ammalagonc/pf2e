@@ -727,7 +727,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>Seldeg Bheldis unleashes a @Template[cone|distance:30] of energy. Creatures in the area take @Damage[11d12[fire]|options:area-damage] damage with a @Check[reflex|dc:39|basic|options:area-effect].</p>\n<p>Seldeg can use this ability once every [[/gmr 1d4 #Rounds]] rounds.</p>"
+                    "value": "<p>Seldeg Bheldis unleashes a @Template[cone|distance:30] of energy. Creatures in the area take @Damage[11d12[fire]|options:area-damage] damage with a @Check[reflex|dc:39|basic|options:area-effect].</p>\n<p>Seldeg can use this ability once every [[/gmr 1d4 #Recharge Devastating Blast]] rounds.</p>"
                 },
                 "publication": {
                     "license": "ORC",
