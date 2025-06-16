@@ -257,7 +257,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p><strong>Requirements</strong> The root rotter has 25 Hit Points or fewer</p><hr /><p><strong>Effect</strong> The root rotter destroys themself. Thorny fungal roots explode from their body, dealing @Damage[10d6[piercing]] damage in a @Template[type:emanation|distance:10] (@Check[reflex|dc:25|basic] save). Any creature who fails the save is exposed to rotter infestation.</p>"
+                    "value": "<p><strong>Requirements</strong> The root rotter has 25 Hit Points or fewer</p><hr /><p><strong>Effect</strong> The root rotter destroys themself. Thorny fungal roots explode from their body, dealing @Damage[10d6[piercing]|options:area-damage] damage in a @Template[type:emanation|distance:10] (@Check[reflex|dc:25|basic|options:area-effect] save). Any creature who fails the save is exposed to rotter infestation.</p>"
                 },
                 "publication": {
                     "license": "OGL",
