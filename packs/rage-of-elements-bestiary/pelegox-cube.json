@@ -116,7 +116,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>The pelegox cube rapidly shifts, creating a display of seemingly impossible geometric patterns. Creatures in a @Template[cone|distance:60] take @Damage[9d6[mental]] damage (@Check[will|dc:29|basic] save). A creature that fails is also @UUID[Compendium.pf2e.conditionitems.Item.Fascinated] with the pelegox cube and @UUID[Compendium.pf2e.conditionitems.Item.Stupefied]{Stupefied 1} for 1 minute.</p>"
+                    "value": "<p>The pelegox cube rapidly shifts, creating a display of seemingly impossible geometric patterns. Creatures in a @Template[cone|distance:60] take @Damage[9d6[mental]|options:area-damage] damage (@Check[will|dc:29|basic|options:area-effect] save). A creature that fails is also @UUID[Compendium.pf2e.conditionitems.Item.Fascinated] with the pelegox cube and @UUID[Compendium.pf2e.conditionitems.Item.Stupefied]{Stupefied 1} for 1 minute.</p>"
                 },
                 "publication": {
                     "license": "OGL",
