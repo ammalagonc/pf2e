@@ -186,7 +186,7 @@
                 "category": "defensive",
                 "deathNote": true,
                 "description": {
-                    "value": "<p>When a Xotanispawn dies, it explodes, dealing @Damage[15d8[fire]] damage to creatures in a @Template[emanation|distance:30] (@Check[reflex|dc:39|basic] save).</p>"
+                    "value": "<p>When a Xotanispawn dies, it explodes, dealing @Damage[15d8[fire]|options:area-damage] damage to creatures in a @Template[emanation|distance:30] (@Check[reflex|dc:39|basic|options:area-effect] save).</p>"
                 },
                 "publication": {
                     "license": "OGL",

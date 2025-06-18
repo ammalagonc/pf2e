@@ -1992,7 +1992,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>Parsus pushes their necromechanical innovation beyond its normal limits, dealing @Damage[10d6[void]] damage in a @Template[emanation|distance:10] (@Check[reflex|dc:31|basic]). Parsus can choose to include themself in this effect.</p>"
+                    "value": "<p>Parsus pushes their necromechanical innovation beyond its normal limits, dealing @Damage[10d6[void]|options:area-damage] damage in a @Template[emanation|distance:10] (@Check[reflex|dc:31|basic|options:area-effect]). Parsus can choose to include themself in this effect.</p>"
                 },
                 "publication": {
                     "license": "OGL",
