@@ -45,7 +45,6 @@
                 "predicate": [
                     "fortunes-coin"
                 ],
-                "removeAfterRoll": "if-enabled",
                 "required": true,
                 "selectors": [
                     "attack",
