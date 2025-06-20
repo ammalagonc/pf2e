@@ -235,7 +235,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>The sanzuwu transforms into an enormous bird made of flame. As the sanzuwu begins their transformation, creatures within a @Template[emanation|distance:10] take @Damage[6d8[fire]] damage (@Check[reflex|dc:33|basic] save). While in their flame form, the sanzuwu gains the effects of 4th-rank @UUID[Compendium.pf2e.spells-srd.Item.Enlarge]. They can use Fiery Transformation again to revert back to their standard form.</p>"
+                    "value": "<p>The sanzuwu transforms into an enormous bird made of flame. As the sanzuwu begins their transformation, creatures within a @Template[emanation|distance:10] take @Damage[6d8[fire]|options:area-damage] damage (@Check[reflex|dc:33|basic|options:area-effect] save). While in their flame form, the sanzuwu gains the effects of 4th-rank @UUID[Compendium.pf2e.spells-srd.Item.Enlarge]. They can use Fiery Transformation again to revert back to their standard form.</p>"
                 },
                 "publication": {
                     "license": "OGL",
