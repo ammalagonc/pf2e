@@ -1658,7 +1658,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>Zellara unleashes a barrage of harrow cards that deals @Damage[7d6[void]] damage in a @Template[cone|distance:30] (@Check[reflex|dc:34|basic] save).</p>"
+                    "value": "<p>Zellara unleashes a barrage of harrow cards that deals @Damage[7d6[void]|options:area-damage] damage in a @Template[cone|distance:30] (@Check[reflex|dc:34|basic|options:area-effect] save).</p>"
                 },
                 "publication": {
                     "license": "OGL",
