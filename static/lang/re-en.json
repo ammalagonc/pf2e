@@ -3281,6 +3281,20 @@
                     "MageArmor": "Scaly Hide w/ Mage Armor"
                 }
             },
+            "DragonForm": {
+                "DragonBreath": {
+                    "Cone":{ 
+                        "Fortitude": "You exhale deadly magical energy in an area, dealing @Damage[(@actor.flags.pf2e.dragonForm.damageDice)d6[(@actor.flags.pf2e.dragonForm.breathDamage)]|options:area-damage] damage to each creature in the area with a @Check[fortitude|against:spell|basic]. The shape is a @Template[type:cone|distance:30]. Once activated, Dragon Breath can't be used again for [[/gmr 1d4 #Recharge Dragon Breath]]{1d4 rounds}.",
+                        "Reflex": "You exhale deadly magical energy in an area, dealing @Damage[(@actor.flags.pf2e.dragonForm.damageDice)d6[(@actor.flags.pf2e.dragonForm.breathDamage)]|options:area-damage] damage to each creature in the area with a @Check[reflex|against:spell|basic]. The shape is a @Template[type:cone|distance:30]. Once activated, Dragon Breath can't be used again for [[/gmr 1d4 #Recharge Dragon Breath]]{1d4 rounds}.",
+                        "Will": "You exhale deadly magical energy in an area, dealing @Damage[(@actor.flags.pf2e.dragonForm.damageDice)d6[(@actor.flags.pf2e.dragonForm.breathDamage)]|options:area-damage] damage to each creature in the area with a @Check[will|against:spell|basic]. The shape is a @Template[type:cone|distance:30]. Once activated, Dragon Breath can't be used again for [[/gmr 1d4 #Recharge Dragon Breath]]{1d4 rounds}."
+                    },
+                    "Line":{ 
+                        "Fortitude": "You exhale deadly magical energy in an area, dealing @Damage[(@actor.flags.pf2e.dragonForm.damageDice)d6[(@actor.flags.pf2e.dragonForm.breathDamage)]|options:area-damage] damage to each creature in the area with a @Check[fortitude|against:spell|basic]. The shape is a @Template[type:line|distance:100]. Once activated, Dragon Breath can't be used again for [[/gmr 1d4 #Recharge Dragon Breath]]{1d4 rounds}.",
+                        "Reflex": "You exhale deadly magical energy in an area, dealing @Damage[(@actor.flags.pf2e.dragonForm.damageDice)d6[(@actor.flags.pf2e.dragonForm.breathDamage)]|options:area-damage] damage to each creature in the area with a @Check[reflex|against:spell|basic]. The shape is a @Template[type:line|distance:100]. Once activated, Dragon Breath can't be used again for [[/gmr 1d4 #Recharge Dragon Breath]]{1d4 rounds}.",
+                        "Will": "You exhale deadly magical energy in an area, dealing @Damage[(@actor.flags.pf2e.dragonForm.damageDice)d6[(@actor.flags.pf2e.dragonForm.breathDamage)]|options:area-damage] damage to each creature in the area with a @Check[will|against:spell|basic]. The shape is a @Template[type:line|distance:100]. Once activated, Dragon Breath can't be used again for [[/gmr 1d4 #Recharge Dragon Breath]]{1d4 rounds}."
+                    }
+                }
+            },
             "Driving": "Driving",
             "Druid": {
                 "DruidicOrder": {
