@@ -473,7 +473,7 @@
                         "key": "RollOption",
                         "label": "PF2E.NPCAbility.ChangeShape.Label",
                         "option": "change-shape",
-                        "selection": "hybrid",
+                        "selection": "humanoid",
                         "suboptions": [
                             {
                                 "label": "PF2E.NPCAbility.ChangeShape.Form.Animal",
@@ -564,6 +564,13 @@
                         ],
                         "selector": "climb",
                         "value": 10
+                    },
+                    {
+                        "key": "CreatureSize",
+                        "predicate": [
+                            "change-shape:animal"
+                        ],
+                        "value": "small"
                     }
                 ],
                 "slug": "werecreature-change-shape",
