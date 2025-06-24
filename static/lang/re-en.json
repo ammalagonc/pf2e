@@ -4015,7 +4015,7 @@
                     "SecondAttackLabel": "Double Slice Second Attack"
                 },
                 "ResoundingBravery": {
-                    "Prompt": "Against a fear effect?",
+                    "Prompt": "Against a fear effect?"
                 }
             },
             "FighterWeaponMasteryLegend": {
