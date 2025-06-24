@@ -394,7 +394,7 @@
             "_stats": {
                 "compendiumSource": "Compendium.pf2e.spells-srd.Item.ZwwIUavMbEwcZz35"
             },
-            "img": "systems/pf2e/icons/spells/create-demiplane.webp",
+            "img": "icons/magic/defensive/barrier-shield-dome-blue-purple.webp",
             "name": "Create Demiplane",
             "sort": 700000,
             "system": {

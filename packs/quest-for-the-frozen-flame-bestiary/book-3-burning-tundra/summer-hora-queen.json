@@ -507,7 +507,7 @@
             "_stats": {
                 "compendiumSource": "Compendium.pf2e.spells-srd.Item.m34WOIGZCEg1h76G"
             },
-            "img": "systems/pf2e/icons/spells/blanket-of-stars.webp",
+            "img": "icons/magic/light/orbs-firefly-hand-yellow.webp",
             "name": "Blanket Of Stars",
             "sort": 700000,
             "system": {
@@ -827,7 +827,7 @@
             "_stats": {
                 "compendiumSource": "Compendium.pf2e.spells-srd.Item.YrzBLPLd3r9m6t1p"
             },
-            "img": "systems/pf2e/icons/spells/fire-shield.webp",
+            "img": "icons/magic/fire/barrier-shield-explosion-yellow.webp",
             "name": "Fire Shield",
             "sort": 1200000,
             "system": {
@@ -1579,7 +1579,7 @@
             "_stats": {
                 "compendiumSource": "Compendium.pf2e.spells-srd.Item.Et8RSCLx8w7uOLvo"
             },
-            "img": "systems/pf2e/icons/spells/restore-senses.webp",
+            "img": "icons/magic/control/buff-flight-wings-runes-red-yellow.webp",
             "name": "Restore Senses",
             "sort": 2300000,
             "system": {

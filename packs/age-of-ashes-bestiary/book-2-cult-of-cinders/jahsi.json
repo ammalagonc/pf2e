@@ -87,7 +87,7 @@
             "_stats": {
                 "compendiumSource": "Compendium.pf2e.spells-srd.Item.X1b9ollVMSLXDN9o"
             },
-            "img": "systems/pf2e/icons/spells/litany-against-wrath.webp",
+            "img": "icons/magic/control/control-influence-rally-purple.webp",
             "name": "Litany against Wrath",
             "sort": 300000,
             "system": {

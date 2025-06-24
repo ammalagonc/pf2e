@@ -180,7 +180,7 @@
             "_stats": {
                 "compendiumSource": "Compendium.pf2e.spells-srd.Item.CQb8HtQ1BPeZmu9h"
             },
-            "img": "systems/pf2e/icons/spells/touch-of-idiocy.webp",
+            "img": "icons/magic/light/hand-sparks-smoke-teal.webp",
             "name": "Touch of Idiocy (At Will)",
             "sort": 400000,
             "system": {

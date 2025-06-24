@@ -1228,7 +1228,7 @@
             "_stats": {
                 "compendiumSource": "Compendium.pf2e.spells-srd.Item.OyFCwQuw8XRazsNr"
             },
-            "img": "systems/pf2e/icons/spells/remove-curse.webp",
+            "img": "icons/magic/control/buff-flight-wings-runes-blue-white.webp",
             "name": "Remove Curse",
             "sort": 1800000,
             "system": {
@@ -1776,7 +1776,7 @@
             "_stats": {
                 "compendiumSource": "Compendium.pf2e.spells-srd.Item.Et8RSCLx8w7uOLvo"
             },
-            "img": "systems/pf2e/icons/spells/restore-senses.webp",
+            "img": "icons/magic/control/buff-flight-wings-runes-red-yellow.webp",
             "name": "Restore Senses",
             "sort": 2600000,
             "system": {

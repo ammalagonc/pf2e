@@ -1143,7 +1143,7 @@
             "_stats": {
                 "compendiumSource": "Compendium.pf2e.spells-srd.Item.sRfSBHWHdbIa0aGc"
             },
-            "img": "systems/pf2e/icons/spells/chilling-darkness.webp",
+            "img": "icons/magic/light/beam-explosion-pink-purple.webp",
             "name": "Chilling Darkness",
             "sort": 1600000,
             "system": {
@@ -1577,7 +1577,7 @@
             "_stats": {
                 "compendiumSource": "Compendium.pf2e.spells-srd.Item.EfFMLVbmkBWmzoLF"
             },
-            "img": "systems/pf2e/icons/spells/remove-fear.webp",
+            "img": "icons/magic/control/buff-flight-wings-runes-purple-orange.webp",
             "name": "Remove Fear",
             "sort": 2100000,
             "system": {

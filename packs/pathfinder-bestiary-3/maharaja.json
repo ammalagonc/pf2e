@@ -123,7 +123,7 @@
             "_stats": {
                 "compendiumSource": "Compendium.pf2e.spells-srd.Item.6s0UW4bujggma9TC"
             },
-            "img": "systems/pf2e/icons/spells/fabricated-truth.webp",
+            "img": "icons/sundries/scrolls/scroll-writing-grey.webp",
             "name": "Fabricated Truth",
             "sort": 300000,
             "system": {
@@ -2945,7 +2945,7 @@
             "_stats": {
                 "compendiumSource": "Compendium.pf2e.spells-srd.Item.c2bTWBNO1BYX4Zfg"
             },
-            "img": "systems/pf2e/icons/spells/missdirection.webp",
+            "img": "systems/pf2e/icons/spells/magic-aura.webp",
             "name": "Misdirection",
             "sort": 4500000,
             "system": {

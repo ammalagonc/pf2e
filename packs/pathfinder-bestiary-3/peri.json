@@ -46,7 +46,7 @@
             "_stats": {
                 "compendiumSource": "Compendium.pf2e.spells-srd.Item.YrzBLPLd3r9m6t1p"
             },
-            "img": "systems/pf2e/icons/spells/fire-shield.webp",
+            "img": "icons/magic/fire/barrier-shield-explosion-yellow.webp",
             "name": "Fire Shield (Constant)",
             "sort": 200000,
             "system": {
