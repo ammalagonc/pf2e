@@ -856,6 +856,14 @@ export const ARMOR_PROPERTY_RUNES: { [T in ArmorPropertyRuneType]: ArmorProperty
         slug: "soaring",
         traits: ["magical"],
     },
+    spellwatch: {
+        name: "PF2E.ArmorPropertyRuneSpellwatch",
+        level: 13,
+        price: 3000,
+        rarity: "common",
+        slug: "spellwatch",
+        traits: ["magical"],
+    },
     stanching: {
         name: "PF2E.ArmorPropertyRuneStanching",
         level: 5,
