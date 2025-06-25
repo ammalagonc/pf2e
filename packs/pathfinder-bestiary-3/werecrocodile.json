@@ -433,6 +433,9 @@
                         "label": "PF2E.Strike.Fist.Label",
                         "predicate": [
                             "change-shape:humanoid"
+                        ],
+                        "traits": [
+                            "unarmed"
                         ]
                     },
                     {
@@ -455,7 +458,10 @@
                                 ]
                             }
                         ],
-                        "slug": "jaws"
+                        "slug": "jaws",
+                        "traits": [
+                            "unarmed"
+                        ]
                     },
                     {
                         "attackModifier": 10,
@@ -479,7 +485,8 @@
                         ],
                         "slug": "tail",
                         "traits": [
-                            "agile"
+                            "agile",
+                            "unarmed"
                         ]
                     },
                     {
@@ -502,7 +509,10 @@
                                 ]
                             }
                         ],
-                        "slug": "jaws"
+                        "slug": "jaws",
+                        "traits": [
+                            "unarmed"
+                        ]
                     },
                     {
                         "key": "BaseSpeed",
