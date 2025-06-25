@@ -464,7 +464,9 @@
                             "change-shape:humanoid"
                         ],
                         "slug": "fist",
-                        "traits": []
+                        "traits": [
+                            "unarmed"
+                        ]
                     },
                     {
                         "attackModifier": 14,
@@ -483,7 +485,10 @@
                                 "not": "change-shape:humanoid"
                             }
                         ],
-                        "slug": "jaws"
+                        "slug": "jaws",
+                        "traits": [
+                            "unarmed"
+                        ]
                     }
                 ],
                 "slug": "change-shape",
