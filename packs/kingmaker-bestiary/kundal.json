@@ -159,7 +159,10 @@
                         "label": "PF2E.Strike.Fist.Label",
                         "predicate": [
                             "change-shape:humanoid"
-                        ]
+                        ],
+                        "traits": [
+                            "unarmed"
+                        ] 
                     },
                     {
                         "key": "Note",
@@ -198,7 +201,8 @@
                         ],
                         "slug": "claw",
                         "traits": [
-                            "agile"
+                            "agile",
+                            "unarmed"
                         ]
                     },
                     {
@@ -218,7 +222,10 @@
                                 "not": "change-shape:humanoid"
                             }
                         ],
-                        "slug": "jaws"
+                        "slug": "jaws",
+                        "traits": [
+                            "unarmed"
+                        ]
                     }
                 ],
                 "slug": "change-shape",
