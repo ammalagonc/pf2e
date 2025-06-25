@@ -23,7 +23,6 @@
         },
         "rules": [
             {
-                "adjustName": false,
                 "choices": [
                     {
                         "label": "PF2E.Dragon.Adamantine",
