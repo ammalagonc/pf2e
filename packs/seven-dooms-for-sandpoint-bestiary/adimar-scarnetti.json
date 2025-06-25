@@ -509,7 +509,8 @@
                         "slug": "claw",
                         "traits": [
                             "agile",
-                            "finesse"
+                            "finesse",
+                            "unarmed"
                         ]
                     },
                     {
@@ -529,7 +530,8 @@
                         ],
                         "slug": "jaws",
                         "traits": [
-                            "finesse"
+                            "finesse",
+                            "unarmed"
                         ]
                     },
                     {
@@ -547,7 +549,10 @@
                         "predicate": [
                             "change-shape:humanoid"
                         ],
-                        "slug": "fist"
+                        "slug": "fist",
+                        "traits": [
+                            "unarmed"
+                        ]
                     },
                     {
                         "key": "BaseSpeed",
