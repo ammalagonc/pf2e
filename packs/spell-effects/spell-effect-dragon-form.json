@@ -258,24 +258,6 @@
                 "rollOption": "dragonbreath-save"
             },
             {
-                "key": "ActiveEffectLike",
-                "mode": "override",
-                "path": "flags.pf2e.dragonForm.damageDice",
-                "value": "(2*@item.level)-2"
-            },
-            {
-                "key": "ActiveEffectLike",
-                "mode": "override",
-                "path": "flags.pf2e.dragonForm.breathDamage",
-                "value": "{item|flags.pf2e.rulesSelections.dragonDamage}"
-            },
-            {
-                "key": "ActiveEffectLike",
-                "mode": "override",
-                "path": "flags.pf2e.dragonForm.dragonTradition",
-                "value": "{item|flags.pf2e.rulesSelections.dragonTradition}"
-            },
-            {
                 "key": "BattleForm",
                 "overrides": {
                     "hasHands": true,
@@ -294,8 +276,7 @@
                     },
                     "speeds": {
                         "fly": 100,
-                        "land": 40,
-                        "swim": 60
+                        "land": 40
                     },
                     "strikes": {
                         "claw": {
@@ -510,6 +491,7 @@
                 "value": 10
             },
             {
+                "flag": "dragonBreath",
                 "key": "GrantItem",
                 "uuid": "Compendium.pf2e.actionspf2e.Item.Dragon Breath (Dragon Form)"
             },
@@ -524,7 +506,7 @@
                     }
                 ],
                 "selector": "climb",
-                "value": 20
+                "value": 40
             },
             {
                 "key": "BaseSpeed",
@@ -540,7 +522,7 @@
                     "dragon-form:horned"
                 ],
                 "selector": "swim",
-                "value": 20
+                "value": 60
             }
         ],
         "start": {
