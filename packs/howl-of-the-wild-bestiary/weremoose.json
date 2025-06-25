@@ -519,7 +519,9 @@
                             "change-shape:humanoid"
                         ],
                         "slug": "fist",
-                        "traits": []
+                        "traits": [
+                            "unarmed"
+                        ]
                     },
                     {
                         "attackModifier": 11,
@@ -537,7 +539,9 @@
                             "change-shape:animal"
                         ],
                         "slug": "hoof",
-                        "traits": []
+                        "traits": [
+                            "unarmed"
+                        ]
                     },
                     {
                         "attackModifier": 11,
@@ -560,7 +564,9 @@
                             }
                         ],
                         "slug": "antler",
-                        "traits": []
+                        "traits": [
+                            "unarmed"
+                        ]
                     }
                 ],
                 "slug": "change-shape",
