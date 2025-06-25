@@ -4,7 +4,7 @@
     "name": "Effect: Resounding Bravery",
     "system": {
         "description": {
-            "value": "<p>Granted by @UUID[Compendium.pf2e.feats-srd.Item.Resounding Bravery]</p>\n<p>You gain a +1 status bonus to saves and a number of temporary Hit Points equal to half your level. Or a +2 status bonus to saves and a number of temporary Hit Points equal to your level if it was against a fear effect.</p>"
+            "value": "<p>Granted by @UUID[Compendium.pf2e.feats-srd.Item.Resounding Bravery]</p>\n<p>You gain a +1 status bonus to saves and a number of temporary Hit Points equal to half your level. These benefits are doubled if you critically succeed against a fear effect.</p>"
         },
         "duration": {
             "expiry": "turn-start",
@@ -26,37 +26,26 @@
                 "choices": [
                     {
                         "label": "PF2E.UI.RuleElements.ChoiceSet.YesLabel",
-                        "value": "against-fear"
+                        "value": 2
                     },
                     {
                         "label": "PF2E.UI.RuleElements.ChoiceSet.NoLabel",
-                        "value": "against-other"
+                        "value": 1
                     }
                 ],
+                "flag": "bonus",
                 "key": "ChoiceSet",
-                "prompt": "PF2E.SpecificRule.Fighter.ResoundingBravery.Prompt",
-                "rollOption": "resounding-bravery"
+                "prompt": "PF2E.SpecificRule.Fighter.ResoundingBravery.Prompt"
             },
             {
                 "key": "FlatModifier",
                 "selector": "saving-throw",
-                "slug": "resounding-bravery-bonus",
                 "type": "status",
-                "value": 1
+                "value": "@item.flags.pf2e.rulesSelections.bonus"
             },
             {
                 "key": "TempHP",
-                "predicate": [
-                    "resounding-bravery:against-fear"
-                ],
-                "value": "@actor.level"
-            },
-            {
-                "key": "TempHP",
-                "predicate": [
-                    "resounding-bravery:against-other"
-                ],
-                "value": "floor(@actor.level/2)"
+                "value": "floor((@item.flags.pf2e.rulesSelections.bonus * @actor.level) / 2)"
             }
         ],
         "start": {
