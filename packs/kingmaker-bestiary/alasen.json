@@ -409,7 +409,10 @@
                                 "not": "change-shape:humanoid"
                             }
                         ],
-                        "slug": "jaws"
+                        "slug": "jaws",
+                        "traits": [
+                            "unarmed"
+                        ]
                     },
                     {
                         "attackModifier": 28,
@@ -430,7 +433,8 @@
                         ],
                         "slug": "claw",
                         "traits": [
-                            "agile"
+                            "agile",
+                            "unarmed"
                         ]
                     },
                     {
