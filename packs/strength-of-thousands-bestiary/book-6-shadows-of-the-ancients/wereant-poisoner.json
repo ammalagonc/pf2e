@@ -372,6 +372,9 @@
                         "label": "PF2E.Strike.Fist.Label",
                         "predicate": [
                             "change-shape:humanoid"
+                        ],
+                        "traits": [
+                            "unarmed"
                         ]
                     },
                     {
@@ -401,7 +404,10 @@
                                 "not": "change-shape:humanoid"
                             }
                         ],
-                        "slug": "mandibles"
+                        "slug": "mandibles",
+                        "traits": [
+                            "unarmed"
+                        ]
                     },
                     {
                         "key": "BaseSpeed",
