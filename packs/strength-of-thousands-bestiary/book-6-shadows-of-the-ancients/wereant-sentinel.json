@@ -436,6 +436,7 @@
                         "predicate": [
                             "change-shape:humanoid"
                         ],
+                        "slug": "fist",
                         "traits": [
                             "unarmed"
                         ]
