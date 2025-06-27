@@ -19,72 +19,7 @@
             "remaster": true,
             "title": "Pathfinder Player Core"
         },
-        "rules": [
-            {
-                "itemId": "{item|id}",
-                "key": "ItemAlteration",
-                "mode": "override",
-                "property": "description",
-                "value": [
-                    {
-                        "predicate": [
-                            "dragonbreath-shape:cone",
-                            "dragonbreath-save:fortitude"
-                        ],
-                        "text": "PF2E.SpecificRule.DragonForm.DragonBreath.Cone.Fortitude"
-                    },
-                    {
-                        "predicate": [
-                            "dragonbreath-shape:cone",
-                            "dragonbreath-save:fortitude"
-                        ],
-                        "text": "PF2E.SpecificRule.DragonForm.DragonBreath.Cone.Reflex"
-                    },
-                    {
-                        "predicate": [
-                            "dragonbreath-shape:cone",
-                            "dragonbreath-save:fortitude"
-                        ],
-                        "text": "PF2E.SpecificRule.DragonForm.DragonBreath.Cone.Will"
-                    },
-                    {
-                        "predicate": [
-                            "dragonbreath-shape:line",
-                            "dragonbreath-save:fortitude"
-                        ],
-                        "text": "PF2E.SpecificRule.DragonForm.DragonBreath.Line.Fortitude"
-                    },
-                    {
-                        "predicate": [
-                            "dragonbreath-shape:line",
-                            "dragonbreath-save:fortitude"
-                        ],
-                        "text": "PF2E.SpecificRule.DragonForm.DragonBreath.Line.Reflex"
-                    },
-                    {
-                        "predicate": [
-                            "dragonbreath-shape:line",
-                            "dragonbreath-save:fortitude"
-                        ],
-                        "text": "PF2E.SpecificRule.DragonForm.DragonBreath.Line.Will"
-                    }
-                ]
-            },
-            {
-                "itemId": "{item|id}",
-                "key": "ItemAlteration",
-                "mode": "add",
-                "property": "traits",
-                "value": "{actor|flags.pf2e.dragonForm.breathDamage}"
-            },
-            {
-                "itemId": "{item|id}",
-                "key": "ItemAlteration",
-                "mode": "add",
-                "property": "traits",
-                "value": "{actor|flags.pf2e.dragonForm.dragonTradition}"
-            }
-        ],
+        "rules": [],
         "traits": {
             "value": []
         }
