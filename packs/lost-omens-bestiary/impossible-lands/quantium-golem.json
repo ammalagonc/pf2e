@@ -329,7 +329,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>The Quantium golem's eyes take on a brilliant glow and it unleashes an arc of destruction dealing @Damage[10d6[fire]|options:area-damage]{10d6 fire damage and 10d6 energy damage} to creatures in a @Template[type:line|distance:120] (@Check[reflex|dc:42|basic] save). The Quantium golem can't use Lambent Beam for [[/gmr 1d4 #rounds]]{1d4 rounds}.</p>"
+                    "value": "<p>The Quantium golem's eyes take on a brilliant glow and it unleashes an arc of destruction dealing @Damage[10d6[fire]|options:area-damage]{10d6 fire damage and 10d6 energy damage} to creatures in a @Template[type:line|distance:120] (@Check[reflex|dc:42|basic|options:area-effect] save). The Quantium golem can't use Lambent Beam for [[/gmr 1d4 #Recharge Lambent Beam]]{1d4 rounds}.</p>"
                 },
                 "publication": {
                     "license": "OGL",
@@ -371,7 +371,6 @@
                     {
                         "alwaysActive": true,
                         "key": "RollOption",
-                        "label": "PF2E.NPCAbility.QuantiumGolem.RollOptionLabel",
                         "option": "twin-defenders",
                         "selection": "electricity",
                         "suboptions": [
@@ -384,6 +383,7 @@
                                 "value": "acid"
                             }
                         ],
+                        "selection": "electricity"
                         "toggleable": true,
                         "value": true
                     },
