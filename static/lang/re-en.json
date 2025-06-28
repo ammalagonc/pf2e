@@ -1208,7 +1208,6 @@
                 "Note": "The reckless attack makes the user @UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{Off-Guard} until the start of their next turn. If they hit, they can add @UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.t6cx9FOODmeZQNYl]{Push} to the strike"
             },
             "QuantiumGolem": {
-                "RollOptionLabel": "Quantium Golem",
                 "Type": {
                     "Crimson": "Crimson",
                     "Emerald": "Emerald"
