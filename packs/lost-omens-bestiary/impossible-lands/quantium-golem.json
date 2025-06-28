@@ -5,6 +5,9 @@
     "items": [
         {
             "_id": "rvALAyZVtGLcmdWi",
+            "_stats": {
+                "compendiumSource": "Compendium.pf2e.equipment-srd.Item.6KWYmeRMxsQfWhhJ"
+            },
             "img": "icons/weapons/swords/sword-guard.webp",
             "name": "Bastard Sword",
             "sort": 100000,
