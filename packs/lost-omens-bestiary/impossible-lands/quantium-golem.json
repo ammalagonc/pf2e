@@ -1,5 +1,5 @@
 {
-    "_id": "wjNbuzeqoVSR0Wwm",
+    "_id": "gZ2qX5vbWg7otMVT",
     "folder": "e11qyjODJcURdkOl",
     "img": "systems/pf2e/icons/default-icons/npc.svg",
     "items": [
@@ -8,7 +8,7 @@
             "_stats": {
                 "compendiumSource": "Compendium.pf2e.equipment-srd.Item.6KWYmeRMxsQfWhhJ"
             },
-            "img": "icons/weapons/swords/greatsword-crossguard-silver.webp",
+            "img": "icons/weapons/swords/sword-guard.webp",
             "name": "Bastard Sword",
             "sort": 100000,
             "system": {
@@ -30,11 +30,11 @@
                     "die": "d8"
                 },
                 "description": {
-                    "value": "<p>This broad-bladed sword, sometimes called the hand-and-a-half sword, has a longer grip so it can be held in one hand or used with two hands to provide extra piercing or slashing power.</p>"
+                    "value": "<p>This broad-bladed sword, sometimes called the hand-and-a-half sword, has a longer grip so it can be held in one hand or used with two hands to provide extra slashing power.</p>"
                 },
                 "equipped": {
-                    "carryType": "worn",
-                    "handsHeld": 0,
+                    "carryType": "held",
+                    "handsHeld": 1,
                     "invested": null
                 },
                 "expend": null,
@@ -57,9 +57,9 @@
                     }
                 },
                 "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": "Pathfinder Core Rulebook"
+                    "license": "ORC",
+                    "remaster": true,
+                    "title": "Pathfinder Player Core"
                 },
                 "quantity": 1,
                 "range": null,
@@ -80,7 +80,6 @@
                 "traits": {
                     "rarity": "common",
                     "value": [
-                        "magical",
                         "two-hand-d12"
                     ]
                 },
@@ -91,19 +90,16 @@
             "type": "weapon"
         },
         {
-            "_id": "9BgaqEFmIjulirAy",
+            "_id": "2qh9PjtXDHh9xkY0",
             "flags": {
                 "pf2e": {
-                    "linkedWeapon": "bd2Bxzbndod4WaZQ"
+                    "linkedWeapon": "rvALAyZVtGLcmdWi"
                 }
             },
             "img": "systems/pf2e/icons/default-icons/melee.svg",
             "name": "Bastard Sword",
             "sort": 200000,
             "system": {
-                "attack": {
-                    "value": ""
-                },
                 "attackEffects": {
                     "value": []
                 },
@@ -111,7 +107,7 @@
                     "value": 39
                 },
                 "damageRolls": {
-                    "nSbCxha1CmAtA5dK": {
+                    "kilkfVRyXVwaNPNI": {
                         "damage": "3d8+18",
                         "damageType": "slashing"
                     }
@@ -125,29 +121,22 @@
                     "title": ""
                 },
                 "rules": [],
-                "slug": null,
+                "slug": "bastard-sword",
                 "traits": {
-                    "rarity": "common",
                     "value": [
                         "magical",
                         "two-hand-d12"
                     ]
-                },
-                "weaponType": {
-                    "value": "melee"
                 }
             },
             "type": "melee"
         },
         {
-            "_id": "3P9XjG1L99lgKXLy",
+            "_id": "WfuFvqMVtM0X4Ygb",
             "img": "systems/pf2e/icons/default-icons/melee.svg",
             "name": "Eye Beam",
             "sort": 300000,
             "system": {
-                "attack": {
-                    "value": ""
-                },
                 "attackEffects": {
                     "value": []
                 },
@@ -155,11 +144,7 @@
                     "value": 36
                 },
                 "damageRolls": {
-                    "6PKmrB13EndchtXh": {
-                        "damage": "4d8",
-                        "damageType": "electricity"
-                    },
-                    "z3RoZyrnYQLqrohu": {
+                    "9dxA7DI3lNzj8VeL": {
                         "damage": "4d8",
                         "damageType": "fire"
                     }
@@ -175,20 +160,16 @@
                 "rules": [],
                 "slug": null,
                 "traits": {
-                    "rarity": "common",
                     "value": [
                         "magical",
                         "range-120"
                     ]
-                },
-                "weaponType": {
-                    "value": "ranged"
                 }
             },
             "type": "melee"
         },
         {
-            "_id": "gkXa9hD1dnoSxatR",
+            "_id": "8Vtg1Juh6oCl0The",
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Defender's Link",
             "sort": 400000,
@@ -211,17 +192,13 @@
                 "rules": [],
                 "slug": null,
                 "traits": {
-                    "rarity": "common",
                     "value": []
                 }
             },
             "type": "action"
         },
         {
-            "_id": "1HLmpNiFbeCNAiK6",
-            "_stats": {
-                "compendiumSource": "Compendium.pf2e.bestiary-ability-glossary-srd.Item.sebk9XseMCRkDqRg"
-            },
+            "_id": "ml2wj6qAyEsHJkMd",
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Lifesense 120 feet",
             "sort": 500000,
@@ -237,24 +214,21 @@
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Lifesense]</p>"
                 },
                 "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": "Pathfinder Bestiary"
+                    "license": "ORC",
+                    "remaster": true,
+                    "title": "Pathfinder Monster Core"
                 },
                 "rules": [],
                 "slug": "lifesense",
                 "traits": {
-                    "rarity": "common",
                     "value": []
                 }
             },
             "type": "action"
         },
         {
-            "_id": "wLibJdF8sVsM43a8",
-            "_stats": {
-                "compendiumSource": "Compendium.pf2e.bestiary-family-ability-glossary.Item.r34QDwKiWZoVymJa"
-            },
+            "_id": "XJBXWx62SBMyPhcM",
+            "folder": "Ciyg1BBWL6784whI",
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Golem Antimagic",
             "sort": 600000,
@@ -277,14 +251,13 @@
                 "rules": [],
                 "slug": "golem-golem-antimagic",
                 "traits": {
-                    "rarity": "common",
                     "value": []
                 }
             },
             "type": "action"
         },
         {
-            "_id": "fM5TkztLOObStHW2",
+            "_id": "HEZYbvSoTFiD7tkb",
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Paired Reconstruction",
             "sort": 700000,
@@ -308,14 +281,13 @@
                 "rules": [],
                 "slug": null,
                 "traits": {
-                    "rarity": "common",
                     "value": []
                 }
             },
             "type": "action"
         },
         {
-            "_id": "ZdqlTV2GE4fHp7o7",
+            "_id": "AmmOS6szcyRNU2UB",
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Vulnerable to Banishment",
             "sort": 800000,
@@ -338,14 +310,13 @@
                 "rules": [],
                 "slug": null,
                 "traits": {
-                    "rarity": "common",
                     "value": []
                 }
             },
             "type": "action"
         },
         {
-            "_id": "QLpS6QL7iaYN78dd",
+            "_id": "EoFvi3f9FYqbifEC",
             "img": "systems/pf2e/icons/actions/TwoActions.webp",
             "name": "Lambent Beam",
             "sort": 900000,
@@ -358,7 +329,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>The Quantium golem's eyes take on a brilliant glow and it unleashes an arc of destruction dealing @Damage[10d6[fire],10d6[electricity]|options:area-damage]{10d6 fire damage and 10d6 electricity damage} to creatures in a @Template[line|distance:120] (@Check[reflex|dc:42|basic|options:area-effect]). The Quantium golem can't use Lambent Beam for [[/gmr 1d4 #Recharge Lambent Beam]]{1d4 rounds}.</p>"
+                    "value": "<p>The Quantium golem's eyes take on a brilliant glow and it unleashes an arc of destruction dealing @Damage[10d6[fire]|options:area-damage]{10d6 fire damage and 10d6 energy damage} to creatures in a @Template[type:line|distance:120] (@Check[reflex|dc:42|basic|options:area-effect] save). The Quantium golem can't use Lambent Beam for [[/gmr 1d4 #Lambent Beam Recharge]]{1d4 rounds}.</p>"
                 },
                 "publication": {
                     "license": "OGL",
@@ -368,7 +339,6 @@
                 "rules": [],
                 "slug": null,
                 "traits": {
-                    "rarity": "common",
                     "value": [
                         "arcane"
                     ]
@@ -377,7 +347,7 @@
             "type": "action"
         },
         {
-            "_id": "db1nDSlbX73gPD9U",
+            "_id": "WqiYGIcZOQmEHcLG",
             "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Twin Defenders",
             "sort": 1000000,
@@ -397,17 +367,51 @@
                     "remaster": false,
                     "title": ""
                 },
-                "rules": [],
+                "rules": [
+                    {
+                        "alwaysActive": true,
+                        "key": "RollOption",
+                        "option": "twin-defenders",
+                        "selection": "electricity",
+                        "suboptions": [
+                            {
+                                "label": "PF2E.NPCAbility.QuantiumGolem.Type.Crimson",
+                                "value": "electricity"
+                            },
+                            {
+                                "label": "PF2E.NPCAbility.QuantiumGolem.Type.Emerald",
+                                "value": "acid"
+                            }
+                        ],
+                        "toggleable": true,
+                        "value": true
+                    },
+                    {
+                        "alwaysActive": true,
+                        "damageType": "{item|flags.pf2e.rulesSelections.twinDefenders}",
+                        "diceNumber": 10,
+                        "dieSize": "d6",
+                        "key": "DamageDice",
+                        "selector": "lambent-beam-inline-damage"
+                    },
+                    {
+                        "alwaysActive": true,
+                        "damageType": "{item|flags.pf2e.rulesSelections.twinDefenders}",
+                        "diceNumber": 4,
+                        "dieSize": "d8",
+                        "key": "DamageDice",
+                        "selector": "eye-beam-damage"
+                    }
+                ],
                 "slug": null,
                 "traits": {
-                    "rarity": "common",
                     "value": []
                 }
             },
             "type": "action"
         }
     ],
-    "name": "Quantium Golem (Electricity)",
+    "name": "Quantium Golem",
     "system": {
         "abilities": {
             "cha": {
@@ -445,11 +449,13 @@
             },
             "immunities": [
                 {
+                    "exceptions": [],
                     "type": "fire"
                 }
             ],
             "resistances": [
                 {
+                    "doubleVs": [],
                     "exceptions": [
                         "adamantine"
                     ],
@@ -459,7 +465,7 @@
             ],
             "speed": {
                 "otherSpeeds": [],
-                "value": 25
+                "value": 50
             }
         },
         "details": {
@@ -483,14 +489,14 @@
             "statistic": "perception"
         },
         "perception": {
-            "details": "defender's link",
+            "details": "defender’s link",
             "mod": 36,
             "senses": [
                 {
                     "type": "darkvision"
                 },
                 {
-                    "acuity": "precise",
+                    "acuity": "imprecise",
                     "range": 120,
                     "type": "lifesense"
                 }
