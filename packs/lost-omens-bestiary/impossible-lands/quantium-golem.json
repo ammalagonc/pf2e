@@ -159,7 +159,7 @@
                 "damageRolls": {
                     "6PKmrB13EndchtXh": {
                         "damage": "4d8",
-                        "damageType": "acid"
+                        "damageType": "fire"
                     }
                 },
                 "description": {
@@ -400,7 +400,6 @@
                         "alwaysActive": true,
                         "key": "RollOption",
                         "option": "twin-defenders",
-                        "selection": "electricity",
                         "suboptions": [
                             {
                                 "label": "PF2E.NPCAbility.QuantiumGolem.Type.Crimson",
@@ -441,9 +440,6 @@
         }
     ],
     "name": "Quantium Golem",
-    "prototypeToken": {
-        "name": "Quantium Golem"
-    },
     "system": {
         "abilities": {
             "cha": {
