@@ -168,7 +168,7 @@
         {
             "_id": "8Vtg1Juh6oCl0The",
             "img": "systems/pf2e/icons/actions/Passive.webp",
-            "name": "Defender’s Link",
+            "name": "Defender's Link",
             "sort": 400000,
             "system": {
                 "actionType": {
@@ -238,7 +238,7 @@
                 },
                 "category": "defensive",
                 "description": {
-                    "value": "<p>Harmed by sonic (@Damage[9d10[untyped]], @Damage[3d10[untyped]] from areas or persistent damage); healed by fire (area @Damage[3d10[healing]] HP); slowed by [damageType]</p><hr /><p>@Localize[PF2E.NPC.Abilities.Glossary.GolemAntimagic]</p>"
+                    "value": "<p>Harmed by sonic (@Damage[9d10[untyped]], @Damage[3d10[untyped]] from areas or persistent damage); healed by fire (area @Damage[3d10[healing]] HP); slowed by cold</p><hr /><p>@Localize[PF2E.NPC.Abilities.Glossary.GolemAntimagic]</p>"
                 },
                 "publication": {
                     "license": "OGL",
@@ -481,7 +481,7 @@
             "statistic": "perception"
         },
         "perception": {
-            "details": "defender’s link",
+            "details": "defender's link",
             "mod": 36,
             "senses": [
                 {
