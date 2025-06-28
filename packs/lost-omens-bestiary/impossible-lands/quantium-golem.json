@@ -448,6 +448,11 @@
                 "temp": 0,
                 "value": 325
             },
+            "immunities": [
+                {
+                    "type": "fire"
+                }
+            ],
             "resistances": [
                 {
                     "doubleVs": [],
