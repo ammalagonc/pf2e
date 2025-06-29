@@ -364,7 +364,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p><span class=\"action-glyph\">1</span> to <span class=\"action-glyph\">3</span></p>\n<p><strong>Frequency</strong> once per round</p><hr /><p><strong>Effect</strong> The troop attacks with spears, clubs, and leiomano against enemies within @Template[emanation|distance:5]{5 feet} (@Check[reflex|dc:33|basic] save) for their choice of bludgeoning, piercing, or slashing damage depending on the number of actions.</p>\n<p><span class=\"action-glyph\">1</span> @Damage[(2d6+2)[untyped]]</p>\n<p><span class=\"action-glyph\">2</span> @Damage[(4d6+12)[untyped]]</p>\n<p><span class=\"action-glyph\">3</span> @Damage[(6d6+12)[untyped]]</p>"
+                    "value": "<p><span class=\"action-glyph\">1</span> to <span class=\"action-glyph\">3</span></p>\n<p><strong>Frequency</strong> once per round</p><hr /><p><strong>Effect</strong> The troop attacks with spears, clubs, and leiomano against enemies within @Template[emanation|distance:5]{5 feet} (@Check[reflex|dc:33|basic|options:area-effect] save) for their choice of bludgeoning, piercing, or slashing damage depending on the number of actions.</p>\n<p><span class=\"action-glyph\">1</span> @Damage[(2d6+2)[untyped]|options:area-damage] damage</p>\n<p><span class=\"action-glyph\">2</span> @Damage[(4d6+12)[untyped]|options:area-damage] damage</p>\n<p><span class=\"action-glyph\">3</span> @Damage[(6d6+12)[untyped]|options:area-damage] damage</p>"
                 },
                 "frequency": {
                     "max": 1,
