@@ -26,100 +26,96 @@
                 "choices": [
                     {
                         "label": "PF2E.Dragon.Adamantine",
-                        "value": "adamantine"
+                        "value": {
+                            "breathShape": "cone",
+                            "damageType": "bludgeoning",
+                            "dragonType": "adamantine",
+                            "saveType": "reflex",
+                            "tradition": "primal"
+                        }
                     },
                     {
                         "label": "PF2E.Dragon.Conspirator",
-                        "value": "conspirator"
+                        "value": {
+                            "breathShape": "cone",
+                            "damageType": "poison",
+                            "dragonType": "conspirator",
+                            "saveType": "fortitude",
+                            "tradition": "occult"
+                        }
                     },
                     {
                         "label": "PF2E.Dragon.Diabolic",
-                        "value": "diabolic"
+                        "value": {
+                            "breathShape": "cone",
+                            "damageType": "fire",
+                            "dragonType": "diabolic",
+                            "saveType": "reflex",
+                            "tradition": "divine"
+                        }
                     },
                     {
                         "label": "PF2E.Dragon.Empyreal",
-                        "value": "empyreal"
+                        "value": {
+                            "breathShape": "cone",
+                            "damageType": "spirit",
+                            "dragonType": "empyreal",
+                            "saveType": "reflex",
+                            "tradition": "divine"
+                        }
                     },
                     {
                         "label": "PF2E.Dragon.Fortune",
-                        "value": "fortune"
+                        "value": {
+                            "breathShape": "cone",
+                            "damageType": "force",
+                            "dragonType": "fortune",
+                            "saveType": "reflex",
+                            "tradition": "arcane"
+                        }
                     },
                     {
                         "label": "PF2E.Dragon.Horned",
-                        "value": "horned"
+                        "value": {
+                            "breathShape": "cone",
+                            "damageType": "poison",
+                            "dragonType": "horned",
+                            "saveType": "fortitude",
+                            "tradition": "primal"
+                        }
                     },
                     {
                         "label": "PF2E.Dragon.Mirage",
-                        "value": "mirage"
+                        "value": {
+                            "breathShape": "cone",
+                            "damageType": "mental",
+                            "dragonType": "mirage",
+                            "saveType": "will",
+                            "tradition": "arcane"
+                        }
                     },
                     {
                         "label": "PF2E.Dragon.Omen",
-                        "value": "omen"
+                        "value": {
+                            "breathShape": "cone",
+                            "damageType": "mental",
+                            "dragonType": "omen",
+                            "saveType": "will",
+                            "tradition": "occult"
+                        }
                     }
                 ],
+                "flag": "dragonForm",
                 "key": "ChoiceSet",
-                "prompt": "PF2E.SpecificRule.DragonDisciple.Prompt",
-                "rollOption": "dragon-form"
+                "prompt": "PF2E.SpecificRule.DragonDisciple.Prompt"
             },
             {
-                "adjustName": false,
-                "choices": [
-                    {
-                        "label": "PF2E.TraitBludgeoning",
-                        "predicate": [
-                            "dragon-form:adamantine"
-                        ],
-                        "value": "bludgeoning"
-                    },
-                    {
-                        "label": "PF2E.TraitFire",
-                        "predicate": [
-                            "dragon-form:diabolic"
-                        ],
-                        "value": "fire"
-                    },
-                    {
-                        "label": "PF2E.TraitForce",
-                        "predicate": [
-                            "dragon-form:fortune"
-                        ],
-                        "value": "force"
-                    },
-                    {
-                        "label": "PF2E.TraitMental",
-                        "predicate": [
-                            {
-                                "or": [
-                                    "dragon-form:mirage",
-                                    "dragon-form:omen"
-                                ]
-                            }
-                        ],
-                        "value": "mental"
-                    },
-                    {
-                        "label": "PF2E.TraitPoison",
-                        "predicate": [
-                            {
-                                "or": [
-                                    "dragon-form:horned",
-                                    "dragon-form:conspirator"
-                                ]
-                            }
-                        ],
-                        "value": "poison"
-                    },
-                    {
-                        "label": "PF2E.TraitSpirit",
-                        "predicate": [
-                            "dragon-form:empyreal"
-                        ],
-                        "value": "spirit"
-                    }
-                ],
-                "flag": "dragonDamage",
-                "key": "ChoiceSet",
-                "prompt": "PF2E.SpecificRule.Prompt.DamageType"
+                "key": "RollOption",
+                "option": "dragon-form:{item|flags.pf2e.rulesSelections.dragonForm.dragonType}"
+            },
+            {
+                "key": "RollOption",
+                "option": "dragon-tradition:{item|flags.pf2e.rulesSelections.dragonForm.tradition}"
             },
             {
                 "key": "BattleForm",
@@ -127,7 +123,7 @@
                     "hasHands": true,
                     "resistances": [
                         {
-                            "type": "{item|flags.pf2e.rulesSelections.dragonDamage}",
+                            "type": "{item|flags.pf2e.rulesSelections.dragonForm.damageType}",
                             "value": 10
                         }
                     ],
@@ -278,153 +274,6 @@
                 }
             },
             {
-                "adjustName": false,
-                "choices": [
-                    {
-                        "predicate": [
-                            {
-                                "or": [
-                                    "dragon-form:adamantine",
-                                    "dragon-form:conspirator",
-                                    "dragon-form:diabolic",
-                                    "dragon-form:empyreal",
-                                    "dragon-form:horned",
-                                    "dragon-form:fortune",
-                                    "dragon-form:mirage",
-                                    "dragon-form:omen"
-                                ]
-                            }
-                        ],
-                        "value": "cone"
-                    },
-                    {
-                        "predicate": [
-                            {
-                                "nor": [
-                                    "dragon-form:adamantine",
-                                    "dragon-form:conspirator",
-                                    "dragon-form:diabolic",
-                                    "dragon-form:empyreal",
-                                    "dragon-form:horned",
-                                    "dragon-form:fortune",
-                                    "dragon-form:mirage",
-                                    "dragon-form:omen"
-                                ]
-                            }
-                        ],
-                        "value": "line"
-                    }
-                ],
-                "flag": "dragonbreathShape",
-                "key": "ChoiceSet",
-                "rollOption": "dragonbreath-shape"
-            },
-            {
-                "adjustName": false,
-                "choices": [
-                    {
-                        "label": "PF2E.TraitArcane",
-                        "predicate": [
-                            {
-                                "or": [
-                                    "dragon-form:fortune",
-                                    "dragon-form:mirage"
-                                ]
-                            }
-                        ],
-                        "value": "arcane"
-                    },
-                    {
-                        "label": "PF2E.TraitDivine",
-                        "predicate": [
-                            {
-                                "or": [
-                                    "dragon-form:diabolic",
-                                    "dragon-form:empyreal"
-                                ]
-                            }
-                        ],
-                        "value": "divine"
-                    },
-                    {
-                        "label": "PF2E.TraitOccult",
-                        "predicate": [
-                            {
-                                "or": [
-                                    "dragon-form:conspirator",
-                                    "dragon-form:omen"
-                                ]
-                            }
-                        ],
-                        "value": "occult"
-                    },
-                    {
-                        "label": "PF2E.TraitPrimal",
-                        "predicate": [
-                            {
-                                "or": [
-                                    "dragon-form:adamantine",
-                                    "dragon-form:horned"
-                                ]
-                            }
-                        ],
-                        "value": "primal"
-                    }
-                ],
-                "flag": "dragonTradition",
-                "key": "ChoiceSet",
-                "rollOption": "dragon-tradition"
-            },
-            {
-                "adjustName": false,
-                "choices": [
-                    {
-                        "predicate": [
-                            {
-                                "or": [
-                                    "dragon-form:conspirator",
-                                    "dragon-form:horned"
-                                ]
-                            }
-                        ],
-                        "value": "fortitude"
-                    },
-                    {
-                        "predicate": [
-                            {
-                                "or": [
-                                    "dragon-form:adamantine",
-                                    "dragon-form:diabolic",
-                                    "dragon-form:empyreal",
-                                    "dragon-form:fortune"
-                                ]
-                            }
-                        ],
-                        "value": "reflex"
-                    },
-                    {
-                        "predicate": [
-                            {
-                                "or": [
-                                    "dragon-form:mirage",
-                                    "dragon-form:omen"
-                                ]
-                            }
-                        ],
-                        "value": "will"
-                    }
-                ],
-                "key": "ChoiceSet",
-                "rollOption": "dragonbreath-save"
-            },
-            {
-                "damageType": "{item|flags.pf2e.rulesSelections.dragonDamage}",
-                "diceNumber": 2,
-                "dieSize": "d6",
-                "key": "DamageDice",
-                "selector": "jaws-damage"
-            },
-            {
                 "key": "BaseSpeed",
                 "predicate": [
                     "dragon-form:adamantine"
@@ -505,46 +354,7 @@
                 "property": "description",
                 "value": [
                     {
-                        "predicate": [
-                            "dragonbreath-shape:cone",
-                            "dragonbreath-save:fortitude"
-                        ],
-                        "text": "PF2E.SpecificRule.DragonForm.DragonBreath.Cone.Fortitude"
-                    },
-                    {
-                        "predicate": [
-                            "dragonbreath-shape:cone",
-                            "dragonbreath-save:reflex"
-                        ],
-                        "text": "PF2E.SpecificRule.DragonForm.DragonBreath.Cone.Reflex"
-                    },
-                    {
-                        "predicate": [
-                            "dragonbreath-shape:cone",
-                            "dragonbreath-save:will"
-                        ],
-                        "text": "PF2E.SpecificRule.DragonForm.DragonBreath.Cone.Will"
-                    },
-                    {
-                        "predicate": [
-                            "dragonbreath-shape:line",
-                            "dragonbreath-save:fortitude"
-                        ],
-                        "text": "PF2E.SpecificRule.DragonForm.DragonBreath.Line.Fortitude"
-                    },
-                    {
-                        "predicate": [
-                            "dragonbreath-shape:line",
-                            "dragonbreath-save:reflex"
-                        ],
-                        "text": "PF2E.SpecificRule.DragonForm.DragonBreath.Line.Reflex"
-                    },
-                    {
-                        "predicate": [
-                            "dragonbreath-shape:line",
-                            "dragonbreath-save:will"
-                        ],
-                        "text": "PF2E.SpecificRule.DragonForm.DragonBreath.Line.Will"
+                        "text": "PF2E.SpecificRule.DragonForm.DragonBreath.{item|flags.pf2e.rulesSelections.dragonForm.breathShape}.{item|flags.pf2e.rulesSelections.dragonForm.saveType}"
                     }
                 ]
             },
@@ -558,14 +368,14 @@
                     }
                 ],
                 "property": "traits",
-                "value": "{item|flags.pf2e.rulesSelections.dragonDamage}"
+                "value": "{item|flags.pf2e.rulesSelections.dragonForm.damageType}"
             },
             {
                 "itemId": "{item|flags.pf2e.itemGrants.dragonBreath.id}",
                 "key": "ItemAlteration",
                 "mode": "add",
                 "property": "traits",
-                "value": "{item|flags.pf2e.rulesSelections.dragonTradition}"
+                "value": "{item|flags.pf2e.rulesSelections.dragonForm.tradition}"
             },
             {
                 "key": "DamageAlteration",
@@ -574,7 +384,7 @@
                 "selectors": [
                     "{item|flags.pf2e.itemGrants.dragonBreath.id}-inline-damage"
                 ],
-                "value": "{item|flags.pf2e.rulesSelections.dragonDamage}"
+                "value": "{item|flags.pf2e.rulesSelections.dragonForm.damageType}"
             },
             {
                 "key": "DamageAlteration",
@@ -592,6 +402,13 @@
                     "{item|flags.pf2e.itemGrants.dragonBreath.id}-inline-damage"
                 ],
                 "value": 4
+            },
+            {
+                "damageType": "{item|flags.pf2e.rulesSelections.dragonForm.damageType}",
+                "diceNumber": 2,
+                "dieSize": "d6",
+                "key": "DamageDice",
+                "selector": "jaws-damage"
             }
         ],
         "start": {
