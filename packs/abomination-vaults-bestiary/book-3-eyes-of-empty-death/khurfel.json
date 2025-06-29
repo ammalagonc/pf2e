@@ -1388,7 +1388,7 @@
                 "category": "defensive",
                 "deathNote": true,
                 "description": {
-                    "value": "<p>When Khurfel dies, his invisible flesh quickly rots away and sublimates into a foul-smelling gas that fills a @Template[emanation|distance:10] around his body. The gas deals @Damage[10d6[void]] damage to creatures in this area as their flesh too curdles and rots (@Check[fortitude|dc:28|basic] save).</p>"
+                    "value": "<p>When Khurfel dies, his invisible flesh quickly rots away and sublimates into a foul-smelling gas that fills a @Template[emanation|distance:10] around his body. The gas deals @Damage[10d6[void]|options:area-damage] damage to creatures in this area as their flesh too curdles and rots (@Check[fortitude|dc:28|basic|options:area-effect] save).</p>"
                 },
                 "publication": {
                     "license": "OGL",
