@@ -115,7 +115,7 @@
             },
             {
                 "key": "RollOption",
-                "option": "dragon-tradition:{item|flags.pf2e.rulesSelections.dragonForm.tradition}"
+                "option": "dragon-form-tradition:{item|flags.pf2e.rulesSelections.dragonForm.tradition}"
             },
             {
                 "key": "BattleForm",
@@ -306,7 +306,7 @@
                 "key": "Resistance",
                 "predicate": [
                     "parent:spellcasting:tradition:primal",
-                    "dragon-tradition:primal"
+                    "dragon-form-tradition:primal"
                 ],
                 "type": "physical",
                 "value": 5
@@ -315,7 +315,7 @@
                 "key": "Resistance",
                 "predicate": [
                     "parent:spellcasting:tradition:occult",
-                    "dragon-tradition:occult"
+                    "dragon-form-tradition:occult"
                 ],
                 "type": "mental",
                 "value": 10
@@ -324,7 +324,7 @@
                 "key": "Resistance",
                 "predicate": [
                     "parent:spellcasting:tradition:arcane",
-                    "dragon-tradition:arcane"
+                    "dragon-form-tradition:arcane"
                 ],
                 "type": "spells",
                 "value": 5
@@ -333,7 +333,7 @@
                 "key": "Resistance",
                 "predicate": [
                     "parent:spellcasting:tradition:divine",
-                    "dragon-tradition:divine"
+                    "dragon-form-tradition:divine"
                 ],
                 "type": [
                     "spirit",
