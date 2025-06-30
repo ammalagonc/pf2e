@@ -216,7 +216,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>The clockwork cannoneer spews flames from one of its cannons, dealing @Damage[8d6[fire]] damage in a @Template[cone|distance:30] (@Check[reflex|dc:36|basic]). Those that fail the save also take @Damage[2d6[persistent,fire]] damage.</p>"
+                    "value": "<p>The clockwork cannoneer spews flames from one of its cannons, dealing @Damage[8d6[fire]|options:area-damage] damage in a @Template[cone|distance:30] (@Check[reflex|dc:36|basic|options:area-effect]). Those that fail the save also take @Damage[2d6[persistent,fire]] damage.</p>"
                 },
                 "publication": {
                     "license": "OGL",
