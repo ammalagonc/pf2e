@@ -60,15 +60,15 @@
                 "choices": [
                     {
                         "label": "PF2E.Skill.Diplomacy",
-                        "value": "deception"
+                        "value": "diplomacy"
                     },
                     {
                         "label": "PF2E.Skill.Intimidation",
-                        "value": "occultism"
+                        "value": "intimidation"
                     },
                     {
                         "label": "PF2E.Skill.Survival",
-                        "value": "occultism"
+                        "value": "survival"
                     }
                 ],
                 "flag": "skill",
