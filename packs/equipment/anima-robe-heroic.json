@@ -72,7 +72,7 @@
                     },
                     {
                         "label": "PF2E.Skill.Performance",
-                        "value": "occultism"
+                        "value": "performance"
                     }
                 ],
                 "flag": "skill",
