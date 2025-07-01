@@ -2019,7 +2019,10 @@
             "Woodworking": "Woodworking"
         },
         "SpecificLore": {
-            "Herbalism": "Herbalism Lore"
+            "Architecture": "Architecture Lore",
+            "Demon": "Demon Lore ",
+            "Herbalism": "Herbalism Lore",
+            "Warfare": "Warfare Lore"
         },
         "SpecificRule": {
             "Acrobat": {
@@ -4298,11 +4301,6 @@
                 "DesperateSwing": {
                     "Note": "If the attack fails, you release your weapon, or drop @UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{Prone} if you were using an unarmed attack or otherwise can't release your weapon."
                 }
-            },
-            "HeroicArtifacts": {
-                "ArchitectureLore": "Architecture Lore",
-                "DemonLore": "Demon Lore ",
-                "WarfareLore": "Warfare Lore"
             },
             "Hobgoblin": {
                 "AgonizingRebuke": {

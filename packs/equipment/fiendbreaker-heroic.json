@@ -71,7 +71,7 @@
                 "adjustName": false,
                 "choices": [
                     {
-                        "label": "PF2E.Skill.HeroicArtifacts.DemonLore",
+                        "label": "PF2E.Skill.SpecificLore.Demon",
                         "value": "demon-lore"
                     },
                     {
