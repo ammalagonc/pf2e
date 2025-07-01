@@ -70,7 +70,7 @@
                     },
                     {
                         "label": "PF2E.Skill.HeroicArtifacts.WarfareLore",
-                        "value": "demon-lore"
+                        "value": "warfare-lore"
                     }
                 ],
                 "flag": "skill",
