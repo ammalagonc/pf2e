@@ -69,12 +69,20 @@
             },
             {
                 "adjustName": false,
-                "choices": {
-                    "config": "skills",
-                    "predicate": [
-                        "skill:{choice|value}:rank:0"
-                    ]
-                },
+                "choices": [
+                    {
+                        "label": "PF2E.Skill.HeroicArtifacts.DemonLore",
+                        "value": "demon-lore"
+                    },
+                    {
+                        "label": "PF2E.Skill.Diplomacy",
+                        "value": "diplomacy"
+                    },
+                    {
+                        "label": "PF2E.Skill.Religion",
+                        "value": "religion"
+                    }
+                ],
                 "flag": "skill",
                 "key": "ChoiceSet",
                 "prompt": "PF2E.SpecificRule.Prompt.Skill"

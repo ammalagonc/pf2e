@@ -76,12 +76,20 @@
             },
             {
                 "adjustName": false,
-                "choices": {
-                    "config": "skills",
-                    "predicate": [
-                        "skill:{choice|value}:rank:0"
-                    ]
-                },
+                "choices": [
+                    {
+                        "label": "PF2E.Skill.Nature",
+                        "value": "nature"
+                    },
+                    {
+                        "label": "PF2E.Skill.Religion",
+                        "value": "religion"
+                    },
+                    {
+                        "label": "PF2E.Skill.Survival",
+                        "value": "survival"
+                    }
+                ],
                 "flag": "skill",
                 "key": "ChoiceSet",
                 "prompt": "PF2E.SpecificRule.Prompt.Skill"

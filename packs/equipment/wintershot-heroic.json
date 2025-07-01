@@ -57,12 +57,20 @@
         "rules": [
             {
                 "adjustName": false,
-                "choices": {
-                    "config": "skills",
-                    "predicate": [
-                        "skill:{choice|value}:rank:0"
-                    ]
-                },
+                "choices": [
+                    {
+                        "label": "PF2E.Skill.Diplomacy",
+                        "value": "deception"
+                    },
+                    {
+                        "label": "PF2E.Skill.Intimidation",
+                        "value": "occultism"
+                    },
+                    {
+                        "label": "PF2E.Skill.Survival",
+                        "value": "occultism"
+                    }
+                ],
                 "flag": "skill",
                 "key": "ChoiceSet",
                 "prompt": "PF2E.SpecificRule.Prompt.Skill"
