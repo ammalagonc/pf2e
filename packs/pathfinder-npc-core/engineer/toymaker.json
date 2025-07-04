@@ -339,7 +339,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>The toymaker throws out a handful of toy building blocks of various sizes 20 feet away in a @Template[type:burst|distance:5]. The area becomes difficult terrain and hazardous terrain. A creature that moves on the ground through the area takes @Damage[1[piercing]|options:area-damage] damage for every square of that area it moves into.</p>"
+                    "value": "<p>The toymaker throws out a handful of toy building blocks of various sizes 20 feet away in a @Template[type:burst|distance:5]. The area becomes difficult terrain and hazardous terrain. A creature that moves on the ground through the area takes @Damage[1[piercing]] damage for every square of that area it moves into.</p>"
                 },
                 "publication": {
                     "license": "ORC",
