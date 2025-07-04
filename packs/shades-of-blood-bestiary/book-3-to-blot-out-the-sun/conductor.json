@@ -699,7 +699,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p><strong>Frequency</strong> once per round</p><hr /><p><strong>Effect</strong> With a horrifying flourish and hungry smile, the velstrac conductor points their baton at a creature within 100 feet, compelling them to scream. The creature must attempt a @Check[will|dc:28] save. On a failure, they scream, taking @Damage[4d6[mental]] damage (@Damage[8d6[mental]] on a critical failure) and dealing @Damage[2d6[sonic]] damage to all creatures in a @Template[type:emanation|distance:20] (@Check[fortitude|dc:28|basic] save).</p>\n<p>Instead of targeting one creature, the conductor can choose to target all creatures in range that were compelled to scream by this ability last round.</p>"
+                    "value": "<p><strong>Frequency</strong> once per round</p><hr /><p><strong>Effect</strong> With a horrifying flourish and hungry smile, the velstrac conductor points their baton at a creature within 100 feet, compelling them to scream. The creature must attempt a @Check[will|dc:28] save. On a failure, they scream, taking @Damage[4d6[mental]] damage (@Damage[8d6[mental]|options:area-damage] on a critical failure) and dealing @Damage[2d6[sonic]|options:area-damage] damage to all creatures in a @Template[type:emanation|distance:20] (@Check[fortitude|dc:28|basic|options:area-effect] save).</p>\n<p>Instead of targeting one creature, the conductor can choose to target all creatures in range that were compelled to scream by this ability last round.</p>"
                 },
                 "frequency": {
                     "max": 1,
