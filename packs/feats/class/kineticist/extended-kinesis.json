@@ -31,46 +31,46 @@
         },
         "rules": [
             {
-              "itemType": "action",
-              "key": "ItemAlteration",
-              "mode": "add",
-              "predicate": [
-                "item:slug:base-kinesis"
-              ],
-              "property": "description",
-              "value": [
-                {
-                  "title": "PF2E.SpecificRule.Kineticist.ExtendedKinesis.Proliferate.Title",
-                  "text": "PF2E.SpecificRule.Kineticist.ExtendedKinesis.Proliferate.Description"
-                },
-                {
-                  "predicate": [
+                "itemType": "action",
+                "key": "ItemAlteration",
+                "mode": "add",
+                "predicate": [
+                    "item:slug:base-kinesis"
+                ],
+                "property": "description",
+                "value": [
                     {
-                      "or": [
-                        "kinetic-gate:air",
-                        "kinetic-gate:fire",
-                        "kinetic-gate:metal",
-                        "kinetic-gate:water"
-                      ]
-                    }
-                  ],
-                  "title": "PF2E.SpecificRule.Kineticist.ExtendedKinesis.Proliferate.Title",
-                  "text": "PF2E.SpecificRule.Kineticist.ExtendedKinesis.Regulate.Description"
-                },
-                {
-                  "predicate": [
+                        "text": "PF2E.SpecificRule.Kineticist.ExtendedKinesis.Proliferate.Description",
+                        "title": "PF2E.SpecificRule.Kineticist.ExtendedKinesis.Proliferate.Title"
+                    },
                     {
-                      "or": [
-                        "kinetic-gate:earth",
-                        "kinetic-gate:metal",
-                        "kinetic-gate:wood"
-                      ]
+                        "predicate": [
+                            {
+                                "or": [
+                                    "kinetic-gate:air",
+                                    "kinetic-gate:fire",
+                                    "kinetic-gate:metal",
+                                    "kinetic-gate:water"
+                                ]
+                            }
+                        ],
+                        "text": "PF2E.SpecificRule.Kineticist.ExtendedKinesis.Regulate.Description",
+                        "title": "PF2E.SpecificRule.Kineticist.ExtendedKinesis.Proliferate.Title"
+                    },
+                    {
+                        "predicate": [
+                            {
+                                "or": [
+                                    "kinetic-gate:earth",
+                                    "kinetic-gate:metal",
+                                    "kinetic-gate:wood"
+                                ]
+                            }
+                        ],
+                        "text": "PF2E.SpecificRule.Kineticist.ExtendedKinesis.Sculpt.Description",
+                        "title": "PF2E.SpecificRule.Kineticist.ExtendedKinesis.Sculpt.Title"
                     }
-                  ],
-                  "title": "PF2E.SpecificRule.Kineticist.ExtendedKinesis.Sculpt.Title",
-                  "text": "PF2E.SpecificRule.Kineticist.ExtendedKinesis.Sculpt.Description"
-                }
-              ]
+                ]
             }
         ],
         "traits": {
