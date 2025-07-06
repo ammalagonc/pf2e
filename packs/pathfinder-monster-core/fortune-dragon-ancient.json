@@ -1218,7 +1218,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p><strong>Requirements</strong> The dragon's body is covered in riches (this is typically the case when the dragon is first encountered)</p>\n<hr />\n<p><strong>Effect</strong> The dragon shakes their body aggressively, sending coins and other riches flying in every direction, dealing @Damage[18d10[bludgeoning]] damage with a @Check[reflex|dc:40|basic] save to all creatures in a @Template[emanation|distance:50]. The dragon's body is then no longer covered in riches.</p>"
+                    "value": "<p><strong>Requirements</strong> The dragon's body is covered in riches (this is typically the case when the dragon is first encountered)</p>\n<hr />\n<p><strong>Effect</strong> The dragon shakes their body aggressively, sending coins and other riches flying in every direction, dealing @Damage[18d10[bludgeoning]|options:area-damage] damage with a @Check[reflex|dc:40|basic|options:area-effect] save to all creatures in a @Template[emanation|distance:50]. The dragon's body is then no longer covered in riches.</p>"
                 },
                 "publication": {
                     "license": "ORC",
