@@ -27,11 +27,14 @@
                     "title": ""
                 },
                 "rules": [],
+                "showSlotlessLevels": {
+                    "value": false
+                },
                 "slots": {},
                 "slug": null,
                 "spelldc": {
                     "dc": 28,
-                    "value": 0
+                    "value": 18
                 },
                 "tradition": {
                     "value": "divine"
