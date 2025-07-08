@@ -1037,6 +1037,9 @@
                     "Yellow": "Yellow — Earth"
                 }
             },
+            "Flynkett": {
+                "KettleUp": "While Kettled Up, the flynkett can't use its claw Strike or take move actions."
+            },
             "GangUp": {
                 "TwoAllies": "Two allies are within reach of the target"
             },
