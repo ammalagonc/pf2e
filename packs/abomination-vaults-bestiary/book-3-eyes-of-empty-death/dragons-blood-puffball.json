@@ -141,7 +141,7 @@
                 "category": "defensive",
                 "deathNote": true,
                 "description": {
-                    "value": "<p>When the dragon's blood puffball dies, it explodes, dealing @Damage[7d8[poison]] damage to each creature in a @Template[emanation|distance:20] (@Check[fortitude|dc:26|basic] save).</p>"
+                    "value": "<p>When the dragon's blood puffball dies, it explodes, dealing @Damage[7d8[poison]|options:area-damage] damage to each creature in a @Template[emanation|distance:20] (@Check[fortitude|dc:26|basic|options:area-effect] save).</p>"
                 },
                 "publication": {
                     "license": "OGL",

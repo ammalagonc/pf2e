@@ -347,7 +347,7 @@
                 "category": "defensive",
                 "deathNote": true,
                 "description": {
-                    "value": "<p>When a spore thrall is reduced to 0 Hit Points by damage other than cold damage, they burst in an explosion of toxic green spores. All creatures in a @Template[type:emanation|distance:15] around the spore thrall take @Damage[10d6[poison]] damage (@Check[fortitude|dc:26|basic] save).</p>"
+                    "value": "<p>When a spore thrall is reduced to 0 Hit Points by damage other than cold damage, they burst in an explosion of toxic green spores. All creatures in a @Template[type:emanation|distance:15] around the spore thrall take @Damage[10d6[poison]|options:area-damage] damage (@Check[fortitude|dc:26|basic|options:area-effect] save).</p>"
                 },
                 "publication": {
                     "license": "OGL",

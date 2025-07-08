@@ -98,7 +98,7 @@
                 "category": "defensive",
                 "deathNote": true,
                 "description": {
-                    "value": "<p>When the reaper skull puffball dies, it explodes, dealing @Damage[8d8[poison]] damage to each creature in a @Template[emanation|distance:20] (@Check[fortitude|dc:28|basic] save).</p>\n<p>Creatures that fail their save are exposed to skull rot.</p>"
+                    "value": "<p>When the reaper skull puffball dies, it explodes, dealing @Damage[8d8[poison]|options:area-damage] damage to each creature in a @Template[emanation|distance:20] (@Check[fortitude|dc:28|basic|options:area-effect] save).</p>\n<p>Creatures that fail their save are exposed to skull rot.</p>"
                 },
                 "publication": {
                     "license": "OGL",
