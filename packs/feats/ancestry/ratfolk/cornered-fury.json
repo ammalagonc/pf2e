@@ -32,6 +32,7 @@
                     "criticalSuccess"
                 ],
                 "predicate": [
+                    "origin:enemy",
                     {
                         "gt": [
                             "origin:size",
