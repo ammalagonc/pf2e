@@ -570,7 +570,7 @@
                 },
                 "category": "defensive",
                 "description": {
-                    "value": "<p>20 feet. The fungal marsh giant exudes a faintly visible cloud of green spores when not underwater. Any creature that ends its turn in the spore cloud takes @Damage[2d6[poison]] damage (@Check[fortitude|dc:27|basic] save). A creature that fails this save also becomes @UUID[Compendium.pf2e.conditionitems.Item.Sickened]{Sickened 1} (@UUID[Compendium.pf2e.conditionitems.Item.Sickened]{Sickened 2} on a critical failure).</p>"
+                    "value": "<p>20 feet. The fungal marsh giant exudes a faintly visible cloud of green spores when not underwater. Any creature that ends its turn in the spore cloud takes @Damage[2d6[poison]|options:area-damage] damage (@Check[fortitude|dc:27|basic|options:area-effect] save). A creature that fails this save also becomes @UUID[Compendium.pf2e.conditionitems.Item.Sickened]{Sickened 1} (@UUID[Compendium.pf2e.conditionitems.Item.Sickened]{Sickened 2} on a critical failure).</p>"
                 },
                 "publication": {
                     "license": "OGL",
