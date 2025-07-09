@@ -1038,7 +1038,10 @@
                 }
             },
             "Flynkett": {
-                "KettleUp": "While Kettled Up, the flynkett can't use its claw Strike or take move actions."
+                "KettleUp": {
+                    "BoilingEffect": "@UUID[Compendium.pf2e.bestiary-effects.Item.zNdEXVVMbC9i4Yox]{Effect: Kettle Up (Boiling)}",
+                    "Note": "While Kettled Up, the flynkett can't use its claw Strike or take move actions."
+                }
             },
             "GangUp": {
                 "TwoAllies": "Two allies are within reach of the target"

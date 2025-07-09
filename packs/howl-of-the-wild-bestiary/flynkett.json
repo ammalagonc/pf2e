@@ -91,7 +91,7 @@
                 },
                 "category": "interaction",
                 "description": {
-                    "value": "<p>The flynkett uses its skin flaps to form a crude kettle. While Kettled Up, the flynkett can't use its claw Strike or take move actions. If the flynkett has been Kettled Up for 1 minute or longer, and its kettle is full of water (usually due to the flynkett being in the rain), the flynkett's kettle begins to boil, emitting a piercing whistle that causes all creatures within 30 feet to take a –2 penalty to Perception checks to hear sources other than the flynkett; this is an auditory effect. The flynkett can stop Kettling Up as a free action.</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.Effect: Kettle Up (Boiling)]</p>"
+                    "value": "<p>The flynkett uses its skin flaps to form a crude kettle. While Kettled Up, the flynkett can't use its claw Strike or take move actions. If the flynkett has been Kettled Up for 1 minute or longer, and its kettle is full of water (usually due to the flynkett being in the rain), the flynkett's kettle begins to boil, emitting a piercing whistle that causes all creatures within 30 feet to take a –2 penalty to Perception checks to hear sources other than the flynkett; this is an auditory effect. The flynkett can stop Kettling Up as a free action.</p>"
                 },
                 "publication": {
                     "license": "OGL",
@@ -105,6 +105,15 @@
                         "toggleable": true
                     },
                     {
+                        "key": "RollOption",
+                        "label": "Kettle Up - Boiling",
+                        "option": "boiling",
+                        "predicate": [
+                            "kettle-up"
+                        ],
+                        "toggleable": true
+                    },
+                    {
                         "itemType": "action",
                         "key": "ItemAlteration",
                         "mode": "add",
@@ -115,7 +124,22 @@
                         "property": "description",
                         "value": [
                             {
-                                "text": "PF2E.NPCAbility.Flynkett.KettleUp"
+                                "text": "PF2E.NPCAbility.Flynkett.KettleUp.Note"
+                            }
+                        ]
+                    },
+                    {
+                        "itemType": "action",
+                        "key": "ItemAlteration",
+                        "mode": "add",
+                        "predicate": [
+                            "item:slug:kettle-up",
+                            "boiling"
+                        ],
+                        "property": "description",
+                        "value": [
+                            {
+                                "text": "PF2E.NPCAbility.Flynkett.KettleUp.BoilingEffect"
                             }
                         ]
                     },
@@ -176,7 +200,7 @@
                         "key": "DamageAlteration",
                         "mode": "add",
                         "predicate": [
-                            "kettle-up"
+                            "boiling"
                         ],
                         "property": "dice-number",
                         "selectors": [
