@@ -6663,10 +6663,7 @@
             },
             "Wrestler": {
                 "InescapableGrasp": {
-                    "Note": {
-                        "Action": "If you attempt to use a teleportation spell or effect to Escape, you must succeed at a @Check[flat|dc:15] or the spell fails.",
-                        "Spell": "If you attempt to use a teleportation effect to Escape, you must succeed at a @Check[flat|dc:15] or the action fails."
-                    }
+                    "Note": "If you attempt to use a teleportation spell or effect to Escape, you must succeed at a @Check[flat|dc:15] or the spell fails."
                 },
                 "Spinebreaker": {
                     "Note": {

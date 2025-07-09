@@ -4,7 +4,7 @@
     "name": "Effect: Inescapable Grasp",
     "system": {
         "description": {
-            "value": "<p>Granted by @UUID[Compendium.pf2e.feats-srd.Item.Inescapable Grasp]</p>\n<p>If you attempt to use a teleportation spell or effect while Grabbed, you must succeed at a DC 15 flat check or the spell fails.</p>"
+            "value": "<p>Granted by @UUID[Compendium.pf2e.feats-srd.Item.Inescapable Grasp]</p>\n<p>If you attempt to use a teleportation spell or effect while grabbed, you must succeed at a DC 15 flat check or the spell fails.</p>"
         },
         "duration": {
             "expiry": null,
@@ -48,7 +48,22 @@
                 "property": "description",
                 "value": [
                     {
-                        "text": "PF2E.SpecificRule.Wrestler.InescapableGrasp.Note.Action"
+                        "text": "PF2E.SpecificRule.Wrestler.InescapableGrasp.Note"
+                    }
+                ]
+            },
+            {
+                "itemType": "feat",
+                "key": "ItemAlteration",
+                "mode": "add",
+                "predicate": [
+                    "item:trait:teleportation",
+                    "self:condition:grabbed"
+                ],
+                "property": "description",
+                "value": [
+                    {
+                        "text": "PF2E.SpecificRule.Wrestler.InescapableGrasp.Note"
                     }
                 ]
             }
