@@ -1886,7 +1886,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>The commander hurls their spear into the air, creating a massive storm in a @Template[burst|distance:100]. Spears of lightning rain down upon enemies in the area, dealing @Damage[5d12[electricity]] damage (@Check[reflex|dc:41|basic] save).</p>"
+                    "value": "<p>The commander hurls their spear into the air, creating a massive storm in a @Template[burst|distance:100]. Spears of lightning rain down upon enemies in the area, dealing @Damage[5d12[electricity]|options:area-damage] damage (@Check[reflex|dc:41|basic|options:area-effect] save).</p>"
                 },
                 "publication": {
                     "license": "OGL",
