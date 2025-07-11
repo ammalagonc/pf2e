@@ -979,7 +979,24 @@
                     "remaster": false,
                     "title": ""
                 },
-                "rules": [],
+                "rules": [
+                    {
+                        "key": "RollOption",
+                        "option": "summon-pack",
+                        "toggleable": true
+                    },
+                    {
+                        "effects": [],
+                        "key": "Aura",
+                        "predicate": [
+                            "summon-pack"
+                        ],
+                        "radius": 20,
+                        "traits": [
+                            "primal"
+                        ]
+                    }
+                ],
                 "slug": null,
                 "traits": {
                     "rarity": "common",
