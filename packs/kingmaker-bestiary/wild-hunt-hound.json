@@ -986,7 +986,6 @@
                         "toggleable": true
                     },
                     {
-                        "effects": [],
                         "key": "Aura",
                         "predicate": [
                             "summon-pack"
