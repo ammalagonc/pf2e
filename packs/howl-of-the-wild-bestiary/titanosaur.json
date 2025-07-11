@@ -174,7 +174,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>The titanosaur lashes its tail in a @Template[cone|distance:30]. Creatures in the area take @Damage[8d10[bludgeoning]] damage (@Check[reflex|dc:38|basic] save). The momentum of the titanosaur's swing then makes it @UUID[Compendium.pf2e.conditionitems.Item.Off-Guard] until the beginning of its next turn.</p>"
+                    "value": "<p>The titanosaur lashes its tail in a @Template[cone|distance:30]. Creatures in the area take @Damage[8d10[bludgeoning]|options:area-damage] damage (@Check[reflex|dc:38|basic|options:area-effect] save). The momentum of the titanosaur's swing then makes it @UUID[Compendium.pf2e.conditionitems.Item.Off-Guard] until the beginning of its next turn.</p>"
                 },
                 "publication": {
                     "license": "OGL",
