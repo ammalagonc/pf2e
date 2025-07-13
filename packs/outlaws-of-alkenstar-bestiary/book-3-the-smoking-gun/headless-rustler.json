@@ -686,7 +686,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p><strong>Frequency</strong> once (until a new clockwork skull is crafted)</p>\n<hr />\n<p><strong>Effect</strong> The headless rustler throws its clockwork skull at a target within 30 feet. The skull explodes, dealing @Damage[8d6[fire]] damage to creatures in a @Template[burst|distance:15]{15-foot radius} (@Check[reflex|dc:23|basic]).</p>"
+                    "value": "<p><strong>Frequency</strong> once (until a new clockwork skull is crafted)</p>\n<hr />\n<p><strong>Effect</strong> The headless rustler throws its clockwork skull at a target within 30 feet. The skull explodes, dealing @Damage[8d6[fire]|options:area-damage] damage to creatures in a @Template[burst|distance:15]{15-foot radius} (@Check[reflex|dc:23|basic|options:area-effect]).</p>"
                 },
                 "publication": {
                     "license": "OGL",
