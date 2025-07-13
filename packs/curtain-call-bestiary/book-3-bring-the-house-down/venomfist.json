@@ -720,7 +720,7 @@
         },
         {
             "_id": "2NDW7G7ibCNbz2Ga",
-            "img": "systems/pf2e/icons/default-icons/action.svg",
+            "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Toxic Downpour",
             "sort": 1100000,
             "system": {
@@ -752,7 +752,7 @@
         },
         {
             "_id": "c5TQWFsibIn62GuT",
-            "img": "systems/pf2e/icons/default-icons/action.svg",
+            "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Vortex",
             "sort": 1200000,
             "system": {
@@ -771,7 +771,25 @@
                     "remaster": false,
                     "title": ""
                 },
-                "rules": [],
+                "rules": [
+                    {
+                        "key": "RollOption",
+                        "label": "PF2E.NPCAbility.Venomfist.Vortex.RollOptionLabel",
+                        "option": "vortex",
+                        "toggleable": true
+                    },
+                    {
+                        "effects": [],
+                        "key": "Aura",
+                        "predicate": [
+                            "vortex"
+                        ],
+                        "radius": 120,
+                        "traits": [
+                            "water"
+                        ]
+                    }
+                ],
                 "slug": null,
                 "traits": {
                     "value": [
@@ -814,7 +832,7 @@
         },
         {
             "_id": "MZyVFqGMNJoV38X5",
-            "img": "systems/pf2e/icons/default-icons/action.svg",
+            "img": "systems/pf2e/icons/actions/OneAction.webp",
             "name": "Create Poison",
             "sort": 1400000,
             "system": {
@@ -843,7 +861,7 @@
         },
         {
             "_id": "R7R8HuEQf02odUEn",
-            "img": "systems/pf2e/icons/default-icons/action.svg",
+            "img": "systems/pf2e/icons/actions/TwoActions.webp",
             "name": "Surge",
             "sort": 1500000,
             "system": {
