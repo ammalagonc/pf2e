@@ -1374,6 +1374,11 @@
                     }
                 }
             },
+            "Venomfist": {
+                "Vortex": {
+                    "RollOptionLabel": "In a body of water"
+                }
+            },
             "Vordine": {
                 "TridentOfDis": {
                     "NoAlly": "No Ally",
