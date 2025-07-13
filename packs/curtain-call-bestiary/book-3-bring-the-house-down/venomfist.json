@@ -732,7 +732,7 @@
                 },
                 "category": "defensive",
                 "description": {
-                    "value": "<p>Venomfist's presence alters the weather within 2 miles to heavy rainfall as long as they're located in a sizable body of water. When they become hostile, the rain in a @Template[type:emanation|distance:120] from them becomes highly toxic and deals @Damage[8d8[poison]] damage (DC 42 basic Fortitude half) to all creatures in the area.</p>"
+                    "value": "<p>Venomfist's presence alters the weather within 2 miles to heavy rainfall as long as they're located in a sizable body of water. When they become hostile, the rain in a @Template[type:emanation|distance:120] from them becomes highly toxic and deals @Damage[8d8[poison]|options:area-damage] damage (@Check[fortitude|dc:42|basic|options:area-effect] half) to all creatures in the area.</p>"
                 },
                 "publication": {
                     "license": "OGL",
