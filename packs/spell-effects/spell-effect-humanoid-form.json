@@ -55,6 +55,10 @@
                 "adjustName": false,
                 "choices": [
                     {
+                        "label": "PF2E.Item.Ability.Category.None",
+                        "value": "none"
+                    },
+                    {
                         "label": "PF2E.Actor.Creature.Sense.Type.LowLightVision",
                         "value": "low-light-vision"
                     },
