@@ -774,7 +774,7 @@
                 "rules": [
                     {
                         "key": "RollOption",
-                        "label": "PF2E.NPCAbility.Venomfist.Vortex.RollOptionLabel",
+                        "label": "PF2E.SkillVariant.Water",
                         "option": "vortex",
                         "toggleable": true
                     },
