@@ -2863,7 +2863,7 @@
         },
         {
             "_id": "OpdWoyPywj7o3f4N",
-            "img": "systems/pf2e/icons/default-icons/action.svg",
+            "img": "systems/pf2e/icons/actions/Reaction.webp",
             "name": "Retract Body",
             "sort": 4300000,
             "system": {
@@ -2908,7 +2908,7 @@
         },
         {
             "_id": "mVB17TASKITmaKOR",
-            "img": "systems/pf2e/icons/default-icons/action.svg",
+            "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Conjure Disguise",
             "sort": 4400000,
             "system": {
@@ -2921,6 +2921,10 @@
                 "category": "offensive",
                 "description": {
                     "value": "<p><strong>Frequency</strong> once per day</p>\n<hr />\n<p><strong>Effect</strong> The dragon conjures a perfect flesh-suit replica of a humanoid they've seen of their size or smaller and compresses themself into it, along with generating appropriate clothing for the humanoid. This process takes 1 minute to complete, during which the dragon is @UUID[Compendium.pf2e.conditionitems.Item.Off-Guard]. If the dragon stops or is interrupted in this process, the suit is destroyed. Once the process is complete, the dragon can remain in this disguise indefinitely.</p>\n<p>The transformation has the effects of @UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.Change Shape], except that the disguise is not actively magical in nature and doesn't register as magical to detect magic and similar effects. The dragon loses Retract Body while transformed.</p>\n<p>If the dragon is critically hit while wearing the disguise, the suit is destroyed and immediately explodes. This has the effects of Detonate Disguise, except that creatures use the outcome one degree of success better than they rolled on their save.</p>"
+                },
+                "frequency": {
+                    "max": 1,
+                    "per": "day"
                 },
                 "publication": {
                     "license": "ORC",
@@ -2950,6 +2954,20 @@
                         ],
                         "toggleable": true,
                         "value": true
+                    },
+                    {
+                        "key": "CreatureSize",
+                        "predicate": [
+                            "change-shape:humanoid-small"
+                        ],
+                        "value": "small"
+                    },
+                    {
+                        "key": "CreatureSize",
+                        "predicate": [
+                            "change-shape:humanoid-medium"
+                        ],
+                        "value": "medium"
                     }
                 ],
                 "slug": null,
@@ -2965,7 +2983,7 @@
         },
         {
             "_id": "kK41S41L533fMggZ",
-            "img": "systems/pf2e/icons/default-icons/action.svg",
+            "img": "systems/pf2e/icons/actions/TwoActions.webp",
             "name": "Detonate Disguise",
             "sort": 4500000,
             "system": {
@@ -2996,7 +3014,7 @@
         },
         {
             "_id": "uyo6N99p8gLhdfCs",
-            "img": "systems/pf2e/icons/default-icons/action.svg",
+            "img": "systems/pf2e/icons/actions/ThreeActions.webp",
             "name": "Rushed Transformation",
             "sort": 4600000,
             "system": {
@@ -3009,6 +3027,10 @@
                 "category": "offensive",
                 "description": {
                     "value": "<p><strong>Frequency</strong> once per hour</p>\n<hr />\n<p><strong>Effect</strong> Using the aid of magic and an exhausting amount of effort, the dragon quickly reshapes their body into the form of a generic humanoid figure. This has the effects of @UUID[Compendium.pf2e.spells-srd.Item.Humanoid Form] except that it lasts only 1 minute, and the dragon doesn't gain the +4 status bonus to Deception as the transformation makes use of the dragon's body to crudely mimic a humanoid form. The dragon can Dismiss the effect.</p>\n<p>Whenever the effect ends, the dragon leaves behind scraps of magically conjured flesh, which could give away the dragon's presence.</p>"
+                },
+                "frequency": {
+                    "max": 1,
+                    "per": "PT1H"
                 },
                 "publication": {
                     "license": "ORC",
@@ -3030,7 +3052,7 @@
         },
         {
             "_id": "ab0Z4gMjfbVX1DVf",
-            "img": "systems/pf2e/icons/default-icons/action.svg",
+            "img": "systems/pf2e/icons/actions/TwoActions.webp",
             "name": "Smoke Breath",
             "sort": 4700000,
             "system": {
@@ -3062,7 +3084,7 @@
         },
         {
             "_id": "lhnqwfK5RkPmG7XJ",
-            "img": "systems/pf2e/icons/default-icons/action.svg",
+            "img": "systems/pf2e/icons/actions/Passive.webp",
             "name": "Sneak Attack",
             "sort": 4800000,
             "system": {
