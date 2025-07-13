@@ -705,6 +705,20 @@
                             "change-shape:humanoid-medium"
                         ],
                         "value": "medium"
+                    },
+                    {
+                        "key": "FlatModifier",
+                        "predicate": [
+                            {
+                                "or": [
+                                    "change-shape:humanoid-medium",
+                                    "change-shape:humanoid-small"
+                                ]
+                            }
+                        ],
+                        "selector": "deception-dc",
+                        "type": "status",
+                        "value": 4
                     }
                 ],
                 "slug": null,
