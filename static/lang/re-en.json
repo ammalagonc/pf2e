@@ -4390,6 +4390,9 @@
                     "SaveNote": "If you roll a success on a saving throw against a curse or a spell cast by a witch or hag, you get a critical success instead."
                 }
             },
+            "HumanoidForm": {
+                "RollOptionLabel": "Human Form — Pass as Humanoid"
+            },
             "HuntPrey": {
                 "FirstHitDamage": "First Hit on Hunted Prey",
                 "FirstHitSwitch": "Hitting Hunted Prey for the First Time This Round",
@@ -5145,6 +5148,7 @@
                 "Sanctification": "Select a sanctification.",
                 "SavingThrow": "Select a saving throw.",
                 "SecondImplement": "Select a second implement.",
+                "Sense": "Select a sense.",
                 "Shield": "Select a shield.",
                 "ShieldOrWeapon": "Select shield or weapon.",
                 "Shillelagh": "Select a club or staff.",
