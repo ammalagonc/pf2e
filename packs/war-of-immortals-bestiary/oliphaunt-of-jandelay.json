@@ -724,7 +724,7 @@
                 },
                 "category": "defensive",
                 "description": {
-                    "value": "<p><strong>Cost</strong> all the creature's Mythic Points</p>\n<p><strong>Trigger</strong> The creature would die and has at least 1 Mythic Point</p><hr /><p><strong>Effect</strong> When the Oliphaunt of Jandelay would die, as long as it has at least 1 Mythic Point, it immediately expends all remaining Mythic Points it has, remains standing and conscious, and recovers @Damage[floor(@actor.system.attributes.hp.max/2)]{50% of its maximum Hit Points}.</p>"
+                    "value": "<p><strong>Cost</strong> all the creature's Mythic Points</p>\n<p><strong>Trigger</strong> The creature would die and has at least 1 Mythic Point</p><hr /><p><strong>Effect</strong> When the Oliphaunt of Jandelay would die, as long as it has at least 1 Mythic Point, it immediately expends all remaining Mythic Points it has, remains standing and conscious, and recovers @Damage[(floor(@actor.system.attributes.hp.max/2))[healing]]{50% of its maximum Hit Points}.</p>"
                 },
                 "publication": {
                     "license": "OGL",
