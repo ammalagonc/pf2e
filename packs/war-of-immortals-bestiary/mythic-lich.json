@@ -2974,6 +2974,9 @@
             "focus": {
                 "max": 1,
                 "value": 1
+            },
+            "mythicPoints": {
+                "value": 3
             }
         },
         "saves": {
@@ -3017,6 +3020,7 @@
                 "value": "med"
             },
             "value": [
+                "mythic",
                 "undead",
                 "unholy"
             ]
