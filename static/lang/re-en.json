@@ -1090,6 +1090,12 @@
             "Hryngar": {
                 "AlchemicalGrenade": "Damage Type of Alchemical Grenade"
             },
+            "ImmortalTrickster": {
+                "Attack": {
+                    "Pipe": "Pipe",
+                    "TelekineticManipulation": "Telekinetic Manipulation"
+                }
+            },
             "Inizkar": {
                 "AlignTheStars": {
                     "Prompt": "Is this an ally of Inizkar?"
