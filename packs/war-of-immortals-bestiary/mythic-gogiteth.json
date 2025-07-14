@@ -393,7 +393,7 @@
                             "athletics",
                             "stealth"
                         ],
-                        "type": "status",
+                        "slug": "mythic-skill-bonus",
                         "value": 4
                     }
                 ],

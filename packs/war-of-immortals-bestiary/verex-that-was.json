@@ -366,7 +366,7 @@
                 },
                 "category": "defensive",
                 "description": {
-                    "value": "<p><strong>Cost</strong> all the creature's Mythic Points</p>\n<p><strong>Trigger</strong> Verex-That-Was would die and has at least 1 Mythic Point</p><hr /><p><strong>Effect</strong> Verex remains standing and conscious, and @Damage[floor(@actor.system.attributes.hp.max/2)]{50% of its maximum Hit Points}.</p>"
+                    "value": "<p><strong>Cost</strong> all the creature's Mythic Points</p>\n<p><strong>Trigger</strong> Verex-That-Was would die and has at least 1 Mythic Point</p><hr /><p><strong>Effect</strong> Verex remains standing and conscious, and @Damage[(floor(@actor.system.attributes.hp.max/2))[healing]]{50% of its maximum Hit Points}.</p>"
                 },
                 "publication": {
                     "license": "OGL",
