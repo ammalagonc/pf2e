@@ -189,7 +189,14 @@ const LANGUAGES_BY_RARITY = {
     secret: ["truespeech", "wildsong"] as const,
 };
 
-const LANGUAGES: Language[] = ["common", ...COMMON_LANGUAGES, ...UNCOMMON_LANGUAGES, ...RARE_LANGUAGES, "truespeech", "wildsong"];
+const LANGUAGES: Language[] = [
+    "common", 
+    ...COMMON_LANGUAGES, 
+    ...UNCOMMON_LANGUAGES, 
+    ...RARE_LANGUAGES, 
+    "truespeech", 
+    "wildsong"
+];
 LANGUAGES.sort();
 
 const LANGUAGE_RARITIES = ["common", "uncommon", "rare", "secret"] as const;
