@@ -190,12 +190,12 @@ const LANGUAGES_BY_RARITY = {
 };
 
 const LANGUAGES: Language[] = [
-    "common", 
-    ...COMMON_LANGUAGES, 
-    ...UNCOMMON_LANGUAGES, 
-    ...RARE_LANGUAGES, 
-    "truespeech", 
-    "wildsong"
+    "common",
+    ...COMMON_LANGUAGES,
+    ...UNCOMMON_LANGUAGES,
+    ...RARE_LANGUAGES,
+    "truespeech",
+    "wildsong",
 ];
 LANGUAGES.sort();
 
