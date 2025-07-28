@@ -713,7 +713,7 @@
         },
         {
             "_id": "7u8sJ9qftjWaiy32",
-            "img": "systems/pf2e/icons/default-icons/action.svg",
+            "img": "systems/pf2e/icons/actions/TwoActions.webp",
             "name": "Cloak of Subversion",
             "sort": 1200000,
             "system": {
@@ -738,6 +738,10 @@
                     "title": ""
                 },
                 "rules": [],
+                "selfEffect": {
+                    "name": "Effect: Cloak of Subversion",
+                    "uuid": "Compendium.pf2e.bestiary-effects.Item.Effect: Cloak of Subversion"
+                },
                 "slug": null,
                 "traits": {
                     "value": [
@@ -750,7 +754,7 @@
         },
         {
             "_id": "MW6uNbupIKPU9HQA",
-            "img": "systems/pf2e/icons/default-icons/action.svg",
+            "img": "systems/pf2e/icons/actions/OneAction.webp",
             "name": "Focus Spores",
             "sort": 1300000,
             "system": {
