@@ -713,7 +713,7 @@
         },
         {
             "_id": "7u8sJ9qftjWaiy32",
-            "img": "systems/pf2e/icons/actions/TwoActions.webp",
+            "img": "systems/pf2e/icons/default-icons/action.svg",
             "name": "Cloak of Subversion",
             "sort": 1200000,
             "system": {
@@ -754,7 +754,7 @@
         },
         {
             "_id": "MW6uNbupIKPU9HQA",
-            "img": "systems/pf2e/icons/actions/OneAction.webp",
+            "img": "systems/pf2e/icons/default-icons/action.svg",
             "name": "Focus Spores",
             "sort": 1300000,
             "system": {
