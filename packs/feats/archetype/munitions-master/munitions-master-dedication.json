@@ -12,7 +12,7 @@
         },
         "category": "class",
         "description": {
-            "value": "<p>You have drilled enough with your light mortar to operate it with unrivaled efficiency. You gain the @UUID[Compendium.pf2e.actionspf2e.Item.Engineer's Efficiency] action.</p>"
+            "value": "<p>You have drilled enough with your light mortar to operate it with unrivaled efficiency. You gain the @UUID[Compendium.pf2e.actionspf2e.Item.Engineer's Efficiency] action.</p>\n<p>@UUID[Compendium.pf2e.journals.JournalEntry.vx5FGEG34AxI2dow.JournalEntryPage.gZVjoq3A0Ny1dKvI]{Munitions Master (Class Archetype)}</p>"
         },
         "level": {
             "value": 2
