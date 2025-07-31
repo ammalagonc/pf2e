@@ -148,7 +148,7 @@
                     {
                         "alwaysActive": true,
                         "key": "RollOption",
-                        "label": "Halberd Damage Type",
+                        "label": "PF2E.NPCAbility.Troop.DamageType.Label",
                         "option": "halberd-sweep",
                         "suboptions": [
                             {

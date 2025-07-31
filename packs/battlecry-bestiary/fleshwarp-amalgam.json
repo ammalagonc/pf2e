@@ -134,7 +134,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p><strong>Frequency</strong> once per round</p><hr /><p><strong>Effect</strong> The fleshwarps make wild melee attacks against each enemy in a @Template[type:emanation|distance:5] (@Check[reflex|dc:23|basic] save). The damage depends on the number of actions.</p>\n<p><span class=\"action-glyph\">1</span> @Damage[1d10[untyped]] bludgeoning or slashing damage</p>\n<p><span class=\"action-glyph\">2</span> @Damage[(2d10+6)[untyped]] bludgeoning or slashing damage</p>\n<p><span class=\"action-glyph\">3</span> @Damage[(2d10+11)[untyped]] bludgeoning or slashing damage</p>"
+                    "value": "<p><strong>Frequency</strong> once per round</p><hr /><p><strong>Effect</strong> The fleshwarps make wild melee attacks against each enemy in a @Template[type:emanation|distance:5] (@Check[reflex|dc:23|basic] save). The damage depends on the number of actions.</p>\n<p><span class=\"action-glyph\">1</span> @Damage[1d10[untyped]] damage</p>\n<p><span class=\"action-glyph\">2</span> @Damage[(2d10+6)[untyped]] damage</p>\n<p><span class=\"action-glyph\">3</span> @Damage[(2d10+11)[untyped]] damage</p>"
                 },
                 "frequency": {
                     "max": 1,
@@ -149,7 +149,7 @@
                     {
                         "alwaysActive": true,
                         "key": "RollOption",
-                        "label": "Fleshwarp Attack Damage Type",
+                        "label": "PF2E.NPCAbility.Troop.DamageType.Label",
                         "option": "frenzy-fleshwarp",
                         "suboptions": [
                             {
