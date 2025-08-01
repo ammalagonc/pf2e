@@ -61,6 +61,10 @@
                 ],
                 "property": "traits",
                 "value": "deadly-d4"
+            },
+            {
+                "key": "RollOption",
+                "option": "parry-trait"
             }
         ],
         "runes": {

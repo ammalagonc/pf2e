@@ -1,6 +1,6 @@
 {
     "_id": "2iKqXkRAq8qwlFlT",
-    "img": "systems/pf2e/icons/default-icons/weapon.svg",
+    "img": "icons/weapons/staves/staff-simple-wrapped.webp",
     "name": "Twisting Gale",
     "system": {
         "baseItem": "sansetsukon",
@@ -52,7 +52,12 @@
         "reload": {
             "value": null
         },
-        "rules": [],
+        "rules": [
+            {
+                "key": "RollOption",
+                "option": "parry-trait"
+            }
+        ],
         "runes": {
             "potency": 2,
             "property": [

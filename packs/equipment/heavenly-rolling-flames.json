@@ -57,6 +57,10 @@
                 "key": "Resistance",
                 "type": "cold",
                 "value": 2
+            },
+            {
+                "key": "RollOption",
+                "option": "parry-trait"
             }
         ],
         "runes": {

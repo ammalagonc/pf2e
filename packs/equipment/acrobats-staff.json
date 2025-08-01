@@ -52,7 +52,12 @@
         "reload": {
             "value": null
         },
-        "rules": [],
+        "rules": [
+            {
+                "key": "RollOption",
+                "option": "parry-trait"
+            }
+        ],
         "runes": {
             "potency": 1,
             "property": [],

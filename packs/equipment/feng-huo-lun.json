@@ -1,6 +1,6 @@
 {
     "_id": "yUgOLSyb4pGGxfCR",
-    "img": "systems/pf2e/icons/default-icons/weapon.svg",
+    "img": "icons/weapons/thrown/shuriken-blue.webp",
     "name": "Feng Huo Lun",
     "system": {
         "baseItem": "feng-huo-lun",
@@ -52,7 +52,12 @@
         "reload": {
             "value": null
         },
-        "rules": [],
+        "rules": [
+            {
+                "key": "RollOption",
+                "option": "parry-trait"
+            }
+        ],
         "runes": {
             "potency": 0,
             "property": [],
