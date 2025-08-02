@@ -5871,6 +5871,14 @@
                     "First": "Mantle of the Magma Heart — First ability",
                     "Second": "Mantle of the Magma Heart — Second ability"
                    }
+                },
+                "MeltingHeart": {
+                    "Label": {
+                        "CopperCore": "Copper Core",
+                        "GoldenFlesh": "Golden Flesh",
+                        "ReactiveTouch": "Reactive Touch",
+                        "Weighted Grasp": "WeightedGrasp"
+                    }
                 }
             },
             "SpellEffectMentalMap": {

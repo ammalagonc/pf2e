@@ -1,0 +1,47 @@
+{
+    "_id": "NSxCNTQuB3CLPd4x",
+    "img": "systems/pf2e/icons/spells/mantle-of-the-melting-heart.webp",
+    "name": "Spell Effect: Reactive Touch (Damage Dealt)",
+    "system": {
+        "description": {
+            "value": "<p>Granted by @UUID[Compendium.pf2e.spells-srd.Item.Mantle of the Melting Heart]</p>\n<p>Any metal that touches you takes 2d6 acid damage that bypasses Hardness.</p>"
+        },
+        "duration": {
+            "expiry": null,
+            "sustained": false,
+            "unit": "encounter",
+            "value": -1
+        },
+        "fromSpell": false,
+        "level": {
+            "value": 1
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": true,
+            "title": "Pathfinder Rage of Elements"
+        },
+        "rules": [
+            {
+                "key": "Note",
+                "predicate": [
+                    "origin:trait:metal"
+                ],
+                "selector": "damage-received",
+                "text": "You take @Damage[2d6[acid]] damage that bypasses Hardness.",
+                "title": "{item|name}"
+            }
+        ],
+        "start": {
+            "initiative": null,
+            "value": 0
+        },
+        "tokenIcon": {
+            "show": true
+        },
+        "traits": {
+            "value": []
+        }
+    },
+    "type": "effect"
+}
