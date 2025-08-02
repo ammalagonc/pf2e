@@ -28,7 +28,7 @@
                     "origin:trait:metal"
                 ],
                 "selector": "damage-received",
-                "text": "You take @Damage[2d6[acid]] damage that bypasses Hardness.",
+                "text": "PF2E.SpecificRule.SpellEffectMantle.MeltingHeart.ReactiveTouch.DamageNote",
                 "title": "{item|name}"
             }
         ],
