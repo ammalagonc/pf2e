@@ -93,6 +93,19 @@
                 "toggleable": true
             },
             {
+                "domain": "all",
+                "key": "RollOption",
+                "option": "self:heart-of-melting",
+                "predicate": [
+                    {
+                        "or": [
+                            "melting-heart-first:reactive-touch",
+                            "melting-heart-second:reactive-touch"
+                        ]
+                    }
+                ]
+            },
+            {
                 "key": "Resistance",
                 "predicate": [
                     {
@@ -212,6 +225,20 @@
                 "selector": "cabled-fist-damage",
                 "text": "@Localize[PF2E.NPC.Abilities.Glossary.Grab]",
                 "title": "@Localize[PF2E.AttackEffectGrab]  <span class=\"action-glyph\">1</span>"
+            },
+            {
+                "key": "Note",
+                "predicate": [
+                    "origin:trait:metal",
+                    "self:heart-of-melting",
+                    "item:type:melee",
+                    {
+                        "not": "item:trait:reach"
+                    }
+                ],
+                "selector": "damage-received",
+                "text": "PF2E.SpecificRule.SpellEffectMantle.MeltingHeart.ReactiveTouch.DamageNote",
+                "title": "{item|name}"
             }
         ],
         "start": {
