@@ -37,6 +37,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": null,
                 "group": "sword",
                 "hardness": 0,
                 "hp": {
@@ -63,11 +64,10 @@
                 "quantity": 1,
                 "range": null,
                 "reload": {
-                    "value": ""
+                    "value": null
                 },
                 "rules": [
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "label": "PF2E.SpecificRule.Equipment.BloodDrinkerBlade.Label",
                         "option": "drink-life",
@@ -154,6 +154,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": null,
                 "group": "knife",
                 "hardness": 0,
                 "hp": {
@@ -433,7 +434,6 @@
                 },
                 "rules": [
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "label": "PF2E.SpecificRule.Equipment.BloodDrinkerBlade.Label",
                         "option": "drink-life",
@@ -683,6 +683,10 @@
                         "label": "PF2E.Strike.Fist.Label",
                         "predicate": [
                             "change-shape:humanoid"
+                        ],
+                        "slug": "fist",
+                        "traits": [
+                            "unarmed"
                         ]
                     },
                     {
@@ -785,7 +789,7 @@
                 "rules": [
                     {
                         "key": "Note",
-                        "selector": "fangs-damage",
+                        "selector": "fangs-attack",
                         "text": "{item|description}",
                         "title": "{item|name}",
                         "visibility": "owner"
@@ -908,7 +912,6 @@
                         "selector": "strike-damage"
                     },
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "label": "PF2E.SpecificRule.TOTMToggle.OffGuard",
                         "option": "target:condition:off-guard",

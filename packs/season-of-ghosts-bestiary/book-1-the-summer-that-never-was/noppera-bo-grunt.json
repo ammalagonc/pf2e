@@ -37,6 +37,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": null,
                 "group": "spear",
                 "hardness": 0,
                 "hp": {
@@ -374,7 +375,6 @@
                 },
                 "rules": [
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "option": "impersonate-shape",
                         "toggleable": true

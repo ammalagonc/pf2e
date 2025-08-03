@@ -3876,6 +3876,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": null,
                 "group": "club",
                 "hardness": 0,
                 "hp": {
@@ -4069,17 +4070,19 @@
             "sort": 6000000,
             "system": {
                 "attackEffects": {
-                    "value": []
+                    "value": [
+                        "fools-feast"
+                    ]
                 },
                 "bonus": {
                     "value": 30
                 },
                 "damageRolls": {
-                    "A23NItWIekCIQKof": {
+                    "0": {
                         "damage": "3d6+12",
                         "damageType": "bludgeoning"
                     },
-                    "jQ6nDXgJi3ZbCld9": {
+                    "1": {
                         "damage": "2d6",
                         "damageType": "mental"
                     }
@@ -4114,19 +4117,21 @@
             "sort": 6100000,
             "system": {
                 "attackEffects": {
-                    "value": []
+                    "value": [
+                        "fools-feast"
+                    ]
                 },
                 "bonus": {
                     "value": 28
                 },
                 "damageRolls": {
-                    "j3CqpbKcifhACgsr": {
-                        "damage": "2d6",
-                        "damageType": "mental"
-                    },
-                    "mVbIbm651Wh2o3Cs": {
+                    "0": {
                         "damage": "3d6+12",
                         "damageType": "bludgeoning"
+                    },
+                    "1": {
+                        "damage": "2d6",
+                        "damageType": "mental"
                     }
                 },
                 "description": {
@@ -4158,19 +4163,21 @@
             "sort": 6200000,
             "system": {
                 "attackEffects": {
-                    "value": []
+                    "value": [
+                        "fools-feast"
+                    ]
                 },
                 "bonus": {
                     "value": 28
                 },
                 "damageRolls": {
-                    "AG71gLJtwmLrHviN": {
-                        "damage": "2d6",
-                        "damageType": "mental"
-                    },
-                    "iswR188zNNz1VJHP": {
+                    "0": {
                         "damage": "1d4+12",
                         "damageType": "bludgeoning"
+                    },
+                    "1": {
+                        "damage": "2d6",
+                        "damageType": "mental"
                     }
                 },
                 "description": {
@@ -4186,6 +4193,7 @@
                 "traits": {
                     "value": [
                         "agile",
+                        "magical",
                         "nonlethal",
                         "unarmed"
                     ]
@@ -4200,7 +4208,9 @@
             "sort": 6300000,
             "system": {
                 "attackEffects": {
-                    "value": []
+                    "value": [
+                        "fools-feast"
+                    ]
                 },
                 "bonus": {
                     "value": 30

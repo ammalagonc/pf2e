@@ -121,9 +121,7 @@
                 "slug": null,
                 "traits": {
                     "rarity": "common",
-                    "value": [
-                        "fey"
-                    ]
+                    "value": []
                 }
             },
             "type": "action"
@@ -183,9 +181,7 @@
                 "slug": null,
                 "traits": {
                     "rarity": "common",
-                    "value": [
-                        "fey"
-                    ]
+                    "value": []
                 }
             },
             "type": "action"

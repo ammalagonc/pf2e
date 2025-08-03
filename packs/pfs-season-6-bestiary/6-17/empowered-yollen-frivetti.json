@@ -1595,6 +1595,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": null,
                 "group": "axe",
                 "hardness": 0,
                 "hp": {
@@ -1621,7 +1622,7 @@
                 "quantity": 1,
                 "range": null,
                 "reload": {
-                    "value": ""
+                    "value": null
                 },
                 "rules": [],
                 "runes": {
@@ -2070,7 +2071,7 @@
             "publication": {
                 "license": "ORC",
                 "remaster": true,
-                "title": "Pathfinder Society Scenario #6-17: The Devil In the Details"
+                "title": "Pathfinder Society Scenario #6-17: The Devil in the Details"
             }
         },
         "initiative": {

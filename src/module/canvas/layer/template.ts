@@ -104,6 +104,7 @@ class TemplateLayerPF2e<TObject extends MeasuredTemplatePF2e = MeasuredTemplateP
 
         const listeners: TemplatePreviewEventListeners = (this.#previewListeners = {
             lockedInPlace: false,
+            wheelAbortController: new AbortController(),
             mousemove: (event: PIXI.FederatedPointerEvent): void => {
                 event.stopPropagation();
                 const now = Date.now();
@@ -164,11 +165,36 @@ class TemplateLayerPF2e<TObject extends MeasuredTemplatePF2e = MeasuredTemplateP
                     this.#deactivatePreviewListeners(initialLayer, event);
                 }
             },
+            wheel: (event: Event): void => {
+                if (!(event instanceof WheelEvent) || this.#previewListeners?.lockedInPlace) return;
+                event.preventDefault();
+                event.stopPropagation();
+                const now = Date.now();
+                if (now - lastMove <= 25) return;
+
+                const { direction } = preview.document;
+                const distance = preview.document.distance ?? 5;
+
+                if (event.ctrlKey) {
+                    const snap = event.shiftKey || distance <= 30 ? 15 : 5;
+                    preview.document.updateSource({ direction: direction + snap * Math.sign(event.deltaY) });
+                    preview.renderFlags.set({ refresh: true });
+                } else if (event.shiftKey) {
+                    const snap = canvas.grid.isHexagonal ? 60 : 45;
+                    preview.document.updateSource({ direction: direction + snap * Math.sign(event.deltaY) });
+                    preview.renderFlags.set({ refresh: true });
+                }
+                lastMove = now;
+            },
         });
 
         canvas.stage.on("mousemove", listeners.mousemove);
         canvas.stage.on("mousedown", listeners.mousedown);
         canvas.stage.on("rightdown", listeners.rightdown);
+        canvas.app.view.addEventListener?.("wheel", listeners.wheel, {
+            passive: false,
+            signal: listeners.wheelAbortController.signal,
+        });
     }
 
     #deactivatePreviewListeners(
@@ -179,6 +205,7 @@ class TemplateLayerPF2e<TObject extends MeasuredTemplatePF2e = MeasuredTemplateP
             canvas.stage.off("mousemove", this.#previewListeners.mousemove);
             canvas.stage.off("mousedown", this.#previewListeners.mousedown);
             canvas.stage.off("rightdown", this.#previewListeners.rightdown);
+            this.#previewListeners.wheelAbortController.abort();
             this.#previewListeners = null;
         }
         if ("interactionData" in event) this._onDragLeftCancel(event);
@@ -189,9 +216,11 @@ class TemplateLayerPF2e<TObject extends MeasuredTemplatePF2e = MeasuredTemplateP
 interface TemplatePreviewEventListeners {
     /** Whether the preview position is locked in place on the canvas */
     lockedInPlace: boolean;
+    wheelAbortController: AbortController;
     mousemove: (event: PIXI.FederatedPointerEvent) => void;
     mousedown: (event: PIXI.FederatedPointerEvent) => void;
     rightdown: (event: PIXI.FederatedPointerEvent) => void;
+    wheel: (event: Event) => void;
 }
 
 export { TemplateLayerPF2e };

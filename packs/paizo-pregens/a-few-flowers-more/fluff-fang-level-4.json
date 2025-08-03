@@ -913,7 +913,6 @@
                         "value": 1
                     },
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "label": "PF2E.SpecificRule.LitTorch",
                         "option": "lit-torch",
@@ -1236,6 +1235,7 @@
                     "handsHeld": 1,
                     "invested": null
                 },
+                "expend": null,
                 "group": "sword",
                 "hardness": 0,
                 "hp": {
@@ -1262,7 +1262,7 @@
                 "quantity": 1,
                 "range": null,
                 "reload": {
-                    "value": ""
+                    "value": null
                 },
                 "rules": [],
                 "runes": {
@@ -2926,7 +2926,6 @@
                         "uuid": "{item|flags.pf2e.rulesSelections.feat}"
                     },
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "option": "feature:{item|flags.pf2e.rulesSelections.muse}"
                     }

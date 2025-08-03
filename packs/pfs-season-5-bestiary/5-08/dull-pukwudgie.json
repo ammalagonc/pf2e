@@ -110,7 +110,7 @@
             "_stats": {
                 "compendiumSource": "Compendium.pf2e.spells-srd.Item.HBJPsonQnWcC3qdX"
             },
-            "img": "systems/pf2e/icons/spells/hallucinatory-terrain.webp",
+            "img": "icons/environment/wilderness/cave-entrance-vulcano.webp",
             "name": "Hallucinatory Terrain",
             "sort": 300000,
             "system": {
@@ -345,6 +345,7 @@
                     "handsHeld": 1,
                     "invested": null
                 },
+                "expend": null,
                 "group": "axe",
                 "hardness": 0,
                 "hp": {
@@ -433,6 +434,7 @@
                     "handsHeld": 1,
                     "invested": null
                 },
+                "expend": 1,
                 "group": "bow",
                 "hardness": 0,
                 "hp": {
@@ -697,7 +699,6 @@
                 },
                 "rules": [
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "option": "change-shape",
                         "toggleable": true

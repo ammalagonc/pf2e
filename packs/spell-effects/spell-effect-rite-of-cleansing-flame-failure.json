@@ -1,0 +1,45 @@
+{
+    "_id": "KhBRuP0Wl2P5okGo",
+    "img": "icons/magic/fire/beam-jet-stream-spiral-yellow.webp",
+    "name": "Spell Effect: Rite of Cleansing Flame (Failure)",
+    "system": {
+        "description": {
+            "value": "<p>Granted by @UUID[Compendium.pf2e.spells-srd.Item.Rite of Cleansing Flame]</p>\n<p>You gain weakness 5 to cold and unholy.</p>"
+        },
+        "duration": {
+            "expiry": null,
+            "sustained": false,
+            "unit": "unlimited",
+            "value": -1
+        },
+        "level": {
+            "value": 1
+        },
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder #216: The Acropolis Pyre"
+        },
+        "rules": [
+            {
+                "key": "Weakness",
+                "type": [
+                    "cold",
+                    "unholy"
+                ],
+                "value": 5
+            }
+        ],
+        "start": {
+            "initiative": null,
+            "value": 0
+        },
+        "tokenIcon": {
+            "show": true
+        },
+        "traits": {
+            "value": []
+        }
+    },
+    "type": "effect"
+}

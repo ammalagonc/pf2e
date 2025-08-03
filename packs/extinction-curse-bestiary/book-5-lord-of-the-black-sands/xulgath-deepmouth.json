@@ -1949,6 +1949,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": null,
                 "group": "brawling",
                 "hardness": 0,
                 "hp": {
@@ -1975,7 +1976,7 @@
                 "quantity": 1,
                 "range": null,
                 "reload": {
-                    "value": ""
+                    "value": null
                 },
                 "rules": [],
                 "runes": {
@@ -2116,7 +2117,6 @@
                 "quantity": 1,
                 "rules": [
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "option": "has-religious-symbol",
                         "requiresEquipped": false
@@ -2393,7 +2393,6 @@
                 },
                 "rules": [
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "option": "devourers-dictum",
                         "toggleable": true

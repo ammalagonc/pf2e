@@ -471,7 +471,8 @@ class SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ite
     loadVariant(options: SpellVariantOptions = {}): SpellPF2e | null {
         if (this.original) {
             const entryId = this.system.location.value;
-            return this.original.loadVariant({ entryId, ...options });
+            const overlayIds = this.appliedOverlays?.values().toArray() ?? [];
+            return this.original.loadVariant({ entryId, overlayIds, ...options });
         }
         const { castRank, overlayIds } = options;
         const appliedOverlays: Map<SpellOverlayType, string> = new Map();
@@ -480,10 +481,11 @@ class SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ite
 
         const overrides = (() => {
             // If there are no overlays, return an override if this is a simple heighten or if its a different entry id
+            const isEntryChange = options.entryId && options.entryId !== this.system.location.value;
             if (overlays.length === 0 && heightenOverlays.length === 0) {
                 if (castRank !== this.rank) {
                     return fu.mergeObject(this.toObject(), { system: { location: { heightenedLevel: castRank } } });
-                } else if (!options.entryId || options.entryId === this.system.location.value) {
+                } else if (!isEntryChange) {
                     return null;
                 }
             }
@@ -532,8 +534,8 @@ class SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ite
         }
 
         // Create the variant and run additional prep since it exists outside the normal cycle
-        const actor = this.parent;
-        const variant = new SpellPF2e(overrides, { parent: actor, parentItem: this.parentItem });
+        overrides.system.location.value = options.entryId ?? this.system.location.value;
+        const variant = new SpellPF2e(overrides, { parent: this.parent, parentItem: this.parentItem });
         variant.original = this;
         variant.appliedOverlays = appliedOverlays;
         variant.system.traits.value = Array.from(variant.traits);
@@ -1097,10 +1099,7 @@ class SpellPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ite
     override getOriginData(): ItemOriginFlag {
         const flag = super.getOriginData();
         flag.castRank = this.rank;
-        if (this.isVariant && this.appliedOverlays) {
-            flag.variant = { overlays: [...this.appliedOverlays.values()] };
-        }
-
+        flag.variant = this.isVariant && this.appliedOverlays ? { overlays: [...this.appliedOverlays.values()] } : null;
         return flag;
     }
 

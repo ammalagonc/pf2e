@@ -1,0 +1,48 @@
+{
+    "_id": "0Hc2HqseslZifEk6",
+    "folder": "D9zBpB4QxouPISQD",
+    "img": "systems/pf2e/icons/default-icons/deity.svg",
+    "name": "Pharimia",
+    "system": {
+        "attribute": [
+            "int",
+            "wis"
+        ],
+        "category": "deity",
+        "description": {
+            "value": "<p>For a divinity of clarity and light, Pharimia's origins are ironically murky; she has traveled the archipelago to build lighthouses, signal fires, and ports throughout living memory. She asks for little in return beyond respect for travelers and responsible infrastructure budgeting to maintain what she creates. In any other age, her mundane mission would be forgettable. However, as myth-speaking became unreliable and the pantheon dwindled, Pharimia has become a self-appointed defender of Iblydan hero-gods and their associated traditions. She's one of the few voices that can convince unholy demigods and righteous divinities to unite against common threats. Her priests seek similar challenges, serving as negotiators and leaders for ragtag coalitions whose members would otherwise stab each other in the back.</p>\n<p><strong>Title</strong> The Horizon Flame</p>\n<p><strong>Areas of Concern</strong> ports and lighthouses</p>\n<p><strong>Edicts</strong> guide others between places of safety, maintain travel infrastructure, unite contentious parties to achieve greater goals</p>\n<p><strong>Anathema</strong> deny directions to the lost, extinguish a lighthouse or similar beacon, bring destruction upon Iblydos</p>\n<p><strong>Religious Symbol</strong> three stars above a lighthouse</p>\n<p><strong>Sacred Animal</strong> rattlesnake</p>\n<p><strong>Sacred Colors</strong> red, yellow</p>"
+        },
+        "domains": {
+            "alternate": [],
+            "primary": [
+                "duty",
+                "fire",
+                "travel",
+                "water"
+            ]
+        },
+        "font": [
+            "heal"
+        ],
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder #216: The Acropolis Pyre"
+        },
+        "rules": [],
+        "sanctification": null,
+        "skill": [
+            "survival"
+        ],
+        "spells": {
+            "1": "Compendium.pf2e.spells-srd.Item.Tailwind",
+            "2": "Compendium.pf2e.spells-srd.Item.Floating Flame",
+            "5": "Compendium.pf2e.spells-srd.Item.Control Water"
+        },
+        "traits": {},
+        "weapons": [
+            "ranseur"
+        ]
+    },
+    "type": "deity"
+}

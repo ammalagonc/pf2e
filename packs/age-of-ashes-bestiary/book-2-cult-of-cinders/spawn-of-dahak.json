@@ -37,6 +37,7 @@
                     "handsHeld": 1,
                     "invested": null
                 },
+                "expend": null,
                 "group": "hammer",
                 "hardness": 0,
                 "hp": {
@@ -63,7 +64,7 @@
                 "quantity": 1,
                 "range": null,
                 "reload": {
-                    "value": ""
+                    "value": null
                 },
                 "rules": [],
                 "runes": {
@@ -121,7 +122,6 @@
                 },
                 "rules": [
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "label": "Weapon Red-Hot",
                         "option": "weapon-hot",
@@ -315,7 +315,7 @@
                 },
                 "rules": [
                     {
-                        "itemType": "weapon",
+                        "itemType": "melee",
                         "key": "ItemAlteration",
                         "mode": "add",
                         "predicate": [

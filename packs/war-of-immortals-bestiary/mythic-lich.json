@@ -2111,6 +2111,7 @@
                     "handsHeld": 1,
                     "invested": null
                 },
+                "expend": null,
                 "group": "club",
                 "hardness": 0,
                 "hp": {
@@ -2137,7 +2138,7 @@
                 "quantity": 1,
                 "range": null,
                 "reload": {
-                    "value": ""
+                    "value": null
                 },
                 "rules": [],
                 "runes": {
@@ -2973,6 +2974,9 @@
             "focus": {
                 "max": 1,
                 "value": 1
+            },
+            "mythicPoints": {
+                "value": 3
             }
         },
         "saves": {
@@ -3016,6 +3020,7 @@
                 "value": "med"
             },
             "value": [
+                "mythic",
                 "undead",
                 "unholy"
             ]

@@ -2235,6 +2235,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": 1,
                 "group": "bow",
                 "hardness": 0,
                 "hp": {
@@ -2410,7 +2411,6 @@
                 "quantity": 1,
                 "rules": [
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "option": "has-religious-symbol",
                         "requiresEquipped": false
@@ -3009,7 +3009,6 @@
                 },
                 "rules": [
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "option": "turn-to-mist",
                         "toggleable": true

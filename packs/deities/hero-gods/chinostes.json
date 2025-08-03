@@ -1,0 +1,55 @@
+{
+    "_id": "LidhlajmOHnmWDze",
+    "folder": "D9zBpB4QxouPISQD",
+    "img": "systems/pf2e/icons/default-icons/deity.svg",
+    "name": "Chinostes",
+    "system": {
+        "attribute": [
+            "cha",
+            "dex"
+        ],
+        "category": "deity",
+        "description": {
+            "value": "<p>In a Sylirican raid on Pol-Reanphoros, the saddle-maker Chinostes took up his tack knife in a desperate attempt to defend his neighbors. His efforts killed the raid's leader and scattered the other warriors, awakening the first spark of his mythic power. Chinostes never abandoned his role as a humble, folk-hero vigilante, even as a hero-god. One day, he tracked and confronted a murderer, only to find this was no mortal foe, but a vampire, who overpowered Chinostes and turned him into one of their kind.</p>\n<p>Even so, Chinostes retained his mythic abilities. He still stalks Reanphoros, most often fighting whatever threatens his city-state. However, the occasional citizen vanishes, only to reappear later, drained of blood—a grim price most citizens accept due to the worse evils he keeps at bay.</p>\n<p>Two diametrically opposed cults venerate Chinostes. Those calling themselves Nightwardens celebrate his undead majesty and necessary evils. In contrast, the Redeemers keep the older faith, condemning the monster Chinostes has become. To the Redeemers, the greatest service they can ever perform for their hero-god is to drive a stake through his heart. Bizarrely, Chinostes grants spells to both groups, suggesting his tacit approval of both agendas.</p>\n<p><strong>Title</strong> The Fallen Blade</p>\n<p><strong>Areas of Concern</strong> tragedy and sacrifice</p>\n<p><strong>Edicts (Redeemer)</strong> aid your neighbors, wield humble weapons, destroy Chinostes</p>\n<p><strong>Anathema (Redeemer)</strong> hog credit, create undead</p>\n<p><strong>Edicts (Nightwarden)</strong> aid your neighbors, sacrifice others for the greater good, leave cryptic calling cards of your actions</p>\n<p><strong>Anathema (Nightwarden)</strong> disparage others for seeking terrible power to achieve laudable goals</p>\n<p><strong>Religious Symbol</strong> heart pierced by two swords</p>\n<p><strong>Sacred Animal</strong> horse</p>\n<p><strong>Sacred Colors</strong> black and white</p>"
+        },
+        "domains": {
+            "alternate": [],
+            "primary": [
+                "cities",
+                "death",
+                "luck",
+                "sorrow"
+            ]
+        },
+        "font": [
+            "harm",
+            "heal"
+        ],
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder #216: The Acropolis Pyre"
+        },
+        "rules": [],
+        "sanctification": {
+            "modal": "can",
+            "what": [
+                "holy",
+                "unholy"
+            ]
+        },
+        "skill": [
+            "acrobatics"
+        ],
+        "spells": {
+            "1": "Compendium.pf2e.spells-srd.Item.Jump",
+            "2": "Compendium.pf2e.spells-srd.Item.Gecko Grip",
+            "7": "Compendium.pf2e.spells-srd.Item.True Target"
+        },
+        "traits": {},
+        "weapons": [
+            "dagger"
+        ]
+    },
+    "type": "deity"
+}

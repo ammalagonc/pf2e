@@ -971,6 +971,7 @@
                     "handsHeld": 1,
                     "invested": null
                 },
+                "expend": null,
                 "group": "club",
                 "hardness": 0,
                 "hp": {
@@ -997,7 +998,7 @@
                 "quantity": 1,
                 "range": null,
                 "reload": {
-                    "value": ""
+                    "value": null
                 },
                 "rules": [],
                 "runes": {
@@ -1057,6 +1058,7 @@
                     "handsHeld": 1,
                     "invested": null
                 },
+                "expend": null,
                 "group": "sword",
                 "hardness": 0,
                 "hp": {
@@ -1083,7 +1085,7 @@
                 "quantity": 1,
                 "range": null,
                 "reload": {
-                    "value": ""
+                    "value": null
                 },
                 "rules": [],
                 "runes": {
@@ -1448,7 +1450,6 @@
                         "selector": "strike-damage"
                     },
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "label": "PF2E.SpecificRule.TOTMToggle.OffGuard",
                         "option": "target:condition:off-guard",
@@ -1545,9 +1546,9 @@
             "privateNotes": "",
             "publicNotes": "<p>Charlatans use pretense and misdirection to swindle money and other valuables from the credulous and confused. Selling snake oil (literally or figuratively), distracting marks to pick their pockets, or faking mediumship are classic grifts.</p>\n<hr />\n<p>Some criminals are the desperate who have no option but to break the law to survive, while others choose a life of crime for thrills, forming gangs or underworld guilds that specialize in certain illegal ventures.</p>",
             "publication": {
-                "license": "OGL",
-                "remaster": false,
-                "title": "Pathfinder #188: They Watched the Stars"
+                "license": "ORC",
+                "remaster": true,
+                "title": "Pathfinder Adventure Path: Gatewalkers"
             }
         },
         "initiative": {
@@ -1616,7 +1617,6 @@
             "value": [
                 "aiuvarin",
                 "elf",
-                "evil",
                 "human",
                 "humanoid"
             ]

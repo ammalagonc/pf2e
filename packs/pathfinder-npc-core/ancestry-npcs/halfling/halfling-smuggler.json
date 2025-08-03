@@ -37,6 +37,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": null,
                 "group": "spear",
                 "hardness": 0,
                 "hp": {
@@ -128,6 +129,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": 1,
                 "group": "sling",
                 "hardness": 0,
                 "hp": {
@@ -992,7 +994,6 @@
                         "selector": "strike-damage"
                     },
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "label": "PF2E.SpecificRule.TOTMToggle.OffGuard",
                         "option": "target:condition:off-guard",

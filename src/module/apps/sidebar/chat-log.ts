@@ -1,5 +1,5 @@
 import { ActorPF2e } from "@actor";
-import { handleKingdomChatMessageEvent } from "@actor/party/kingdom/chat.ts";
+import { Kingdom } from "@actor/party/kingdom/model.ts";
 import type { ApplicationRenderContext } from "@client/applications/_types.d.mts";
 import type { ContextMenuCondition, ContextMenuEntry } from "@client/applications/ux/context-menu.d.mts";
 import type { Rolled } from "@client/dice/_module.d.mts";
@@ -13,7 +13,7 @@ import { TokenDocumentPF2e } from "@scene";
 import { CheckPF2e } from "@system/check/index.ts";
 import { looksLikeDamageRoll } from "@system/damage/helpers.ts";
 import { DamageRoll } from "@system/damage/roll.ts";
-import { createHTMLElement, ErrorPF2e, htmlClosest, htmlQuery, objectHasKey } from "@util";
+import { createHTMLElement, ErrorPF2e, fontAwesomeIcon, htmlClosest, htmlQuery, objectHasKey } from "@util";
 
 class ChatLogPF2e extends fa.sidebar.tabs.ChatLog {
     static override DEFAULT_OPTIONS: DeepPartial<fa.ApplicationConfiguration> = {
@@ -21,7 +21,7 @@ class ChatLogPF2e extends fa.sidebar.tabs.ChatLog {
             applyDamage: ChatLogPF2e.#onClickApplyDamage,
             applyEffect: ChatLogPF2e.#onClickApplyEffect,
             findToken: ChatLogPF2e.#onClickFindToken,
-            kingdomAction: ChatLogPF2e.#onClickKingdomAction,
+            kingdomCollect: ChatLogPF2e.#onClickKingdomAction,
             revertDamage: ChatLogPF2e.#onClickRevertDamage,
             recoverPersistentDamage: ChatLogPF2e.#onClickRecoverPersistent,
             setAsInitiative: ChatLogPF2e.#onClickSetAsInitiative,
@@ -38,6 +38,7 @@ class ChatLogPF2e extends fa.sidebar.tabs.ChatLog {
         options: fa.api.HandlebarsRenderOptions,
     ): Promise<void> {
         await super._onRender(context, options);
+        if (!options.parts.includes("log")) return;
         const log = htmlQuery(this.element, "ol.chat-log");
         if (!log) throw ErrorPF2e("Unexpected failure to find ChatLog element");
         log.dataset.tooltipDirection = "UP";
@@ -192,7 +193,24 @@ class ChatLogPF2e extends fa.sidebar.tabs.ChatLog {
 
     static async #onClickKingdomAction(this: ChatLogPF2e, event: PointerEvent): Promise<void> {
         const { message, element: messageEl } = ChatLogPF2e.#messageFromEvent(event);
-        if (message && messageEl) return handleKingdomChatMessageEvent({ event, message, messageEl });
+        if (!message || !messageEl) return;
+
+        const party = message.actor ?? game.actors.party;
+        if (!party?.isOfType("party") || !party?.isOwner || !(party?.campaign instanceof Kingdom)) {
+            return;
+        }
+
+        const kingdom = party.campaign;
+        await kingdom.collect();
+
+        const content = createHTMLElement("div", { innerHTML: message.content });
+        htmlQuery(content, "[data-action=kingdomCollect]")?.replaceWith(
+            createHTMLElement("div", {
+                classes: ["confirmation"],
+                children: [fontAwesomeIcon("fa-check"), "Resources Collected"],
+            }),
+        );
+        await message.update({ content: content.innerHTML });
     }
 
     static async #onClickRevertDamage(this: ChatLogPF2e, event: PointerEvent, button: HTMLElement): Promise<void> {
@@ -378,6 +396,14 @@ class ChatLogPF2e extends fa.sidebar.tabs.ChatLog {
             return message.isRerollable && !!actor?.isOfType("character") && actor.heroPoints.value > 0;
         };
 
+        const canMythicPointReroll: ContextMenuCondition = (li) => {
+            const message = game.messages.get(li.dataset.messageId, { strict: true });
+            const actor = message.actor;
+            return (
+                message.isRerollable && !!actor?.isOfType("character") && actor.system.resources.mythicPoints.value > 0
+            );
+        };
+
         const canShowRollDetails: ContextMenuCondition = (li) => {
             const message = game.messages.get(li.dataset.messageId, { strict: true });
             return game.user.isGM && !!message.flags.pf2e.context;
@@ -445,7 +471,16 @@ class ChatLogPF2e extends fa.sidebar.tabs.ChatLog {
                 condition: canHeroPointReroll,
                 callback: (li) => {
                     const message = game.messages.get(li.dataset.messageId, { strict: true });
-                    CheckPF2e.rerollFromMessage(message, { heroPoint: true });
+                    CheckPF2e.rerollFromMessage(message, { resource: "hero-points" });
+                },
+            },
+            {
+                name: "PF2E.RerollMenu.MythicPoint",
+                icon: fa.fields.createFontAwesomeIcon("circle-m").outerHTML,
+                condition: canMythicPointReroll,
+                callback: (li) => {
+                    const message = game.messages.get(li.dataset.messageId, { strict: true });
+                    CheckPF2e.rerollFromMessage(message, { resource: "mythic-points" });
                 },
             },
             {

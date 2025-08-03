@@ -9,7 +9,7 @@
         },
         "containerId": null,
         "description": {
-            "value": "<p>This spellheart is fashioned from the tip of a demon's horn that's been polished until smooth and shiny. The spell DC of any spell cast by Activating this item is 29.</p><ul><li><strong>Armor</strong> You gain resistance 10 to unholy.</li><li><strong>Weapon</strong> After you cast an enchantment spell by Activating the <em>horn</em>, your Strikes with the weapon deal an additional 1d8 mental damage until end of your next turn.</li></ul><p>@UUID[Compendium.pf2e.equipment-effects.Item.Effect: Polished Demon Horn - Armor]</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.Effect: Polished Demon Horn - Weapon]</p><hr /><p><strong>Activate</strong> Cast a Spell</p>\n<p><strong>Effect</strong> You cast @UUID[Compendium.pf2e.spells-srd.Item.Daze] (@Check[will|dc:29|basic|traits:cantrip,spell,mental,nonlethal]).</p><hr /><p><strong>Activate</strong> Cast a Spell</p>\n<p><strong>Frequency</strong> once per day</p>\n<p><strong>Effect</strong> You cast 4th-rank @UUID[Compendium.pf2e.spells-srd.Item.Agonizing Despair] (@Check[will|dc:29|traits:emotion,fear,mental,spell]).</p><hr /><p><strong>Activate</strong> Cast a Spell</p>\n<p><strong>Frequency</strong> once per day</p>\n<p><strong>Effect</strong> You cast @UUID[Compendium.pf2e.spells-srd.Item.Outcast's Curse] (@Check[will|dc:29|traits:misfortune,curse,mental,spell]).</p>"
+            "value": "<p>This spellheart is fashioned from the tip of a demon's horn that's been polished until smooth and shiny. The spell DC of any spell cast by Activating this item is 29.</p><ul><li><strong>Armor</strong> You gain resistance 10 to unholy.</li><li><strong>Weapon</strong> After you cast an enchantment spell by Activating the <em>horn</em>, your Strikes with the weapon deal an additional 1d8 mental damage until end of your next turn.</li></ul><p>@UUID[Compendium.pf2e.equipment-effects.Item.Effect: Polished Demon Horn - Armor]</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.Effect: Polished Demon Horn - Weapon]</p><hr /><p><strong>Activate</strong> Cast a Spell</p>\n<p><strong>Effect</strong> You cast @UUID[Compendium.pf2e.spells-srd.Item.Daze] (@Check[will|dc:29|basic|traits:mental,emotion,fear|options:spell]).</p><hr /><p><strong>Activate</strong> Cast a Spell</p>\n<p><strong>Frequency</strong> once per day</p>\n<p><strong>Effect</strong> You cast 3rd-rank @UUID[Compendium.pf2e.spells-srd.Item.Fear] (@Check[will|dc:29|basic|traits:cantrip,spell,mental,nonlethal])..</p><hr /><p><strong>Activate</strong> Cast a Spell</p>\n<p><strong>Frequency</strong> once per day</p>\n<p><strong>Effect</strong> You cast @UUID[Compendium.pf2e.spells-srd.Item.Outcast's Curse] (@Check[will|dc:29|traits:misfortune,curse,mental,spell]).</p><hr /><p><strong>Activate</strong> Cast a Spell</p>\n<p><strong>Frequency</strong> once per day</p>\n<p><strong>Effect</strong> You cast @UUID[Compendium.pf2e.spells-srd.Item.Vision of Death] (@Check[will|dc:29|traits:emotion,death,fear,mental,spell]).</p>"
         },
         "hardness": 0,
         "hp": {
@@ -29,9 +29,9 @@
             }
         },
         "publication": {
-            "license": "OGL",
-            "remaster": false,
-            "title": "Pathfinder #188: They Watched the Stars"
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Adventure Path: Gatewalkers"
         },
         "quantity": 1,
         "rules": [],

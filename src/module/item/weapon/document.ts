@@ -135,7 +135,8 @@ class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ph
 
     /** Whether the weapon in its current usage is thrown: a thrown-only weapon or a thrown usage of a melee weapon */
     get isThrown(): boolean {
-        return this.isRanged && (this.baseType === "alchemical-bomb" || this.system.traits.value.includes("thrown"));
+        const isThrownBaseType = tupleHasValue(CONFIG.PF2E.thrownBaseWeapons, this.baseType);
+        return this.isRanged && (isThrownBaseType || this.system.traits.value.includes("thrown"));
     }
 
     /** Whether the weapon is _can be_ thrown: a thrown-only weapon or one that has a throwable usage */
@@ -176,15 +177,6 @@ class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ph
             this.system.splashDamage.value > 0 ||
             !!baseDamage.persistent?.number
         );
-    }
-
-    /** The number of units of ammunition required to attack with this weapon */
-    get ammoRequired(): number {
-        return this.isRanged && !this.isThrown && ![null, "-"].includes(this.reload)
-            ? this.system.traits.toggles.doubleBarrel.selected
-                ? 2
-                : 1
-            : 0;
     }
 
     get ammo(): ConsumablePF2e<ActorPF2e> | WeaponPF2e<ActorPF2e> | null {
@@ -431,6 +423,15 @@ class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ph
 
         if (this.system.usage.canBeAmmo && !this.isThrowable) {
             this.system.usage.canBeAmmo = false;
+        }
+
+        // Initialize expend value. Valid expend values depend on the reload value
+        if (this.isRanged && !this.isThrown && this.reload !== null) {
+            const isDoubleBarrel = this.system.traits.toggles.doubleBarrel.selected;
+            const minValue = isDoubleBarrel ? 2 : 1;
+            this.system.expend = Math.max(minValue, this.system.expend ?? 1);
+        } else {
+            this.system.expend = null;
         }
     }
 
@@ -736,8 +737,8 @@ class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ph
     /** Consume a unit of ammunition used by this weapon */
     async consumeAmmo(): Promise<void> {
         const ammo = this.ammo;
-        if (ammo?.isOfType("consumable")) {
-            return ammo.consume(this.ammoRequired);
+        if (this.system.expend && ammo?.isOfType("consumable")) {
+            return ammo.consume(this.system.expend);
         } else if (ammo?.isOfType("weapon")) {
             if (!ammo.system.usage.canBeAmmo) {
                 throw ErrorPF2e("attempted to consume weapon not usable as ammunition");
@@ -779,6 +780,17 @@ class WeaponPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends Ph
                 changed.system.damage.die ||= null;
             }
         }
+
+        // Ensure expend stays a valid value (simpler once we have data models), and set it when swapping to a ranged weapon
+        const reload = changed.system.reload?.value ?? this._source.system.reload.value;
+        const isThrown = (traits?.value ?? this._source.system.traits.value)?.includes("thrown");
+        const isRanged =
+            setHasElement(MANDATORY_RANGED_GROUPS, changed.system.group ?? this.system.group) ||
+            !!("range" in changed.system ? changed.system.range : this._source.system.range);
+        const mustHaveExpend = isRanged && !isThrown && reload !== null;
+        changed.system.expend = mustHaveExpend
+            ? Math.max(1, changed.system.expend ?? this._source.system.expend ?? 1)
+            : null;
 
         return super._preUpdate(changed, options, user);
     }

@@ -872,7 +872,6 @@
                         "uuid": "{item|flags.pf2e.rulesSelections.elementTwo}"
                     },
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "option": "junction:{item|flags.pf2e.rulesSelections.elementOne}:impulse",
                         "predicate": [
@@ -1144,7 +1143,6 @@
                         }
                     },
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "option": "junction:fire:impulse",
                         "predicate": [
@@ -1940,6 +1938,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": null,
                 "group": "knife",
                 "hardness": 0,
                 "hp": {
@@ -2785,7 +2784,6 @@
                         "value": 1
                     },
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "label": "PF2E.SpecificRule.LitTorch",
                         "option": "lit-torch",

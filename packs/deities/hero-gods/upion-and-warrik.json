@@ -1,0 +1,53 @@
+{
+    "_id": "xDHJU43e9Bw7GwYm",
+    "folder": "D9zBpB4QxouPISQD",
+    "img": "systems/pf2e/icons/default-icons/deity.svg",
+    "name": "Upion and Warrik",
+    "system": {
+        "attribute": [
+            "cha",
+            "con"
+        ],
+        "category": "deity",
+        "description": {
+            "value": "<p>When Upion received his myth-speaking, he politely thanked the cyclopes but refused to seek divinity or hear their whole prophecy. To do so would mean outliving his lover, Warrik, by decades or even centuries. Instead, the pair continued their military careers, believing it better to find immortality together on the front lines than chase some goal they couldn't share. Both appeared to perish in the Battle of Tesikon Heights, only to arise imbued with mythic power to turn the tide of battle. Since then, Upion and Warrik have acted as a single hero-god, seemingly able to grant spells only when together. The pair encourage camaraderie, neither expecting nor disparaging those whose loyalty develops into consensual romance.</p>\n<p><strong>Title</strong> The Shieldbrothers</p>\n<p><strong>Areas of Concern</strong> shield-bearers and promises</p>\n<p><strong>Edicts</strong> share stories that glorify your companions, guard your friends' backs, find joy in grim circumstances</p>\n<p><strong>Anathema</strong> betray a lover, flee battle before your companions have a chance to escape</p>\n<p><strong>Religious Symbol</strong> pair of overlapping circular shields</p>\n<p><strong>Sacred Animal</strong> wolf</p>\n<p><strong>Sacred Colors</strong> brown, orange</p>"
+        },
+        "domains": {
+            "alternate": [],
+            "primary": [
+                "family",
+                "might",
+                "passion",
+                "protection"
+            ]
+        },
+        "font": [
+            "heal"
+        ],
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder #216: The Acropolis Pyre"
+        },
+        "rules": [],
+        "sanctification": {
+            "modal": "can",
+            "what": [
+                "holy"
+            ]
+        },
+        "skill": [
+            "performance"
+        ],
+        "spells": {
+            "1": "Compendium.pf2e.spells-srd.Item.Mindlink",
+            "2": "Compendium.pf2e.spells-srd.Item.Laughing Fit",
+            "6": "Compendium.pf2e.spells-srd.Item.Wall of Force"
+        },
+        "traits": {},
+        "weapons": [
+            "shield-boss"
+        ]
+    },
+    "type": "deity"
+}

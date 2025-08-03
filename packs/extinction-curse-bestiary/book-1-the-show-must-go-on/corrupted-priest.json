@@ -1012,6 +1012,7 @@
                     "handsHeld": 1,
                     "invested": null
                 },
+                "expend": null,
                 "group": "spear",
                 "hardness": 0,
                 "hp": {
@@ -1178,7 +1179,6 @@
                 "quantity": 1,
                 "rules": [
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "option": "has-religious-symbol",
                         "requiresEquipped": false
@@ -1316,7 +1316,7 @@
                 },
                 "category": "interaction",
                 "description": {
-                    "value": "<p>The corrupted priest can use <span data-pf2-action=\"makeAnImpression\">Diplomacy</span> to @UUID[Compendium.pf2e.actionspf2e.Item.Make an Impression] on animals and to make very simple @UUID[Compendium.pf2e.actionspf2e.Item.Request]{Requests} of them.</p>"
+                    "value": "<p>The corrupted priest can use Diplomacy to [[/act make-an-impression]] on animals and to make very simple [[/act request]]{Requests} of them.</p>"
                 },
                 "publication": {
                     "license": "OGL",
@@ -1415,7 +1415,7 @@
                         "selector": "strike-damage"
                     },
                     {
-                        "itemType": "weapon",
+                        "itemType": "melee",
                         "key": "ItemAlteration",
                         "mode": "add",
                         "predicate": [

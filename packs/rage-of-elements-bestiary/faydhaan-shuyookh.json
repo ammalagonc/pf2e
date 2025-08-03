@@ -1319,6 +1319,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": null,
                 "group": "knife",
                 "hardness": 0,
                 "hp": {
@@ -1663,7 +1664,6 @@
                         ]
                     },
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "option": "aura-of-hospitality-active",
                         "toggleable": true,

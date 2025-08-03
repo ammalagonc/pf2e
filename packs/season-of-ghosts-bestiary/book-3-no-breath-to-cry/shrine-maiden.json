@@ -1836,6 +1836,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": null,
                 "group": null,
                 "hardness": 0,
                 "hp": {
@@ -1933,6 +1934,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": null,
                 "group": "club",
                 "hardness": 0,
                 "hp": {
@@ -1959,7 +1961,7 @@
                 "quantity": 1,
                 "range": null,
                 "reload": {
-                    "value": ""
+                    "value": null
                 },
                 "rules": [],
                 "runes": {
@@ -2020,6 +2022,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": 1,
                 "group": "bow",
                 "hardness": 0,
                 "hp": {
@@ -2372,7 +2375,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p><strong>Frequency</strong> once per day</p>\n<hr />\n<p><strong>Effect</strong> The shrine maiden nocks an arrow and whispers a chant before unleashing a torrent of holy power in the form of dozens of ghostly glowing arrows. Creatures in a @Template[line|distance:60] take @Damage[10d6[force]] damage (@Check[reflex|dc:28|basic] save). On a critical failure, the creature is also @UUID[Compendium.pf2e.conditionitems.Item.Immobilized] (@UUID[Compendium.pf2e.actionspf2e.Item.Escape] DC 28) for 1 minute.</p>"
+                    "value": "<p><strong>Frequency</strong> once per day</p>\n<hr />\n<p><strong>Effect</strong> The shrine maiden nocks an arrow and whispers a chant before unleashing a torrent of holy power in the form of dozens of ghostly glowing arrows. Creatures in a @Template[line|distance:60] take @Damage[10d6[force]|options:area-damage] damage (@Check[reflex|dc:28|basic|options:area-effect,inflicts:immobilized] save). On a critical failure, the creature is also @UUID[Compendium.pf2e.conditionitems.Item.Immobilized] ([[/act escape dc=28]]) for 1 minute.</p>"
                 },
                 "frequency": {
                     "max": 1,

@@ -1,0 +1,43 @@
+{
+    "_id": "okDw1dRcrQafunTV",
+    "img": "icons/commodities/leather/scales-blue.webp",
+    "name": "Effect: Dragonhide",
+    "system": {
+        "description": {
+            "value": "<p>You gain a +1 circumstance bonus to AC.</p>"
+        },
+        "duration": {
+            "expiry": "turn-end",
+            "sustained": false,
+            "unit": "rounds",
+            "value": 1
+        },
+        "level": {
+            "value": 1
+        },
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder #216: The Acropolis Pyre"
+        },
+        "rules": [
+            {
+                "key": "FlatModifier",
+                "selector": "ac",
+                "type": "circumstance",
+                "value": 1
+            }
+        ],
+        "start": {
+            "initiative": null,
+            "value": 0
+        },
+        "tokenIcon": {
+            "show": true
+        },
+        "traits": {
+            "value": []
+        }
+    },
+    "type": "effect"
+}

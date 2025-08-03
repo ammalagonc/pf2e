@@ -335,6 +335,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": 1,
                 "group": "bow",
                 "hardness": 0,
                 "hp": {
@@ -422,6 +423,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": null,
                 "group": "sword",
                 "hardness": 0,
                 "hp": {
@@ -448,7 +450,7 @@
                 "quantity": 1,
                 "range": null,
                 "reload": {
-                    "value": ""
+                    "value": null
                 },
                 "rules": [],
                 "runes": {
@@ -895,7 +897,7 @@
                 "category": "defensive",
                 "deathNote": true,
                 "description": {
-                    "value": "<p>When Kharostan dies, his daemon-tainted flesh quickly rots away and sublimates into a foul-smelling gas that fills a @Template[emanation|distance:10] around his body.</p>\n<p>All creatures within the area take @Damage[20d6[void]] damage as their flesh curdles and rots as well (@Check[fortitude|dc:37|basic] save).</p>"
+                    "value": "<p>When Kharostan dies, his daemon-tainted flesh quickly rots away and sublimates into a foul-smelling gas that fills a @Template[emanation|distance:10] around his body.</p>\n<p>All creatures within the area take @Damage[20d6[void]|options:area-damage] damage as their flesh curdles and rots as well (@Check[fortitude|dc:37|basic|options:area-effect] save).</p>"
                 },
                 "publication": {
                     "license": "OGL",
@@ -1104,7 +1106,6 @@
                 },
                 "rules": [
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "option": "reckless-abandon",
                         "toggleable": true

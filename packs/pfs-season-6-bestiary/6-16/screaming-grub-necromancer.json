@@ -1389,6 +1389,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": null,
                 "group": "polearm",
                 "hardness": 0,
                 "hp": {
@@ -1415,7 +1416,7 @@
                 "quantity": 1,
                 "range": null,
                 "reload": {
-                    "value": ""
+                    "value": null
                 },
                 "rules": [],
                 "runes": {
@@ -1587,14 +1588,24 @@
                 },
                 "category": "interaction",
                 "description": {
-                    "value": "<p>The necromancer emits a scent of putrid rot in a @Template[type:emanation|distance:5]. Anyone that enters or begins its turn in the aura that is not a member of the Cult of the Screaming Grub is @UUID[Compendium.pf2e.conditionitems.Item.Sickened]{Sickened 1}.</p>"
+                    "value": "<p>The necromancer emits a scent of putrid rot in a 5-foot emanation. Anyone that enters or begins its turn in the aura that is not a member of the Cult of the Screaming Grub is @UUID[Compendium.pf2e.conditionitems.Item.Sickened]{Sickened 1}.</p>"
                 },
                 "publication": {
                     "license": "OGL",
                     "remaster": false,
                     "title": ""
                 },
-                "rules": [],
+                "rules": [
+                    {
+                        "key": "Aura",
+                        "radius": 5,
+                        "slug": "stench-of-decay",
+                        "traits": [
+                            "occult",
+                            "olfactory"
+                        ]
+                    }
+                ],
                 "slug": null,
                 "traits": {
                     "value": [

@@ -36,6 +36,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": 1,
                 "group": "bow",
                 "hardness": 0,
                 "hp": {
@@ -122,6 +123,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": null,
                 "group": "sword",
                 "hardness": 0,
                 "hp": {
@@ -148,7 +150,7 @@
                 "quantity": 1,
                 "range": null,
                 "reload": {
-                    "value": ""
+                    "value": null
                 },
                 "rules": [],
                 "runes": {
@@ -471,7 +473,7 @@
                         "key": "RollOption",
                         "label": "PF2E.NPCAbility.ChangeShape.Label",
                         "option": "change-shape",
-                        "selection": "hybrid",
+                        "selection": "humanoid",
                         "suboptions": [
                             {
                                 "label": "PF2E.NPCAbility.ChangeShape.Form.Animal",
@@ -507,7 +509,8 @@
                         "slug": "claw",
                         "traits": [
                             "agile",
-                            "finesse"
+                            "finesse",
+                            "unarmed"
                         ]
                     },
                     {
@@ -527,7 +530,8 @@
                         ],
                         "slug": "jaws",
                         "traits": [
-                            "finesse"
+                            "finesse",
+                            "unarmed"
                         ]
                     },
                     {
@@ -545,7 +549,10 @@
                         "predicate": [
                             "change-shape:humanoid"
                         ],
-                        "slug": "fist"
+                        "slug": "fist",
+                        "traits": [
+                            "unarmed"
+                        ]
                     },
                     {
                         "key": "BaseSpeed",
@@ -562,6 +569,13 @@
                         ],
                         "selector": "climb",
                         "value": 10
+                    },
+                    {
+                        "key": "CreatureSize",
+                        "predicate": [
+                            "change-shape:animal"
+                        ],
+                        "value": "small"
                     }
                 ],
                 "slug": "werecreature-change-shape",
@@ -692,7 +706,6 @@
                         "selector": "strike-damage"
                     },
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "label": "PF2E.SpecificRule.TOTMToggle.OffGuard",
                         "option": "target:condition:off-guard",
@@ -730,7 +743,6 @@
                 },
                 "rules": [
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "option": "unexpected-transformation",
                         "toggleable": true

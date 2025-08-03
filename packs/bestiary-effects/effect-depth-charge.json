@@ -1,0 +1,79 @@
+{
+    "_id": "cs9UyOf4D3hh7cDG",
+    "img": "icons/magic/fire/explosion-fireball-medium-blue.webp",
+    "name": "Effect: Depth Charge",
+    "system": {
+        "description": {
+            "value": "<p>You take a –2 circumstance penalty to Acrobatics checks to Balance and Athletics checks to Swim. If you critically failed the save you are also deafened.</p>"
+        },
+        "duration": {
+            "expiry": "turn-start",
+            "sustained": false,
+            "unit": "minutes",
+            "value": 1
+        },
+        "fromSpell": false,
+        "level": {
+            "value": 5
+        },
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder NPC Core"
+        },
+        "rules": [
+            {
+                "choices": [
+                    {
+                        "label": "PF2E.Check.Result.Degree.Check.failure",
+                        "value": "failure"
+                    },
+                    {
+                        "label": "PF2E.Check.Result.Degree.Check.criticalFailure",
+                        "value": "critical-failure"
+                    }
+                ],
+                "key": "ChoiceSet",
+                "prompt": "PF2E.SpecificRule.Prompt.DegreeOfSuccess",
+                "rollOption": "depth-charge"
+            },
+            {
+                "key": "FlatModifier",
+                "predicate": [
+                    "action:balance"
+                ],
+                "selector": "acrobatics",
+                "type": "circumstance",
+                "value": -2
+            },
+            {
+                "key": "FlatModifier",
+                "predicate": [
+                    "action:swim"
+                ],
+                "selector": "athletics",
+                "type": "circumstance",
+                "value": -2
+            },
+            {
+                "inMemoryOnly": true,
+                "key": "GrantItem",
+                "predicate": [
+                    "depth-charge:critical-failure"
+                ],
+                "uuid": "Compendium.pf2e.conditionitems.Item.Deafened"
+            }
+        ],
+        "start": {
+            "initiative": null,
+            "value": 0
+        },
+        "tokenIcon": {
+            "show": true
+        },
+        "traits": {
+            "value": []
+        }
+    },
+    "type": "effect"
+}

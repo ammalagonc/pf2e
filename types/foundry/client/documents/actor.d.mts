@@ -1,4 +1,5 @@
 import Token from "@client/canvas/placeables/token.mjs";
+import { DocumentConstructionContext } from "@common/_types.mjs";
 import {
     DatabaseCreateOperation,
     DatabaseDeleteOperation,
@@ -7,6 +8,7 @@ import {
 } from "@common/abstract/_types.mjs";
 import Document from "@common/abstract/document.mjs";
 import { ImageFilePath, VideoFilePath } from "@common/constants.mjs";
+import { IterableWeakMap, IterableWeakSet } from "@common/utils/_module.mjs";
 import ActorSheet from "../appv1/sheets/actor-sheet.mjs";
 import { ActiveEffect, ActorUUID, BaseActor, Combat, Item, Scene, TokenDocument } from "./_module.mjs";
 import { ClientDocument, ClientDocumentStatic } from "./abstract/client-document.mjs";
@@ -79,6 +81,12 @@ declare class Actor<TParent extends TokenDocument | null = TokenDocument | null>
     /** Whether the Actor has at least one Combatant in the active Combat that represents it. */
     get inCombat(): boolean;
 
+    /**
+     * Maintain a list of Token Documents that represent this Actor, stored by Scene.
+     * @internal
+     */
+    readonly _dependentTokens: IterableWeakMap<Scene, IterableWeakSet<TokenDocument>>;
+
     /* -------------------------------------------- */
     /*  Methods                                     */
     /* -------------------------------------------- */
@@ -113,10 +121,14 @@ declare class Actor<TParent extends TokenDocument | null = TokenDocument | null>
 
     /**
      * Create a new Token document, not yet saved to the database, which represents the Actor.
-     * @param [data={}] Additional data, such as x, y, rotation, etc. for the created token data
+     * @param data Additional data, such as x, y, rotation, etc. for the created token data
+     * @param options The options passed to the TokenDocument constructor
      * @returns The created TokenDocument instance
      */
-    getTokenDocument(data?: DeepPartial<foundry.documents.TokenSource>): Promise<NonNullable<TParent>>;
+    getTokenDocument(
+        data?: DeepPartial<foundry.documents.TokenSource>,
+        options?: Partial<DocumentConstructionContext<this>>,
+    ): Promise<NonNullable<TParent>>;
 
     /** Get an Array of Token images which could represent this Actor */
     getTokenImages(): Promise<(ImageFilePath | VideoFilePath)[]>;

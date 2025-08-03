@@ -253,6 +253,7 @@
                     "handsHeld": 2,
                     "invested": null
                 },
+                "expend": null,
                 "group": "polearm",
                 "hardness": 0,
                 "hp": {
@@ -279,7 +280,7 @@
                 "quantity": 1,
                 "range": null,
                 "reload": {
-                    "value": ""
+                    "value": null
                 },
                 "rules": [],
                 "runes": {
@@ -340,6 +341,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": 1,
                 "group": "crossbow",
                 "hardness": 0,
                 "hp": {
@@ -503,7 +505,6 @@
                 "quantity": 1,
                 "rules": [
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "option": "has-religious-symbol",
                         "requiresEquipped": false
@@ -862,7 +863,8 @@
                         ],
                         "selector": "glaive-attack-roll",
                         "text": "{item|description}",
-                        "title": "{item|name}"
+                        "title": "{item|name}",
+                        "visibility": "owner"
                     }
                 ],
                 "slug": null,

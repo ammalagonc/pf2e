@@ -358,7 +358,7 @@
             "_stats": {
                 "compendiumSource": "Compendium.pf2e.spells-srd.Item.y6rAdMK6EFlV6U0t"
             },
-            "img": "systems/pf2e/icons/spells/burning-hands.webp",
+            "img": "icons/magic/fire/flame-burning-hand-orange.webp",
             "name": "Burning Hands",
             "sort": 500000,
             "system": {
@@ -1047,6 +1047,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": null,
                 "group": "sword",
                 "hardness": 0,
                 "hp": {
@@ -1073,7 +1074,7 @@
                 "quantity": 1,
                 "range": null,
                 "reload": {
-                    "value": ""
+                    "value": null
                 },
                 "rules": [],
                 "runes": {
@@ -1448,7 +1449,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>The priest breathes fire that deals @Damage[7d6[fire]] damage in a @Template[cone|distance:30] (@Check[reflex|dc:23|basic] save).</p>\n<p>It can't use Breath Weapon again for [[/gmr 1d4 #Recharge Breath Weapon]]{1d4 rounds}.</p>"
+                    "value": "<p>The priest breathes fire that deals @Damage[7d6[fire]|options:area-damage] damage in a @Template[cone|distance:30] (@Check[reflex|dc:23|basic|options:area-effect] save).</p>\n<p>It can't use Breath Weapon again for [[/gmr 1d4 #Recharge Breath Weapon]]{1d4 rounds}.</p>"
                 },
                 "publication": {
                     "license": "OGL",
@@ -1526,7 +1527,7 @@
                 },
                 "rules": [
                     {
-                        "itemType": "weapon",
+                        "itemType": "melee",
                         "key": "ItemAlteration",
                         "mode": "add",
                         "predicate": [

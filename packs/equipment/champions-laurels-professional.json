@@ -1,0 +1,59 @@
+{
+    "_id": "5w7BqWBjsmPVpGyB",
+    "img": "icons/equipment/head/crown-horns-brown.webp",
+    "name": "Champion's Laurels (Professional)",
+    "system": {
+        "baseItem": null,
+        "bulk": {
+            "value": 0
+        },
+        "category": "talisman",
+        "containerId": null,
+        "damage": null,
+        "description": {
+            "value": "<p><strong>Activate</strong> <span class=\"action-glyph\">f</span> (concentrate)</p>\n<p><strong>Trigger</strong> You are about to roll an Acrobatics or Athletics check, and you are trained or better in the skill</p>\n<p><strong>Requirements</strong> You can perceive at least 12 allies or friendly bystanders encouraging you.</p><hr /><p>This elegant crown of laurels can be worn on the head, atop a helmet, or even wrapped around the neck as a torc, signaling the wearer's athletic achievements in a past competition. When you Activate the laurels, you draw strength from your adoring crowd and gain a +2 status bonus to the triggering check. If you critically succeed at the check, you gain 10 temporary Hit Points that last for 1 minute.</p>"
+        },
+        "hardness": 0,
+        "hp": {
+            "max": 0,
+            "value": 0
+        },
+        "level": {
+            "value": 10
+        },
+        "material": {
+            "grade": null,
+            "type": null
+        },
+        "price": {
+            "value": {
+                "gp": 160
+            }
+        },
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder #216: The Acropolis Pyre"
+        },
+        "quantity": 1,
+        "rules": [],
+        "size": "med",
+        "traits": {
+            "rarity": "uncommon",
+            "value": [
+                "consumable",
+                "magical",
+                "talisman"
+            ]
+        },
+        "usage": {
+            "value": "affixed-to-armor"
+        },
+        "uses": {
+            "autoDestroy": true,
+            "max": 1,
+            "value": 1
+        }
+    },
+    "type": "consumable"
+}

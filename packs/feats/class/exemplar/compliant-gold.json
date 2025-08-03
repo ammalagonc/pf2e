@@ -51,6 +51,7 @@
                     "item:tag:physical-ikon:{item|flags.pf2e.rulesSelections.ikon}",
                     "divine-spark:{item|flags.pf2e.rulesSelections.ikon}"
                 ],
+                "priority": 121,
                 "property": "traits",
                 "value": "reach"
             },
@@ -66,7 +67,8 @@
                 "path": "system.attributes.reach.base",
                 "phase": "afterDerived",
                 "predicate": [
-                    "compliant-gold-extra-reach"
+                    "compliant-gold-extra-reach",
+                    "divine-spark:{item|flags.pf2e.rulesSelections.ikon}"
                 ],
                 "value": 10
             }

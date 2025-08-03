@@ -37,6 +37,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": 1,
                 "group": "bow",
                 "hardness": 0,
                 "hp": {
@@ -124,6 +125,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": null,
                 "group": "sword",
                 "hardness": 0,
                 "hp": {
@@ -639,7 +641,7 @@
         {
             "_id": "baE5TfLTN71MdB62",
             "img": "systems/pf2e/icons/default-icons/action.svg",
-            "name": "+3 Perception to Sense Motive",
+            "name": "+3 to Sense Motive",
             "sort": 1100000,
             "system": {
                 "actionType": {
@@ -906,7 +908,6 @@
                         "selector": "strike-damage"
                     },
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "label": "PF2E.SpecificRule.TOTMToggle.OffGuard",
                         "option": "target:condition:off-guard",

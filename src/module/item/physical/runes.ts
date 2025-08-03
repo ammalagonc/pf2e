@@ -856,6 +856,14 @@ export const ARMOR_PROPERTY_RUNES: { [T in ArmorPropertyRuneType]: ArmorProperty
         slug: "soaring",
         traits: ["magical"],
     },
+    spellwatch: {
+        name: "PF2E.ArmorPropertyRuneSpellwatch",
+        level: 13,
+        price: 3000,
+        rarity: "common",
+        slug: "spellwatch",
+        traits: ["magical"],
+    },
     stanching: {
         name: "PF2E.ArmorPropertyRuneStanching",
         level: 5,
@@ -1000,6 +1008,14 @@ const WEAPON_PROPERTY_RUNES: { [T in WeaponPropertyRuneType]: WeaponPropertyRune
         rarity: "uncommon",
         slug: "bloodthirsty",
         traits: ["magical"],
+    },
+    bolkasBlessing: {
+        level: 5,
+        name: "PF2E.WeaponPropertyRune.bolkasBlessing.Name",
+        price: 160,
+        rarity: "uncommon",
+        slug: "bolkasBlessing",
+        traits: ["divine"],
     },
     brilliant: {
         damage: {
@@ -1421,6 +1437,14 @@ const WEAPON_PROPERTY_RUNES: { [T in WeaponPropertyRuneType]: WeaponPropertyRune
         slug: "greaterBloodbane",
         traits: ["dwarf", "magical"],
     },
+    greaterBolkasBlessing: {
+        level: 11,
+        name: "PF2E.WeaponPropertyRune.greaterBolkasBlessing.Name",
+        price: 1400,
+        rarity: "uncommon",
+        slug: "greaterBolkasBlessing",
+        traits: ["divine"],
+    },
     greaterBrilliant: {
         damage: {
             additional: [
@@ -1702,6 +1726,14 @@ const WEAPON_PROPERTY_RUNES: { [T in WeaponPropertyRuneType]: WeaponPropertyRune
         slug: "greaterImpactful",
         traits: ["force", "magical"],
     },
+    greaterKolssOath: {
+        level: 11,
+        name: "PF2E.WeaponPropertyRune.greaterKolssOath.Name",
+        price: 1400,
+        rarity: "uncommon",
+        slug: "greaterKolssOath",
+        traits: ["divine"],
+    },
     greaterRooting: {
         level: 11,
         name: "PF2E.WeaponPropertyRune.greaterRooting.Name",
@@ -1766,6 +1798,14 @@ const WEAPON_PROPERTY_RUNES: { [T in WeaponPropertyRuneType]: WeaponPropertyRune
         rarity: "common",
         slug: "greaterThundering",
         traits: ["magical", "sonic"],
+    },
+    greaterTruddsStrength: {
+        level: 11,
+        name: "PF2E.WeaponPropertyRune.greaterTruddsStrength.Name",
+        price: 1400,
+        rarity: "uncommon",
+        slug: "greaterTruddsStrength",
+        traits: ["divine"],
     },
     grievous: {
         damage: {
@@ -2012,6 +2052,14 @@ const WEAPON_PROPERTY_RUNES: { [T in WeaponPropertyRuneType]: WeaponPropertyRune
         slug: "kinWarding",
         traits: ["dwarf", "magical"],
     },
+    kolssOath: {
+        level: 5,
+        name: "PF2E.WeaponPropertyRune.kolssOath.Name",
+        price: 160,
+        rarity: "uncommon",
+        slug: "kolssOath",
+        traits: ["divine"],
+    },
     majorFanged: {
         level: 15,
         name: "PF2E.WeaponPropertyRune.majorFanged.Name",
@@ -2215,6 +2263,14 @@ const WEAPON_PROPERTY_RUNES: { [T in WeaponPropertyRuneType]: WeaponPropertyRune
         rarity: "common",
         slug: "thundering",
         traits: ["magical", "sonic"],
+    },
+    truddsStrength: {
+        level: 5,
+        name: "PF2E.WeaponPropertyRune.truddsStrength.Name",
+        price: 160,
+        rarity: "uncommon",
+        slug: "truddsStrength",
+        traits: ["divine"],
     },
     trueRooting: {
         level: 19,

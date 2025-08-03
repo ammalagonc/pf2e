@@ -48,7 +48,7 @@
             "_stats": {
                 "compendiumSource": "Compendium.pf2e.spells-srd.Item.HBJPsonQnWcC3qdX"
             },
-            "img": "systems/pf2e/icons/spells/hallucinatory-terrain.webp",
+            "img": "icons/environment/wilderness/cave-entrance-vulcano.webp",
             "name": "Hallucinatory Terrain",
             "sort": 200000,
             "system": {
@@ -614,6 +614,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": 1,
                 "group": "sling",
                 "hardness": 0,
                 "hp": {
@@ -770,7 +771,7 @@
                 },
                 "category": "interaction",
                 "description": {
-                    "value": "<p>The blodeuwedd can use Diplomacy to @UUID[Compendium.pf2e.actionspf2e.Item.Make an Impression] on and make very simple @UUID[Compendium.pf2e.actionspf2e.Item.Request]{Requests} of animals.</p>"
+                    "value": "<p>The blodeuwedd can use Diplomacy to [[/act make-an-impression]] on and make very simple [[/act request]]{Requests} of animals.</p>"
                 },
                 "publication": {
                     "license": "OGL",
@@ -853,7 +854,6 @@
                         ]
                     },
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "option": "allergen-aura-active",
                         "toggleable": true,

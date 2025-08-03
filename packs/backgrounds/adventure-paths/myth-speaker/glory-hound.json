@@ -1,0 +1,80 @@
+{
+    "_id": "Lue29rc3ZDt64iyL",
+    "folder": "4h6Y0ehALprvN9Pe",
+    "img": "systems/pf2e/icons/default-icons/background.svg",
+    "name": "Glory Hound",
+    "system": {
+        "boosts": {
+            "0": {
+                "value": [
+                    "cha",
+                    "str"
+                ]
+            },
+            "1": {
+                "value": [
+                    "cha",
+                    "con",
+                    "dex",
+                    "int",
+                    "str",
+                    "wis"
+                ]
+            }
+        },
+        "description": {
+            "value": "<p>Eventually, even the greatest hero-god must die. Yet many live eternally through song, poetry, shrines, and art. Even though Iblydos isn't producing new hero-gods, its people know how to appreciate and commemorate a real hero. You hope to seize that same immortality through exceptional deeds and a little luck. If everything goes to plan, you'll retire rich and famous, looking good all the while. If the fates turn against you, at the very least you know tales of your exploits will dazzle audiences for ages.</p>\n<p>Choose two attribute boosts. One must be to <strong>Strength</strong> or <strong>Charisma</strong>, and one is a free attribute boost.</p>\n<p>You're trained in either the Intimidation or Performance skill, as well as the Games Lore skill. If you choose Intimidation, you gain the @UUID[Compendium.pf2e.feats-srd.Item.Intimidating Glare] skill feat. If you choose Performance, you gain the @UUID[Compendium.pf2e.feats-srd.Item.Impressive Performance] skill feat.</p>"
+        },
+        "items": {},
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Myth-Speaker Player's Guide"
+        },
+        "rules": [
+            {
+                "adjustName": false,
+                "choices": [
+                    {
+                        "label": "PF2E.Skill.Intimidation",
+                        "value": {
+                            "feat": "Compendium.pf2e.feats-srd.Item.Intimidating Glare",
+                            "skill": "intimidation"
+                        }
+                    },
+                    {
+                        "label": "PF2E.Skill.Performance",
+                        "value": {
+                            "feat": "Compendium.pf2e.feats-srd.Item.Impressive Performance",
+                            "skill": "performance"
+                        }
+                    }
+                ],
+                "flag": "choice",
+                "key": "ChoiceSet",
+                "prompt": "PF2E.SpecificRule.Prompt.Skill"
+            },
+            {
+                "key": "ActiveEffectLike",
+                "mode": "upgrade",
+                "path": "system.skills.{item|flags.pf2e.rulesSelections.choice.skill}.rank",
+                "value": 1
+            },
+            {
+                "key": "GrantItem",
+                "uuid": "{item|flags.pf2e.rulesSelections.choice.feat}"
+            }
+        ],
+        "trainedSkills": {
+            "lore": [
+                "Games Lore"
+            ],
+            "value": []
+        },
+        "traits": {
+            "rarity": "uncommon",
+            "value": []
+        }
+    },
+    "type": "background"
+}

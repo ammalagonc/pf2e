@@ -36,6 +36,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": null,
                 "group": "hammer",
                 "hardness": 0,
                 "hp": {
@@ -62,7 +63,7 @@
                 "quantity": 1,
                 "range": null,
                 "reload": {
-                    "value": ""
+                    "value": null
                 },
                 "rules": [],
                 "runes": {
@@ -121,6 +122,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": 1,
                 "group": "firearm",
                 "hardness": 0,
                 "hp": {
@@ -495,7 +497,7 @@
                 "category": "defensive",
                 "deathNote": true,
                 "description": {
-                    "value": "<p>When the munsahir is reduced to 0 HP, their armor explodes at the start of their next turn, dealing @Damage[5d6[fire]] damage in a @Template[emanation|distance:10] (@Check[reflex|dc:19|basic]).</p>"
+                    "value": "<p>When the munsahir is reduced to 0 HP, their armor explodes at the start of their next turn, dealing @Damage[5d6[fire]|options:area-damage] damage in a @Template[emanation|distance:10] (@Check[reflex|dc:19|basic|options:area-effect]).</p>"
                 },
                 "publication": {
                     "license": "OGL",

@@ -154,7 +154,6 @@
                 "property": "description",
                 "value": [
                     {
-                        "divider": true,
                         "text": "PF2E.SpecificRule.Sorcerer.Bloodline.BloodMagicDescription.Nymph",
                         "title": "PF2E.SpecificRule.Sorcerer.Bloodline.BloodMagicLabel.Nymph"
                     },
@@ -187,7 +186,6 @@
                 "property": "description",
                 "value": [
                     {
-                        "divider": true,
                         "text": "PF2E.SpecificRule.Sorcerer.Bloodline.BloodMagicDescription.Nymph",
                         "title": "PF2E.SpecificRule.Sorcerer.Bloodline.BloodMagicLabel.Nymph"
                     },
@@ -197,7 +195,6 @@
                 ]
             },
             {
-                "domain": "all",
                 "key": "RollOption",
                 "option": "feature:bloodline:tradition:primal",
                 "predicate": [

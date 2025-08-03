@@ -1,0 +1,52 @@
+{
+    "_id": "JZWi6512m9RlMrNO",
+    "img": "icons/sundries/flags/banner-sword-blue.webp",
+    "name": "Effect: Commander's Banner",
+    "system": {
+        "description": {
+            "value": "<p>Granted by @UUID[Compendium.pf2e.classfeatures.Item.Commander's Banner]</p>\n<p>You gain a +1 status bonus to Will saves and DCs against fear effects.</p>"
+        },
+        "duration": {
+            "expiry": null,
+            "sustained": false,
+            "unit": "unlimited",
+            "value": -1
+        },
+        "fromSpell": false,
+        "level": {
+            "value": 1
+        },
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Battlecry!"
+        },
+        "rules": [
+            {
+                "key": "FlatModifier",
+                "predicate": [
+                    "item:trait:fear"
+                ],
+                "selector": [
+                    "ac",
+                    "fortitude-dc",
+                    "reflex-dc",
+                    "will"
+                ],
+                "type": "status",
+                "value": 1
+            }
+        ],
+        "start": {
+            "initiative": null,
+            "value": 0
+        },
+        "tokenIcon": {
+            "show": true
+        },
+        "traits": {
+            "value": []
+        }
+    },
+    "type": "effect"
+}

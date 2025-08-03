@@ -37,6 +37,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": 1,
                 "group": "crossbow",
                 "hardness": 0,
                 "hp": {
@@ -120,6 +121,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": null,
                 "group": "club",
                 "hardness": 0,
                 "hp": {
@@ -146,7 +148,7 @@
                 "quantity": 1,
                 "range": null,
                 "reload": {
-                    "value": ""
+                    "value": null
                 },
                 "rules": [],
                 "runes": {
@@ -474,6 +476,11 @@
         },
         {
             "_id": "xuyjTEDoDAmb5acN",
+            "flags": {
+                "pf2e": {
+                    "linkedWeapon": "IGUOzNrIaqQKPR2j"
+                }
+            },
             "img": "systems/pf2e/icons/default-icons/melee.svg",
             "name": "Sap",
             "sort": 800000,
@@ -553,6 +560,11 @@
         },
         {
             "_id": "wfNSTwrVHkHF5YLS",
+            "flags": {
+                "pf2e": {
+                    "linkedWeapon": "3tjip0HhguL5l2lw"
+                }
+            },
             "img": "systems/pf2e/icons/default-icons/melee.svg",
             "name": "Hand Crossbow",
             "sort": 1000000,
@@ -745,7 +757,6 @@
                         "selector": "strike-damage"
                     },
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "label": "PF2E.SpecificRule.TOTMToggle.OffGuard",
                         "option": "target:condition:off-guard",

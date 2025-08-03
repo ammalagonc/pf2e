@@ -8,7 +8,7 @@
             "_stats": {
                 "compendiumSource": "Compendium.pf2e.equipment-srd.Item.ynnBwzkzsR6B73iO"
             },
-            "img": "systems/pf2e/icons/equipment/weapons/sickle.webp",
+            "img": "icons/tools/hand/sickle-steel-grey.webp",
             "name": "Sickle",
             "sort": 100000,
             "system": {
@@ -37,6 +37,7 @@
                     "handsHeld": 1,
                     "invested": null
                 },
+                "expend": null,
                 "group": "knife",
                 "hardness": 0,
                 "hp": {
@@ -58,12 +59,12 @@
                 "publication": {
                     "license": "ORC",
                     "remaster": true,
-                    "title": "Pathfinder Core Rulebook"
+                    "title": "Pathfinder Player Core"
                 },
                 "quantity": 1,
                 "range": null,
                 "reload": {
-                    "value": ""
+                    "value": null
                 },
                 "rules": [],
                 "runes": {

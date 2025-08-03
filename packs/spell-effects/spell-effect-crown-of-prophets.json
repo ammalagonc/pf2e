@@ -1,0 +1,58 @@
+{
+    "_id": "C2jiokGoehvLu0fi",
+    "img": "icons/creatures/reptiles/serpent-horned-green.webp",
+    "name": "Spell Effect: Crown of Prophets",
+    "system": {
+        "description": {
+            "value": "<p>Granted by @UUID[Compendium.pf2e.spells-srd.Item.Crown of Prophets]</p>\n<p>You gain a fangs unarmed attack that deals 1d6 piercing damage and has the agile, finesse, and versatile poison traits.</p>"
+        },
+        "duration": {
+            "expiry": "turn-start",
+            "sustained": true,
+            "unit": "minutes",
+            "value": 1
+        },
+        "level": {
+            "value": 1
+        },
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder #216: The Acropolis Pyre"
+        },
+        "rules": [
+            {
+                "category": "unarmed",
+                "damage": {
+                    "base": {
+                        "damageType": "piercing",
+                        "dice": 1,
+                        "die": "d6"
+                    }
+                },
+                "group": "brawling",
+                "img": "systems/pf2e/icons/unarmed-attacks/fangs.webp",
+                "key": "Strike",
+                "label": "PF2E.BattleForm.Attack.Fangs",
+                "slug": "fangs",
+                "traits": [
+                    "unarmed",
+                    "finesse",
+                    "agile",
+                    "versatile-poison"
+                ]
+            }
+        ],
+        "start": {
+            "initiative": null,
+            "value": 0
+        },
+        "tokenIcon": {
+            "show": true
+        },
+        "traits": {
+            "value": []
+        }
+    },
+    "type": "effect"
+}

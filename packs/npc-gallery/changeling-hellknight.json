@@ -239,7 +239,7 @@
             "_stats": {
                 "compendiumSource": "Compendium.pf2e.spells-srd.Item.y6rAdMK6EFlV6U0t"
             },
-            "img": "systems/pf2e/icons/spells/burning-hands.webp",
+            "img": "icons/magic/fire/flame-burning-hand-orange.webp",
             "name": "Burning Hands",
             "sort": 500000,
             "system": {
@@ -828,6 +828,7 @@
                     "handsHeld": 2,
                     "invested": null
                 },
+                "expend": null,
                 "group": "polearm",
                 "hardness": 0,
                 "hp": {
@@ -854,7 +855,7 @@
                 "quantity": 1,
                 "range": null,
                 "reload": {
-                    "value": ""
+                    "value": null
                 },
                 "rules": [],
                 "runes": {

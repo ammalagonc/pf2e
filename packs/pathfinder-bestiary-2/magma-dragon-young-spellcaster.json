@@ -164,7 +164,7 @@
             "_stats": {
                 "compendiumSource": "Compendium.pf2e.spells-srd.Item.y6rAdMK6EFlV6U0t"
             },
-            "img": "systems/pf2e/icons/spells/burning-hands.webp",
+            "img": "icons/magic/fire/flame-burning-hand-orange.webp",
             "name": "Burning Hands (At Will)",
             "sort": 300000,
             "system": {
@@ -717,7 +717,7 @@
             "_stats": {
                 "compendiumSource": "Compendium.pf2e.spells-srd.Item.Et8RSCLx8w7uOLvo"
             },
-            "img": "systems/pf2e/icons/spells/restore-senses.webp",
+            "img": "icons/magic/control/buff-flight-wings-runes-red-yellow.webp",
             "name": "Restore Senses",
             "sort": 1100000,
             "system": {

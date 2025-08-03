@@ -73,9 +73,10 @@ import type { ActorSourcePF2e } from "./data/index.ts";
 import { Immunity, Resistance, Weakness } from "./data/iwr.ts";
 import { ActorSizePF2e } from "./data/size.ts";
 import {
-    applyActorUpdate,
+    applyActorGroupUpdate,
     auraAffectsActor,
     checkAreaEffects,
+    createActorGroupUpdate,
     createEncounterRollOptions,
     createEnvironmentRollOptions,
     isReallyPC,
@@ -232,9 +233,9 @@ class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
     get dimensions(): ActorDimensions {
         const size = this.system.traits?.size ?? new ActorSizePF2e({ value: "med" });
         return {
-            length: size.length,
-            width: size.width,
-            height: Math.min(size.length, size.width),
+            length: size.long,
+            width: size.wide,
+            height: Math.min(size.long, size.wide),
         };
     }
 
@@ -424,6 +425,20 @@ class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
         return 0;
     }
 
+    /**
+     * @inheritdoc
+     * Overriden to also clone dependent tokens if keepId is true
+     */
+    override clone(data?: Record<string, unknown>, context?: DocumentCloneContext): this {
+        const clone = super.clone(data, context);
+        if (context?.keepId) {
+            for (const [key, value] of this._dependentTokens.entries()) {
+                clone._dependentTokens.set(key, value);
+            }
+        }
+        return clone;
+    }
+
     /** Create a clone of this actor to recalculate its statistics with ephemeral effects and roll options included */
     getContextualClone(rollOptions: string[], ephemeralEffects: (ConditionSource | EffectSource)[] = []): this {
         const rollOptionsAll = rollOptions.reduce(
@@ -524,11 +539,9 @@ class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
     }
 
     /** Recharges all abilities after some time has elapsed. */
-    async recharge(options: RechargeOptions): Promise<ActorRechargeData<this>> {
-        const commitData: ActorRechargeData<this> = {
-            actorUpdates: null,
-            itemCreates: [],
-            itemUpdates: [],
+    async recharge(options: RechargeOptions): Promise<ActorRechargeData> {
+        const commitData: ActorRechargeData = {
+            ...createActorGroupUpdate(),
             affected: {
                 frequencies: false,
                 spellSlots: false,
@@ -589,7 +602,7 @@ class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
 
         // Commit to the database unless commit is explicitly set to false
         if (options.commit !== false) {
-            await applyActorUpdate(this, commitData);
+            await applyActorGroupUpdate(this, commitData);
         }
 
         return commitData;
@@ -670,9 +683,9 @@ class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
 
             const sourceSize = source.system?.traits?.size?.value;
             if (linkToActorSize && sourceSize) {
-                const size = new ActorSizePF2e({ value: sourceSize });
-                merged.prototypeToken.width = size.width / 5;
-                merged.prototypeToken.height = size.length / 5;
+                const { width, height } = new ActorSizePF2e({ value: sourceSize }).tokenDimensions;
+                merged.prototypeToken.width = width;
+                merged.prototypeToken.height = height;
             }
 
             switch (merged.type) {
@@ -944,19 +957,16 @@ class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
 
     /** Set defaults for this actor's prototype token */
     private preparePrototypeToken(): void {
-        const linkToActorSize = SIZE_LINKABLE_ACTOR_TYPES.has(this.type);
-        const size = this.system.traits?.size;
-
-        if (linkToActorSize && size) {
-            const width = size.width / 5;
-            const height = size.length / 5;
-            if (this.prototypeToken.width !== width || this.prototypeToken.height !== height) {
-                this.prototypeToken.updateSource({ width, height });
-            }
+        this.prototypeToken.flags = fu.mergeObject(
+            { pf2e: { linkToActorSize: SIZE_LINKABLE_ACTOR_TYPES.has(this.type) } },
+            this.prototypeToken.flags,
+        );
+        // Set as a reference rather than used directly for setting placed token dimensions
+        if (this.prototypeToken.flags.pf2e.linkToActorSize && this.system.traits?.size) {
+            const tokenDimensions = this.system.traits.size.tokenDimensions;
+            this.prototypeToken.width = tokenDimensions.width;
+            this.prototypeToken.height = tokenDimensions.height;
         }
-
-        this.prototypeToken.flags = fu.mergeObject({ pf2e: { linkToActorSize } }, this.prototypeToken.flags);
-        TokenDocumentPF2e.assignDefaultImage(this.prototypeToken);
         TokenDocumentPF2e.prepareScale(this.prototypeToken);
     }
 
@@ -1000,6 +1010,17 @@ class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
             );
             return rule?.toggle(value, suboption) ?? null;
         }
+    }
+
+    /** Ensure newly-created tokens have dimensions matching this actor's size category */
+    override async getTokenDocument(
+        data: DeepPartial<foundry.documents.TokenSource> = {},
+        options?: DocumentConstructionContext<this>,
+    ): Promise<NonNullable<TParent>> {
+        if (this.prototypeToken.flags.pf2e.linkToActorSize) {
+            Object.assign(data, this.system.traits?.size?.tokenDimensions);
+        }
+        return super.getTokenDocument(data, options);
     }
 
     /**
@@ -1795,13 +1816,6 @@ class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
     }
 
     /** Store certain data to be checked in _onUpdateDescendantDocuments */
-    protected override _preUpdateDescendantDocuments<P extends Document>(
-        parent: P,
-        collection: string,
-        changes: Record<string, unknown>[],
-        options: DatabaseUpdateOperation<P>,
-        userId: string,
-    ): void;
     protected override _preUpdateDescendantDocuments(
         parent: Document,
         collection: string,
@@ -1816,14 +1830,6 @@ class ActorPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
     }
 
     /** Overriden to handle max hp updates when certain items changes. */
-    protected override _onUpdateDescendantDocuments<P extends Document>(
-        parent: P,
-        collection: string,
-        documents: Document<P>[],
-        changes: Record<string, unknown>[],
-        options: DatabaseUpdateOperation<P>,
-        userId: string,
-    ): void;
     protected override _onUpdateDescendantDocuments(
         parent: Document,
         collection: string,

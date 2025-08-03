@@ -36,6 +36,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": 1,
                 "group": "bow",
                 "hardness": 0,
                 "hp": {
@@ -122,6 +123,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": null,
                 "group": "sword",
                 "hardness": 0,
                 "hp": {
@@ -148,7 +150,7 @@
                 "quantity": 1,
                 "range": null,
                 "reload": {
-                    "value": ""
+                    "value": null
                 },
                 "rules": [],
                 "runes": {
@@ -286,7 +288,6 @@
                 "quantity": 1,
                 "rules": [
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "option": "has-religious-symbol",
                         "requiresEquipped": false
@@ -555,7 +556,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p><strong>Frequency</strong> once per day</p>\n<hr />\n<p><strong>Effect</strong> The ascended disciple cuts their tongue with a slashing weapon held in a hand (taking @Damage[1[slashing]] damage), then exhales a @Template[cone|distance:15] of burning smoke. Each creature in the area must attempt a @Check[reflex|dc:22|options:area-effect] save.</p>\n<hr />\n<p><strong>Critical Success</strong> The creature is unaffected.</p>\n<p><strong>Success</strong> The creature takes @Damage[2d8[fire]] damage.</p>\n<p><strong>Failure</strong> The creature takes @Damage[4d8[fire]] damage and is @UUID[Compendium.pf2e.conditionitems.Item.Sickened]{Sickened 1} by the agonizing pain of the burns.</p>\n<p><strong>Critical Failure</strong> The creature takes @Damage[6d8[fire]] damage, is sickened 1 by the agonizing pain of the burns, and is @UUID[Compendium.pf2e.conditionitems.Item.Enfeebled]{Enfeebled 1} by the smoke for 1 minute.</p>"
+                    "value": "<p><strong>Frequency</strong> once per day</p>\n<hr />\n<p><strong>Effect</strong> The ascended disciple cuts their tongue with a slashing weapon held in a hand (taking @Damage[1[slashing]] damage), then exhales a @Template[cone|distance:15] of burning smoke. Each creature in the area must attempt a @Check[reflex|dc:22|options:area-effect,damaging-effect] save.</p>\n<hr />\n<p><strong>Critical Success</strong> The creature is unaffected.</p>\n<p><strong>Success</strong> The creature takes @Damage[2d8[fire]|options:area-damage] damage.</p>\n<p><strong>Failure</strong> The creature takes @Damage[4d8[fire]|options:area-damage] damage and is @UUID[Compendium.pf2e.conditionitems.Item.Sickened]{Sickened 1} by the agonizing pain of the burns.</p>\n<p><strong>Critical Failure</strong> The creature takes @Damage[6d8[fire]|options:area-damage] damage, is sickened 1 by the agonizing pain of the burns, and is @UUID[Compendium.pf2e.conditionitems.Item.Enfeebled]{Enfeebled 1} by the smoke for 1 minute.</p>"
                 },
                 "frequency": {
                     "max": 1,
@@ -613,7 +614,6 @@
                         "selector": "strike-damage"
                     },
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "label": "PF2E.SpecificRule.TOTMToggle.OffGuard",
                         "option": "target:condition:off-guard",

@@ -36,6 +36,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": 1,
                 "group": "bow",
                 "hardness": 0,
                 "hp": {
@@ -123,6 +124,7 @@
                     "handsHeld": 1,
                     "invested": null
                 },
+                "expend": null,
                 "group": "axe",
                 "hardness": 0,
                 "hp": {
@@ -539,7 +541,6 @@
                 },
                 "rules": [
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "option": "ghost-dodge",
                         "toggleable": true
@@ -637,7 +638,6 @@
                 },
                 "rules": [
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "label": "PF2E.NPCAbility.PlanarScion.Duskwalker.SpiritHunter",
                         "option": "spirit-hunter",

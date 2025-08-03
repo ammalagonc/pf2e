@@ -1096,6 +1096,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": 1,
                 "group": "crossbow",
                 "hardness": 0,
                 "hp": {
@@ -1179,6 +1180,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": null,
                 "group": "sword",
                 "hardness": 0,
                 "hp": {
@@ -1205,7 +1207,7 @@
                 "quantity": 1,
                 "range": null,
                 "reload": {
-                    "value": ""
+                    "value": null
                 },
                 "rules": [],
                 "runes": {
@@ -1426,7 +1428,7 @@
             "_stats": {
                 "compendiumSource": "Compendium.pf2e.equipment-srd.Item.G5WuYX1ghrZcJ1J1"
             },
-            "img": "systems/pf2e/icons/equipment/treasure/art-objects/minor-art-object/illustrated-book.webp",
+            "img": "icons/sundries/books/book-backed-blue-gold.webp",
             "name": "Poetry book",
             "sort": 2200000,
             "system": {

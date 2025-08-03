@@ -1099,6 +1099,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": 1,
                 "group": "crossbow",
                 "hardness": 0,
                 "hp": {
@@ -1182,6 +1183,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": null,
                 "group": "sword",
                 "hardness": 0,
                 "hp": {
@@ -1208,7 +1210,7 @@
                 "quantity": 1,
                 "range": null,
                 "reload": {
-                    "value": ""
+                    "value": null
                 },
                 "rules": [],
                 "runes": {
@@ -1578,39 +1580,10 @@
             "type": "melee"
         },
         {
-            "_id": "36ET5jV2rkhYn3A0",
-            "img": "systems/pf2e/icons/default-icons/action.svg",
-            "name": "Manipulation Specialist",
-            "sort": 2500000,
-            "system": {
-                "actionType": {
-                    "value": "passive"
-                },
-                "actions": {
-                    "value": null
-                },
-                "category": "interaction",
-                "description": {
-                    "value": "<p>When competing in a social or intellectual arena, the mastermind is a 7th-level challenge.</p>"
-                },
-                "publication": {
-                    "license": "ORC",
-                    "remaster": true,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null,
-                "traits": {
-                    "value": []
-                }
-            },
-            "type": "action"
-        },
-        {
             "_id": "WPfgNQXR7Zw6gYO5",
             "img": "systems/pf2e/icons/default-icons/action.svg",
-            "name": "Perception +17 to Sense Motive",
-            "sort": 2600000,
+            "name": "+7 to Sense Motive",
+            "sort": 2500000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -1637,6 +1610,35 @@
                         "value": 7
                     }
                 ],
+                "slug": null,
+                "traits": {
+                    "value": []
+                }
+            },
+            "type": "action"
+        },
+        {
+            "_id": "36ET5jV2rkhYn3A0",
+            "img": "systems/pf2e/icons/default-icons/action.svg",
+            "name": "Manipulation Specialist",
+            "sort": 2600000,
+            "system": {
+                "actionType": {
+                    "value": "passive"
+                },
+                "actions": {
+                    "value": null
+                },
+                "category": "interaction",
+                "description": {
+                    "value": "<p>When competing in a social or intellectual arena, the mastermind is a 7th-level challenge.</p>"
+                },
+                "publication": {
+                    "license": "ORC",
+                    "remaster": true,
+                    "title": ""
+                },
+                "rules": [],
                 "slug": null,
                 "traits": {
                     "value": []
@@ -1738,7 +1740,6 @@
                         "selector": "strike-damage"
                     },
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "label": "PF2E.SpecificRule.TOTMToggle.OffGuard",
                         "option": "target:condition:off-guard",
@@ -1843,7 +1844,7 @@
             "statistic": "perception"
         },
         "perception": {
-            "details": "",
+            "details": "(+17 to Sense Motive)",
             "mod": 10,
             "senses": []
         },

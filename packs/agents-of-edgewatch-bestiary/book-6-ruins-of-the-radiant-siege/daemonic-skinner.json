@@ -425,6 +425,7 @@
                     "handsHeld": 1,
                     "invested": null
                 },
+                "expend": null,
                 "group": "axe",
                 "hardness": 0,
                 "hp": {
@@ -451,7 +452,7 @@
                 "quantity": 1,
                 "range": null,
                 "reload": {
-                    "value": ""
+                    "value": null
                 },
                 "rules": [],
                 "runes": {
@@ -731,7 +732,6 @@
                         ]
                     },
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "option": "bloody-chain-aura-active",
                         "toggleable": true,
@@ -814,7 +814,6 @@
                         ]
                     },
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "option": "transfusion-aura-active",
                         "toggleable": true
@@ -881,7 +880,6 @@
                         "uuid": "Compendium.pf2e.conditionitems.Item.Off-Guard"
                     },
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "label": "PF2E.SpecificRule.TOTMToggle.OffGuard",
                         "option": "target:condition:off-guard",

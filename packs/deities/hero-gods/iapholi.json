@@ -1,0 +1,54 @@
+{
+    "_id": "bmOKsNOZymMijc4m",
+    "folder": "D9zBpB4QxouPISQD",
+    "img": "systems/pf2e/icons/default-icons/deity.svg",
+    "name": "Iapholi",
+    "system": {
+        "attribute": [
+            "cha",
+            "str"
+        ],
+        "category": "deity",
+        "description": {
+            "value": "<p><strong>Title</strong> Child of Bloodstone</p>\n<p><strong>Areas of Concern</strong> monstrous heritage and acceptance</p>\n<p><strong>Edicts</strong> Develop unique strengths, ally with those who appear different than you do, defend monsters who have been falsely vilified</p>\n<p><strong>Anathema</strong> vilify a monster based on the reputation of their species, terrorize others for fun</p>\n<p><strong>Religious Symbol</strong> winged egg</p>\n<p><strong>Sacred Animal</strong> hoatzin</p>\n<p><strong>Sacred Colors</strong> crimson and green</p>"
+        },
+        "domains": {
+            "alternate": [],
+            "primary": [
+                "confidence",
+                "introspection",
+                "might",
+                "perfection"
+            ]
+        },
+        "font": [
+            "harm",
+            "heal"
+        ],
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder #218: Titanbane"
+        },
+        "rules": [],
+        "sanctification": {
+            "modal": "can",
+            "what": [
+                "unholy"
+            ]
+        },
+        "skill": [
+            "intimidation"
+        ],
+        "spells": {
+            "1": "Compendium.pf2e.spells-srd.Item.Sure Strike",
+            "2": "Compendium.pf2e.spells-srd.Item.Hidebound",
+            "8": "Compendium.pf2e.spells-srd.Item.Monstrosity Form"
+        },
+        "traits": {},
+        "weapons": [
+            "war-flail"
+        ]
+    },
+    "type": "deity"
+}

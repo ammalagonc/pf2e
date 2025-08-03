@@ -37,6 +37,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": null,
                 "group": "dart",
                 "hardness": 0,
                 "hp": {
@@ -123,6 +124,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": null,
                 "group": "sword",
                 "hardness": 0,
                 "hp": {
@@ -725,7 +727,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>The graveknight unleashes a @Template[cone|distance:30] of energy. Creatures in the area take @Damage[11d12[fire]] damage for a creature of the graveknight's level with a @Check[reflex|dc:39|basic|traits:area-damage] based on a high DC of the graveknight's level.</p>\n<p>The graveknight can use this ability once every [[/gmr 1d4 #Rounds]] rounds.</p>\n<p>This energy damage is of the same type as that of their ruinous weapons, and Devastating Blast gains the associated trait.</p>"
+                    "value": "<p>Seldeg Bheldis unleashes a @Template[cone|distance:30] of energy. Creatures in the area take @Damage[11d12[fire]|options:area-damage] damage with a @Check[reflex|dc:39|basic|options:area-effect].</p>\n<p>Seldeg can use this ability once every [[/gmr 1d4 #Recharge Devastating Blast]] rounds.</p>"
                 },
                 "publication": {
                     "license": "ORC",

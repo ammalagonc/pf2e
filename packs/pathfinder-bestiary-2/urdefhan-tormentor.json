@@ -808,6 +808,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": null,
                 "group": "hammer",
                 "hardness": 0,
                 "hp": {
@@ -834,7 +835,7 @@
                 "quantity": 1,
                 "range": null,
                 "reload": {
-                    "value": ""
+                    "value": null
                 },
                 "rules": [],
                 "runes": {
@@ -1000,7 +1001,7 @@
                 "category": "defensive",
                 "deathNote": true,
                 "description": {
-                    "value": "<p>When an urdefhan dies, its invisible flesh quickly rots away and sublimates into a foul-smelling gas that fills a @Template[emanation|distance:5] around the body.</p>\n<p>This gas deals @Damage[5d6[void]] damage to creatures in this area as their flesh curdles and rots as well (@Check[fortitude|dc:21|basic] save).</p>"
+                    "value": "<p>When an urdefhan dies, its invisible flesh quickly rots away and sublimates into a foul-smelling gas that fills a @Template[emanation|distance:5] around the body.</p>\n<p>This gas deals @Damage[5d6[void]|options:area-damage] damage to creatures in this area as their flesh curdles and rots as well (@Check[fortitude|dc:21|basic|options:area-effect] save).</p>"
                 },
                 "publication": {
                     "license": "OGL",

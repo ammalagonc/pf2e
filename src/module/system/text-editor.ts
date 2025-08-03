@@ -196,15 +196,6 @@ class TextEditorPF2e extends foundry.applications.ux.TextEditor {
         return roll.toMessage({ speaker, flavor }, { rollMode });
     }
 
-    /** Remove once https://github.com/foundryvtt/foundryvtt/issues/12933 is fixed */
-    protected static override async _embedContent(
-        match: RegExpMatchArray,
-        options: EnrichmentOptionsPF2e = {},
-    ): Promise<HTMLElement | null> {
-        options = { ...options };
-        return super._embedContent(match, options);
-    }
-
     static processUserVisibility(content: string, options: EnrichmentOptionsPF2e): string {
         const html = createHTMLElement("div", { innerHTML: content });
         const rollData = resolveRollData(options.rollData);
@@ -334,6 +325,10 @@ class TextEditorPF2e extends foundry.applications.ux.TextEditor {
             html.setAttribute("data-pf2-distance", params.distance);
             if (params.traits !== "") html.setAttribute("data-pf2-traits", params.traits);
             if (params.type === "line") html.setAttribute("data-pf2-width", params.width ?? "5");
+            if (["cone", "line"].includes(params.type)) {
+                html.setAttribute("data-tooltip", "PF2E.Item.Spell.MeasuredTemplate.PlacementTooltip");
+                html.setAttribute("data-tooltip-class", "pf2e");
+            }
             if (params.itemUuid !== "") html.setAttribute("data-item-uuid", params.itemUuid);
             return html;
         }
@@ -883,21 +878,26 @@ function getCheckDC({
     if (base && actor && !immutable) {
         const idDomain = item ? `${item.id}-inline-dc` : null;
         const slugDomain = `${sluggify(name)}-inline-dc`;
-        const domains = [params.type !== "flat" ? "all" : null, "inline-dc", idDomain, slugDomain].filter(R.isTruthy);
-        const { synthetics } = actor;
+        const domains =
+            params.type === "flat"
+                ? ["inline-flat-check-dc"]
+                : ["all", "inline-dc", idDomain, slugDomain].filter(R.isTruthy);
         const modifier = new ModifierPF2e({
             slug: "base",
             label: "PF2E.ModifierTitle",
             modifier: base - 10,
-            adjustments: extractModifierAdjustments(synthetics.modifierAdjustments, domains, "base"),
+            adjustments: extractModifierAdjustments(actor.synthetics.modifierAdjustments, domains, "base"),
         });
-        const stat = new Statistic(actor, {
-            slug: params.type,
-            label: name,
-            domains,
-            modifiers: [modifier],
-        });
-
+        const stat = new Statistic(
+            actor,
+            {
+                slug: params.type,
+                label: name,
+                domains,
+                modifiers: [modifier],
+            },
+            { extraRollOptions: [`inline-dc:value:${base}`], item },
+        );
         return String(stat.dc.value);
     }
 

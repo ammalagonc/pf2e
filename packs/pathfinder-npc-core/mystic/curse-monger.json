@@ -2023,6 +2023,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": null,
                 "group": "knife",
                 "hardness": 0,
                 "hp": {
@@ -2049,7 +2050,7 @@
                 "quantity": 1,
                 "range": null,
                 "reload": {
-                    "value": ""
+                    "value": null
                 },
                 "rules": [],
                 "runes": {
@@ -2129,9 +2130,9 @@
                 "quantity": 1,
                 "rules": [],
                 "runes": {
-                    "potency": 0,
+                    "potency": 1,
                     "property": [],
-                    "resilient": 0
+                    "resilient": 1
                 },
                 "size": "med",
                 "slug": "explorers-clothing",
@@ -2395,7 +2396,6 @@
                         "alwaysActive": true,
                         "key": "RollOption",
                         "option": "incurable-curse",
-                        "selection": "Compendium.pf2e.conditionitems.Item.Clumsy",
                         "suboptions": [
                             {
                                 "label": "PF2E.condition.clumsy.name",
@@ -2433,9 +2433,9 @@
             "type": "action"
         },
         {
-            "_id": "4u8iXfXC13rONcRj",
+            "_id": "htR4le3t4fiRyPEw",
             "img": "systems/pf2e/icons/default-icons/action.svg",
-            "name": "Cursed Aura",
+            "name": "–2 To All Saves vs. Curses",
             "sort": 3400000,
             "system": {
                 "actionType": {
@@ -2446,7 +2446,45 @@
                 },
                 "category": "defensive",
                 "description": {
-                    "value": "<p>30 feet. The very earth and air around the curse monger are poisoned by the curses that burden their soul. Any creature who enters or starts their turn in the aura must succeed at a @Check[will|dc:31] save or be @UUID[Compendium.pf2e.conditionitems.Item.Doomed]{Doomed 1} (or @UUID[Compendium.pf2e.conditionitems.Item.Doomed]{Doomed 2} on a critical failure). Regardless of the result of its save, the creature is then temporarily immune for 1 hour.</p>"
+                    "value": ""
+                },
+                "publication": {
+                    "license": "ORC",
+                    "remaster": true,
+                    "title": ""
+                },
+                "rules": [
+                    {
+                        "key": "FlatModifier",
+                        "predicate": [
+                            "item:trait:curse"
+                        ],
+                        "selector": "saving-throw",
+                        "value": -2
+                    }
+                ],
+                "slug": null,
+                "traits": {
+                    "value": []
+                }
+            },
+            "type": "action"
+        },
+        {
+            "_id": "4u8iXfXC13rONcRj",
+            "img": "systems/pf2e/icons/default-icons/action.svg",
+            "name": "Cursed Aura",
+            "sort": 3500000,
+            "system": {
+                "actionType": {
+                    "value": "passive"
+                },
+                "actions": {
+                    "value": null
+                },
+                "category": "defensive",
+                "description": {
+                    "value": "<p>30 feet. The very earth and air around the curse monger are poisoned by the curses that burden their soul. Any creature who enters or starts their turn in the aura must succeed at a @Check[will|dc:31|options:inflicts:doomed] save or be @UUID[Compendium.pf2e.conditionitems.Item.Doomed]{Doomed 1} (or @UUID[Compendium.pf2e.conditionitems.Item.Doomed]{Doomed 2} on a critical failure). Regardless of the result of its save, the creature is then temporarily immune for 1 hour.</p>"
                 },
                 "publication": {
                     "license": "ORC",
@@ -2478,7 +2516,7 @@
             "_id": "TxfvDT9dqOAuWcTv",
             "img": "systems/pf2e/icons/default-icons/action.svg",
             "name": "Share Burden",
-            "sort": 3500000,
+            "sort": 3600000,
             "system": {
                 "actionType": {
                     "value": "action"
@@ -2535,7 +2573,7 @@
                 "value": 35
             },
             "allSaves": {
-                "value": ""
+                "value": "–2 to all saves vs. curses"
             },
             "hp": {
                 "details": "",

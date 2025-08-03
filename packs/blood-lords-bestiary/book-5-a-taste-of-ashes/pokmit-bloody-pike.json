@@ -37,6 +37,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": 1,
                 "group": "bow",
                 "hardness": 0,
                 "hp": {
@@ -124,6 +125,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": null,
                 "group": "spear",
                 "hardness": 0,
                 "hp": {
@@ -150,7 +152,7 @@
                 "quantity": 1,
                 "range": null,
                 "reload": {
-                    "value": ""
+                    "value": null
                 },
                 "rules": [],
                 "runes": {
@@ -212,6 +214,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": null,
                 "group": "hammer",
                 "hardness": 0,
                 "hp": {
@@ -238,7 +241,7 @@
                 "quantity": 1,
                 "range": null,
                 "reload": {
-                    "value": ""
+                    "value": null
                 },
                 "rules": [],
                 "runes": {
@@ -769,7 +772,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>Pokmit unleashes a @Template[cone|distance:30] of cold. Creatures in the area take @Damage[10d12[cold]] damage (@Check[reflex|dc:40|basic]). The graveknight can use this ability once every [[/gmr 1d4 #Recharge Devastating Blast]]{1d4 rounds}.</p>"
+                    "value": "<p>Pokmit unleashes a @Template[cone|distance:30] of cold. Creatures in the area take @Damage[10d12[cold]|options:area-damage] damage (@Check[reflex|dc:40|basic|options:area-effect]). The graveknight can use this ability once every [[/gmr 1d4 #Recharge Devastating Blast]]{1d4 rounds}.</p>"
                 },
                 "publication": {
                     "license": "OGL",

@@ -1,0 +1,49 @@
+{
+    "_id": "gndfKuUTVDOubob2",
+    "folder": "D9zBpB4QxouPISQD",
+    "img": "systems/pf2e/icons/default-icons/deity.svg",
+    "name": "Aerekostes",
+    "system": {
+        "attribute": [
+            "con",
+            "int"
+        ],
+        "category": "deity",
+        "description": {
+            "value": "<p>When the behemoth Ousmariku ravaged western Iblydos, the hero-god Ximakter drew his curved blade and led a band of other mythic warriors against the beast. Ousmariku consumed Ximakter, sending his sword flying to lodge into the nearby beach. Within days of being recovered, the blade awoke with magical intelligence and mythic power. Recognizing this as a novel hero-god, Iblydans swiftly constructed a temple-armory for the divine blade. Known as Aerekostes, the sword has never confirmed the origin of its personality, be it the trapped soul of Ximakter or some spontaneously created entity.</p>\n<p>Aerekostes doesn't just lend magical power; they lend themselves. Aspiring heroes can petition the sword for help, and Aerekostes occasionally agrees to accompany them for some worthy quest. However, if the quest goes awry, the sword sometimes disappears for weeks or even years before resurfacing.</p>\n<p><strong>Title</strong> The Mentor in Blades</p>\n<p><strong>Areas of Concern</strong> contingencies and intelligent items</p>\n<p><strong>Edicts</strong> make items, treat items well, prepare for many possibilities</p>\n<p><strong>Anathema</strong> destroy an intelligent item</p>\n<p><strong>Religious Symbol</strong> kopis encircled by mystical runes</p>\n<p><strong>Sacred Animal</strong> lungfish</p>\n<p><strong>Sacred Colors</strong> blue and bronze</p>"
+        },
+        "domains": {
+            "alternate": [],
+            "primary": [
+                "creation",
+                "healing",
+                "knowledge",
+                "metal"
+            ]
+        },
+        "font": [
+            "harm",
+            "heal"
+        ],
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder #216: The Acropolis Pyre"
+        },
+        "rules": [],
+        "sanctification": null,
+        "skill": [
+            "crafting"
+        ],
+        "spells": {
+            "1": "Compendium.pf2e.spells-srd.Item.Object Reading",
+            "2": "Compendium.pf2e.spells-srd.Item.Animated Assault",
+            "7": "Compendium.pf2e.spells-srd.Item.Contingency"
+        },
+        "traits": {},
+        "weapons": [
+            "falcata"
+        ]
+    },
+    "type": "deity"
+}

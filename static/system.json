@@ -2,10 +2,10 @@
     "id": "pf2e",
     "title": "Pathfinder Second Edition",
     "description": "A community contributed game system for Pathfinder Second Edition",
-    "version": "7.1.0",
+    "version": "7.3.1",
     "license": "./LICENSE",
     "manifest": "https://raw.githubusercontent.com/foundryvtt/pf2e/v13-dev/static/system.json",
-    "download": "https://github.com/foundryvtt/pf2e/releases/download/7.1.0/pf2e.zip",
+    "download": "https://github.com/foundryvtt/pf2e/releases/download/7.3.1/pf2e.zip",
     "changelog": "https://github.com/foundryvtt/pf2e/blob/v13-dev/CHANGELOG.md",
     "url": "https://github.com/foundryvtt/pf2e",
     "bugs": "https://github.com/foundryvtt/pf2e/issues",
@@ -13,8 +13,8 @@
     "socket": true,
     "primaryTokenAttribute": "attributes.hp",
     "compatibility": {
-        "minimum": "13.344",
-        "verified": "13.344",
+        "minimum": "13.345",
+        "verified": "13.346",
         "maximum": "13"
     },
     "authors": [
@@ -77,6 +77,19 @@
             "name": "agents-of-edgewatch-bestiary",
             "label": "Agents of Edgewatch",
             "path": "packs/agents-of-edgewatch-bestiary",
+            "type": "Actor",
+            "banner": "systems/pf2e/assets/compendium-banner/red.webp",
+            "system": "pf2e",
+            "ownership": {
+                "PLAYER": "LIMITED",
+                "ASSISTANT": "OWNER"
+            },
+            "flags": {}
+        },
+        {
+            "name": "battlecry-bestiary",
+            "label": "Battlecry!",
+            "path": "packs/battlecry-bestiary",
             "type": "Actor",
             "banner": "systems/pf2e/assets/compendium-banner/red.webp",
             "system": "pf2e",
@@ -659,6 +672,19 @@
             "flags": {}
         },
         {
+            "name": "myth-speaker-bestiary",
+            "label": "Myth-Speaker",
+            "path": "packs/myth-speaker-bestiary",
+            "type": "Actor",
+            "banner": "systems/pf2e/assets/compendium-banner/red.webp",
+            "system": "pf2e",
+            "ownership": {
+                "PLAYER": "LIMITED",
+                "ASSISTANT": "OWNER"
+            },
+            "flags": {}
+        },
+        {
             "name": "night-of-the-gray-death-bestiary",
             "label": "Night of the Gray Death",
             "path": "packs/night-of-the-gray-death-bestiary",
@@ -1200,6 +1226,7 @@
                         "gatewalkers-bestiary",
                         "outlaws-of-alkenstar-bestiary",
                         "kingmaker-bestiary",
+                        "myth-speaker-bestiary",
                         "quest-for-the-frozen-flame-bestiary",
                         "season-of-ghosts-bestiary",
                         "seven-dooms-for-sandpoint-bestiary",
@@ -1217,6 +1244,7 @@
                     "sorting": "m",
                     "color": "#573938",
                     "packs": [
+                        "battlecry-bestiary",
                         "pathfinder-dark-archive",
                         "book-of-the-dead-bestiary",
                         "rage-of-elements-bestiary",

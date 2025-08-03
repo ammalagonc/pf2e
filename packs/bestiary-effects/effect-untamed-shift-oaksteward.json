@@ -1,0 +1,60 @@
+{
+    "_id": "lBpprC8VD4GRzTtg",
+    "img": "icons/commodities/claws/claw-bear-brown-grey.webp",
+    "name": "Effect: Untamed Shift (Oaksteward)",
+    "system": {
+        "description": {
+            "value": "<p>The Oaksteward gains a claw strike.</p>"
+        },
+        "duration": {
+            "expiry": "turn-start",
+            "sustained": false,
+            "unit": "minutes",
+            "value": 1
+        },
+        "level": {
+            "value": 1
+        },
+        "publication": {
+            "license": "OGL",
+            "remaster": false,
+            "title": "Pathfinder #187: The Seventh Arch"
+        },
+        "rules": [
+            {
+                "attackModifier": 7,
+                "category": "unarmed",
+                "damage": {
+                    "base": {
+                        "damageType": "slashing",
+                        "dice": 1,
+                        "die": "d6",
+                        "modifier": 2
+                    }
+                },
+                "group": "brawling",
+                "key": "Strike",
+                "label": "PF2E.Weapon.Base.claw",
+                "range": null,
+                "slug": "claw",
+                "traits": [
+                    "finesse",
+                    "agile",
+                    "unarmed"
+                ]
+            }
+        ],
+        "start": {
+            "initiative": null,
+            "value": 0
+        },
+        "tokenIcon": {
+            "show": true
+        },
+        "traits": {
+            "rarity": "common",
+            "value": []
+        }
+    },
+    "type": "effect"
+}

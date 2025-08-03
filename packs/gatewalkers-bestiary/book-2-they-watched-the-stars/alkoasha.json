@@ -13,6 +13,8 @@
             "sort": 100000,
             "system": {
                 "badge": {
+                    "max": null,
+                    "min": 0,
                     "type": "counter",
                     "value": 10
                 },
@@ -20,7 +22,7 @@
                     "value": "<p>The number of heads the hydra currently has.</p>"
                 },
                 "duration": {
-                    "expiry": "turn-start",
+                    "expiry": null,
                     "sustained": false,
                     "unit": "unlimited",
                     "value": -1
@@ -399,9 +401,9 @@
             "privateNotes": "",
             "publicNotes": "<p>Hydras are multiheaded, foul-tempered serpentine beasts with voracious appetites, widely feared for their regeneration abilities.</p>",
             "publication": {
-                "license": "OGL",
-                "remaster": false,
-                "title": "Pathfinder #188: They Watched the Stars"
+                "license": "ORC",
+                "remaster": true,
+                "title": "Pathfinder Adventure Path: Gatewalkers"
             }
         },
         "initiative": {

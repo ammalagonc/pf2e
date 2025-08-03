@@ -1053,14 +1053,21 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>When a wyrmwraith deals damage to a living creature with a spectral jaws or spectral claw Strike, the wyrmwraith gains [[/r 18 #Temporary Hit Points]]{18 temporary Hit Points}, and the creature must succeed at a @Check[fortitude|dc:38] save or become @UUID[Compendium.pf2e.conditionitems.Item.Drained]{Drained 2}. Further damage dealt by the wyrmwraith's spectral jaws or spectral claws Strikes increases the value of the drained condition by 2 on a failed save, to a maximum of drained 4.</p>"
+                    "value": "<p>When a wyrmwraith deals damage to a living creature with a spectral jaws or spectral claw Strike, the wyrmwraith gains 18 temporary Hit Points, and the creature must succeed at a @Check[fortitude|dc:38|options:inflicts:drained] save or become @UUID[Compendium.pf2e.conditionitems.Item.Drained]{Drained 2}. Further damage dealt by the wyrmwraith's spectral jaws or spectral claws Strikes increases the value of the drained condition by 2 on a failed save, to a maximum of drained 4.</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.Effect: Drain Life]</p>"
                 },
                 "publication": {
                     "license": "OGL",
                     "remaster": false,
                     "title": ""
                 },
-                "rules": [],
+                "rules": [
+                    {
+                        "key": "ActiveEffectLike",
+                        "mode": "override",
+                        "path": "flags.pf2e.drainLifeTempHP",
+                        "value": 18
+                    }
+                ],
                 "slug": "drain-life",
                 "traits": {
                     "rarity": "common",

@@ -32,8 +32,8 @@
             }
         },
         "publication": {
-            "license": "ORC",
-            "remaster": true,
+            "license": "OGL",
+            "remaster": false,
             "title": "Pathfinder Treasure Vault"
         },
         "quantity": 1,

@@ -7,7 +7,7 @@
             "value": "<p>Allies within the aura gain a +1 status bonus to Will saves against emotion effects.</p>"
         },
         "duration": {
-            "expiry": "turn-start",
+            "expiry": null,
             "sustained": false,
             "unit": "unlimited",
             "value": -1
@@ -16,15 +16,15 @@
             "value": 1
         },
         "publication": {
-            "license": "OGL",
-            "remaster": false,
-            "title": "Pathfinder #188: They Watched the Stars"
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Adventure Path: Gatewalkers"
         },
         "rules": [
             {
                 "key": "FlatModifier",
                 "predicate": [
-                    "emotion"
+                    "item:trait:emotion"
                 ],
                 "selector": "will",
                 "type": "status",

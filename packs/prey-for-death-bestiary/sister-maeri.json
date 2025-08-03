@@ -361,6 +361,7 @@
                     "value": "1 minute"
                 },
                 "heightening": {
+                    "area": 0,
                     "damage": {
                         "rQT6Is4xVcbWJIAt": "1d8"
                     },
@@ -388,7 +389,7 @@
                     "value": ""
                 },
                 "time": {
-                    "value": "2"
+                    "value": "3"
                 },
                 "traits": {
                     "rarity": "common",
@@ -2521,6 +2522,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": null,
                 "group": "sword",
                 "hardness": 0,
                 "hp": {
@@ -2547,7 +2549,7 @@
                 "quantity": 1,
                 "range": null,
                 "reload": {
-                    "value": ""
+                    "value": null
                 },
                 "rules": [],
                 "runes": {
@@ -2608,6 +2610,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": null,
                 "group": "dart",
                 "hardness": 0,
                 "hp": {
@@ -2789,7 +2792,6 @@
                 "quantity": 1,
                 "rules": [
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "option": "has-religious-symbol",
                         "requiresEquipped": false
@@ -3068,7 +3070,6 @@
                         "selector": "sawtooth-saber-damage"
                     },
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "label": "PF2E.SpecificRule.TOTMToggle.OffGuard",
                         "option": "target:condition:off-guard",

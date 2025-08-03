@@ -111,7 +111,7 @@
             "_stats": {
                 "compendiumSource": "Compendium.pf2e.spells-srd.Item.sRfSBHWHdbIa0aGc"
             },
-            "img": "systems/pf2e/icons/spells/chilling-darkness.webp",
+            "img": "icons/magic/light/beam-explosion-pink-purple.webp",
             "name": "Chilling Darkness",
             "sort": 300000,
             "system": {
@@ -667,6 +667,7 @@
                     "handsHeld": 1,
                     "invested": null
                 },
+                "expend": null,
                 "group": "knife",
                 "hardness": 0,
                 "hp": {
@@ -911,7 +912,6 @@
                         "selector": "strike-damage"
                     },
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "label": "PF2E.SpecificRule.TOTMToggle.OffGuard",
                         "option": "target:condition:off-guard",

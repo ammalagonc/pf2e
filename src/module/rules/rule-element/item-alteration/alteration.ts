@@ -4,7 +4,7 @@ import type { FrequencyInterval, ItemSourcePF2e, PhysicalItemSource } from "@ite
 import { itemIsOfType } from "@item/helpers.ts";
 import { prepareBulkData } from "@item/physical/helpers.ts";
 import type { WeaponRangeIncrement } from "@item/weapon/types.ts";
-import type { ZeroToThree } from "@module/data.ts";
+import type { ZeroToFour, ZeroToThree } from "@module/data.ts";
 import { nextDamageDieSize } from "@system/damage/helpers.ts";
 import { objectHasKey } from "@util";
 import { Duration } from "luxon";
@@ -34,17 +34,22 @@ class ItemAlteration extends foundry.abstract.DataModel<RuleElementPF2e, ItemAlt
         "focus-point-cost",
         "frequency-max",
         "frequency-per",
+        "group",
         "hardness",
         "hp-max",
         "material-type",
+        "name",
         "other-tags",
         "pd-recovery-dc",
         "persistent-damage",
+        "potency",
         "range-increment",
         "range-max",
         "rarity",
+        "resilient",
         "speed-penalty",
         "strength",
+        "striking",
         "traits",
     ] as const;
 
@@ -92,6 +97,7 @@ class ItemAlteration extends foundry.abstract.DataModel<RuleElementPF2e, ItemAlt
         if (this.parent.ignored) return;
 
         const DataModelValidationFailure = foundry.data.validation.DataModelValidationFailure;
+        const abpEnabled = game.pf2e.variantRules.AutomaticBonusProgression.isEnabled(this.actor);
 
         switch (this.property) {
             case "ac-bonus": {
@@ -259,6 +265,13 @@ class ItemAlteration extends foundry.abstract.DataModel<RuleElementPF2e, ItemAlt
                 data.item.system.cast.focusPoints = (Math.clamp(newValue, 0, 3) || 0) as ZeroToThree;
                 return;
             }
+            case "group": {
+                const validator = ITEM_ALTERATION_VALIDATORS[this.property];
+                if (validator.isValid(data)) {
+                    data.item.system.group = data.alteration.value;
+                }
+                return;
+            }
             case "hardness": {
                 const validator = ITEM_ALTERATION_VALIDATORS[this.property];
                 if (validator.isValid(data)) {
@@ -358,6 +371,59 @@ class ItemAlteration extends foundry.abstract.DataModel<RuleElementPF2e, ItemAlt
                 }
                 return;
             }
+            case "name": {
+                const validator = ITEM_ALTERATION_VALIDATORS[this.property];
+                if (validator.isValid(data)) {
+                    data.item.name = game.i18n.localize(data.alteration.value);
+                }
+                return;
+            }
+            case "potency": {
+                const validator = ITEM_ALTERATION_VALIDATORS[this.property];
+                if (abpEnabled || !validator.isValid(data)) return;
+
+                const runes = data.item.system.runes;
+                const previousValue = runes.potency;
+                data.item.system.runes.potency = Math.clamp(
+                    AELikeRuleElement.getNewValue(this.mode, data.item.system.runes.potency, data.alteration.value),
+                    0,
+                    4,
+                ) as ZeroToFour;
+
+                if (data.item instanceof ItemPF2e && data.item.system.runes.potency !== previousValue) {
+                    // If a weapon or armor gains a potency rune, it becomes magical
+                    if (!data.item.isMagical && data.item.system.runes.potency > previousValue) {
+                        data.item.system.traits.value.push("magical");
+                    }
+
+                    if (data.item.isOfType("armor") && data.item.isInvested !== false) {
+                        data.item.system.acBonus += data.item.system.runes.potency - previousValue;
+                    }
+
+                    // If this is a constructed item, have the displayed name reflect the new rune
+                    data.item.name = game.pf2e.system.generateItemName(data.item);
+                }
+
+                return;
+            }
+            case "resilient": {
+                const validator = ITEM_ALTERATION_VALIDATORS[this.property];
+                if (abpEnabled || !validator.isValid(data)) return;
+
+                const previousValue = data.item.system.runes.resilient;
+                data.item.system.runes.resilient = Math.clamp(
+                    AELikeRuleElement.getNewValue(this.mode, previousValue, data.alteration.value),
+                    0,
+                    4,
+                ) as ZeroToFour;
+
+                // If this is a constructed item, have the displayed name reflect the new rune
+                if (data.item instanceof ItemPF2e && data.item.system.runes.resilient !== previousValue) {
+                    data.item.name = game.pf2e.system.generateItemName(data.item);
+                }
+
+                return;
+            }
             case "speed-penalty": {
                 const validator = ITEM_ALTERATION_VALIDATORS[this.property];
                 if (!validator.isValid(data)) return;
@@ -380,6 +446,26 @@ class ItemAlteration extends foundry.abstract.DataModel<RuleElementPF2e, ItemAlt
                     data.alteration.value,
                 );
                 data.item.system.strength = Math.max(newValue, -2);
+                return;
+            }
+            case "striking": {
+                const validator = ITEM_ALTERATION_VALIDATORS[this.property];
+                if (abpEnabled || !validator.isValid(data)) return;
+
+                const previousValue = data.item.system.runes.striking;
+                data.item.system.runes.striking = Math.clamp(
+                    AELikeRuleElement.getNewValue(this.mode, previousValue, data.alteration.value),
+                    0,
+                    4,
+                ) as ZeroToFour;
+
+                // Update number of damage dice if the value changed
+                // If this is a constructed item, have the displayed name reflect the new rune
+                if (data.item instanceof ItemPF2e && data.item.system.runes.striking !== previousValue) {
+                    data.item.system.damage.dice = 1 + data.item.system.runes.striking;
+                    data.item.name = game.pf2e.system.generateItemName(data.item);
+                }
+
                 return;
             }
             case "traits": {

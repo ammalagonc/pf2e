@@ -27,7 +27,6 @@
         "rules": [
             {
                 "actorFlag": true,
-                "adjustName": true,
                 "choices": [
                     {
                         "label": "PF2E.Dragon.Arcane",
@@ -345,7 +344,6 @@
                 "value": 1
             },
             {
-                "domain": "all",
                 "key": "RollOption",
                 "option": "feature:bloodline:draconic:{item|flags.pf2e.rulesSelections.dragonBloodline.slug}"
             },
@@ -662,7 +660,6 @@
                 "property": "description",
                 "value": [
                     {
-                        "divider": true,
                         "text": "PF2E.SpecificRule.Sorcerer.Bloodline.BloodMagicDescription.Draconic",
                         "title": "PF2E.SpecificRule.Sorcerer.Bloodline.BloodMagicLabel.Draconic"
                     },
@@ -695,7 +692,6 @@
                 "property": "description",
                 "value": [
                     {
-                        "divider": true,
                         "text": "PF2E.SpecificRule.Sorcerer.Bloodline.BloodMagicDescription.Draconic",
                         "title": "PF2E.SpecificRule.Sorcerer.Bloodline.BloodMagicLabel.Draconic"
                     },
@@ -705,7 +701,6 @@
                 ]
             },
             {
-                "domain": "all",
                 "key": "RollOption",
                 "option": "feature:bloodline:tradition:{item|flags.pf2e.rulesSelections.dragonBloodline.tradition}",
                 "predicate": [

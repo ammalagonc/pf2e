@@ -152,7 +152,7 @@
             "_stats": {
                 "compendiumSource": "Compendium.pf2e.bestiary-family-ability-glossary.Item.aiwlPSmNY9b6Psvd"
             },
-            "img": "systems/pf2e/icons/actions/TwoActions.webp",
+            "img": "systems/pf2e/icons/actions/OneAction.webp",
             "name": "Frightful Moan",
             "sort": 500000,
             "system": {
@@ -160,7 +160,7 @@
                     "value": "action"
                 },
                 "actions": {
-                    "value": 2
+                    "value": 1
                 },
                 "category": "offensive",
                 "description": {

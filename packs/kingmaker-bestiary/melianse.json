@@ -1743,7 +1743,7 @@
                 },
                 "category": "interaction",
                 "description": {
-                    "value": "<p>Melianse can use Diplomacy to @UUID[Compendium.pf2e.actionspf2e.Item.Make an Impression] on aquatic or amphibious animals and make very simple Requests of them.</p>"
+                    "value": "<p>Melianse can use Diplomacy to [[/act make-an-impression]] on aquatic or amphibious animals and make very simple [[/act request]]{Requests} of them.</p>"
                 },
                 "publication": {
                     "license": "OGL",

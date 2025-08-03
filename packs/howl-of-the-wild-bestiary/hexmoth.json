@@ -139,7 +139,6 @@
                 "rules": [
                     {
                         "alwaysActive": true,
-                        "domain": "all",
                         "key": "RollOption",
                         "option": "advanced-arcanovore",
                         "suboptions": [
@@ -270,7 +269,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>With a few fierce wingbeats, the hexmoth expels magical scale dust in a @Template[cone|distance:30]. This deals @Damage[10d6[untyped]] damage of the type to which the hexmoth is immune (@Check[fortitude|dc:23|basic] save). It can't use Hexdust Wind again for [[/gmr 1d4 #Recharge Hexdust Wind]]{1d4 rounds}.</p>"
+                    "value": "<p>With a few fierce wingbeats, the hexmoth expels magical scale dust in a @Template[cone|distance:30]. This deals @Damage[10d6[untyped]|options:area-damage] damage of the type to which the hexmoth is immune (@Check[fortitude|dc:23|basic|options:area-effect] save). It can't use Hexdust Wind again for [[/gmr 1d4 #Recharge Hexdust Wind]]{1d4 rounds}.</p>"
                 },
                 "publication": {
                     "license": "OGL",
@@ -350,7 +349,7 @@
                 "value": 8
             },
             "privateNotes": "",
-            "publicNotes": "",
+            "publicNotes": "<p>A hexworm, upon consuming a sufficient quantity of magic, will spin a cocoon of magically infused silk, metamorphosing into its imago form.</p>",
             "publication": {
                 "license": "ORC",
                 "remaster": true,

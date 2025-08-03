@@ -1,0 +1,80 @@
+{
+    "_id": "J0SCT6yZgdf0DTTD",
+    "folder": "4h6Y0ehALprvN9Pe",
+    "img": "systems/pf2e/icons/default-icons/background.svg",
+    "name": "Beast Seeker",
+    "system": {
+        "boosts": {
+            "0": {
+                "value": [
+                    "dex",
+                    "str"
+                ]
+            },
+            "1": {
+                "value": [
+                    "cha",
+                    "con",
+                    "dex",
+                    "int",
+                    "str",
+                    "wis"
+                ]
+            }
+        },
+        "description": {
+            "value": "<p>From jagged reefs to trackless forests to volcanoes dusted by snow even at this low latitude, Iblydos is home to fearsome creatures willing to eat civilians and snap ships in half. There might be no greater place to test one's monster-hunting credentials than this archipelago, much as countless hero-gods have done over the millennia. Perhaps you traveled here to learn how to slay leviathans and better defend your homeland from some bestial threat. You might instead value the esoteric properties of the slain creatures, knowing the alchemical potential of a hydra's eye or a medusa's venom. Whatever your motivation, you have honed tactics to trip and even tackle massive monsters.</p>\n<p>Choose two attribute boosts. One must be to <strong>Strength</strong> or <strong>Dexterity</strong>, and one is a free attribute boost.</p>\n<p>You're trained in either the Athletics or Thievery skill, as well as the Legendary Beast Lore skill. If you choose Athletics, you gain the @UUID[Compendium.pf2e.feats-srd.Item.Titan Wrestler] skill feat. If you choose Thievery, you gain the @UUID[Compendium.pf2e.feats-srd.Item.Dirty Trick] skill feat.</p>"
+        },
+        "items": {},
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Myth-Speaker Player's Guide"
+        },
+        "rules": [
+            {
+                "adjustName": false,
+                "choices": [
+                    {
+                        "label": "PF2E.Skill.Athletics",
+                        "value": {
+                            "feat": "Compendium.pf2e.feats-srd.Item.Titan Wrestler",
+                            "skill": "athletics"
+                        }
+                    },
+                    {
+                        "label": "PF2E.Skill.Thievery",
+                        "value": {
+                            "feat": "Compendium.pf2e.feats-srd.Item.Dirty Trick",
+                            "skill": "thievery"
+                        }
+                    }
+                ],
+                "flag": "choice",
+                "key": "ChoiceSet",
+                "prompt": "PF2E.SpecificRule.Prompt.Skill"
+            },
+            {
+                "key": "ActiveEffectLike",
+                "mode": "upgrade",
+                "path": "system.skills.{item|flags.pf2e.rulesSelections.choice.skill}.rank",
+                "value": 1
+            },
+            {
+                "key": "GrantItem",
+                "uuid": "{item|flags.pf2e.rulesSelections.choice.feat}"
+            }
+        ],
+        "trainedSkills": {
+            "lore": [
+                "Legendary Beast Lore"
+            ],
+            "value": []
+        },
+        "traits": {
+            "rarity": "uncommon",
+            "value": []
+        }
+    },
+    "type": "background"
+}

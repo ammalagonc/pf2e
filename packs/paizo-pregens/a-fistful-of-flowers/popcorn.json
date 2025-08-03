@@ -220,7 +220,6 @@
                 },
                 "rules": [
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "option": "grasping-reach",
                         "toggleable": true
@@ -517,6 +516,7 @@
                     "handsHeld": 2,
                     "invested": null
                 },
+                "expend": null,
                 "group": "flail",
                 "hardness": 0,
                 "hp": {
@@ -543,7 +543,7 @@
                 "quantity": 1,
                 "range": null,
                 "reload": {
-                    "value": ""
+                    "value": null
                 },
                 "rules": [],
                 "runes": {
@@ -609,6 +609,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": 1,
                 "group": "bomb",
                 "hardness": 0,
                 "hp": {
@@ -1701,7 +1702,6 @@
                         "value": "{item|flags.pf2e.rulesSelections.dragon.damageType}"
                     },
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "label": "PF2E.SpecificRule.Barbarian.Dragon.ToggleLabel",
                         "option": "draconic-rage",

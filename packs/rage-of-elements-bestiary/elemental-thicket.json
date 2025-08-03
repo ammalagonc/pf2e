@@ -137,7 +137,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>@Check[reflex|dc:30], @Damage[(8d10)[bludgeoning]] damage, Escape DC 27, Rupture 20</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Engulf]</p>"
+                    "value": "<p>@Check[reflex|dc:30], @Damage[(8d10)[bludgeoning]] damage, [[/act escape dc=27]], Rupture 20</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Engulf]</p>"
                 },
                 "publication": {
                     "license": "OGL",

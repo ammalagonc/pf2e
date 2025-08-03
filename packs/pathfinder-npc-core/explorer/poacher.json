@@ -37,6 +37,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": 1,
                 "group": "bow",
                 "hardness": 0,
                 "hp": {
@@ -123,6 +124,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": null,
                 "group": "club",
                 "hardness": 0,
                 "hp": {
@@ -149,7 +151,7 @@
                 "quantity": 1,
                 "range": null,
                 "reload": {
-                    "value": ""
+                    "value": null
                 },
                 "rules": [],
                 "runes": {
@@ -371,6 +373,11 @@
         },
         {
             "_id": "yM3snMjrKoj8gXaq",
+            "flags": {
+                "pf2e": {
+                    "linkedWeapon": "JMQ4wgzf4ZoD8kp3"
+                }
+            },
             "img": "systems/pf2e/icons/default-icons/melee.svg",
             "name": "Light Mace",
             "sort": 600000,
@@ -596,7 +603,6 @@
                 },
                 "rules": [
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "label": "PF2E.SpecificRule.HuntPrey.TargetHuntedPrey",
                         "option": "hunted-prey",
@@ -633,7 +639,6 @@
                         ]
                     },
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "label": "PF2E.SpecificRule.Ranger.HuntersEdge.FirstAttack",
                         "option": "first-attack",

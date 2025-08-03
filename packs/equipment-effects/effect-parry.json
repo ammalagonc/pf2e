@@ -24,6 +24,7 @@
             {
                 "key": "FlatModifier",
                 "selector": "ac",
+                "slug": "parry-bonus",
                 "type": "circumstance",
                 "value": 1
             }

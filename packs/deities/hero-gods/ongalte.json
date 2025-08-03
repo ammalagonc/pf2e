@@ -1,0 +1,53 @@
+{
+    "_id": "tOXJ90TOPlzfNdql",
+    "folder": "D9zBpB4QxouPISQD",
+    "img": "systems/pf2e/icons/default-icons/deity.svg",
+    "name": "Ongalte",
+    "system": {
+        "attribute": [
+            "str",
+            "wis"
+        ],
+        "category": "deity",
+        "description": {
+            "value": "<p>When cyclopes and Iblydans first joined forces, they lived as equals. However, humanity gradually overshadowed their giant colleagues, with cyclopes uplifting hero-gods but rarely becoming divine themselves. As she trained in the art of myth-speaking, the cyclops Ongalte became bitter at her species' decline and humans' ascendancy. Without change, her people would eventually dwindle and vanish entirely. She enacted her own myth-speaking, soon after which she collapsed the temple, crushing her and many others beneath the rubble. Yet moments later, she emerged unscathed and ascendant.</p>\n<p>Since then, Ongalte has haunted Iblydos as a hero-god of deicide. She has killed at least three hero-gods, and she may have orchestrated others' demises without formally claiming responsibility. Her greatest obstacles are the city-states themselves; surviving hero-gods rarely leave their urban sanctuaries, so Ongalte relies on slander and disgrace to force these demigods into the open.</p>\n<p>Ongalte has only elevated one hero-god other than herself: her lieutenant Ytildos. His betrayal decades ago confirmed her belief that all hero-gods must die.</p>\n<p><strong>Title</strong> The Death of Divinity</p>\n<p><strong>Areas of Concern</strong> deicide</p>\n<p><strong>Edicts</strong> ruin the reputation of other hero-gods, aid those whom the hero-gods have wronged, kill gods</p>\n<p><strong>Anathema</strong> make a sincere prayer to any other hero-god, perform deeds that ultimately glorify another hero-god</p>\n<p><strong>Religious Symbol</strong> pierced skull of a cyclops</p>\n<p><strong>Sacred Animal</strong> parasitic wasp</p>\n<p><strong>Sacred Colors</strong> gray, red</p>"
+        },
+        "domains": {
+            "alternate": [],
+            "primary": [
+                "ambition",
+                "destruction",
+                "fate",
+                "void"
+            ]
+        },
+        "font": [
+            "harm"
+        ],
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder #216: The Acropolis Pyre"
+        },
+        "rules": [],
+        "sanctification": {
+            "modal": "can",
+            "what": [
+                "unholy"
+            ]
+        },
+        "skill": [
+            "survival"
+        ],
+        "spells": {
+            "1": "Compendium.pf2e.spells-srd.Item.Sure Strike",
+            "2": "Compendium.pf2e.spells-srd.Item.Paranoia",
+            "6": "Compendium.pf2e.spells-srd.Item.Disintegrate"
+        },
+        "traits": {},
+        "weapons": [
+            "greataxe"
+        ]
+    },
+    "type": "deity"
+}

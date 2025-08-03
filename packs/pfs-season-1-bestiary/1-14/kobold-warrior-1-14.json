@@ -37,6 +37,7 @@
                     "handsHeld": 1,
                     "invested": null
                 },
+                "expend": 1,
                 "group": "sling",
                 "hardness": 0,
                 "hp": {
@@ -120,6 +121,7 @@
                     "handsHeld": 1,
                     "invested": null
                 },
+                "expend": null,
                 "group": "spear",
                 "hardness": 0,
                 "hp": {
@@ -210,6 +212,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": 1,
                 "group": "bomb",
                 "hardness": 0,
                 "hp": {
@@ -628,7 +631,6 @@
                 },
                 "rules": [
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "option": "hurried-retreat",
                         "toggleable": true
@@ -695,7 +697,6 @@
                         "selector": "strike-damage"
                     },
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "label": "PF2E.SpecificRule.TOTMToggle.OffGuard",
                         "option": "target:condition:off-guard",

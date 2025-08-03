@@ -1632,6 +1632,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": null,
                 "group": "spear",
                 "hardness": 0,
                 "hp": {
@@ -1662,7 +1663,6 @@
                 },
                 "rules": [
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "label": "PF2E.SpecificRule.GoldenBladeOfMzali.LitLabel",
                         "option": "lit-golden-blade",
@@ -1670,7 +1670,6 @@
                         "value": true
                     },
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "label": "PF2E.SpecificRule.GoldenBladeOfMzali.ElementalFormLabel",
                         "option": "used-elemental-form",

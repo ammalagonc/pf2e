@@ -1,6 +1,6 @@
 import type { ActorSourcePF2e } from "@actor/data/index.ts";
 import { CREATURE_ACTOR_TYPES } from "@actor/values.ts";
-import type { CompendiumDocument } from "@client/documents/collections/compendium-collection.d.mts";
+import type { CompendiumDocument } from "@client/documents/_module.d.mts";
 import type { ItemSourcePF2e } from "@item/base/data/index.ts";
 import { itemIsOfType } from "@item/helpers.ts";
 import { PHYSICAL_ITEM_TYPES } from "@item/physical/values.ts";
@@ -37,6 +37,7 @@ import { Migration934MythicCallingCategory } from "@module/migration/migrations/
 import { Migration935DeityIconPaths } from "@module/migration/migrations/935-deity-icon-paths.ts";
 import { Migration937RemoveInvalidAuraTraits } from "@module/migration/migrations/937-remove-invalid-aura-traits.ts";
 import { Migration938RenameBroochesAndThroned } from "@module/migration/migrations/938-rename-brooches-and-throned.ts";
+import { Migration940WeaponExpend } from "@module/migration/migrations/940-weapon-expend.ts";
 // ^^^ don't let your IDE use the index in these imports. you need to specify the full path ^^^
 
 const { window } = new JSDOM();
@@ -68,6 +69,7 @@ const migrations: MigrationBase[] = [
     new Migration935DeityIconPaths(),
     new Migration937RemoveInvalidAuraTraits(),
     new Migration938RenameBroochesAndThroned(),
+    new Migration940WeaponExpend(),
 ];
 
 const packsDataPath = path.resolve(process.cwd(), "packs");

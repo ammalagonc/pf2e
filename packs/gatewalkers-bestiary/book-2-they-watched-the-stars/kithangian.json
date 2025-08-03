@@ -27,6 +27,9 @@
                     "title": ""
                 },
                 "rules": [],
+                "showSlotlessLevels": {
+                    "value": false
+                },
                 "slots": {},
                 "slug": null,
                 "spelldc": {
@@ -35,17 +38,19 @@
                 },
                 "tradition": {
                     "value": "divine"
-                }
+                },
+                "traits": {}
             },
             "type": "spellcastingEntry"
         },
         {
-            "_id": "l9fwplJ6DXttNOJf",
+            "_id": "DwtlMNedhB4t4XXH",
             "_stats": {
-                "compendiumSource": "Compendium.pf2e.spells-srd.Item.b5sGjGlBf58f8jn0"
+                "compendiumSource": "Compendium.pf2e.spells-srd.Item.A2JfEKe6BZcTG1S8"
             },
-            "img": "icons/magic/water/wave-water-teal.webp",
-            "name": "Air Walk",
+            "folder": "7cyoYPoPYA01mErU",
+            "img": "icons/creatures/mammals/bats-movement-flying-black.webp",
+            "name": "Fly",
             "sort": 200000,
             "system": {
                 "area": null,
@@ -56,7 +61,7 @@
                 "damage": {},
                 "defense": null,
                 "description": {
-                    "value": "<p>The target can walk on air as if it were solid ground. It can ascend and descend in this way at a maximum of a 45-degree angle.</p>"
+                    "value": "<p>The target can soar through the air, gaining a fly Speed equal to its Speed or 20 feet, whichever is greater.</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Spell Effect: Fly]</p>\n<hr />\n<p><strong>Heightened (7th)</strong> The duration increases to 1 hour.</p>"
                 },
                 "duration": {
                     "sustained": false,
@@ -70,16 +75,16 @@
                     "value": "z2jiwgJuxRj0r1Bh"
                 },
                 "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": "Pathfinder Core Rulebook"
+                    "license": "ORC",
+                    "remaster": true,
+                    "title": "Pathfinder Player Core"
                 },
                 "range": {
                     "value": "touch"
                 },
                 "requirements": "",
                 "rules": [],
-                "slug": "air-walk",
+                "slug": "fly",
                 "target": {
                     "value": "1 creature"
                 },
@@ -89,11 +94,12 @@
                 "traits": {
                     "rarity": "common",
                     "traditions": [
+                        "arcane",
                         "divine",
+                        "occult",
                         "primal"
                     ],
                     "value": [
-                        "air",
                         "concentrate",
                         "manipulate"
                     ]
@@ -107,7 +113,7 @@
                 "compendiumSource": "Compendium.pf2e.spells-srd.Item.VlNcjmYyu95vOUe8"
             },
             "img": "icons/magic/symbols/ring-circle-smoke-blue.webp",
-            "name": "Dimension Door",
+            "name": "Translocate",
             "sort": 300000,
             "system": {
                 "area": null,
@@ -118,7 +124,7 @@
                 "damage": {},
                 "defense": null,
                 "description": {
-                    "value": "<p>Opening a door that bypasses normal space, you instantly transport yourself and any items you're wearing and holding from your current space to a clear space within range you can see. If this would bring another creature with you-even if you're carrying it in an extradimensional container-the spell is lost.</p>\n<hr />\n<p><strong>Heightened (5th)</strong> The range increases to 1 mile. You don't need to be able to see your destination, as long as you have been there in the past and know its relative location and distance from you. You are temporarily immune for 1 hour.</p>"
+                    "value": "<p>You instantly transport yourself and any items you're wearing and holding from your current space to an unoccupied space within range you can see. If this would bring another creature with you—even if you're carrying it in an extradimensional container—the spell is lost.</p>\n<hr />\n<p><strong>Heightened (5th)</strong> The range increases to 1 mile. You don't need to be able to see your destination, as long as you have been there in the past and know its relative location and distance from you. You are then temporarily immune for 1 hour.</p>"
                 },
                 "duration": {
                     "sustained": false,
@@ -142,16 +148,16 @@
                     "value": "z2jiwgJuxRj0r1Bh"
                 },
                 "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": "Pathfinder Core Rulebook"
+                    "license": "ORC",
+                    "remaster": true,
+                    "title": "Pathfinder Player Core"
                 },
                 "range": {
                     "value": "120 feet"
                 },
                 "requirements": "",
                 "rules": [],
-                "slug": "dimension-door",
+                "slug": "translocate",
                 "target": {
                     "value": ""
                 },
@@ -223,9 +229,9 @@
                     "value": "z2jiwgJuxRj0r1Bh"
                 },
                 "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": "Pathfinder Core Rulebook"
+                    "license": "ORC",
+                    "remaster": true,
+                    "title": "Pathfinder Player Core"
                 },
                 "range": {
                     "value": "30 feet"
@@ -276,7 +282,7 @@
                 },
                 "duration": {
                     "sustained": false,
-                    "value": "10 minutes"
+                    "value": "1 hour"
                 },
                 "level": {
                     "value": 2
@@ -286,9 +292,9 @@
                     "value": "z2jiwgJuxRj0r1Bh"
                 },
                 "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": "Pathfinder Core Rulebook"
+                    "license": "ORC",
+                    "remaster": true,
+                    "title": "Pathfinder Player Core"
                 },
                 "range": {
                     "value": ""
@@ -316,76 +322,13 @@
             "type": "spell"
         },
         {
-            "_id": "oD5ID6f9UvkNbeHN",
-            "_stats": {
-                "compendiumSource": "Compendium.pf2e.spells-srd.Item.tsKnoBuBbKMXkiz5"
-            },
-            "img": "icons/sundries/scrolls/scroll-writing-tan-grey.webp",
-            "name": "Abyssal Pact",
-            "sort": 600000,
-            "system": {
-                "area": null,
-                "cost": {
-                    "value": ""
-                },
-                "counteraction": false,
-                "damage": {},
-                "defense": null,
-                "description": {
-                    "value": "<p>You call in a favor from another demon whose level is no more than double <em>Abyssal pact's</em> spell rank, two demons whose levels are each at least 2 less than double the spell rank, or three demons whose levels are each at least 3 less than double the spell rank.</p>\n<hr />\n<p><strong>Critical Success</strong> You conjure the demon or demons. They are eager to pursue the task, so they don't ask for a favor.</p>\n<p><strong>Success</strong> You conjure the demon or demons. They are not eager to pursue the task, so they require a favor in return.</p>\n<p><strong>Failure</strong> You don't conjure any demons.</p>\n<p><strong>Critical Failure</strong> The demon or demons are angry that you disturbed them. They appear before you, but they immediately attack you.</p>"
-                },
-                "duration": {
-                    "sustained": false,
-                    "value": ""
-                },
-                "level": {
-                    "value": 1
-                },
-                "location": {
-                    "value": null
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": "Pathfinder Bestiary"
-                },
-                "range": {
-                    "value": ""
-                },
-                "requirements": "",
-                "ritual": {
-                    "primary": {
-                        "check": "Religion (expert; you must be a demon)"
-                    },
-                    "secondary": {
-                        "casters": 0,
-                        "checks": ""
-                    }
-                },
-                "rules": [],
-                "slug": "abyssal-pact",
-                "target": {
-                    "value": ""
-                },
-                "time": {
-                    "value": "1 day"
-                },
-                "traits": {
-                    "rarity": "uncommon",
-                    "traditions": [],
-                    "value": []
-                }
-            },
-            "type": "spell"
-        },
-        {
             "_id": "L0ujpusfMIHUIKop",
             "_stats": {
                 "compendiumSource": "Compendium.pf2e.spells-srd.Item.aIHY2DArKFweIrpf"
             },
             "img": "systems/pf2e/icons/spells/command.webp",
             "name": "Command (At Will, Animals Only)",
-            "sort": 700000,
+            "sort": 600000,
             "system": {
                 "area": null,
                 "cost": {
@@ -400,7 +343,7 @@
                     }
                 },
                 "description": {
-                    "value": "<p>You shout a command that's hard to ignore. You can command the target to approach you, run away (as if it had the @UUID[Compendium.pf2e.conditionitems.Item.Fleeing] condition), release what it's holding, drop @UUID[Compendium.pf2e.conditionitems.Item.Prone], or stand in place. It can't Delay or take any reactions until it has obeyed your command. The effects depend on the target's Will save.</p>\n<hr /><p><strong>Success</strong> The creature is unaffected.</p>\n<p><strong>Failure</strong> For the first action on its next turn, the creature must use a single action to do as you command.</p>\n<p><strong>Critical Failure</strong> The target must use all its actions on its next turn to obey your command.</p>\n<hr /><p><strong>Heightened (5th)</strong> You can target up to 10 creatures.</p>"
+                    "value": "<p>You shout a command that's hard to ignore. You can command the target to approach you, run away (as if it had the @UUID[Compendium.pf2e.conditionitems.Item.Fleeing] condition), release what it's holding, drop @UUID[Compendium.pf2e.conditionitems.Item.Prone], or stand in place. It can't @UUID[Compendium.pf2e.actionspf2e.Item.Delay] or take any reactions until it has obeyed your command. The effects depend on the target's Will save.</p>\n<hr />\n<p><strong>Success</strong> The creature is unaffected.</p>\n<p><strong>Failure</strong> For the first action on its next turn, the creature must use a single action to do as you command.</p>\n<p><strong>Critical Failure</strong> The target must use all its actions on its next turn to obey your command.</p>\n<hr />\n<p><strong>Heightened (5th)</strong> You can target up to 10 creatures.</p>"
                 },
                 "duration": {
                     "sustained": false,
@@ -424,9 +367,9 @@
                     "value": "z2jiwgJuxRj0r1Bh"
                 },
                 "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": "Pathfinder Core Rulebook"
+                    "license": "ORC",
+                    "remaster": true,
+                    "title": "Pathfinder Player Core"
                 },
                 "range": {
                     "value": "30 feet"
@@ -453,6 +396,72 @@
                         "linguistic",
                         "manipulate",
                         "mental"
+                    ]
+                }
+            },
+            "type": "spell"
+        },
+        {
+            "_id": "3ZOXuL4yvfr4efce",
+            "_stats": {
+                "compendiumSource": "Compendium.pf2e.spells-srd.Item.tsKnoBuBbKMXkiz5"
+            },
+            "folder": "6JF73zNhT8zbp1qC",
+            "img": "icons/sundries/scrolls/scroll-writing-tan-grey.webp",
+            "name": "Demonic Pact",
+            "sort": 700000,
+            "system": {
+                "area": null,
+                "cost": {
+                    "value": ""
+                },
+                "counteraction": false,
+                "damage": {},
+                "defense": null,
+                "description": {
+                    "value": "<p>You call in a favor from one demon of level 2 or lower, two demons of level 0 or lower, or three demons of level –1 or lower.</p><hr /><p><strong>Critical Success</strong> You conjure the demon or demons. They are eager to pursue the task, so they don't ask for a favor.</p>\n<p><strong>Success</strong> You conjure the demon or demons. They are not eager to pursue the task, so they require a favor in return.</p>\n<p><strong>Failure</strong> You don't conjure any demons.</p>\n<p><strong>Critical Failure</strong> The demon or demons are angry that you disturbed them. They appear before you, but they immediately attack you.</p><hr /><p><strong>Heightened (+1)</strong> Increase the level of demon you call by 2 for each option.</p>"
+                },
+                "duration": {
+                    "sustained": false,
+                    "value": ""
+                },
+                "level": {
+                    "value": 1
+                },
+                "location": {
+                    "value": null
+                },
+                "publication": {
+                    "license": "ORC",
+                    "remaster": true,
+                    "title": "Pathfinder Monster Core"
+                },
+                "range": {
+                    "value": ""
+                },
+                "requirements": "",
+                "ritual": {
+                    "primary": {
+                        "check": "Religion (expert; you must be a demon)"
+                    },
+                    "secondary": {
+                        "casters": 0,
+                        "checks": ""
+                    }
+                },
+                "rules": [],
+                "slug": "demonic-pact",
+                "target": {
+                    "value": ""
+                },
+                "time": {
+                    "value": "1 day"
+                },
+                "traits": {
+                    "rarity": "uncommon",
+                    "traditions": [],
+                    "value": [
+                        "unholy"
                     ]
                 }
             },
@@ -642,9 +651,9 @@
                     "value": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AllAroundVision]</p>"
                 },
                 "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": "Pathfinder Bestiary"
+                    "license": "ORC",
+                    "remaster": true,
+                    "title": "Pathfinder Monster Core"
                 },
                 "rules": [
                     {
@@ -656,7 +665,6 @@
                 ],
                 "slug": "all-around-vision",
                 "traits": {
-                    "rarity": "common",
                     "value": []
                 }
             },
@@ -980,9 +988,9 @@
             "privateNotes": "",
             "publicNotes": "<p>The kithangian—a horrifying amalgam of horse and scorpion also known as a \"beast demon\"—is a foul fend born of the souls of mortals who abused and tormented animals in life. Kithangians tend to roam wild areas rife with animals to torture, though humanoid settlements with plenty of pets or livestock also make for tantalizing hunting grounds. Uncontested for too long, a kithangian's presence has a corrupting influence on the local fauna, which birth fiendish monstrosities until the demon is vanquished. If it realizes it's being tracked by vengeful druids or demon slayers, a kithangian assumes the shape of an unassuming animal so it can get the jump on its pursuers.</p>",
             "publication": {
-                "license": "OGL",
-                "remaster": false,
-                "title": "Pathfinder #188: They Watched the Stars"
+                "license": "ORC",
+                "remaster": true,
+                "title": "Pathfinder Adventure Path: Gatewalkers"
             }
         },
         "initiative": {
@@ -1027,14 +1035,12 @@
             }
         },
         "traits": {
-            "rarity": "uncommon",
+            "rarity": "common",
             "size": {
                 "value": "lg"
             },
             "value": [
-                "chaotic",
                 "demon",
-                "evil",
                 "fiend",
                 "unholy"
             ]

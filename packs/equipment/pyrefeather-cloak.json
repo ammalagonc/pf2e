@@ -1,0 +1,51 @@
+{
+    "_id": "eqrqkIdQHYzueKmj",
+    "img": "icons/commodities/materials/feather-orange.webp",
+    "name": "Pyrefeather Cloak",
+    "system": {
+        "baseItem": null,
+        "bulk": {
+            "value": 0.1
+        },
+        "containerId": null,
+        "description": {
+            "value": "<p>The red and dark-orange feathers of a pyrefowl have been woven into a beautiful cloak.</p>\n<p><strong>Activate—Deflect Flame</strong> <span class=\"action-glyph\">r</span> (manipulate)</p>\n<p><strong>Trigger</strong> You would be affected by a fire effect</p>\n<p><strong>Frequency</strong> once per day</p><hr /><p><strong>Effect</strong> You flourish the cloak, using the feathers to reduce the incoming heat. You gain fire resistance 5 and a +1 circumstance bonus to saving throws against the triggering effect until the beginning of your next turn. If you are taking persistent fire damage, you can immediately attempt a flat check to end the persistent damage.</p>"
+        },
+        "hardness": 0,
+        "hp": {
+            "max": 0,
+            "value": 0
+        },
+        "level": {
+            "value": 3
+        },
+        "material": {
+            "grade": null,
+            "type": null
+        },
+        "price": {
+            "value": {
+                "gp": 50
+            }
+        },
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder #216: The Acropolis Pyre"
+        },
+        "quantity": 1,
+        "rules": [],
+        "size": "med",
+        "traits": {
+            "rarity": "uncommon",
+            "value": [
+                "invested",
+                "magical"
+            ]
+        },
+        "usage": {
+            "value": "worncloak"
+        }
+    },
+    "type": "equipment"
+}

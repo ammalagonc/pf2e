@@ -1,0 +1,74 @@
+{
+    "_id": "pZg3dGKD5jAfcJ0E",
+    "folder": "4h6Y0ehALprvN9Pe",
+    "img": "systems/pf2e/icons/default-icons/background.svg",
+    "name": "Student of Apotheosis",
+    "system": {
+        "boosts": {
+            "0": {
+                "value": [
+                    "cha",
+                    "int"
+                ]
+            },
+            "1": {
+                "value": [
+                    "cha",
+                    "con",
+                    "dex",
+                    "int",
+                    "str",
+                    "wis"
+                ]
+            }
+        },
+        "description": {
+            "value": "<p>From subjects of worship to forces of nature that literally reshaped the region, hero-gods are central to Iblydan identity. While every child learns at least a little about their city-state's divinities from the past and present, you have devoured these legends. Do you long to have witnessed their miracles firsthand? Have you studied this topic as an academic, archivist, or priest? Perhaps you just love a good story. Whatever the case, these legends speak to you on an ineffable level. Are the fates hinting at some secret destiny: perhaps you're becoming a hero-god of old?</p>\n<p>Choose two attribute boosts. One must be to <strong>Intelligence</strong> or <strong>Charisma</strong>, and one is a free attribute boost.</p>\n<p>You're trained in either the Occultism or Religion skill, as well as the Hero-God Lore skill. You gain the @UUID[Compendium.pf2e.actionspf2e.Item.My Legend Must Be Told] action. Replace this with the @UUID[Compendium.pf2e.actionspf2e.Item.Mythic Echo] action when you gain a mythic calling.</p>"
+        },
+        "items": {},
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Myth-Speaker Player's Guide"
+        },
+        "rules": [
+            {
+                "adjustName": false,
+                "choices": [
+                    {
+                        "label": "PF2E.Skill.Occultism",
+                        "value": "occultism"
+                    },
+                    {
+                        "label": "PF2E.Skill.Religion",
+                        "value": "religion"
+                    }
+                ],
+                "flag": "skill",
+                "key": "ChoiceSet",
+                "prompt": "PF2E.SpecificRule.Prompt.Skill"
+            },
+            {
+                "key": "ActiveEffectLike",
+                "mode": "upgrade",
+                "path": "system.skills.{item|flags.pf2e.rulesSelections.skill}.rank",
+                "value": 1
+            },
+            {
+                "key": "GrantItem",
+                "uuid": "Compendium.pf2e.actionspf2e.Item.My Legend Must Be Told"
+            }
+        ],
+        "trainedSkills": {
+            "lore": [
+                "Hero-God Lore"
+            ],
+            "value": []
+        },
+        "traits": {
+            "rarity": "uncommon",
+            "value": []
+        }
+    },
+    "type": "background"
+}

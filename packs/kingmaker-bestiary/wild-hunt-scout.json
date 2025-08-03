@@ -107,7 +107,7 @@
             "_stats": {
                 "compendiumSource": "Compendium.pf2e.spells-srd.Item.U0hL0LLaprcnAyzC"
             },
-            "img": "systems/pf2e/icons/spells/wind-walk.webp",
+            "img": "icons/magic/air/wind-swirl-gray-blue.webp",
             "name": "Wind Walk",
             "sort": 300000,
             "system": {
@@ -1268,7 +1268,6 @@
                         ]
                     },
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "option": "wild-gaze-active",
                         "toggleable": true,
@@ -1495,7 +1494,6 @@
                         "selector": "strike-damage"
                     },
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "label": "PF2E.SpecificRule.TOTMToggle.OffGuard",
                         "option": "target:condition:off-guard",

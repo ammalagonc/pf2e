@@ -255,9 +255,6 @@
         }
     ],
     "name": "Torn Quartet",
-    "prototypeToken": {
-        "name": "SK Actor"
-    },
     "system": {
         "abilities": {
             "cha": {
@@ -339,7 +336,7 @@
         "details": {
             "blurb": "",
             "languages": {
-                "details": "can’t speak any language",
+                "details": "can't speak any language",
                 "value": [
                     "common",
                     "necril"

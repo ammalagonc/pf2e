@@ -1228,7 +1228,7 @@
             "_stats": {
                 "compendiumSource": "Compendium.pf2e.spells-srd.Item.OyFCwQuw8XRazsNr"
             },
-            "img": "systems/pf2e/icons/spells/remove-curse.webp",
+            "img": "icons/magic/control/buff-flight-wings-runes-blue-white.webp",
             "name": "Remove Curse",
             "sort": 1800000,
             "system": {
@@ -1776,7 +1776,7 @@
             "_stats": {
                 "compendiumSource": "Compendium.pf2e.spells-srd.Item.Et8RSCLx8w7uOLvo"
             },
-            "img": "systems/pf2e/icons/spells/restore-senses.webp",
+            "img": "icons/magic/control/buff-flight-wings-runes-red-yellow.webp",
             "name": "Restore Senses",
             "sort": 2600000,
             "system": {
@@ -2732,6 +2732,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": null,
                 "group": "polearm",
                 "hardness": 0,
                 "hp": {
@@ -2758,7 +2759,7 @@
                 "quantity": 1,
                 "range": null,
                 "reload": {
-                    "value": ""
+                    "value": null
                 },
                 "rules": [],
                 "runes": {
@@ -3099,7 +3100,6 @@
                 },
                 "rules": [
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "option": "catch-rock",
                         "toggleable": true
@@ -3179,7 +3179,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>The tomb giant turns the spiritual tide on a creature that has just died, temporarily transforming it into a volatile vessel of void energy. The tomb giant touches a creature that died in the past 24 hours, infusing its flesh and bone with void energy. Once during the next hour, the tomb giant can spend a single action (from any distance) to release this void energy from the corpse in an explosion that deals @Damage[10d12[void]] damage energy in a @Template[burst|distance:15] (@Check[fortitude|dc:36|basic] save); if not released before the end of the hour, the energy dissipates harmlessly. The tomb giant can't use Font of Death while a previous corpse remains infused.</p>"
+                    "value": "<p>The tomb giant turns the spiritual tide on a creature that has just died, temporarily transforming it into a volatile vessel of void energy. The tomb giant touches a creature that died in the past 24 hours, infusing its flesh and bone with void energy. Once during the next hour, the tomb giant can spend a single action (from any distance) to release this void energy from the corpse in an explosion that deals @Damage[10d12[void]|options:area-damage] damage energy in a @Template[burst|distance:15] (@Check[fortitude|dc:36|basic|options:area-effect] save); if not released before the end of the hour, the energy dissipates harmlessly. The tomb giant can't use Font of Death while a previous corpse remains infused.</p>"
                 },
                 "publication": {
                     "license": "OGL",

@@ -59,12 +59,20 @@
             },
             {
                 "adjustName": false,
-                "choices": {
-                    "config": "skills",
-                    "predicate": [
-                        "skill:{choice|value}:rank:0"
-                    ]
-                },
+                "choices": [
+                    {
+                        "label": "PF2E.Skill.Intimidation",
+                        "value": "intimidation"
+                    },
+                    {
+                        "label": "PF2E.Skill.Society",
+                        "value": "society"
+                    },
+                    {
+                        "label": "PF2E.SpecificLore.Warfare",
+                        "value": "warfare-lore"
+                    }
+                ],
                 "flag": "skill",
                 "key": "ChoiceSet",
                 "prompt": "PF2E.SpecificRule.Prompt.Skill"

@@ -28,19 +28,22 @@
             ]
         },
         "publication": {
-            "license": "OGL",
-            "remaster": false,
-            "title": "Pathfinder #188: They Watched the Stars"
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Adventure Path: Gatewalkers"
         },
         "rules": [
             {
-                "diceNumber": 2,
-                "dieSize": "d6",
-                "key": "DamageDice",
+                "key": "DamageAlteration",
+                "mode": "add",
                 "predicate": [
-                    "spiritual-strike"
+                    "damage:slug:spiritual-strike"
                 ],
-                "selector": "strike-damage"
+                "property": "dice-number",
+                "selectors": [
+                    "strike-damage"
+                ],
+                "value": 2
             },
             {
                 "key": "Note",

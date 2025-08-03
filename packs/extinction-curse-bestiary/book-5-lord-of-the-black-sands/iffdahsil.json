@@ -264,7 +264,7 @@
             "_stats": {
                 "compendiumSource": "Compendium.pf2e.spells-srd.Item.HBJPsonQnWcC3qdX"
             },
-            "img": "systems/pf2e/icons/spells/hallucinatory-terrain.webp",
+            "img": "icons/environment/wilderness/cave-entrance-vulcano.webp",
             "name": "Hallucinatory Terrain",
             "sort": 500000,
             "system": {
@@ -772,7 +772,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>@Check[reflex|dc:43], @Damage[10d6[void]], Escape DC 43, Rupture 45</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Engulf]</p>"
+                    "value": "<p>@Check[reflex|dc:43], @Damage[10d6[void]], [[/act escape dc=43]], Rupture 45</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.Engulf]</p>"
                 },
                 "publication": {
                     "license": "OGL",
@@ -802,7 +802,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>Iffdahsil deals @Damage[8d8[piercing]] damage to each creature in a @Template[emanation|distance:10] (@Check[reflex|dc:43|basic] save) and can also attempt to @UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.Grab] any creatures who critically fail their save as a free action. Iffdahsil is then @UUID[Compendium.pf2e.conditionitems.Item.Off-Guard] until the start of its next turn.</p>"
+                    "value": "<p>Iffdahsil deals @Damage[8d8[piercing]|options:area-damage] damage to each creature in a @Template[emanation|distance:10] (@Check[reflex|dc:43|basic|options:area-effect] save) and can also attempt to @UUID[Compendium.pf2e.bestiary-ability-glossary-srd.Item.Grab] any creatures who critically fail their save as a free action. Iffdahsil is then @UUID[Compendium.pf2e.conditionitems.Item.Off-Guard] until the start of its next turn.</p>"
                 },
                 "publication": {
                     "license": "OGL",

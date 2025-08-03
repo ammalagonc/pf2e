@@ -1218,6 +1218,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": null,
                 "group": "knife",
                 "hardness": 0,
                 "hp": {
@@ -1244,7 +1245,7 @@
                 "quantity": 1,
                 "range": null,
                 "reload": {
-                    "value": ""
+                    "value": null
                 },
                 "rules": [],
                 "runes": {
@@ -1305,6 +1306,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": 1,
                 "group": "sling",
                 "hardness": 0,
                 "hp": {
@@ -1502,11 +1504,11 @@
                     "value": []
                 },
                 "bonus": {
-                    "value": 9
+                    "value": 11
                 },
                 "damageRolls": {
                     "ltvq3TmO4erfqztL": {
-                        "damage": "1d4",
+                        "damage": "1d4+4",
                         "damageType": "slashing"
                     }
                 },
@@ -1677,10 +1679,10 @@
             "sort": 2400000,
             "system": {
                 "actionType": {
-                    "value": "passive"
+                    "value": "action"
                 },
                 "actions": {
-                    "value": null
+                    "value": 1
                 },
                 "category": "offensive",
                 "description": {
@@ -1798,7 +1800,16 @@
                 "base": 6
             },
             "diplomacy": {
-                "base": 9
+                "base": 9,
+                "special": [
+                    {
+                        "base": 12,
+                        "label": "against animals",
+                        "predicate": [
+                            "target:trait:animal"
+                        ]
+                    }
+                ]
             },
             "nature": {
                 "base": 12

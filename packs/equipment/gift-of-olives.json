@@ -1,0 +1,51 @@
+{
+    "_id": "jt5WnZXTPR39epV7",
+    "img": "icons/consumables/plants/dried-leaf-stem-twig-green.webp",
+    "name": "Gift of Olives",
+    "system": {
+        "baseItem": null,
+        "bulk": {
+            "value": 0.1
+        },
+        "containerId": null,
+        "description": {
+            "value": "<p>This expertly trimmed olive branch remains lush and vibrant, even months after being ritually harvested. With a little soil and patience, it can quickly grow into a sheltering tree that later bestows the user with a new <em>gift of olives</em>.</p>\n<p><strong>Activate—Sew the Cutting</strong> <span class=\"action-glyph\">2</span> (healing, manipulate, plant)</p>\n<p><strong>Requirements</strong> You are outside and standing atop an unoccupied 5-foot square with some soil</p>\n<p><strong>Frequency</strong> once per day</p><hr /><p><strong>Effect</strong> You drive one end of the cutting into the soil. The cutting immediately grows into an olive tree whose boughs shelter a 15-foot-diameter area. Creatures in the sheltered area gain resistance 3 to any environmental damage, gain a +1 status bonus to saving throws against environmental hazards, and gain a +1 status bonus to Survival checks to Subsist. After 10 minutes, the tree sprouts 8 olives, each of which can be eaten as an action to restore 1 Hit Point and nourish the eater as if they had consumed a full meal. After 8 hours, the olives lose their potency, and the <em>gift of olives</em> cutting detaches from the tree and falls harmlessly to the ground. The olive tree loses its protective abilities and becomes a normal, non-magical olive tree that survives so long as it's growing in a suitable location.</p>"
+        },
+        "hardness": 0,
+        "hp": {
+            "max": 0,
+            "value": 0
+        },
+        "level": {
+            "value": 3
+        },
+        "material": {
+            "grade": null,
+            "type": null
+        },
+        "price": {
+            "value": {
+                "gp": 48
+            }
+        },
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder #216: The Acropolis Pyre"
+        },
+        "quantity": 1,
+        "rules": [],
+        "size": "med",
+        "traits": {
+            "rarity": "uncommon",
+            "value": [
+                "magical",
+                "plant"
+            ]
+        },
+        "usage": {
+            "value": "held-in-one-hand"
+        }
+    },
+    "type": "equipment"
+}

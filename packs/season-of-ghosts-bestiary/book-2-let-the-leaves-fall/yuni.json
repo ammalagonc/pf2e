@@ -163,7 +163,7 @@
             "_stats": {
                 "compendiumSource": "Compendium.pf2e.bestiary-family-ability-glossary.Item.aiwlPSmNY9b6Psvd"
             },
-            "img": "systems/pf2e/icons/actions/TwoActions.webp",
+            "img": "systems/pf2e/icons/actions/OneAction.webp",
             "name": "Frightful Moan",
             "sort": 500000,
             "system": {
@@ -171,7 +171,7 @@
                     "value": "action"
                 },
                 "actions": {
-                    "value": 2
+                    "value": 1
                 },
                 "category": "offensive",
                 "description": {
@@ -211,7 +211,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>Yuni cries out in pain as a ghostly tiger appears to rip and tear at her body, only for additional ghostly tigers to appear and do the same to all creatures in a @Template[emanation|distance:30]. Creatures in this area take @Damage[4d6[slashing]] damage (@Check[reflex|dc:25|basic] save).</p>"
+                    "value": "<p>Yuni cries out in pain as a ghostly tiger appears to rip and tear at her body, only for additional ghostly tigers to appear and do the same to all creatures in a @Template[emanation|distance:30]. Creatures in this area take @Damage[4d6[slashing]|options:area-damage] damage (@Check[reflex|dc:25|basic|options:area-effect] save).</p>"
                 },
                 "publication": {
                     "license": "OGL",

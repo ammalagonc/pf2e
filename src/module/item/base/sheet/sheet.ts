@@ -56,7 +56,7 @@ class ItemSheetPF2e<TItem extends ItemPF2e> extends fav1.sheets.ItemSheet<TItem,
 
         return {
             ...options,
-            width: 695,
+            width: 700,
             height: 460,
             template: "systems/pf2e/templates/items/sheet.hbs",
             scrollY: [".tab.active", ".inventory-details", "div[data-rule-tab]"],
@@ -339,7 +339,7 @@ class ItemSheetPF2e<TItem extends ItemPF2e> extends fav1.sheets.ItemSheet<TItem,
             htmlQuery(rulesPanel, "a[data-action=regenerate-slug]")?.addEventListener("click", () => {
                 if (this._submitting) return;
 
-                slugInput.value = sluggify(this.item.name);
+                slugInput.value = sluggify(this.item._source.name);
                 const event = new Event("change");
                 slugInput.dispatchEvent(event);
             });
@@ -429,9 +429,9 @@ class ItemSheetPF2e<TItem extends ItemPF2e> extends fav1.sheets.ItemSheet<TItem,
             });
             closeBtn?.removeAttribute("disabled");
 
-            html
-                .querySelector<HTMLButtonElement>(".rule-editing button[data-action=apply]")
-                ?.addEventListener("click", () => {
+            html.querySelector<HTMLButtonElement>(".rule-editing button[data-action=apply]")?.addEventListener(
+                "click",
+                () => {
                     const value = view.state.doc.toString();
 
                     // Close early if the editing index is invalid
@@ -455,7 +455,8 @@ class ItemSheetPF2e<TItem extends ItemPF2e> extends fav1.sheets.ItemSheet<TItem,
                             throw error;
                         }
                     }
-                });
+                },
+            );
         }
 
         // Activate rule element sub forms
@@ -630,8 +631,8 @@ class ItemSheetPF2e<TItem extends ItemPF2e> extends fav1.sheets.ItemSheet<TItem,
             }
 
             const incomingData = expanded.system?.rules?.[idx];
-            if (incomingData) {
-                ruleForm.updateObject(incomingData);
+            if (incomingData?.key) {
+                ruleForm.updateObject(incomingData as RuleElementSource);
                 itemRules[idx] = ruleForm.rule;
                 this.item.update({ "system.rules": itemRules });
             }

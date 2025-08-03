@@ -1,7 +1,7 @@
 {
     "_id": "2Ub3nAwaQXyzyAbz",
     "img": "icons/consumables/potions/bottle-conical-corked-blue.webp",
-    "name": "The Dancers’ Song",
+    "name": "The Dancers' Song",
     "system": {
         "baseItem": null,
         "bulk": {
@@ -26,6 +26,7 @@
             "type": null
         },
         "price": {
+            "per": 1,
             "value": {
                 "gp": 50
             }

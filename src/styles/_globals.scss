@@ -318,23 +318,33 @@ span[data-pf2-effect-area] {
         margin-right: 0.25em;
     }
 
+    // EFFECT_AREA_SHAPES
+
+    &[data-pf2-effect-area="burst"]::before {
+        content: "\f111";
+    }
+
     &[data-pf2-effect-area="cone"]::before {
         content: "\f104";
     }
 
-    &[data-pf2-effect-area="line"]::before {
-        content: "\f7a5";
+    &[data-pf2-effect-area="cube"]::before {
+        content: "\f1b2";
     }
 
-    &[data-pf2-effect-area="burst"]::before {
-        content: "\f111";
+    &[data-pf2-effect-area="cylinder"]::before {
+        content: "\f1c0";
     }
 
     &[data-pf2-effect-area="emanation"]::before {
         content: "\f192";
     }
 
-    &[data-pf2-effect-area="rect"]::before {
+    &[data-pf2-effect-area="line"]::before {
+        content: "\f7a5";
+    }
+
+    &[data-pf2-effect-area="square"]::before {
         content: "\f0c8";
     }
 }
@@ -424,6 +434,10 @@ a[href]:hover {
             margin-bottom: var(--space-2);
         }
 
+        li[data-action="pf2e-action-glyph"] {
+            font-family: "Pathfinder2eActions", sans-serif;
+        }
+
         .visibility-gm {
             background: var(--visibility-gm-bg);
             border-radius: 1px;
@@ -438,8 +452,12 @@ a[href]:hover {
     }
 }
 
+// Ever so slightly more compact prosemirror menu
 .prosemirror menu {
-    gap: 3px;
+    gap: 2px;
+    button {
+        padding: 1px 5px;
+    }
 }
 
 // System theme Foundry tooltips

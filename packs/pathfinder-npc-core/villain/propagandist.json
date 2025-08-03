@@ -1202,6 +1202,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": null,
                 "group": "knife",
                 "hardness": 0,
                 "hp": {
@@ -1291,6 +1292,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": null,
                 "group": "sword",
                 "hardness": 0,
                 "hp": {
@@ -1317,7 +1319,7 @@
                 "quantity": 1,
                 "range": null,
                 "reload": {
-                    "value": ""
+                    "value": null
                 },
                 "rules": [],
                 "runes": {
@@ -1678,39 +1680,10 @@
             "type": "melee"
         },
         {
-            "_id": "TqHrm04cviH8w0wW",
-            "img": "systems/pf2e/icons/default-icons/action.svg",
-            "name": "Nuanced Spin",
-            "sort": 2500000,
-            "system": {
-                "actionType": {
-                    "value": "passive"
-                },
-                "actions": {
-                    "value": null
-                },
-                "category": "interaction",
-                "description": {
-                    "value": "<p>The propagandist phrases everything loosely and vaguely enough that, though it's always misleading, none of it is false. The propagandist can use Diplomacy instead of Deception to @UUID[Compendium.pf2e.actionspf2e.Item.Create a Diversion] or [[/act feint statistic=diplomacy]], and instead of Intimidation to [[/act coerce statistic=diplomacy]]. A creature attempting to @UUID[Compendium.pf2e.actionspf2e.Item.Sense Motive] against the propagandist gets a result one degree of success worse than they rolled.</p>"
-                },
-                "publication": {
-                    "license": "ORC",
-                    "remaster": true,
-                    "title": ""
-                },
-                "rules": [],
-                "slug": null,
-                "traits": {
-                    "value": []
-                }
-            },
-            "type": "action"
-        },
-        {
             "_id": "7kdNdHbR0DpafTo6",
             "img": "systems/pf2e/icons/default-icons/action.svg",
-            "name": "Perception +12 to Sense Motive",
-            "sort": 2600000,
+            "name": "+2 to Sense Motive",
+            "sort": 2500000,
             "system": {
                 "actionType": {
                     "value": "passive"
@@ -1737,6 +1710,35 @@
                         "value": 2
                     }
                 ],
+                "slug": null,
+                "traits": {
+                    "value": []
+                }
+            },
+            "type": "action"
+        },
+        {
+            "_id": "TqHrm04cviH8w0wW",
+            "img": "systems/pf2e/icons/default-icons/action.svg",
+            "name": "Nuanced Spin",
+            "sort": 2600000,
+            "system": {
+                "actionType": {
+                    "value": "passive"
+                },
+                "actions": {
+                    "value": null
+                },
+                "category": "interaction",
+                "description": {
+                    "value": "<p>The propagandist phrases everything loosely and vaguely enough that, though it's always misleading, none of it is false. The propagandist can use Diplomacy instead of Deception to @UUID[Compendium.pf2e.actionspf2e.Item.Create a Diversion] or [[/act feint statistic=diplomacy]], and instead of Intimidation to [[/act coerce statistic=diplomacy]]. A creature attempting to @UUID[Compendium.pf2e.actionspf2e.Item.Sense Motive] against the propagandist gets a result one degree of success worse than they rolled.</p>"
+                },
+                "publication": {
+                    "license": "ORC",
+                    "remaster": true,
+                    "title": ""
+                },
+                "rules": [],
                 "slug": null,
                 "traits": {
                     "value": []
@@ -1870,7 +1872,7 @@
             "statistic": "perception"
         },
         "perception": {
-            "details": "",
+            "details": "(+12 to Sense Motive)",
             "mod": 10,
             "senses": []
         },

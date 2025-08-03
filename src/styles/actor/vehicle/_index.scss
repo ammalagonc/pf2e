@@ -31,8 +31,9 @@
 
         &.actions {
             ol.actions-list li.action .icon {
-                height: var(--font-size-18);
-                width: var(--font-size-18);
+                height: var(--font-size-20);
+                width: var(--font-size-20);
+                font-size: var(--font-size-14);
             }
 
             .frequency {
@@ -93,6 +94,7 @@
 
                 .detail-small {
                     display: flex;
+                    gap: var(--space-8);
                 }
             }
 
@@ -100,6 +102,7 @@
                 display: flex;
                 flex-wrap: wrap;
                 padding-top: 8px;
+                column-gap: var(--space-8);
             }
 
             .vehicle-properties > div {

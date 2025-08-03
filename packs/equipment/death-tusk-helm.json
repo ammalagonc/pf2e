@@ -1,0 +1,51 @@
+{
+    "_id": "8l3IEK409fDYgRR9",
+    "img": "icons/equipment/head/helm-norman-barbarian.webp",
+    "name": "Death Tusk Helm",
+    "system": {
+        "baseItem": null,
+        "bulk": {
+            "value": 0.1
+        },
+        "containerId": null,
+        "description": {
+            "value": "<p>Slivers of boar tusk are sewn into this leather cap, creating a scaled helmet that channels dozens of boars' ferocity into the wearer.</p>\n<p><strong>Activate—Boar's Last Stand</strong> <span class=\"action-glyph\">1</span> (auditory, concentrate)</p>\n<p><strong>Frequency</strong> once per day</p>\n<p><strong>Trigger</strong> Your turn begins</p>\n<p><strong>Requirements</strong> You have a doomed or wounded value of 1 or higher</p><hr /><p><strong>Effect</strong> You unleash a fearsome roar. 1 creature of your choice within 30 feet must attempt a @Check[will|dc:16] save or become @UUID[Compendium.pf2e.conditionitems.Item.Frightened]{Frightened 1} (@UUID[Compendium.pf2e.conditionitems.Item.Frightened]{Frightened 2} on a critical failure). Increase this DC by the sum of your @UUID[Compendium.pf2e.conditionitems.Item.Doomed] and @UUID[Compendium.pf2e.conditionitems.Item.Wounded] values (maximum DC 20). You then gain 5 temporary Hit Points that last 1 minute.</p>"
+        },
+        "hardness": 0,
+        "hp": {
+            "max": 0,
+            "value": 0
+        },
+        "level": {
+            "value": 3
+        },
+        "material": {
+            "grade": null,
+            "type": null
+        },
+        "price": {
+            "value": {
+                "gp": 55
+            }
+        },
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder #216: The Acropolis Pyre"
+        },
+        "quantity": 1,
+        "rules": [],
+        "size": "med",
+        "traits": {
+            "rarity": "uncommon",
+            "value": [
+                "invested",
+                "magical"
+            ]
+        },
+        "usage": {
+            "value": "held-in-one-hand"
+        }
+    },
+    "type": "equipment"
+}

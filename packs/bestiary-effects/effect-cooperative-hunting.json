@@ -1,0 +1,44 @@
+{
+    "_id": "FngohajUtnPe9vmJ",
+    "img": "icons/skills/targeting/target-strike-triple-blue.webp",
+    "name": "Effect: Cooperative Hunting",
+    "system": {
+        "description": {
+            "value": "<p>You gain a +2 circumstance bonus to your next strike attack roll.</p>"
+        },
+        "duration": {
+            "expiry": null,
+            "sustained": false,
+            "unit": "unlimited",
+            "value": -1
+        },
+        "level": {
+            "value": 1
+        },
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Adventure Path: Gatewalkers"
+        },
+        "rules": [
+            {
+                "key": "FlatModifier",
+                "removeAfterRoll": true,
+                "selector": "strike-attack-roll",
+                "type": "circumstance",
+                "value": 2
+            }
+        ],
+        "start": {
+            "initiative": null,
+            "value": 0
+        },
+        "tokenIcon": {
+            "show": true
+        },
+        "traits": {
+            "value": []
+        }
+    },
+    "type": "effect"
+}

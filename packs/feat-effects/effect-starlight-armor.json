@@ -7,18 +7,18 @@
             "value": "<p>Granted by @UUID[Compendium.pf2e.feats-srd.Item.Starlight Armor]</p>\n<p>You gain resistance 7 to piercing, bludgeoning, and slashing damage. You also shed bright light for 20 feet (and dim light for the next 20 feet).</p>\n<p>When you reach 17th level, the resistance increases to 10.</p>"
         },
         "duration": {
-            "expiry": null,
+            "expiry": "turn-start",
             "sustained": false,
-            "unit": "unlimited",
-            "value": -1
+            "unit": "minutes",
+            "value": 1
         },
         "level": {
             "value": 7
         },
         "publication": {
-            "license": "OGL",
-            "remaster": false,
-            "title": "Pathfinder #187: The Seventh Arch"
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Adventure Path: Gatewalkers"
         },
         "rules": [
             {

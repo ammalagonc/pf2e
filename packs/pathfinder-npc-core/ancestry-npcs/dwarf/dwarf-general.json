@@ -37,6 +37,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": 1,
                 "group": "crossbow",
                 "hardness": 0,
                 "hp": {
@@ -122,6 +123,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": null,
                 "group": "knife",
                 "hardness": 0,
                 "hp": {
@@ -148,7 +150,7 @@
                 "quantity": 1,
                 "range": null,
                 "reload": {
-                    "value": ""
+                    "value": null
                 },
                 "rules": [],
                 "runes": {
@@ -210,6 +212,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": null,
                 "group": "hammer",
                 "hardness": 0,
                 "hp": {
@@ -236,7 +239,7 @@
                 "quantity": 1,
                 "range": null,
                 "reload": {
-                    "value": ""
+                    "value": null
                 },
                 "rules": [],
                 "runes": {
@@ -800,7 +803,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>When the general critically hits with a hammer, the target of the critical hit is knocked @UUID[Compendium.pf2e.conditionitems.Item.Prone] unless it succeeds at a @Check[fortitude|dc:26] save.</p>"
+                    "value": "<p>When the general critically hits with a hammer, the target of the critical hit is knocked @UUID[Compendium.pf2e.conditionitems.Item.Prone] unless it succeeds at a @Check[fortitude|dc:26|options:inflicts:prone] save.</p>"
                 },
                 "publication": {
                     "license": "ORC",
@@ -815,7 +818,8 @@
                         ],
                         "selector": "warhammer-attack-roll",
                         "text": "{item|description}",
-                        "title": "{item|name}"
+                        "title": "{item|name}",
+                        "visibility": "owner"
                     }
                 ],
                 "slug": null,

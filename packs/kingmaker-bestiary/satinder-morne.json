@@ -506,7 +506,7 @@
             "_stats": {
                 "compendiumSource": "Compendium.pf2e.spells-srd.Item.FzAtX8yXBjTaisJK"
             },
-            "img": "systems/pf2e/icons/spells/undetectable-alignment.webp",
+            "img": "icons/magic/control/silhouette-aura-energy.webp",
             "name": "Undetectable Alignment",
             "sort": 800000,
             "system": {
@@ -1400,6 +1400,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": null,
                 "group": "knife",
                 "hardness": 0,
                 "hp": {
@@ -1568,7 +1569,6 @@
                 "quantity": 1,
                 "rules": [
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "option": "has-religious-symbol",
                         "requiresEquipped": false
@@ -1878,7 +1878,6 @@
                         "selector": "strike-damage"
                     },
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "label": "PF2E.SpecificRule.TOTMToggle.OffGuard",
                         "option": "target:condition:off-guard",

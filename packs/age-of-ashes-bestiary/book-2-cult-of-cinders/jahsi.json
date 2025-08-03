@@ -87,7 +87,7 @@
             "_stats": {
                 "compendiumSource": "Compendium.pf2e.spells-srd.Item.X1b9ollVMSLXDN9o"
             },
-            "img": "systems/pf2e/icons/spells/litany-against-wrath.webp",
+            "img": "icons/magic/control/control-influence-rally-purple.webp",
             "name": "Litany against Wrath",
             "sort": 300000,
             "system": {
@@ -597,6 +597,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": null,
                 "group": "knife",
                 "hardness": 0,
                 "hp": {
@@ -687,6 +688,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": null,
                 "group": "knife",
                 "hardness": 0,
                 "hp": {
@@ -775,6 +777,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": 1,
                 "group": "bow",
                 "hardness": 0,
                 "hp": {

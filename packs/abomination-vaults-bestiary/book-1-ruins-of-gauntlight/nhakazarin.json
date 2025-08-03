@@ -160,7 +160,7 @@
             "_stats": {
                 "compendiumSource": "Compendium.pf2e.spells-srd.Item.sRfSBHWHdbIa0aGc"
             },
-            "img": "systems/pf2e/icons/spells/chilling-darkness.webp",
+            "img": "icons/magic/light/beam-explosion-pink-purple.webp",
             "name": "Chilling Darkness",
             "sort": 300000,
             "system": {
@@ -1429,6 +1429,7 @@
                     "handsHeld": 1,
                     "invested": null
                 },
+                "expend": null,
                 "group": "club",
                 "hardness": 0,
                 "hp": {
@@ -1455,7 +1456,7 @@
                 "quantity": 1,
                 "range": null,
                 "reload": {
-                    "value": ""
+                    "value": null
                 },
                 "rules": [
                     {

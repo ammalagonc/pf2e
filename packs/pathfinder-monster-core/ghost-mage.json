@@ -1244,7 +1244,7 @@
             "_stats": {
                 "compendiumSource": "Compendium.pf2e.bestiary-family-ability-glossary.Item.aiwlPSmNY9b6Psvd"
             },
-            "img": "systems/pf2e/icons/actions/TwoActions.webp",
+            "img": "systems/pf2e/icons/actions/OneAction.webp",
             "name": "Frightful Moan",
             "sort": 2000000,
             "system": {
@@ -1252,7 +1252,7 @@
                     "value": "action"
                 },
                 "actions": {
-                    "value": 2
+                    "value": 1
                 },
                 "category": "offensive",
                 "description": {
@@ -1295,7 +1295,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>The ghost cries out in pain and anguish as small objects and debris fly about in a @Template[emanation|distance:30]. Creatures in this area take @Damage[6d6[bludgeoning]] damage, subject to a @Check[reflex|dc:29|basic] save.</p>"
+                    "value": "<p>The ghost cries out in pain and anguish as small objects and debris fly about in a @Template[emanation|distance:30]. Creatures in this area take @Damage[6d6[bludgeoning]|options:area-damage] damage, subject to a @Check[reflex|dc:29|basic|options:area-effect] save.</p>"
                 },
                 "publication": {
                     "license": "ORC",

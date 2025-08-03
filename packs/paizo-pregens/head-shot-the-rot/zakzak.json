@@ -493,6 +493,7 @@
                     "handsHeld": 1,
                     "invested": null
                 },
+                "expend": 1,
                 "group": "firearm",
                 "hardness": 0,
                 "hp": {
@@ -1717,7 +1718,6 @@
                         "value": 2
                     },
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "option": "ten-paces",
                         "toggleable": true

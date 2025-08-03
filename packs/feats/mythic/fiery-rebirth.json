@@ -1,0 +1,44 @@
+{
+    "_id": "lNIHXCQ0Zc2gY5OH",
+    "folder": "Ic6bDFDq8L8Ep2BS",
+    "img": "icons/sundries/books/book-red-exclamation.webp",
+    "name": "Fiery Rebirth",
+    "system": {
+        "actionType": {
+            "value": "free"
+        },
+        "actions": {
+            "value": null
+        },
+        "category": "class",
+        "description": {
+            "value": "<p><strong>Trigger</strong> You regain Hit Points while you are @UUID[Compendium.pf2e.conditionitems.Item.Unconscious].</p><hr /><p>When you escape death, you return to life with retributive fire that burns those who harmed you. You expend 1 Mythic Point, return to consciousness, Stand, and regain additional Hit Points equal to your level. You then erupt in flames, dealing fire damage equal to twice your level (@Damage[(2*@actor.level)[fire]]) to adjacent foes, with a @Check[reflex|against:class|basic] save against your class DC. Foes that critically fail the save are also pushed 5 feet away from you.</p>"
+        },
+        "level": {
+            "value": 4
+        },
+        "prerequisites": {
+            "value": []
+        },
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder #216: The Acropolis Pyre"
+        },
+        "rules": [],
+        "subfeatures": {
+            "proficiencies": {},
+            "senses": {},
+            "suppressedFeatures": []
+        },
+        "traits": {
+            "rarity": "uncommon",
+            "value": [
+                "fire",
+                "healing",
+                "mythic"
+            ]
+        }
+    },
+    "type": "feat"
+}

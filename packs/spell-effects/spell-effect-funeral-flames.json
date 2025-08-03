@@ -1,0 +1,112 @@
+{
+    "_id": "NRGAkp9i7j0sWeM7",
+    "img": "icons/weapons/clubs/club-spiked-glowing.webp",
+    "name": "Spell Effect: Funeral Flames",
+    "system": {
+        "description": {
+            "value": "<p>Granted by @UUID[Compendium.pf2e.spells-srd.Item.Funeral Flames]</p>\n<p>While you wield the target weapon, it becomes a +1 weapon, gains the versatile fire trait, and sheds light as brightly as a torch. Whenever you successfully Strike a creature with the weapon, you can Dismiss the spell as a free action to deal 1d6 persistent fire damage to the target; if the target is undead, increase the persistent damage dice to d8s.</p>"
+        },
+        "duration": {
+            "expiry": "turn-start",
+            "sustained": false,
+            "unit": "minutes",
+            "value": 1
+        },
+        "level": {
+            "value": 1
+        },
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder #216: The Acropolis Pyre"
+        },
+        "rules": [
+            {
+                "choices": {
+                    "ownedItems": true,
+                    "predicate": [
+                        "item:group:club"
+                    ],
+                    "types": [
+                        "weapon"
+                    ]
+                },
+                "flag": "weapon",
+                "key": "ChoiceSet",
+                "prompt": "PF2E.SpecificRule.Prompt.Weapon"
+            },
+            {
+                "key": "WeaponPotency",
+                "selector": "{item|flags.pf2e.rulesSelections.weapon}-attack",
+                "value": 1
+            },
+            {
+                "itemType": "weapon",
+                "key": "ItemAlteration",
+                "mode": "add",
+                "predicate": [
+                    "item:id:{item|flags.pf2e.rulesSelections.weapon}"
+                ],
+                "property": "traits",
+                "value": "versatile-fire"
+            },
+            {
+                "key": "TokenLight",
+                "value": {
+                    "alpha": 0.45,
+                    "animation": {
+                        "intensity": 1,
+                        "speed": 2,
+                        "type": "flame"
+                    },
+                    "attenuation": 0.4,
+                    "bright": 20,
+                    "color": "#ffae3d",
+                    "dim": 40,
+                    "shadows": 0.2
+                }
+            },
+            {
+                "key": "RollOption",
+                "label": "PF2E.SpecificRule.FuneralFlames.DismissLabel",
+                "option": "dismiss-funeral-flames",
+                "toggleable": true
+            },
+            {
+                "damageType": "fire",
+                "diceNumber": "ceil(@item.level/2)",
+                "dieSize": "d6",
+                "key": "DamageDice",
+                "predicate": [
+                    "dismiss-funeral-flames"
+                ],
+                "selector": "{item|flags.pf2e.rulesSelections.weapon}-damage",
+                "slug": "funeral-flames"
+            },
+            {
+                "key": "DamageAlteration",
+                "mode": "upgrade",
+                "predicate": [
+                    "target:mode:undead"
+                ],
+                "property": "dice-faces",
+                "selectors": [
+                    "{item|flags.pf2e.rulesSelections.weapon}-damage"
+                ],
+                "slug": "funeral-flames",
+                "value": "8"
+            }
+        ],
+        "start": {
+            "initiative": null,
+            "value": 0
+        },
+        "tokenIcon": {
+            "show": true
+        },
+        "traits": {
+            "value": []
+        }
+    },
+    "type": "effect"
+}

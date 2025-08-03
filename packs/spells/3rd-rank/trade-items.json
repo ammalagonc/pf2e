@@ -37,7 +37,7 @@
         "requirements": "",
         "rules": [],
         "target": {
-            "value": "1 item you’re holding and 1 item in another creature’s possession you can see, each no more than light Bulk"
+            "value": "1 item you're holding and 1 item in another creature's possession you can see, each no more than light Bulk"
         },
         "time": {
             "value": "2"

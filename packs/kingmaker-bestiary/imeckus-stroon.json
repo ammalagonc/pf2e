@@ -609,7 +609,7 @@
             "_stats": {
                 "compendiumSource": "Compendium.pf2e.spells-srd.Item.YrzBLPLd3r9m6t1p"
             },
-            "img": "systems/pf2e/icons/spells/fire-shield.webp",
+            "img": "icons/magic/fire/barrier-shield-explosion-yellow.webp",
             "name": "Fire Shield",
             "sort": 900000,
             "system": {
@@ -1878,7 +1878,7 @@
             "_stats": {
                 "compendiumSource": "Compendium.pf2e.spells-srd.Item.y6rAdMK6EFlV6U0t"
             },
-            "img": "systems/pf2e/icons/spells/burning-hands.webp",
+            "img": "icons/magic/fire/flame-burning-hand-orange.webp",
             "name": "Burning Hands",
             "sort": 2500000,
             "system": {
@@ -1965,7 +1965,7 @@
             "_stats": {
                 "compendiumSource": "Compendium.pf2e.spells-srd.Item.y6rAdMK6EFlV6U0t"
             },
-            "img": "systems/pf2e/icons/spells/burning-hands.webp",
+            "img": "icons/magic/fire/flame-burning-hand-orange.webp",
             "name": "Burning Hands",
             "sort": 2600000,
             "system": {
@@ -2801,6 +2801,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": null,
                 "group": "knife",
                 "hardness": 0,
                 "hp": {
@@ -2889,6 +2890,7 @@
                     "handsHeld": 1,
                     "invested": null
                 },
+                "expend": null,
                 "group": "club",
                 "hardness": 0,
                 "hp": {
@@ -2915,7 +2917,7 @@
                 "quantity": 1,
                 "range": null,
                 "reload": {
-                    "value": ""
+                    "value": null
                 },
                 "rules": [],
                 "runes": {

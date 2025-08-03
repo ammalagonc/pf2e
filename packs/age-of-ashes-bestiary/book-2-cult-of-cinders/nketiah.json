@@ -404,7 +404,7 @@
             "_stats": {
                 "compendiumSource": "Compendium.pf2e.spells-srd.Item.Et8RSCLx8w7uOLvo"
             },
-            "img": "systems/pf2e/icons/spells/restore-senses.webp",
+            "img": "icons/magic/control/buff-flight-wings-runes-red-yellow.webp",
             "name": "Restore Senses",
             "sort": 800000,
             "system": {
@@ -1667,6 +1667,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": 1,
                 "group": "bow",
                 "hardness": 0,
                 "hp": {
@@ -1753,6 +1754,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": null,
                 "group": "club",
                 "hardness": 0,
                 "hp": {
@@ -1779,7 +1781,7 @@
                 "quantity": 1,
                 "range": null,
                 "reload": {
-                    "value": ""
+                    "value": null
                 },
                 "rules": [
                     {

@@ -36,6 +36,7 @@
                     "handsHeld": 1,
                     "invested": null
                 },
+                "expend": null,
                 "group": "axe",
                 "hardness": 0,
                 "hp": {
@@ -124,6 +125,7 @@
                     "handsHeld": 1,
                     "invested": null
                 },
+                "expend": null,
                 "group": "sword",
                 "hardness": 0,
                 "hp": {
@@ -150,7 +152,7 @@
                 "quantity": 1,
                 "range": null,
                 "reload": {
-                    "value": ""
+                    "value": null
                 },
                 "rules": [],
                 "runes": {
@@ -302,14 +304,14 @@
                     {
                         "key": "Note",
                         "outcome": [
-                            "success"
+                            "criticalSuccess"
                         ],
                         "predicate": [
                             "check:total:natural:19"
                         ],
                         "selector": "{item|_id}-attack",
                         "text": "PF2E.AttackEffects.IncreasedCriticalChance",
-                        "title": "PF2E.WeaponPropertyRune.keen",
+                        "title": "PF2E.WeaponPropertyRune.keen.Name",
                         "visibility": "gm"
                     }
                 ],
@@ -384,14 +386,14 @@
                     {
                         "key": "Note",
                         "outcome": [
-                            "success"
+                            "criticalSuccess"
                         ],
                         "predicate": [
                             "check:total:natural:19"
                         ],
                         "selector": "{item|_id}-attack",
                         "text": "PF2E.AttackEffects.IncreasedCriticalChance",
-                        "title": "PF2E.WeaponPropertyRune.keen",
+                        "title": "PF2E.WeaponPropertyRune.keen.Name",
                         "visibility": "gm"
                     }
                 ],
@@ -512,14 +514,14 @@
                     {
                         "key": "Note",
                         "outcome": [
-                            "success"
+                            "criticalSuccess"
                         ],
                         "predicate": [
                             "check:total:natural:19"
                         ],
                         "selector": "{item|_id}-attack",
                         "text": "PF2E.AttackEffects.IncreasedCriticalChance",
-                        "title": "PF2E.WeaponPropertyRune.keen",
+                        "title": "PF2E.WeaponPropertyRune.keen.Name",
                         "visibility": "gm"
                     }
                 ],

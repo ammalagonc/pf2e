@@ -1,0 +1,48 @@
+{
+    "_id": "u9b233QynLAPKPty",
+    "img": "icons/magic/lightning/bolt-strike-forked-blue.webp",
+    "name": "Effect: Tempest Rage",
+    "system": {
+        "description": {
+            "value": "<p>Akki gains 5 temporary Hit Points and deals an additional 1d4 electricity damage with her weapon Strikes.</p>"
+        },
+        "duration": {
+            "expiry": "turn-start",
+            "sustained": false,
+            "unit": "minutes",
+            "value": 1
+        },
+        "level": {
+            "value": 1
+        },
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder #216: The Acropolis Pyre"
+        },
+        "rules": [
+            {
+                "key": "TempHP",
+                "value": 5
+            },
+            {
+                "damageType": "electricity",
+                "diceNumber": 1,
+                "dieSize": "d4",
+                "key": "DamageDice",
+                "selector": "strike-damage"
+            }
+        ],
+        "start": {
+            "initiative": null,
+            "value": 0
+        },
+        "tokenIcon": {
+            "show": true
+        },
+        "traits": {
+            "value": []
+        }
+    },
+    "type": "effect"
+}

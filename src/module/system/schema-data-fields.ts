@@ -15,7 +15,7 @@ import type {
     SourceFromSchema,
 } from "@common/data/fields.d.mts";
 import { Predicate, PredicateStatement, RawPredicate, StatementValidator } from "@system/predication.ts";
-import { SlugCamel, objectHasKey, sluggify } from "@util";
+import { SlugCamel, sluggify, tupleHasValue } from "@util";
 import * as R from "remeda";
 import fields = foundry.data.fields;
 import validation = foundry.data.validation;
@@ -114,15 +114,15 @@ class StrictArrayField<
 
     override initialize(
         value: JSONValue,
-        model: ConstructorOf<DataModel>,
+        model: DataModel,
         options: ArrayFieldOptions<TSourceProp, TRequired, TNullable, THasInitial>,
     ): MaybeSchemaProp<TModelProp, TRequired, TNullable, THasInitial>;
     override initialize(
         value: JSONValue,
-        model: ConstructorOf<DataModel>,
+        model: DataModel,
         options: ArrayFieldOptions<TSourceProp, TRequired, TNullable, THasInitial>,
     ): Maybe<TModelProp> {
-        return Array.isArray(value) ? super.initialize(value, model, options) : null;
+        return Array.isArray(value) ? super.initialize(value, model, options) : this.nullable ? null : undefined;
     }
 }
 
@@ -163,31 +163,73 @@ class StrictObjectField<
     }
 }
 
+type JSONPrimitive = Exclude<JSONValue, "object">;
+
 /** A field that allows nothing except for the provided choices */
 class AnyChoiceField<
-    TChoices extends JSONValue,
+    TChoices extends JSONPrimitive,
     TRequired extends boolean = true,
     TNullable extends boolean = false,
     THasInitial extends boolean = true,
 > extends fields.DataField<TChoices, TChoices, TRequired, TNullable, THasInitial> {
+    static override get _defaults(): AnyChoiceFieldOptions<JSONPrimitive, boolean, boolean, boolean> {
+        return { ...super._defaults, choices: [] } as AnyChoiceFieldOptions<JSONPrimitive, boolean, boolean, boolean>;
+    }
+
+    // Overriden to satisfy typescript types only
+    constructor(
+        options?: AnyChoiceFieldOptions<TChoices, TRequired, TNullable, THasInitial>,
+        context?: foundry.data.DataFieldContext,
+    ) {
+        super(options, context);
+    }
+
+    /** Converts invalid string representations to valid non-string choices if they exist */
+    protected override _cleanType(value: unknown): unknown {
+        if (typeof value === "string" && !this.choices.includes(value)) {
+            const index = this.choices.findIndex((c) => String(c) === value);
+            return index >= 0 ? this.choices[index] : value;
+        }
+        return value;
+    }
+
     protected override _cast(value: unknown): unknown {
         return value;
     }
 
     protected override _validateType(value: unknown): void {
         if (this.options.nullable && value === null) return;
-
-        const choices =
-            "choices" in this.options
-                ? typeof this.options.choices === "function"
-                    ? this.options.choices()
-                    : (this.options.choices ?? [])
-                : null;
-        const isValid = Array.isArray(choices) ? choices.includes(value) : objectHasKey(choices, value);
-        if (!isValid) {
+        if (!tupleHasValue(this.choices, value)) {
             throw new Error(`${value} is not a valid choice`);
         }
     }
+
+    override _toInput(
+        config: foundry.applications.fields.SelectInputConfig & Partial<foundry.data.ChoiceInputConfig>,
+    ): HTMLElement | HTMLCollection {
+        config.choices ??= R.mapToObj(this.choices, (c) => [String(c), c]);
+        fields.StringField._prepareChoiceConfig(config);
+        return foundry.applications.fields.createSelectInput(config);
+    }
+}
+
+interface AnyChoiceField<
+    TChoices extends JSONPrimitive,
+    TRequired extends boolean = true,
+    TNullable extends boolean = false,
+    THasInitial extends boolean = true,
+> extends fields.DataField<TChoices, TChoices, TRequired, TNullable, THasInitial> {
+    choices: JSONPrimitive[];
+    options: AnyChoiceFieldOptions<TChoices, TRequired, TNullable, THasInitial>;
+}
+
+interface AnyChoiceFieldOptions<
+    TChoices extends JSONPrimitive,
+    TRequired extends boolean,
+    TNullable extends boolean,
+    THasInitial extends boolean,
+> extends DataFieldOptions<TChoices, TRequired, TNullable, THasInitial> {
+    choices: JSONPrimitive[];
 }
 
 class DataUnionField<
@@ -222,21 +264,29 @@ class DataUnionField<
         return value;
     }
 
+    /**
+     * Perform some cleaning while first checking that an upstream `_cast` won't convert a dog into a cat (or a number
+     * into an array).
+     */
     override clean(
         value: unknown,
         options?: CleanFieldOptions | undefined,
     ): MaybeUnionSchemaProp<TField, TRequired, TNullable, THasInitial> {
-        if (Array.isArray(value) && this.fields.some((f) => f instanceof foundry.data.fields.ArrayField)) {
+        type MaybeProp = MaybeUnionSchemaProp<TField, TRequired, TNullable, THasInitial>;
+        if (Array.isArray(value) && this.fields.some((f) => f instanceof fields.ArrayField)) {
             const arrayField = this.fields.find((f) => f instanceof StrictArrayField);
-            return (arrayField?.clean(value, options) ?? value) as MaybeUnionSchemaProp<
-                TField,
-                TRequired,
-                TNullable,
-                THasInitial
-            >;
+            return (arrayField?.clean(value, options) ?? value) as MaybeProp;
+        } else if (R.isPlainObject(value)) {
+            const field = this.fields.find((f) => f instanceof fields.SchemaField || f instanceof fields.ObjectField);
+            const initial = field?.getInitialValue();
+            if (!R.isPlainObject(initial)) return super.clean(value, options) as MaybeProp;
+            for (const key of Object.keys(initial)) {
+                if (!(key in value)) value[key] = initial[key];
+            }
+            return value as MaybeProp;
         }
 
-        return super.clean(value, options) as MaybeUnionSchemaProp<TField, TRequired, TNullable, THasInitial>;
+        return super.clean(value, options) as MaybeProp;
     }
 
     protected override _validateType(
@@ -257,7 +307,7 @@ class DataUnionField<
 
     override initialize(
         value: unknown,
-        model?: ConstructorOf<DataModel> | undefined,
+        model?: DataModel,
         options?: object | undefined,
     ): MaybeUnionSchemaProp<TField, TRequired, TNullable, THasInitial> {
         const field = this.fields.find((f) => !f.validate(value));
@@ -362,12 +412,12 @@ class PredicateField<
     /** Construct a `PredicatePF2e` from the initialized `PredicateStatement[]` */
     override initialize(
         value: RawPredicate,
-        model: ConstructorOf<foundry.abstract.DataModel>,
+        model: foundry.abstract.DataModel,
         options?: ArrayFieldOptions<RawPredicate, TRequired, TNullable, THasInitial>,
     ): MaybeSchemaProp<Predicate, TRequired, TNullable, THasInitial>;
     override initialize(
         value: RawPredicate,
-        model: ConstructorOf<foundry.abstract.DataModel>,
+        model: foundry.abstract.DataModel,
         options: ArrayFieldOptions<RawPredicate, TRequired, TNullable, THasInitial>,
     ): Predicate | null | undefined {
         const statements = super.initialize(value, model, options);
@@ -481,7 +531,12 @@ class RecordField<
             }
         }
         if (failures.elements.length) {
-            failures.unresolved = failures.elements.some((e) => e.failure.unresolved);
+            if (failures.elements.every((f) => f.id in values)) {
+                failures.unresolved = false;
+            } else {
+                failures.unresolved = failures.elements.some((e) => e.failure.unresolved);
+            }
+
             return failures;
         }
     }
@@ -509,19 +564,32 @@ class RecordField<
 
     override initialize(
         values: object | null | undefined,
-        model: ConstructorOf<foundry.abstract.DataModel>,
+        model: foundry.abstract.DataModel,
         options?: ObjectFieldOptions<RecordFieldSourceProp<TKeyField, TValueField>, TRequired, TNullable, THasInitial>,
     ): MaybeSchemaProp<RecordFieldModelProp<TKeyField, TValueField, TDense>, TRequired, TNullable, THasInitial>;
     override initialize(
         values: object | null | undefined,
-        model: ConstructorOf<foundry.abstract.DataModel>,
+        model: foundry.abstract.DataModel,
         options?: ObjectFieldOptions<RecordFieldSourceProp<TKeyField, TValueField>, TRequired, TNullable, THasInitial>,
     ): Record<string, unknown> | null | undefined {
         if (!values) return values;
+
+        // Check for validation failures in the model to omit from the results
+        const path = this.fieldPath.startsWith(model.schema.fieldPath + ".")
+            ? this.fieldPath.substring(model.schema.fieldPath.length + 1)
+            : this.fieldPath;
+        const pathParts = path.split(".");
+        const failures = pathParts.reduce((fields, part) => {
+            return fields ? fields.fields[part] : null;
+        }, model.validationFailures.fields);
+        const failureKeys = failures?.elements.map((e) => e.id) ?? [];
+
         const data: Record<string, unknown> = {};
         for (const [key, value] of Object.entries(values)) {
+            if (failureKeys.includes(key)) continue;
             data[key] = this.valueField.initialize(value, model, options);
         }
+
         return data;
     }
 }

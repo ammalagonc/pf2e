@@ -60,7 +60,7 @@ import type {
     InventoryItem,
     SheetInventory,
 } from "./data-types.ts";
-import { applyDeltaToInput, createBulkPerLabel, onClickCreateSpell } from "./helpers.ts";
+import { createBulkPerLabel, onClickCreateSpell } from "./helpers.ts";
 import { ItemSummaryRenderer } from "./item-summary-renderer.ts";
 import { AddCoinsPopup } from "./popups/add-coins-popup.ts";
 import { CastingItemCreateDialog } from "./popups/casting-item-create-dialog.ts";
@@ -191,7 +191,8 @@ abstract class ActorSheetPF2e<TActor extends ActorPF2e> extends fav1.sheets.Acto
     }
 
     protected prepareInventory(): SheetInventory {
-        const items = [...iterateAllItems(this.actor)].filter((i) => i.isOfType("physical"));
+        const actor = this.actor;
+        const items = [...iterateAllItems(actor)].filter((i) => i.isOfType("physical"));
         this.#inventorySearchEngine.removeAll();
         this.#inventorySearchEngine.addAll(items.map((i) => R.pick(i, ["uuid", "name"])));
 
@@ -212,7 +213,6 @@ abstract class ActorSheetPF2e<TActor extends ActorPF2e> extends fav1.sheets.Acto
             { label: game.i18n.localize("PF2E.Item.Container.Plural"), types: ["backpack"], items: [] },
         ];
 
-        const actor = this.actor.clone({}, { keepId: true });
         for (const item of actor.inventory.contents.sort((a, b) => (a.sort || 0) - (b.sort || 0))) {
             if (item.isInContainer) continue;
             const section = sections.find((s) => s.types.includes(item.type));
@@ -517,40 +517,66 @@ abstract class ActorSheetPF2e<TActor extends ActorPF2e> extends fav1.sheets.Acto
             });
         }
 
-        // Only allow digits & leading plus and minus signs for `data-allow-delta` inputs,
-        // thus emulating input[type="number"]
-        // Also enable delta adjustment by arrow key and mousewheel
+        // Inputs with the data-allow-delta attribute mostly emulate number type inputs, but allow +X and -X delta values
         for (const deltaInput of htmlQueryAll<HTMLInputElement>(html, "input[data-allow-delta]")) {
+            deltaInput.dataset.numValue = deltaInput.value;
+
+            const sendChangeEvent = fu.debounce((value: string) => {
+                deltaInput.value = value;
+                deltaInput.dispatchEvent(new Event("change", { bubbles: true }));
+            }, 1000);
+
+            // Applies whatever is in the input to the current value
+            const updateInput = (delta?: number) => {
+                const min = Number(deltaInput.dataset.min) || 0;
+                const max = deltaInput.dataset.max ? Number(deltaInput.dataset.max) : Infinity;
+
+                const rawValue = deltaInput.value;
+                const value = Number(rawValue);
+                const oldValue = Number(deltaInput.dataset.numValue || "0");
+                const appliedValue = Number.isNaN(value)
+                    ? oldValue
+                    : deltaInput.value.startsWith("+") || deltaInput.value.startsWith("-")
+                      ? Math.clamp(oldValue + value, min, max)
+                      : Math.clamp(value, min, max);
+                const newValue = Math.clamp(appliedValue + (delta ?? 0), min, max);
+                deltaInput.value = deltaInput.dataset.numValue = String(newValue);
+            };
+
+            // Force valid characters while inputting
             deltaInput.addEventListener("input", () => {
                 const match = /[+-]?\d*/.exec(deltaInput.value)?.at(0);
                 deltaInput.value = match ?? deltaInput.value;
             });
 
+            // Keyup/Keydown support
             deltaInput.addEventListener("keydown", (event: KeyboardEvent) => {
-                if (event.key === "ArrowUp") {
-                    applyDeltaToInput(deltaInput, 1);
-                } else if (event.key === "ArrowDown") {
-                    applyDeltaToInput(deltaInput, -1);
+                const step = event.key === "ArrowUp" ? 1 : event.key === "ArrowDown" ? -1 : 0;
+                if (step !== 0) {
+                    updateInput(step);
+                    sendChangeEvent(deltaInput.value);
                 }
             });
 
+            // Mousewheel while focused support
             deltaInput.addEventListener(
                 "wheel",
                 (event: WheelEvent) => {
                     if (deltaInput === document.activeElement) {
                         event.preventDefault();
-                        event.stopPropagation();
                         const step = Math.sign(-1 * event.deltaY);
-                        const min = Number(deltaInput.dataset.min) || 0;
-                        const max = Number(deltaInput.dataset.max) || 0;
-                        const oldValue = Number(deltaInput.value) || min;
-                        const newValue =
-                            max > 0 ? Math.clamp(oldValue + step, min, max) : Math.max(oldValue + step, min);
-                        deltaInput.value = String(newValue);
+                        updateInput(step);
+                        sendChangeEvent(deltaInput.value);
                     }
                 },
                 { passive: false },
             );
+
+            // Clamp data and apply deltas on change events
+            // For this to work properly, this change event must occur before other ones
+            deltaInput.addEventListener("change", () => {
+                updateInput();
+            });
         }
 
         // Work around search filter flashing on re-render
@@ -1446,22 +1472,6 @@ abstract class ActorSheetPF2e<TActor extends ActorPF2e> extends fav1.sheets.Acto
         if (options?.tab) {
             this.openTab(options.tab);
         }
-    }
-
-    protected override _getSubmitData(updateData?: Record<string, unknown>): Record<string, unknown> {
-        const data = super._getSubmitData(updateData);
-
-        // Use delta values for inputs that have `data-allow-delta` if input value starts with + or -
-        for (const el of this.form.elements) {
-            if (el instanceof HTMLInputElement && el.dataset.allowDelta !== undefined) {
-                const strValue = el.value.trim();
-                const value = Number(strValue);
-                if ((strValue.startsWith("+") || strValue.startsWith("-")) && !Number.isNaN(value))
-                    data[el.name] = Number(fu.getProperty(this.actor, el.name)) + value;
-            }
-        }
-
-        return data;
     }
 
     protected override _configureProseMirrorPlugins(

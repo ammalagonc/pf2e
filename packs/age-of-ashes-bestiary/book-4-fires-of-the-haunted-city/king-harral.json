@@ -881,7 +881,7 @@
             "_stats": {
                 "compendiumSource": "Compendium.pf2e.spells-srd.Item.YrzBLPLd3r9m6t1p"
             },
-            "img": "systems/pf2e/icons/spells/fire-shield.webp",
+            "img": "icons/magic/fire/barrier-shield-explosion-yellow.webp",
             "name": "Fire Shield",
             "sort": 1100000,
             "system": {
@@ -2207,6 +2207,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": null,
                 "group": "hammer",
                 "hardness": 0,
                 "hp": {
@@ -2233,7 +2234,7 @@
                 "quantity": 1,
                 "range": null,
                 "reload": {
-                    "value": ""
+                    "value": null
                 },
                 "rules": [],
                 "runes": {

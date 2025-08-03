@@ -1,0 +1,43 @@
+{
+    "_id": "2Co7H8w20nOwCCoN",
+    "folder": "TkJtvE40gwxy3G0K",
+    "img": "icons/consumables/food/plate-chicken-grilled-mushroom-brown.webp",
+    "name": "Effect: Xenia Spirit Grand Feast",
+    "system": {
+        "description": {
+            "value": "<p>The Xenia Spirit takes a –2 penalty to its attack, AC, DCs, Perception, and skill modifiers.</p>"
+        },
+        "duration": {
+            "expiry": null,
+            "sustained": false,
+            "unit": "unlimited",
+            "value": -1
+        },
+        "level": {
+            "value": 1
+        },
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder #216: The Acropolis Pyre"
+        },
+        "rules": [
+            {
+                "key": "FlatModifier",
+                "selector": "all",
+                "value": -2
+            }
+        ],
+        "start": {
+            "initiative": null,
+            "value": 0
+        },
+        "tokenIcon": {
+            "show": true
+        },
+        "traits": {
+            "value": []
+        }
+    },
+    "type": "effect"
+}

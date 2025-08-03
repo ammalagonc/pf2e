@@ -1,0 +1,80 @@
+{
+    "_id": "KrlSyOoVcND109iT",
+    "folder": "4h6Y0ehALprvN9Pe",
+    "img": "systems/pf2e/icons/default-icons/background.svg",
+    "name": "Obari Wanderer",
+    "system": {
+        "boosts": {
+            "0": {
+                "value": [
+                    "dex",
+                    "wis"
+                ]
+            },
+            "1": {
+                "value": [
+                    "cha",
+                    "con",
+                    "dex",
+                    "int",
+                    "str",
+                    "wis"
+                ]
+            }
+        },
+        "description": {
+            "value": "<p>For millennia, the Obari Crossing has been the lifeblood of Iblydos's economy. You're no stranger to these waters, having traveled the route before and learned to feel the currents' pulse. Did you begin your career far to the west in the Impossible Lands before sailing in search of fortune? Perhaps your first voyage involved a hold full of Vudran spices, textiles, and artwork bound for Absalom's markets or beyond. You might have even grown up in Iblydos, learning to ply the Obari Ocean and guide incoming merchants past treacherous reefs. Whatever the case, you're at home at sea—a priceless boon in this scattered archipelago.</p>\n<p>Choose two attribute boosts. One must be to <strong>Dexterity</strong> or <strong>Wisdom</strong>, and one is a free attribute boost.</p>\n<p>You're trained in either the Acrobatics or Survival skill, as well as the Sailing Lore skill. If you choose Acrobatics, you gain the @UUID[Compendium.pf2e.feats-srd.Item.Cat Fall] skill feat. If you choose Survival, you gain the @UUID[Compendium.pf2e.feats-srd.Item.Terrain Expertise] skill feat (aquatic or forest terrain is recommended).</p>"
+        },
+        "items": {},
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Myth-Speaker Player's Guide"
+        },
+        "rules": [
+            {
+                "adjustName": false,
+                "choices": [
+                    {
+                        "label": "PF2E.Skill.Acrobatics",
+                        "value": {
+                            "feat": "Compendium.pf2e.feats-srd.Item.Cat Fall",
+                            "skill": "acrobatics"
+                        }
+                    },
+                    {
+                        "label": "PF2E.Skill.Survival",
+                        "value": {
+                            "feat": "Compendium.pf2e.feats-srd.Item.Terrain Expertise",
+                            "skill": "survival"
+                        }
+                    }
+                ],
+                "flag": "choice",
+                "key": "ChoiceSet",
+                "prompt": "PF2E.SpecificRule.Prompt.Skill"
+            },
+            {
+                "key": "ActiveEffectLike",
+                "mode": "upgrade",
+                "path": "system.skills.{item|flags.pf2e.rulesSelections.choice.skill}.rank",
+                "value": 1
+            },
+            {
+                "key": "GrantItem",
+                "uuid": "{item|flags.pf2e.rulesSelections.choice.feat}"
+            }
+        ],
+        "trainedSkills": {
+            "lore": [
+                "Sailing Lore"
+            ],
+            "value": []
+        },
+        "traits": {
+            "rarity": "uncommon",
+            "value": []
+        }
+    },
+    "type": "background"
+}

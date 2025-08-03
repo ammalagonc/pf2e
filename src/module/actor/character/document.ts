@@ -323,7 +323,7 @@ class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e
               : "opposition";
 
         // Attributes
-        const attributes: DeepPartial<CharacterAttributes> = this.system.attributes;
+        const attributes: Partial<CharacterAttributes> = this.system.attributes;
         attributes.polymorphed = false;
         attributes.battleForm = false;
         attributes.classDC = null;
@@ -373,7 +373,7 @@ class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e
         this.system.traits.size = new ActorSizePF2e({ value: "med" });
 
         // Attack and defense proficiencies
-        type PartialMartialProficiency = Record<string, Partial<MartialProficiency> | undefined>;
+        type PartialMartialProficiency = Record<string, DeepPartial<MartialProficiency> | undefined>;
         const attacks: PartialMartialProficiency = (system.proficiencies.attacks ??= {});
         // Set custom attack proficiencies to be visible
         for (const attack of Object.values(attacks).filter(R.isDefined)) {
@@ -886,10 +886,7 @@ class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e
         });
 
         // Assemble lore items, key'd by a normalized slug
-        const loreItems = R.mapToObj(this.itemTypes.lore, (loreItem) => {
-            const rawLoreSlug = sluggify(loreItem.name);
-            return [/\blore\b/.test(rawLoreSlug) ? rawLoreSlug : `${rawLoreSlug}-lore`, loreItem];
-        });
+        const loreItems = R.mapToObj(this.itemTypes.lore, (loreItem) => [loreItem.slug, loreItem]);
 
         // Add Lore skills to skill statistics
         for (const [slug, loreItem] of Object.entries(loreItems)) {
@@ -1417,7 +1414,7 @@ class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e
         }
 
         // Show the ammo list if the weapon requires ammo
-        if (weapon.ammoRequired > 0) {
+        if (weapon.system.expend) {
             const compatible = ammos
                 .filter((a) => a.isAmmoFor(weapon))
                 .map((a) => ({ id: a.id, label: `${a.name} (${a.quantity})` }));
@@ -1471,16 +1468,16 @@ class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e
             roll: async (params: AttackRollParams = {}): Promise<Rolled<CheckRoll> | null> => {
                 params.options ??= [];
 
+                const expend = weapon.system.expend ?? 0;
                 const configuredAmmo = weapon.ammo;
-                const ammoRequired = weapon.ammoRequired;
                 const ammoRemaining = configuredAmmo?.isOfType("consumable")
                     ? configuredAmmo.uses.max > 1
                         ? configuredAmmo.uses.value
                         : configuredAmmo.quantity
                     : (configuredAmmo?.quantity ?? 0);
-                params.consumeAmmo ??= ammoRequired > 0;
+                params.consumeAmmo ??= expend > 0;
 
-                if (params.consumeAmmo && ammoRequired > ammoRemaining) {
+                if (params.consumeAmmo && expend > ammoRemaining) {
                     ui.notifications.warn(
                         game.i18n.format("PF2E.Strike.Ranged.NoAmmo", { weapon: weapon.name, actor: this.name }),
                     );
@@ -1715,10 +1712,8 @@ class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e
             );
             for (const proficiency of linkedProficiencies) {
                 const category = proficiencies[proficiency.sameAs ?? ""];
-                proficiency.rank = ((): ZeroToFour => {
-                    const maxRankIndex = PROFICIENCY_RANKS.indexOf(proficiency.maxRank ?? "legendary");
-                    return Math.min(category?.rank ?? 0, maxRankIndex) as ZeroToFour;
-                })();
+                const maxRankIndex = PROFICIENCY_RANKS.indexOf(proficiency.maxRank ?? "legendary");
+                proficiency.rank = Math.min(category?.rank ?? 0, maxRankIndex) as ZeroToFour;
             }
 
             // Deduplicate proficiencies, set proficiency bonuses to all
@@ -1833,7 +1828,7 @@ class CharacterPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e
         if (changed.system.resources?.crafting?.infusedReagents?.value !== undefined) {
             const infusedReagents = changed.system.resources.crafting.infusedReagents;
             const max = Math.max(0, this.system.resources.crafting.infusedReagents.max || 0);
-            infusedReagents.value = Math.clamp(Math.floor(infusedReagents.value) || 0, 0, max);
+            infusedReagents.value = Math.clamp(Math.floor(infusedReagents.value || 0), 0, max);
         }
 
         // Clamp Stamina and Resolve

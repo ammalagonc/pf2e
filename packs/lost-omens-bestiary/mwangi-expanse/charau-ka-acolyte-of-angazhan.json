@@ -971,6 +971,7 @@
                     "handsHeld": 1,
                     "invested": null
                 },
+                "expend": null,
                 "group": "spear",
                 "hardness": 0,
                 "hp": {
@@ -1328,7 +1329,7 @@
                 },
                 "rules": [
                     {
-                        "itemType": "weapon",
+                        "itemType": "melee",
                         "key": "ItemAlteration",
                         "mode": "add",
                         "predicate": [

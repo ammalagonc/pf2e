@@ -785,6 +785,7 @@
                     "handsHeld": 1,
                     "invested": null
                 },
+                "expend": null,
                 "group": "club",
                 "hardness": 0,
                 "hp": {
@@ -804,12 +805,12 @@
                 "publication": {
                     "license": "ORC",
                     "remaster": true,
-                    "title": "Pathfinder Core Rulebook"
+                    "title": "Pathfinder Player Core"
                 },
                 "quantity": 1,
                 "range": null,
                 "reload": {
-                    "value": ""
+                    "value": null
                 },
                 "rules": [],
                 "runes": {
@@ -825,6 +826,7 @@
                 "traits": {
                     "rarity": "common",
                     "value": [
+                        "monk",
                         "two-hand-d8"
                     ]
                 },
@@ -929,7 +931,7 @@
                 "publication": {
                     "license": "ORC",
                     "remaster": true,
-                    "title": "Pathfinder Core Rulebook"
+                    "title": "Pathfinder Player Core"
                 },
                 "quantity": 1,
                 "rules": [],

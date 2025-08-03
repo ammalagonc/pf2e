@@ -12,7 +12,7 @@
         },
         "category": "class",
         "description": {
-            "value": "<p>Your study of the stars unlocks supernatural insights and magic. You either become trained in Astronomy Lore or an expert in Occultism.</p>\n<p>You learn to cast spontaneous spells and gain the Cast a Spell activity. You gain a spell repertoire with two common cantrips of your choice; these cantrips can be from any spell tradition, but they must be divination spells. You cast these spells as occult spells as you draw on the stars and night sky. You're trained in occult spell attack rolls and spell DCs. If you have a hand free and you've gazed at the night sky in the last 24 hours, you can usually replace material components with somatic components, so you don't need to use a spell component pouch. Your key spellcasting ability for these spells is Intelligence.</p>\n<p>@UUID[Compendium.pf2e.journals.JournalEntry.vx5FGEG34AxI2dow.JournalEntryPage.PVwU1LMWcSgD7Q0m]{Oatia Skysage}</p>"
+            "value": "<p>Your study of the stars unlocks supernatural insights and magic. You either become trained in Astronomy Lore or an expert in Occultism.</p>\n<p>You learn to cast spontaneous spells and gain the Cast a Spell activity. You gain a spell repertoire with two of the following cantrips of your choice: @UUID[Compendium.pf2e.spells-srd.Item.Detect Magic], @UUID[Compendium.pf2e.spells-srd.Item.Guidance], @UUID[Compendium.pf2e.spells-srd.Item.Know the Way], or @UUID[Compendium.pf2e.spells-srd.Item.Read Aura]. You cast these spells as occult spells as you draw on the stars and night sky. You're trained in occult spell attack rolls and spell DCs. Your key spellcasting ability for these spells is Intelligence.</p>\n<p>@UUID[Compendium.pf2e.journals.JournalEntry.vx5FGEG34AxI2dow.JournalEntryPage.PVwU1LMWcSgD7Q0m]{Oatia Skysage}</p>"
         },
         "level": {
             "value": 2
@@ -25,9 +25,9 @@
             ]
         },
         "publication": {
-            "license": "OGL",
-            "remaster": false,
-            "title": "Pathfinder #187: The Seventh Arch"
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Adventure Path: Gatewalkers"
         },
         "rules": [],
         "subfeatures": {

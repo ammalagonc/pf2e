@@ -92,7 +92,7 @@
             "_stats": {
                 "compendiumSource": "Compendium.pf2e.spells-srd.Item.Dbd5W6G8U2vzWolN"
             },
-            "img": "systems/pf2e/icons/spells/consecrate.webp",
+            "img": "icons/magic/holy/chalice-glowing-gold-water.webp",
             "name": "Consecrate",
             "sort": 200000,
             "system": {
@@ -1189,6 +1189,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": null,
                 "group": "knife",
                 "hardness": 0,
                 "hp": {
@@ -1303,7 +1304,6 @@
                 "quantity": 1,
                 "rules": [
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "option": "has-religious-symbol",
                         "requiresEquipped": false
@@ -1668,7 +1668,6 @@
                 },
                 "rules": [
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "option": "impersonate-shape",
                         "toggleable": true

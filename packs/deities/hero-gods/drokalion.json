@@ -1,0 +1,50 @@
+{
+    "_id": "DUaWAIn8nUMx5AIE",
+    "folder": "D9zBpB4QxouPISQD",
+    "img": "systems/pf2e/icons/default-icons/deity.svg",
+    "name": "Drokalion",
+    "system": {
+        "attribute": [
+            "con",
+            "str"
+        ],
+        "category": "deity",
+        "description": {
+            "value": "<p>Hero-gods are supposed to have backstories, doctrines, myth-spoken origins, and even intelligible speech. Somehow, the lion known as Drokalion proved an exception. Though smarter than an average animal, Drokalion is nonetheless a fairly mundane lion with fairly mundane motivations, which seemingly includes no self-awareness of his hero-god status. Nevertheless, a hero-god he is. His small cult happily hunts along the periphery of Drokalion's territory and draws spellcasting from him, exulting in the no-nonsense lifestyle their unwitting patron teaches by example. Followers take special joy in Drokalion's attention, even though this attention almost always involves the lion charging at (and sometimes even eating) his faithful.</p>\n<p><strong>Title</strong> The Pridefather</p>\n<p><strong>Areas of Concern</strong> being a lion</p>\n<p><strong>Edicts</strong> embody a lion's hunting strategies, savor meat, be chased or eaten by Drokalion</p>\n<p><strong>Anathema</strong> back down from a fair challenge, cower to avoid harm, ruin Drokalion's hunt</p>\n<p><strong>Religious Symbol</strong> roaring lion</p>\n<p><strong>Sacred Animal</strong> lion</p>\n<p><strong>Sacred Colors</strong> brown, yellow</p>"
+        },
+        "domains": {
+            "alternate": [],
+            "primary": [
+                "family",
+                "indulgence",
+                "nature",
+                "zeal"
+            ]
+        },
+        "font": [
+            "harm",
+            "heal"
+        ],
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder #216: The Acropolis Pyre"
+        },
+        "rules": [],
+        "sanctification": null,
+        "skill": [
+            "athletics"
+        ],
+        "spells": {
+            "1": "Compendium.pf2e.spells-srd.Item.Fleet Step",
+            "2": "Compendium.pf2e.spells-srd.Item.Animal Form",
+            "5": "Compendium.pf2e.spells-srd.Item.Chameleon Coat"
+        },
+        "traits": {},
+        "weapons": [
+            "jaws",
+            "pick"
+        ]
+    },
+    "type": "deity"
+}

@@ -1,0 +1,66 @@
+{
+    "_id": "ANZPiu3eb3byDRUk",
+    "img": "icons/magic/unholy/barrier-shield-glowing-pink.webp",
+    "name": "Effect: Inhale Light",
+    "system": {
+        "description": {
+            "value": "<p>The torcheater gains a reach of 10 feet, a +5 foot status bonus to Speed, and fast healing 2. Its resistance to physical damage reduces to 2.</p>"
+        },
+        "duration": {
+            "expiry": "turn-start",
+            "sustained": false,
+            "unit": "rounds",
+            "value": 6
+        },
+        "level": {
+            "value": 1
+        },
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder #216: The Acropolis Pyre"
+        },
+        "rules": [
+            {
+                "exceptions": [
+                    {
+                        "definition": [
+                            "damage:material:bronze"
+                        ],
+                        "label": "PF2E.IWR.Custom.Bronze"
+                    }
+                ],
+                "key": "Resistance",
+                "type": "physical",
+                "value": 2
+            },
+            {
+                "key": "AdjustStrike",
+                "mode": "add",
+                "property": "weapon-traits",
+                "value": "reach-10"
+            },
+            {
+                "key": "FlatModifier",
+                "selector": "land-speed",
+                "type": "status",
+                "value": 5
+            },
+            {
+                "key": "FastHealing",
+                "value": 2
+            }
+        ],
+        "start": {
+            "initiative": null,
+            "value": 0
+        },
+        "tokenIcon": {
+            "show": true
+        },
+        "traits": {
+            "value": []
+        }
+    },
+    "type": "effect"
+}

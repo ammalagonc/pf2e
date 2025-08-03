@@ -1,14 +1,14 @@
 {
     "_id": "aiwlPSmNY9b6Psvd",
     "folder": "LOmu7fmjWOthtbvt",
-    "img": "systems/pf2e/icons/actions/TwoActions.webp",
+    "img": "systems/pf2e/icons/actions/OneAction.webp",
     "name": "(Ghost) Frightful Moan",
     "system": {
         "actionType": {
             "value": "action"
         },
         "actions": {
-            "value": 2
+            "value": 1
         },
         "category": "offensive",
         "description": {

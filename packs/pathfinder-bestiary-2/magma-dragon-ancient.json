@@ -49,7 +49,7 @@
             "_stats": {
                 "compendiumSource": "Compendium.pf2e.spells-srd.Item.y6rAdMK6EFlV6U0t"
             },
-            "img": "systems/pf2e/icons/spells/burning-hands.webp",
+            "img": "icons/magic/fire/flame-burning-hand-orange.webp",
             "name": "Burning Hands (At Will)",
             "sort": 200000,
             "system": {
@@ -299,7 +299,7 @@
             "_stats": {
                 "compendiumSource": "Compendium.pf2e.spells-srd.Item.YrzBLPLd3r9m6t1p"
             },
-            "img": "systems/pf2e/icons/spells/fire-shield.webp",
+            "img": "icons/magic/fire/barrier-shield-explosion-yellow.webp",
             "name": "Fire Shield (Constant)",
             "sort": 500000,
             "system": {
@@ -953,7 +953,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>Once per day, the dragon can spit a molten boulder at a target within 120 feet. This deals @Damage[12d6[fire],5d12[bludgeoning]]{12d6 fire damage and 5d12 bludgeoning damage}, with a @Check[reflex|dc:42|basic] save. If the creature fails its save, it's encased in magma that instantly cools and has Hardness 10, HP 40, and BT 20. The encased creature can't breathe and is @UUID[Compendium.pf2e.conditionitems.Item.Restrained] (Escape DC 42).</p>"
+                    "value": "<p>Once per day, the dragon can spit a molten boulder at a target within 120 feet. This deals @Damage[12d6[fire],5d12[bludgeoning]]{12d6 fire damage and 5d12 bludgeoning damage}, with a @Check[reflex|dc:42|basic] save. If the creature fails its save, it's encased in magma that instantly cools and has Hardness 10, HP 40, and BT 20. The encased creature can't breathe and is @UUID[Compendium.pf2e.conditionitems.Item.Restrained] ([[/act escape dc=42]]).</p>"
                 },
                 "publication": {
                     "license": "OGL",

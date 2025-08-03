@@ -509,7 +509,7 @@
             "_stats": {
                 "compendiumSource": "Compendium.pf2e.spells-srd.Item.HBJPsonQnWcC3qdX"
             },
-            "img": "systems/pf2e/icons/spells/hallucinatory-terrain.webp",
+            "img": "icons/environment/wilderness/cave-entrance-vulcano.webp",
             "name": "Hallucinatory Terrain",
             "sort": 800000,
             "system": {
@@ -2286,7 +2286,6 @@
                 },
                 "rules": [
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "option": "deflecting-cloud",
                         "toggleable": true

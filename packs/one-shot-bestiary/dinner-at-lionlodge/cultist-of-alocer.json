@@ -253,7 +253,7 @@
             "_stats": {
                 "compendiumSource": "Compendium.pf2e.spells-srd.Item.FzAtX8yXBjTaisJK"
             },
-            "img": "systems/pf2e/icons/spells/undetectable-alignment.webp",
+            "img": "icons/magic/control/silhouette-aura-energy.webp",
             "name": "Undetectable Alignment",
             "sort": 500000,
             "system": {
@@ -1477,6 +1477,7 @@
                     "handsHeld": 1,
                     "invested": null
                 },
+                "expend": 1,
                 "group": "bow",
                 "hardness": 0,
                 "hp": {
@@ -1563,6 +1564,7 @@
                     "handsHeld": 1,
                     "invested": null
                 },
+                "expend": null,
                 "group": "brawling",
                 "hardness": 0,
                 "hp": {
@@ -1589,7 +1591,7 @@
                 "quantity": 1,
                 "range": null,
                 "reload": {
-                    "value": ""
+                    "value": null
                 },
                 "rules": [],
                 "runes": {

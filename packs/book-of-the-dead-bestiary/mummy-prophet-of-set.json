@@ -781,7 +781,7 @@
             "_stats": {
                 "compendiumSource": "Compendium.pf2e.spells-srd.Item.sRfSBHWHdbIa0aGc"
             },
-            "img": "systems/pf2e/icons/spells/chilling-darkness.webp",
+            "img": "icons/magic/light/beam-explosion-pink-purple.webp",
             "name": "Chilling Darkness",
             "sort": 1000000,
             "system": {
@@ -1983,6 +1983,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": null,
                 "group": "spear",
                 "hardness": 0,
                 "hp": {
@@ -2433,7 +2434,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p><strong>Requirements</strong> The prophet's Sandstorm is active</p>\n<hr />\n<p><strong>Effect</strong> The prophet inhales its Sandstorm, suppressing the effect until the end of the prophet's next turn. It then exhales a @Template[cone|distance:120] of negatively charged sand that deals @Damage[7d6[void],7d6[slashing]]{7d6 void and 7d6 slashing damage} (@Check[reflex|dc:33|basic]).</p>"
+                    "value": "<p><strong>Requirements</strong> The prophet's Sandstorm is active</p>\n<hr />\n<p><strong>Effect</strong> The prophet inhales its Sandstorm, suppressing the effect until the end of the prophet's next turn. It then exhales a @Template[cone|distance:120] of negatively charged sand that deals @Damage[7d6[void],7d6[slashing]|options:area-damage]{7d6 void and 7d6 slashing damage} (@Check[reflex|dc:33|basic|options:area-effect]).</p>"
                 },
                 "publication": {
                     "license": "OGL",
@@ -2514,7 +2515,6 @@
                 },
                 "rules": [
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "option": "sand-form",
                         "toggleable": true
@@ -2604,7 +2604,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p><strong>Frequency</strong> once per day</p>\n<hr />\n<p><strong>Effect</strong> The mummy creates a temporary sandstorm in a @Template[emanation|distance:30] that lasts for 1 minute. Creatures within the emanation take a -4 circumstance penalty to Perception checks and must succeed at a @Check[fortitude|dc:33] save or be forced to hold their breath or start suffocating. A creature within the sandstorm at the end of its turn takes @Damage[2d6[void],1d6[slashing]]{2d6 void and 1d6 slashing damage}.</p>"
+                    "value": "<p><strong>Frequency</strong> once per day</p>\n<hr />\n<p><strong>Effect</strong> The mummy creates a temporary sandstorm in a @Template[emanation|distance:30] that lasts for 1 minute. Creatures within the emanation take a –4 circumstance penalty to Perception checks and must succeed at a @Check[fortitude|dc:33|options:area-effect] save or be forced to hold their breath or start suffocating. A creature within the sandstorm at the end of its turn takes @Damage[2d6[void],1d6[slashing]|options:area-damage]{2d6 void and 1d6 slashing damage}.</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.Effect: Sandstorm]</p>"
                 },
                 "frequency": {
                     "max": 1,

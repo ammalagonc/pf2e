@@ -122,9 +122,7 @@
                 "slug": null,
                 "traits": {
                     "rarity": "common",
-                    "value": [
-                        "fey"
-                    ]
+                    "value": []
                 }
             },
             "type": "action"
@@ -388,12 +386,12 @@
             "mod": 11,
             "senses": [
                 {
+                    "type": "darkvision"
+                },
+                {
                     "acuity": "imprecise",
                     "range": 30,
                     "type": "lifesense"
-                },
-                {
-                    "type": "low-light-vision"
                 }
             ]
         },

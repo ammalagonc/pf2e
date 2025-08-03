@@ -1,0 +1,98 @@
+{
+    "_id": "GRipBAomeHCBPwep",
+    "folder": "oCIMT95Cx5yDy0s6",
+    "img": "systems/pf2e/icons/default-icons/hazard.svg",
+    "items": [
+        {
+            "_id": "9g9H4sDLhxFuLws6",
+            "img": "systems/pf2e/icons/default-icons/action.svg",
+            "name": "Quake",
+            "sort": 0,
+            "system": {
+                "actionType": {
+                    "value": "reaction"
+                },
+                "actions": {
+                    "value": null
+                },
+                "category": "offensive",
+                "description": {
+                    "value": "<p>The ground shakes violently. All creatures in the area take @Damage[8d10[bludgeoning]|options:area-damage] damage with a @Check[reflex|dc:30|basic|options:area-effect] save. On a critical failure, the creature falls into a 60-foot-deep fissure opened by the tremor. They can attempt to @UUID[Compendium.pf2e.actionspf2e.Item.Grab an Edge] (DC 30 to prevent the fall, with a –2 circumstance penalty due to the moving ground). A creature that falls takes an additional @Damage[30[bludgeoning]]{30} falling damage, is knocked @UUID[Compendium.pf2e.conditionitems.Item.Prone], and must be rescued from their predicament by another PC taking one action to pull them free. If any creatures are still in fissures due to previous tremors, they automatically get a Failure on this save.</p>"
+                },
+                "publication": {
+                    "license": "OGL",
+                    "remaster": false,
+                    "title": ""
+                },
+                "rules": [],
+                "slug": null,
+                "traits": {
+                    "value": []
+                }
+            },
+            "type": "action"
+        }
+    ],
+    "name": "Earthquake (13-14)",
+    "prototypeToken": {
+        "name": "Earthquake"
+    },
+    "system": {
+        "attributes": {
+            "ac": {
+                "value": null
+            },
+            "emitsSound": "encounter",
+            "hardness": 0,
+            "hp": {
+                "details": "",
+                "max": 0,
+                "temp": 0,
+                "value": 0
+            },
+            "immunities": [],
+            "resistances": [],
+            "stealth": {
+                "details": "",
+                "value": 0
+            },
+            "weaknesses": []
+        },
+        "details": {
+            "description": "<p>The earth shakes violently side to side, opening a fissure in the ground, partially collapsing builds, and scattering debris in all directions.</p>",
+            "disable": "",
+            "isComplex": false,
+            "level": {
+                "value": 14
+            },
+            "publication": {
+                "license": "ORC",
+                "remaster": true,
+                "title": "Pathfinder Society Scenario #6-19: What Walks Again"
+            },
+            "reset": "",
+            "routine": ""
+        },
+        "saves": {
+            "fortitude": {
+                "value": 0
+            },
+            "reflex": {
+                "value": 0
+            },
+            "will": {
+                "value": 0
+            }
+        },
+        "traits": {
+            "rarity": "uncommon",
+            "size": {
+                "value": "lg"
+            },
+            "value": [
+                "environmental"
+            ]
+        }
+    },
+    "type": "hazard"
+}

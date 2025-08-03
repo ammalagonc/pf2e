@@ -113,7 +113,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>The sootsoldiers reignite and rush across the battlefield, Forming Up and Striding twice. At the end of this movement, a wave of flame and heat pours off the sootsoldiers, dealing @Damage[4d8[fire]] damage to other creatures in a @Template[emanation|distance:10], with a @Check[reflex|dc:29|basic] save. A creature that critically fails its save is also knocked @UUID[Compendium.pf2e.conditionitems.Item.Prone].</p>"
+                    "value": "<p>The sootsoldiers reignite and rush across the battlefield, Forming Up and Striding twice. At the end of this movement, a wave of flame and heat pours off the sootsoldiers, dealing @Damage[4d8[fire]|options:area-damage] damage to other creatures in a @Template[emanation|distance:10], with a @Check[reflex|dc:29|basic|options:area-effect,inflicts:prone] save. A creature that critically fails its save is also knocked @UUID[Compendium.pf2e.conditionitems.Item.Prone].</p>"
                 },
                 "publication": {
                     "license": "OGL",

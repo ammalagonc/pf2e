@@ -703,6 +703,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": null,
                 "group": "knife",
                 "hardness": 0,
                 "hp": {
@@ -977,6 +978,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": null,
                 "group": "knife",
                 "hardness": 0,
                 "hp": {
@@ -1003,7 +1005,7 @@
                 "quantity": 1,
                 "range": null,
                 "reload": {
-                    "value": ""
+                    "value": null
                 },
                 "rules": [],
                 "runes": {
@@ -1066,6 +1068,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": null,
                 "group": "sword",
                 "hardness": 0,
                 "hp": {
@@ -1092,7 +1095,7 @@
                 "quantity": 1,
                 "range": null,
                 "reload": {
-                    "value": ""
+                    "value": null
                 },
                 "rules": [],
                 "runes": {
@@ -1289,7 +1292,6 @@
                         "value": 1
                     },
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "label": "PF2E.SpecificRule.LitTorch",
                         "option": "lit-torch",
@@ -1957,7 +1959,6 @@
                             }
                         ],
                         "disabledValue": false,
-                        "domain": "all",
                         "key": "RollOption",
                         "label": "PF2E.SpecificRule.Swashbuckler.Finisher.Label",
                         "mergeable": true,
@@ -2229,7 +2230,7 @@
                         "predicate": [
                             "item:trait:bravado",
                             {
-                                "not": "panache"
+                                "not": "self:effect:panache"
                             }
                         ],
                         "selector": [
@@ -2247,7 +2248,7 @@
                         "predicate": [
                             "item:trait:bravado",
                             {
-                                "not": "panache"
+                                "not": "self:effect:panache"
                             }
                         ],
                         "selector": [
@@ -2724,7 +2725,6 @@
                             }
                         ],
                         "disabledValue": false,
-                        "domain": "all",
                         "key": "RollOption",
                         "label": "PF2E.SpecificRule.Swashbuckler.Finisher.Label",
                         "mergeable": true,
@@ -2800,7 +2800,6 @@
                 },
                 "rules": [
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "option": "aquatic-combat:not-off-guard"
                     },

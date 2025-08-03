@@ -114,7 +114,6 @@
                 },
                 "rules": [
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "label": "PF2E.NPCAbility.ConstructArmor.CriticalHit",
                         "option": "construct-armor",
@@ -253,9 +252,9 @@
             "privateNotes": "",
             "publicNotes": "",
             "publication": {
-                "license": "OGL",
-                "remaster": false,
-                "title": "Pathfinder #188: They Watched the Stars"
+                "license": "ORC",
+                "remaster": true,
+                "title": "Pathfinder Adventure Path: Gatewalkers"
             }
         },
         "initiative": {

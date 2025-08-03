@@ -37,6 +37,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": null,
                 "group": "knife",
                 "hardness": 0,
                 "hp": {
@@ -560,7 +561,7 @@
             "statistic": "perception"
         },
         "perception": {
-            "details": "+14 to Sense Motive",
+            "details": "(+14 to Sense Motive)",
             "mod": 12,
             "senses": [
                 {

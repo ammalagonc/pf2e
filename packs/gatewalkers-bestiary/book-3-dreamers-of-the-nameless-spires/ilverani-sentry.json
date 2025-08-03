@@ -8,7 +8,7 @@
             "_stats": {
                 "compendiumSource": "Compendium.pf2e.equipment-srd.Item.rQWaJhI5Bko5x14Z"
             },
-            "img": "systems/pf2e/icons/equipment/weapons/dagger.webp",
+            "img": "icons/weapons/daggers/dagger-straight-blue.webp",
             "name": "Dagger",
             "sort": 100000,
             "system": {
@@ -37,6 +37,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": null,
                 "group": "knife",
                 "hardness": 0,
                 "hp": {
@@ -56,9 +57,9 @@
                     }
                 },
                 "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": "Pathfinder Core Rulebook"
+                    "license": "ORC",
+                    "remaster": true,
+                    "title": "Pathfinder Player Core"
                 },
                 "quantity": 1,
                 "range": null,
@@ -86,6 +87,7 @@
                     ]
                 },
                 "usage": {
+                    "canBeAmmo": false,
                     "value": "held-in-one-hand"
                 }
             },
@@ -96,7 +98,7 @@
             "_stats": {
                 "compendiumSource": "Compendium.pf2e.equipment-srd.Item.dUC8Fsa6FZtVikS3"
             },
-            "img": "systems/pf2e/icons/equipment/weapons/composite-longbow.webp",
+            "img": "icons/weapons/bows/longbow-recurve-brown.webp",
             "name": "Composite Longbow",
             "sort": 200000,
             "system": {
@@ -125,6 +127,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": 1,
                 "group": "bow",
                 "hardness": 0,
                 "hp": {
@@ -132,7 +135,7 @@
                     "value": 0
                 },
                 "level": {
-                    "value": 0
+                    "value": 1
                 },
                 "material": {
                     "grade": null,
@@ -144,9 +147,9 @@
                     }
                 },
                 "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": "Pathfinder Core Rulebook"
+                    "license": "ORC",
+                    "remaster": true,
+                    "title": "Pathfinder Player Core"
                 },
                 "quantity": 1,
                 "range": 100,
@@ -156,7 +159,9 @@
                 "rules": [],
                 "runes": {
                     "potency": 1,
-                    "property": [],
+                    "property": {
+                        "0": ""
+                    },
                     "striking": 0
                 },
                 "size": "med",
@@ -212,6 +217,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": null,
                 "group": "sword",
                 "hardness": 0,
                 "hp": {
@@ -231,14 +237,14 @@
                     }
                 },
                 "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": "Pathfinder Core Rulebook"
+                    "license": "ORC",
+                    "remaster": true,
+                    "title": "Pathfinder Player Core"
                 },
                 "quantity": 1,
                 "range": null,
                 "reload": {
-                    "value": ""
+                    "value": null
                 },
                 "rules": [],
                 "runes": {
@@ -288,6 +294,7 @@
                 "dexCap": 4,
                 "equipped": {
                     "carryType": "worn",
+                    "handsHeld": 0,
                     "inSlot": false,
                     "invested": null
                 },
@@ -310,9 +317,9 @@
                     }
                 },
                 "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": "Pathfinder Core Rulebook"
+                    "license": "ORC",
+                    "remaster": true,
+                    "title": "Pathfinder Player Core"
                 },
                 "quantity": 1,
                 "rules": [],
@@ -337,7 +344,7 @@
             "_stats": {
                 "compendiumSource": "Compendium.pf2e.equipment-srd.Item.w2ENw2VMPcsbif8g"
             },
-            "img": "systems/pf2e/icons/equipment/weapons/arrows.webp",
+            "img": "icons/weapons/ammunition/arrows-broadhead-white.webp",
             "name": "Arrows",
             "sort": 500000,
             "system": {
@@ -374,9 +381,9 @@
                     }
                 },
                 "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": "Pathfinder Core Rulebook"
+                    "license": "ORC",
+                    "remaster": true,
+                    "title": "Pathfinder Player Core"
                 },
                 "quantity": 20,
                 "rules": [],
@@ -580,7 +587,6 @@
                 },
                 "rules": [
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "label": "PF2E.SpecificRule.HuntPrey.TargetHuntedPrey",
                         "option": "hunted-prey",
@@ -700,7 +706,7 @@
             }
         },
         "details": {
-            "blurb": "Elf hunters",
+            "blurb": "Elf hunter",
             "languages": {
                 "details": "",
                 "value": [
@@ -715,9 +721,9 @@
             "privateNotes": "",
             "publicNotes": "",
             "publication": {
-                "license": "OGL",
-                "remaster": false,
-                "title": "Pathfinder #189: Dreamers of the Nameless Spires"
+                "license": "ORC",
+                "remaster": true,
+                "title": "Pathfinder Adventure Path: Gatewalkers"
             }
         },
         "initiative": {
@@ -767,9 +773,7 @@
                 "value": "med"
             },
             "value": [
-                "chaotic",
                 "elf",
-                "good",
                 "humanoid"
             ]
         }

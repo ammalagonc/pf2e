@@ -420,7 +420,7 @@
             "_stats": {
                 "compendiumSource": "Compendium.pf2e.spells-srd.Item.CQb8HtQ1BPeZmu9h"
             },
-            "img": "systems/pf2e/icons/spells/touch-of-idiocy.webp",
+            "img": "icons/magic/light/hand-sparks-smoke-teal.webp",
             "name": "Touch of Idiocy",
             "sort": 700000,
             "system": {
@@ -1207,6 +1207,7 @@
                     "handsHeld": 1,
                     "invested": null
                 },
+                "expend": null,
                 "group": "knife",
                 "hardness": 0,
                 "hp": {
@@ -1576,7 +1577,6 @@
                         "selector": "strike-damage"
                     },
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "label": "PF2E.SpecificRule.TOTMToggle.OffGuard",
                         "option": "target:condition:off-guard",

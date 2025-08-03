@@ -377,6 +377,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": 1,
                 "group": "crossbow",
                 "hardness": 0,
                 "hp": {
@@ -460,6 +461,7 @@
                     "handsHeld": 0,
                     "invested": null
                 },
+                "expend": null,
                 "group": "knife",
                 "hardness": 0,
                 "hp": {
@@ -486,7 +488,7 @@
                 "quantity": 1,
                 "range": null,
                 "reload": {
-                    "value": ""
+                    "value": null
                 },
                 "rules": [],
                 "runes": {
@@ -869,7 +871,7 @@
                 "category": "defensive",
                 "deathNote": true,
                 "description": {
-                    "value": "<p>When Nox dies, their body combusts in a flash of white-hot flame that deals @Damage[5d6[fire]] damage to creatures in a @Template[burst|distance:20] (@Check[reflex|dc:21|basic] save). Nox's gear and treasure are unaffected by the flames and are left in a pile where they died.</p>"
+                    "value": "<p>When Nox dies, their body combusts in a flash of white-hot flame that deals @Damage[5d6[fire]|options:area-damage] damage to creatures in a @Template[burst|distance:20] (@Check[reflex|dc:21|basic|options:area-effect] save). Nox's gear and treasure are unaffected by the flames and are left in a pile where they died.</p>"
                 },
                 "publication": {
                     "license": "OGL",
@@ -986,7 +988,6 @@
                         "selector": "strike-damage"
                     },
                     {
-                        "domain": "all",
                         "key": "RollOption",
                         "label": "PF2E.SpecificRule.TOTMToggle.OffGuard",
                         "option": "target:condition:off-guard",

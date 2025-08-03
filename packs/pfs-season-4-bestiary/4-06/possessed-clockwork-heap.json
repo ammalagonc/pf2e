@@ -226,7 +226,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>The infested clockwork heap unleashes a cloud of loosely connected debris that whirls around its body at incredible speed. Each creature within @Template[burst|distance:30]{30 feet} takes @Damage[3d8[bludgeoning]] damage (@Check[fortitude|dc:25|basic]).</p>"
+                    "value": "<p>The infested clockwork heap unleashes a cloud of loosely connected debris that whirls around its body at incredible speed. Each creature within @Template[emanation|distance:30]{30 feet} takes @Damage[3d8[bludgeoning]|options:area-damage] damage (@Check[fortitude|dc:25|basic|options:area-effect]).</p>"
                 },
                 "publication": {
                     "license": "OGL",

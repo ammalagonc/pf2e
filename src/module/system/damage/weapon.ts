@@ -5,7 +5,7 @@ import type { MeleePF2e, WeaponPF2e } from "@item";
 import type { NPCAttackDamage } from "@item/melee/data.ts";
 import { RUNE_DATA, getPropertyRuneDamage, getPropertyRuneModifierAdjustments } from "@item/physical/runes.ts";
 import type { WeaponDamage } from "@item/weapon/data.ts";
-import type { ZeroToThree } from "@module/data.ts";
+import type { ZeroToFour } from "@module/data.ts";
 import { RollNotePF2e } from "@module/notes.ts";
 import {
     extractDamageAlterations,
@@ -261,7 +261,7 @@ class WeaponDamagePF2e {
             weapon.system.runes.striking = Math.max(
                 weapon.system.runes.striking,
                 strikingSynthetic.bonus,
-            ) as ZeroToThree;
+            ) as ZeroToFour;
         }
 
         // Get striking dice: the number of damage dice from a striking rune (or ABP devastating strikes)

@@ -99,6 +99,16 @@ class ActorDirectoryPF2e extends fa.sidebar.tabs.ActorDirectory<ActorPF2e<null>>
         game.settings.set("pf2e", "activePartyFolderState", this.#extraFolders[game.actors.party?.id ?? ""] ?? true);
     }
 
+    override render(options: Partial<HandlebarsRenderOptions> = {}): Promise<this> {
+        // Ensure the entire directory gets re-rendered when the parties are
+        // This prevents drag/drop events from breaking on party only re-renders such as changing the active one
+        if (options.parts && options.parts.includes("parties") && !options.parts.includes("directory")) {
+            options.parts.push("directory");
+        }
+
+        return super.render(options);
+    }
+
     override async _onRender(context: object, options: HandlebarsRenderOptions): Promise<void> {
         // Move the party list into the directory part
         // This must occur before super._onRender() so that drag/drop is registered correctly
@@ -111,20 +121,22 @@ class ActorDirectoryPF2e extends fa.sidebar.tabs.ActorDirectory<ActorPF2e<null>>
         await super._onRender(context, options);
 
         // Inject any additional buttons for specific party implementations
-        for (const party of game.actors.filter((a) => a.isOfType("party"))) {
-            const sidebarButtons = party.campaign?.createSidebarButtons?.() ?? [];
-            if (sidebarButtons.length) {
-                this.element
-                    .querySelector(`li[data-party][data-entry-id="${party.id}"] header .folder-name`)
-                    ?.after(...sidebarButtons);
+        if (options.parts.includes("directory")) {
+            for (const party of game.actors.filter((a) => a.isOfType("party"))) {
+                const sidebarButtons = party.campaign?.createSidebarButtons?.() ?? [];
+                if (sidebarButtons.length) {
+                    this.element
+                        .querySelector(`li[data-party][data-entry-id="${party.id}"] header .folder-name`)
+                        ?.after(...sidebarButtons);
+                }
             }
-        }
 
-        // Strip actor level from actors we lack proper observer permission for
-        for (const element of htmlQueryAll(this.element, "li.directory-item.actor")) {
-            const actor = game.actors.get(element.dataset.entryId, { strict: true });
-            if (!actor.testUserPermission(game.user, "OBSERVER")) {
-                element.querySelector("span.actor-level")?.remove();
+            // Strip actor level from actors we lack proper observer permission for
+            for (const element of htmlQueryAll(this.element, "li.directory-item.actor")) {
+                const actor = game.actors.get(element.dataset.entryId, { strict: true });
+                if (!actor.testUserPermission(game.user, "OBSERVER")) {
+                    element.querySelector("span.actor-level")?.remove();
+                }
             }
         }
     }

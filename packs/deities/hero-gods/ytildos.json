@@ -1,0 +1,54 @@
+{
+    "_id": "y1aoHudIXFqYwWXP",
+    "folder": "D9zBpB4QxouPISQD",
+    "img": "systems/pf2e/icons/default-icons/deity.svg",
+    "name": "Ytildos",
+    "system": {
+        "attribute": [
+            "dex",
+            "int"
+        ],
+        "category": "deity",
+        "description": {
+            "value": "<p>In her efforts to kill other hero-gods, Ongalte performed an act of hypocrisy: she created a hero-god of her own. A marauder and iconoclast, the pirate Ytildos seemed like a perfect lieutenant who could hound Iblydos's pantheon from the sea. However, when Pharimia wounded Ongalte in battle, the cyclops fled and relied on Ytildos to guard her as she recuperated. He did… for a time. Greed and contrariness got the better of him, and he absconded with much of Ongalte's wealth, earning her eternal ire.</p>\n<p>Ytildos is an inconsistent divinity. One moment, he's encouraging his worshippers to cause and pilfer shipwrecks, only to become jealous of their newfound wealth. It's common for sailors to cast a portion of their wealth into the sea, hoping to assuage the hero-god's avarice. He drags the ships of any who fail to placate him onto reefs, delighting as the coral tears open a vessel's belly and spills its cargo into the sea.</p>\n<p><strong>Title</strong> The Tidefang</p>\n<p><strong>Areas of Concern</strong> reefs and shipwrecks</p>\n<p><strong>Edicts</strong> capitalize on others' misfortune for profit, subtly ruin navigation tools, set traps</p>\n<p><strong>Anathema</strong> despoil a coastal ecosystem, give away a treasure map for free</p>\n<p><strong>Religious Symbol</strong> a ship wrecked atop a reef</p>\n<p><strong>Sacred Animal</strong> hermit crab</p>\n<p><strong>Sacred Colors</strong> brown, orange</p>"
+        },
+        "domains": {
+            "alternate": [],
+            "primary": [
+                "delirium",
+                "secrecy",
+                "water",
+                "wealth"
+            ]
+        },
+        "font": [
+            "harm"
+        ],
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder #216: The Acropolis Pyre"
+        },
+        "rules": [],
+        "sanctification": {
+            "modal": "can",
+            "what": [
+                "holy",
+                "unholy"
+            ]
+        },
+        "skill": [
+            "thievery"
+        ],
+        "spells": {
+            "1": "Compendium.pf2e.spells-srd.Item.Hydraulic Push",
+            "3": "Compendium.pf2e.spells-srd.Item.Coral Scourge",
+            "8": "Compendium.pf2e.spells-srd.Item.Whirlpool"
+        },
+        "traits": {},
+        "weapons": [
+            "macuahuitl"
+        ]
+    },
+    "type": "deity"
+}

@@ -197,7 +197,8 @@ class ChatMessagePF2e extends ChatMessage {
         // For non-image types consider video thumbnails using game.video.createThumbnail() depending on cache performance
         // Tokens with smaller scales (such as for small and tiny actors) are set to scale 1
         const header = html?.querySelector("header.message-header");
-        if (actor && header && this.isContentVisible) {
+        const isOOC = this.style === CONST.CHAT_MESSAGE_STYLES.OOC;
+        if (!isOOC && actor && header && this.isContentVisible) {
             const token = this.token ?? actor.prototypeToken;
 
             const [imageUrl, scale] = (() => {
@@ -218,6 +219,7 @@ class ChatMessagePF2e extends ChatMessage {
             const image = document.createElement("img");
             image.alt = actor.name;
             image.src = imageUrl;
+            image.inert = true;
             image.style.transform = `scale(${scale})`;
 
             // If image scale is above 1.2, we might need to add a radial fade to not block out the name
@@ -239,6 +241,19 @@ class ChatMessagePF2e extends ChatMessage {
             if (this.author) {
                 header.append(createHTMLElement("span", { classes: ["user"], children: [this.author.name] }));
             }
+        }
+
+        // If the description has auto-collapse, collapse if text exceeds a certain length
+        // Its not possible to check the actual size if its not in the DOM yet
+        const collapsableElement = html.querySelector<HTMLElement>(
+            ".description[data-auto-collapse], .card-content[data-auto-collapse]",
+        );
+        if (collapsableElement && collapsableElement.innerText.length > 250) {
+            collapsableElement.classList.add("collapsed");
+            collapsableElement.dataset.action = "expand-description";
+            collapsableElement.dataset.tooltipClass = "pf2e";
+            collapsableElement.dataset.tooltip = "PF2E.Action.ExpandDescription";
+            collapsableElement.after(createHTMLElement("div", { classes: ["shadow"] }));
         }
 
         if (!this.flags.pf2e.suppressDamageButtons && this.isDamageRoll) {

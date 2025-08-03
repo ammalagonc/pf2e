@@ -4,7 +4,7 @@
     "name": "Effect: Oil of Corpse Restoration",
     "system": {
         "description": {
-            "value": "<p>Granted by @UUID[Compendium.pf2e.equipment-srd.Item.Oil of Corpse Restoration]</p>\n<p>The dead creature gains a +2 circumstance bonus on Deception checks to look like a living creature.</p>"
+            "value": "<p>Granted by @UUID[Compendium.pf2e.equipment-srd.Item.Oil of Corpse Restoration]</p>\n<p>You gain a +2 circumstance bonus on Deception checks to look like a living creature.</p>"
         },
         "duration": {
             "expiry": "turn-start",
@@ -16,9 +16,9 @@
             "value": 1
         },
         "publication": {
-            "license": "OGL",
-            "remaster": false,
-            "title": "Pathfinder #189: Dreamers of the Nameless Spires"
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Adventure Path: Gatewalkers"
         },
         "rules": [
             {
