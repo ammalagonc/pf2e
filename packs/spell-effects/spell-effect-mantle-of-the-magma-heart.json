@@ -94,7 +94,6 @@
                 "toggleable": true
             },
             {
-                "domain": "all",
                 "key": "RollOption",
                 "option": "self:heart-of-fire",
                 "predicate": [
