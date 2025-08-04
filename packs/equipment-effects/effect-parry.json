@@ -36,6 +36,7 @@
                 "predicate": [
                     {
                         "or": [
+                            "feat:defensive-armaments",
                             "feat:extravagant-parry",
                             "feat:twin-parry"
                         ]
