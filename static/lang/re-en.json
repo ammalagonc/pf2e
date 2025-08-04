@@ -5254,6 +5254,9 @@
             "PackAttack": {
                 "Label": "Target is Within Range of At Least Two Allies"
             },
+            "Parry": {
+                "Prompt": "Weapon has the parry trait?"
+            },
             "PathfinderAgentDedication": {
                 "ThoroughReports": "Thorough Reports"
             },
