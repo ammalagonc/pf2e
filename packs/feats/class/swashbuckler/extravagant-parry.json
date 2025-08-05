@@ -45,6 +45,10 @@
                 "selector": "ac",
                 "slug": "parry-bonus",
                 "value": 2
+            },
+            {
+                "key": "RollOption",
+                "option": "weapon-parry"
             }
         ],
         "selfEffect": {

@@ -34,14 +34,7 @@
                 ],
                 "key": "ChoiceSet",
                 "predicate": [
-                    {
-                        "or": [
-                            "feat:defensive-armaments",
-                            "feat:extravagant-parry",
-                            "feat:twin-parry"
-                        ]
-                    },
-                    "hands-free:0"
+                    "weapon-parry"
                 ],
                 "prompt": "PF2E.SpecificRule.Parry.Prompt",
                 "rollOption": "parry-bonus-upgrade"
