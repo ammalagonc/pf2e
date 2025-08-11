@@ -1237,6 +1237,9 @@
                 "TargetMurderedPaleStranger": "Target Murdered Pale Stranger",
                 "TargetNeverKilled": "Target has Never Killed"
             },
+            "PhantasmalProtagonist": {
+                "AbilityLabel": "Phantasmal Protagonist"
+            },
             "PlanarScion": {
                 "Duskwalker": {
                     "HuntPrey": {

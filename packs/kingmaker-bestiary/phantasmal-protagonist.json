@@ -68,7 +68,25 @@
                     "remaster": false,
                     "title": ""
                 },
-                "rules": [],
+                "rules": [
+                    {
+                        "key": "DamageAlteration",
+                        "mode": "add",
+                        "predicate": [
+                            {
+                                "gte": [
+                                    "self:level",
+                                    5
+                                ]
+                            }
+                        ],
+                        "property": "dice-number",
+                        "selectors": [
+                            "{item|id}-damage"
+                        ],
+                        "value": "@actor.level - 4"
+                    }
+                ],
                 "slug": null,
                 "traits": {
                     "value": []
@@ -100,24 +118,20 @@
                 "rules": [
                     {
                         "key": "FlatModifier",
-                        "label": "Phantasmal Protagonist",
+                        "label": "PF2E.NPCAbility.PhantasmalProtagonist.AbilityLabel",
                         "selector": "hp",
                         "value": "(@actor.level - 1) * 30"
                     },
                     {
                         "key": "FlatModifier",
-                        "label": "Phantasmal Protagonist",
+                        "label": "PF2E.NPCAbility.PhantasmalProtagonist.AbilityLabel",
                         "selector": [
                             "saving-throw",
                             "perception",
-                            "skill-check"
+                            "skill-check",
+                            "ac"
                         ],
                         "value": "@actor.level * 3"
-                    },
-                    {
-                        "key": "FlatModifier",
-                        "selector": "ac",
-                        "value": "(@actor.level *3)"
                     }
                 ],
                 "slug": null,
