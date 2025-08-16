@@ -34,7 +34,12 @@
             "title": "Pathfinder #165: Eyes of Empty Death"
         },
         "quantity": 1,
-        "rules": [],
+        "rules": [
+            {
+                "key": "RollOption",
+                "option": "fulcrum-lattice"
+            }
+        ],
         "size": "med",
         "traits": {
             "rarity": "unique",
