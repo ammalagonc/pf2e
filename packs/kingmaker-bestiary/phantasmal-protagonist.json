@@ -3,46 +3,6 @@
     "img": "systems/pf2e/icons/default-icons/npc.svg",
     "items": [
         {
-            "_id": "R7dn3GjbAQ64z6a4",
-            "img": "systems/pf2e/icons/default-icons/spellcastingEntry.svg",
-            "name": "Divine Innate Spells",
-            "sort": 100000,
-            "system": {
-                "autoHeightenLevel": {
-                    "value": null
-                },
-                "description": {
-                    "value": ""
-                },
-                "prepared": {
-                    "value": "innate"
-                },
-                "proficiency": {
-                    "value": 1
-                },
-                "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
-                },
-                "rules": [],
-                "showSlotlessLevels": {
-                    "value": false
-                },
-                "slots": {},
-                "slug": null,
-                "spelldc": {
-                    "dc": 20,
-                    "value": 0
-                },
-                "tradition": {
-                    "value": "divine"
-                },
-                "traits": {}
-            },
-            "type": "spellcastingEntry"
-        },
-        {
             "_id": "VwFPof1dofh8yRFP",
             "img": "systems/pf2e/icons/default-icons/melee.svg",
             "name": "Thematic Action - Hero",
