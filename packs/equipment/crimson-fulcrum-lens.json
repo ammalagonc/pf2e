@@ -77,28 +77,6 @@
                 "selector": "crimson-fulcrum-lens",
                 "slug": "crimson-fulcrum-len-bonus",
                 "value": 18
-            },
-            {
-                "key": "AdjustModifier",
-                "mode": "upgrade",
-                "predicate": [
-                    "fulcrum-lattice",
-                    "emerald-fulcrum-lens"
-                ],
-                "selector": "crimson-fulcrum-lens",
-                "slug": "crimson-fulcrum-len-bonus",
-                "value": 20
-            },
-            {
-                "key": "AdjustModifier",
-                "mode": "upgrade",
-                "predicate": [
-                    "fulcrum-lattice",
-                    "ochre-fulcrum-lens"
-                ],
-                "selector": "crimson-fulcrum-lens",
-                "slug": "crimson-fulcrum-len-bonus",
-                "value": 21
             }
         ],
         "size": "med",

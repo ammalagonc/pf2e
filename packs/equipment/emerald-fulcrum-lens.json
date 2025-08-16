@@ -50,17 +50,6 @@
             {
                 "key": "RollOption",
                 "option": "emerald-fulcrum-lens"
-            },
-            {
-                "key": "AdjustModifier",
-                "mode": "upgrade",
-                "predicate": [
-                    "fulcrum-lattice",
-                    "ochre-fulcrum-lens"
-                ],
-                "selector": "emerald-fulcrum-lens",
-                "slug": "emerald-fulcrum-len-bonus",
-                "value": 21
             }
         ],
         "size": "med",
