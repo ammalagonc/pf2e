@@ -1207,6 +1207,11 @@
                 "ImpactDriver": "Impact Driver",
                 "SpinningBlade": "Spinning Blade"
             },
+            "Murschen": {
+                "RedRuinStance": {
+                    "RedClawLabel": "Red Claw"
+                }
+            },
             "Necrohulk": {
                 "AlchemicalCartridgeRuptured": "Alchemical Cartridge Ruptured"
             },
