@@ -5255,7 +5255,7 @@
                 "Label": "Target is Within Range of At Least Two Allies"
             },
             "Parry": {
-                "Prompt": "Weapon has the parry trait?"
+                "Prompt": "Are you wielding a weapon with the parry trait?"
             },
             "PathfinderAgentDedication": {
                 "ThoroughReports": "Thorough Reports"
