@@ -42,7 +42,7 @@
                     }
                 ],
                 "key": "ChoiceSet",
-                "prompt": "PF2E.BattleForm.AngelForm.Prompt",
+                "prompt": "PF2E.SpecificRule.Prompt.Form",
                 "rollOption": "angel-form"
             },
             {
