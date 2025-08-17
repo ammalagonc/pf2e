@@ -64,7 +64,7 @@
                             "damage": {
                                 "damageType": "slashing",
                                 "dice": 2,
-                                "die": "d8"
+                                "die": "d6"
                             },
                             "group": "sword",
                             "img": "icons/weapons/swords/scimitar-worn-blue.webp",
