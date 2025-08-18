@@ -459,7 +459,7 @@
                         "darkvision": {}
                     },
                     "speeds": {
-                        "fly": 40,
+                        "fly": 60,
                         "land": 30
                     },
                     "traits": [
