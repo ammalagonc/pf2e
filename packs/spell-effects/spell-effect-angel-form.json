@@ -49,6 +49,9 @@
                 "hasHands": true,
                 "key": "BattleForm",
                 "overrides": {
+                    "armorClass": {
+                        "modifier": "22 + @actor.level"
+                    },
                     "senses": {
                         "darkvision": {}
                     },
@@ -64,7 +67,8 @@
                             "damage": {
                                 "damageType": "slashing",
                                 "dice": 2,
-                                "die": "d6"
+                                "die": "d6",
+                                "modifier": 12
                             },
                             "group": "sword",
                             "img": "icons/weapons/swords/scimitar-worn-blue.webp",
@@ -79,13 +83,13 @@
                         }
                     },
                     "traits": [
-                        "angel",
-                        "empyrean"
+                        "holy",
+                        "angel"
                     ],
                     "weaknesses": [
                         {
                             "type": "unholy",
-                            "value": "10+ 5*floor((@item.level -7)/2)"
+                            "value": 10
                         }
                     ]
                 },
@@ -97,43 +101,27 @@
                         {
                             "end": 8,
                             "start": 7,
+                            "tempHP": 40,
                             "value": {
-                                "armorClass": {
-                                    "modifier": "22 + @actor.level"
-                                },
                                 "size": "med",
                                 "skills": {
                                     "athletics": {
-                                        "modifier": 9
+                                        "modifier": 25
                                     }
                                 },
                                 "strikes": {
                                     "scimitar": {
-                                        "ability": "str",
-                                        "baseType": "scimitar",
-                                        "category": "martial",
-                                        "damage": {
-                                            "damageType": "slashing",
-                                            "dice": 2,
-                                            "die": "d8",
-                                            "modifier": 12
-                                        },
-                                        "group": "sword",
-                                        "img": "icons/weapons/swords/scimitar-worn-blue.webp",
-                                        "label": "PF2E.Weapon.Base.scimitar",
-                                        "modifier": 25,
-                                        "traits": [
-                                            "forceful",
-                                            "sweep"
-                                        ]
+                                        "modifier": 25
                                     }
-                                },
-                                "tempHP": 40
+                                }
                             }
                         },
                         {
                             "start": 9,
                             "value": {
+                                "armorClass": {
+                                    "modifier": "22 + @actor.level"
+                                },
                                 "size": "lg",
                                 "skills": {
                                     "athletics": {
@@ -142,13 +130,16 @@
                                 },
                                 "strikes": {
                                     "scimitar": {
-                                        "damage": {
-                                            "modifier": 20
-                                        },
                                         "modifier": 30
                                     }
                                 },
-                                "tempHP": 60
+                                "tempHP": 60,
+                                "weaknesses": [
+                                    {
+                                        "type": "unholy",
+                                        "value": 15
+                                    }
+                                ]
                             }
                         }
                     ],
@@ -169,6 +160,9 @@
                 "hasHands": true,
                 "key": "BattleForm",
                 "overrides": {
+                    "armorClass": {
+                        "modifier": "22 + @actor.level"
+                    },
                     "senses": {
                         "darkvision": {}
                     },
@@ -184,7 +178,8 @@
                             "damage": {
                                 "damageType": "bludgeoning",
                                 "dice": 2,
-                                "die": "d6"
+                                "die": "d6",
+                                "modifier": 12
                             },
                             "img": "icons/skills/melee/unarmed-punch-fist.webp",
                             "label": "PF2E.Weapon.Base.fist",
@@ -199,8 +194,9 @@
                             "category": "unarmed",
                             "damage": {
                                 "damageType": "sonic",
-                                "dice": 1,
-                                "die": "d6"
+                                "dice": 3,
+                                "die": "d6",
+                                "modifier": 12
                             },
                             "img": "icons/skills/trades/music-singing-voice-blue.webp",
                             "label": "PF2E.BattleForm.Attack.PiercingHymn",
@@ -215,13 +211,13 @@
                         }
                     },
                     "traits": [
-                        "angel",
-                        "empyrean"
+                        "holy",
+                        "angel"
                     ],
                     "weaknesses": [
                         {
                             "type": "unholy",
-                            "value": "10+ 5*floor((@item.level -7)/2)"
+                            "value": 10
                         }
                     ]
                 },
@@ -233,42 +229,30 @@
                         {
                             "end": 8,
                             "start": 7,
+                            "tempHP": 40,
                             "value": {
-                                "armorClass": {
-                                    "modifier": "22 + @actor.level"
-                                },
                                 "size": "sm",
                                 "skills": {
                                     "athletics": {
-                                        "modifier": 9
+                                        "modifier": 25
                                     }
                                 },
                                 "strikes": {
                                     "fist": {
-                                        "damage": {
-                                            "damageType": "bludgeoning",
-                                            "dice": 2,
-                                            "die": "d6",
-                                            "modifier": 12
-                                        },
                                         "modifier": 25
                                     },
                                     "piercing-hymn": {
-                                        "damage": {
-                                            "damageType": "sonic",
-                                            "dice": 1,
-                                            "die": "d6",
-                                            "modifier": 12
-                                        },
                                         "modifier": 25
                                     }
-                                },
-                                "tempHP": 40
+                                }
                             }
                         },
                         {
                             "start": 9,
                             "value": {
+                                "armorClass": {
+                                    "modifier": "22 + @actor.level"
+                                },
                                 "size": "lg",
                                 "skills": {
                                     "athletics": {
@@ -277,23 +261,23 @@
                                 },
                                 "strikes": {
                                     "fist": {
-                                        "damage": {
-                                            "modifier": 20
-                                        },
                                         "modifier": 30
                                     },
                                     "piercing-hymn": {
-                                        "damage": {
-                                            "modifier": 20
-                                        },
                                         "modifier": 30
                                     }
                                 },
-                                "tempHP": 60
+                                "tempHP": 60,
+                                "weaknesses": [
+                                    {
+                                        "type": "unholy",
+                                        "value": 15
+                                    }
+                                ]
                             }
                         }
                     ],
-                    "field": "item|level"
+                    "field": "item|system.level.value"
                 }
             },
             {
@@ -331,6 +315,9 @@
                 "hasHands": true,
                 "key": "BattleForm",
                 "overrides": {
+                    "armorClass": {
+                        "modifier": "22 + @actor.level"
+                    },
                     "resistances": [
                         {
                             "type": "electricity",
@@ -361,6 +348,7 @@
                             },
                             "group": "bow",
                             "img": "icons/weapons/bows/shortbow-recurve-bone.webp",
+                            "label": "PF2E.Weapon.Base.composite-longbow",
                             "traits": [
                                 "deadly-2d10",
                                 "holy",
@@ -388,13 +376,13 @@
                         }
                     },
                     "traits": [
-                        "angel",
-                        "empyrean"
+                        "holy",
+                        "angel"
                     ],
                     "weaknesses": [
                         {
                             "type": "unholy",
-                            "value": "10+ 5*floor((@item.level -7)/2)"
+                            "value": 10
                         }
                     ]
                 },
@@ -406,65 +394,30 @@
                         {
                             "end": 8,
                             "start": 7,
+                            "tempHP": 40,
                             "value": {
-                                "armorClass": {
-                                    "modifier": "22 + @actor.level"
-                                },
                                 "size": "sm",
                                 "skills": {
                                     "athletics": {
-                                        "modifier": 9
+                                        "modifier": 25
                                     }
                                 },
                                 "strikes": {
                                     "composite-shortbow": {
-                                        "ability": "dex",
-                                        "baseType": "composite-shortbow",
-                                        "category": "unarmed",
-                                        "damage": {
-                                            "damageType": "piercing",
-                                            "dice": 3,
-                                            "die": "d6",
-                                            "modifier": 12
-                                        },
-                                        "group": "bow",
-                                        "img": "icons/weapons/bows/shortbow-recurve-bone.webp",
-                                        "label": "PF2E.Weapon.Base.composite-shortbow",
-                                        "modifier": 25,
-                                        "traits": [
-                                            "deadly-2d10",
-                                            "holy",
-                                            "magical",
-                                            "propulsive"
-                                        ]
+                                        "modifier": 25
                                     },
                                     "fist": {
-                                        "ability": "str",
-                                        "baseType": "fist",
-                                        "category": "unarmed",
-                                        "damage": {
-                                            "damageType": "bludgeoning",
-                                            "dice": 3,
-                                            "die": "d4",
-                                            "modifier": 12
-                                        },
-                                        "group": "brawling",
-                                        "img": null,
-                                        "label": "PF2E.BattleForm.Attack.Fist",
-                                        "modifier": 25,
-                                        "traits": [
-                                            "agile",
-                                            "holy",
-                                            "magical"
-                                        ]
+                                        "modifier": 25
                                     }
-                                },
-                                "tempHP": 40
+                                }
                             }
                         },
                         {
                             "start": 9,
                             "value": {
+                                "armorClass": {
+                                    "modifier": "22 + @actor.level"
+                                },
                                 "size": "lg",
                                 "skills": {
                                     "athletics": {
@@ -473,19 +426,19 @@
                                 },
                                 "strikes": {
                                     "composite-shortbow": {
-                                        "damage": {
-                                            "modifier": 20
-                                        },
                                         "modifier": 30
                                     },
                                     "fist": {
-                                        "damage": {
-                                            "modifier": 20
-                                        },
                                         "modifier": 30
                                     }
                                 },
-                                "tempHP": 60
+                                "tempHP": 60,
+                                "weaknesses": [
+                                    {
+                                        "type": "unholy",
+                                        "value": 15
+                                    }
+                                ]
                             }
                         }
                     ],
@@ -496,48 +449,19 @@
                 "hasHands": true,
                 "key": "BattleForm",
                 "overrides": {
-                    "resistances": [
-                        {
-                            "type": "void",
-                            "value": 10
-                        }
-                    ],
+                    "armorClass": {
+                        "modifier": "22 + @actor.level"
+                    },
                     "senses": {
                         "darkvision": {}
                     },
                     "speeds": {
-                        "fly": 60,
+                        "fly": 40,
                         "land": 30
                     },
-                    "strikes": {
-                        "fist": {
-                            "ability": "str",
-                            "baseType": "fist",
-                            "category": "unarmed",
-                            "damage": {
-                                "damageType": "bludgeoning",
-                                "dice": 1,
-                                "die": "d8"
-                            },
-                            "group": "brawling",
-                            "label": "PF2E.Weapon.Base.fist",
-                            "traits": [
-                                "agile",
-                                "holy",
-                                "magical",
-                                "nonlethal"
-                            ]
-                        }
-                    },
                     "traits": [
-                        "angel",
-                        "empyrean"
-                    ],
-                    "weaknesses": [
-                        {
-                            "type": "unholy",
-                            "value": "10+ 5*floor((@item.level -7)/2)"
-                        }
+                        "holy",
+                        "angel"
                     ]
                 },
                 "predicate": [
@@ -549,44 +473,51 @@
                             "end": 8,
                             "start": 7,
                             "value": {
-                                "armorClass": {
-                                    "modifier": "22 + @actor.level"
-                                },
                                 "size": "med",
                                 "skills": {
                                     "athletics": {
-                                        "modifier": 9
+                                        "modifier": 25
                                     }
                                 },
                                 "strikes": {
-                                    "fist": {
+                                    "scimitar": {
                                         "ability": "str",
-                                        "baseType": "fist",
-                                        "category": "unarmed",
+                                        "baseType": "scimitar",
+                                        "category": "martial",
                                         "damage": {
-                                            "damageType": "bludgeoning",
-                                            "dice": 1,
+                                            "damageType": "slashing",
+                                            "dice": 2,
                                             "die": "d6",
                                             "modifier": 12
                                         },
-                                        "group": "brawling",
-                                        "img": null,
-                                        "label": "PF2E.Weapon.Base.fist",
+                                        "group": "sword",
+                                        "img": "icons/weapons/swords/scimitar-worn-blue.webp",
+                                        "label": "PF2E.Weapon.Base.scimitar",
                                         "modifier": 25,
                                         "traits": [
-                                            "agile",
+                                            "fire",
+                                            "forceful",
                                             "holy",
                                             "magical",
-                                            "nonlethal"
+                                            "sweep"
                                         ]
                                     }
                                 },
-                                "tempHP": 40
+                                "tempHP": 40,
+                                "weaknesses": [
+                                    {
+                                        "type": "unholy",
+                                        "value": 10
+                                    }
+                                ]
                             }
                         },
                         {
                             "start": 9,
                             "value": {
+                                "armorClass": {
+                                    "modifier": "22 + @actor.level"
+                                },
                                 "size": "lg",
                                 "skills": {
                                     "athletics": {
@@ -594,14 +525,36 @@
                                     }
                                 },
                                 "strikes": {
-                                    "fist": {
+                                    "scimitar": {
+                                        "ability": "str",
+                                        "baseType": "scimitar",
+                                        "category": "martial",
                                         "damage": {
-                                            "modifier": 20
+                                            "damageType": "slashing",
+                                            "dice": 2,
+                                            "die": "d6",
+                                            "modifier": 12
                                         },
-                                        "modifier": 30
+                                        "group": "sword",
+                                        "img": "icons/weapons/swords/scimitar-worn-blue.webp",
+                                        "label": "PF2E.Weapon.Base.scimitar",
+                                        "modifier": 30,
+                                        "traits": [
+                                            "fire",
+                                            "forceful",
+                                            "holy",
+                                            "magical",
+                                            "sweep"
+                                        ]
                                     }
                                 },
-                                "tempHP": 60
+                                "tempHP": 60,
+                                "weaknesses": [
+                                    {
+                                        "type": "unholy",
+                                        "value": 15
+                                    }
+                                ]
                             }
                         }
                     ],
@@ -612,6 +565,7 @@
                 "damageType": "cold",
                 "diceNumber": 1,
                 "dieSize": "d6",
+                "hideIfDisabled": true,
                 "key": "DamageDice",
                 "predicate": [
                     "angel-form:tennin"
@@ -622,6 +576,7 @@
                 "damageType": "spirit",
                 "diceNumber": 1,
                 "dieSize": "d6",
+                "hideIfDisabled": true,
                 "key": "DamageDice",
                 "predicate": [
                     "angel-form:tennin"
