@@ -101,7 +101,6 @@
                         {
                             "end": 8,
                             "start": 7,
-                            "tempHP": 40,
                             "value": {
                                 "size": "med",
                                 "skills": {
@@ -113,7 +112,8 @@
                                     "scimitar": {
                                         "modifier": 25
                                     }
-                                }
+                                },
+                                "tempHP": 40
                             }
                         },
                         {
@@ -229,7 +229,6 @@
                         {
                             "end": 8,
                             "start": 7,
-                            "tempHP": 40,
                             "value": {
                                 "size": "sm",
                                 "skills": {
@@ -244,7 +243,8 @@
                                     "piercing-hymn": {
                                         "modifier": 25
                                     }
-                                }
+                                },
+                                "tempHP": 40
                             }
                         },
                         {
@@ -394,7 +394,6 @@
                         {
                             "end": 8,
                             "start": 7,
-                            "tempHP": 40,
                             "value": {
                                 "size": "sm",
                                 "skills": {
@@ -409,7 +408,8 @@
                                     "fist": {
                                         "modifier": 25
                                     }
-                                }
+                                },
+                                "tempHP": 40
                             }
                         },
                         {
