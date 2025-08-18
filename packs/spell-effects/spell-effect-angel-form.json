@@ -494,25 +494,28 @@
                         }
                     ]
                 },
+                "predicate": [
+                    "angel-form:tennin"
+                ],
                 "value": {
                     "brackets": [
                         {
                             "end": 8,
                             "start": 7,
+                            "tempHP": 40,
                             "value": {
+                                "size": "med",
                                 "skills": {
                                     "athletics": {
                                         "modifier": 25
                                     }
                                 },
-                                "size": "med",
                                 "strikes": {
                                     "fist": {
                                         "modifier": 25
                                     }
                                 }
-                            },
-                            "tempHP": 40
+                            }
                         },
                         {
                             "start": 9,
@@ -521,14 +524,14 @@
                                     "modifier": "22 + @actor.level"
                                 },
                                 "size": "lg",
-                                "strikes": {
-                                    "fist": {
-                                        "modifier": 30
-                                    }
-                                },
                                 "skills": {
                                     "athletics": {
                                         "modifier": 33
+                                    }
+                                },
+                                "strikes": {
+                                    "fist": {
+                                        "modifier": 30
                                     }
                                 },
                                 "tempHP": 60,
@@ -542,10 +545,7 @@
                         }
                     ],
                     "field": "item|system.level.value"
-                },
-                "predicate": [
-                    "angel-form:tennin"
-                ]
+                }
             },
             {
                 "damageType": "cold",
