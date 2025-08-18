@@ -462,58 +462,57 @@
                         "fly": 60,
                         "land": 30
                     },
+                    "strikes": {
+                        "fist": {
+                            "ability": "str",
+                            "baseType": "fist",
+                            "category": "unarmed",
+                            "damage": {
+                                "damageType": "bludgeoning",
+                                "dice": 1,
+                                "die": "d6",
+                                "modifier": 12
+                            },
+                            "group": "brawling",
+                            "img": "systems/pf2e/icons/features/classes/powerful-fist.webp",
+                            "traits": [
+                                "agile",
+                                "holy",
+                                "magical",
+                                "nonlethal"
+                            ]
+                        }
+                    },
                     "traits": [
                         "holy",
                         "angel"
+                    ],
+                    "weaknesses": [
+                        {
+                            "type": "unholy",
+                            "value": 10
+                        }
                     ]
                 },
-                "predicate": [
-                    "angel-form:tennin"
-                ],
                 "value": {
                     "brackets": [
                         {
                             "end": 8,
                             "start": 7,
                             "value": {
-                                "size": "med",
                                 "skills": {
                                     "athletics": {
                                         "modifier": 25
                                     }
                                 },
+                                "size": "med",
                                 "strikes": {
-                                    "scimitar": {
-                                        "ability": "str",
-                                        "baseType": "scimitar",
-                                        "category": "martial",
-                                        "damage": {
-                                            "damageType": "slashing",
-                                            "dice": 2,
-                                            "die": "d6",
-                                            "modifier": 12
-                                        },
-                                        "group": "sword",
-                                        "img": "icons/weapons/swords/scimitar-worn-blue.webp",
-                                        "label": "PF2E.Weapon.Base.scimitar",
-                                        "modifier": 25,
-                                        "traits": [
-                                            "fire",
-                                            "forceful",
-                                            "holy",
-                                            "magical",
-                                            "sweep"
-                                        ]
+                                    "fist": {
+                                        "modifier": 25
                                     }
-                                },
-                                "tempHP": 40,
-                                "weaknesses": [
-                                    {
-                                        "type": "unholy",
-                                        "value": 10
-                                    }
-                                ]
-                            }
+                                }
+                            },
+                            "tempHP": 40
                         },
                         {
                             "start": 9,
@@ -522,33 +521,14 @@
                                     "modifier": "22 + @actor.level"
                                 },
                                 "size": "lg",
+                                "strikes": {
+                                    "fist": {
+                                        "modifier": 30
+                                    }
+                                },
                                 "skills": {
                                     "athletics": {
                                         "modifier": 33
-                                    }
-                                },
-                                "strikes": {
-                                    "scimitar": {
-                                        "ability": "str",
-                                        "baseType": "scimitar",
-                                        "category": "martial",
-                                        "damage": {
-                                            "damageType": "slashing",
-                                            "dice": 2,
-                                            "die": "d6",
-                                            "modifier": 12
-                                        },
-                                        "group": "sword",
-                                        "img": "icons/weapons/swords/scimitar-worn-blue.webp",
-                                        "label": "PF2E.Weapon.Base.scimitar",
-                                        "modifier": 30,
-                                        "traits": [
-                                            "fire",
-                                            "forceful",
-                                            "holy",
-                                            "magical",
-                                            "sweep"
-                                        ]
                                     }
                                 },
                                 "tempHP": 60,
@@ -562,7 +542,10 @@
                         }
                     ],
                     "field": "item|system.level.value"
-                }
+                },
+                "predicate": [
+                    "angel-form:tennin"
+                ]
             },
             {
                 "damageType": "cold",
