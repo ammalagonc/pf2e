@@ -349,6 +349,9 @@
                             "group": "bow",
                             "img": "icons/weapons/bows/shortbow-recurve-bone.webp",
                             "label": "PF2E.Weapon.Base.composite-longbow",
+                            "range": {
+                                "increment": 60
+                            },
                             "traits": [
                                 "deadly-2d10",
                                 "holy",
