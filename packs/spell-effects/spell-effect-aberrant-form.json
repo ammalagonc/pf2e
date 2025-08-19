@@ -548,7 +548,7 @@
                 "key": "FlatModifier",
                 "predicate": [
                     "aberrant-form:otyugh",
-                    "disease"
+                    "item:trait:disease"
                 ],
                 "selector": "saving-throw",
                 "type": "circumstance",
