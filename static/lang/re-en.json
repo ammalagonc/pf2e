@@ -1006,6 +1006,10 @@
                 },
                 "Label": "Current Form"
             },
+            "ChangeFormation": {
+                "Loose": "Loose",
+                "": ""
+            },
             "Charge": {
                 "AtLeastTen": "Moved at Least 10 feet"
             },
