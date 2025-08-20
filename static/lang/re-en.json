@@ -1007,8 +1007,16 @@
                 "Label": "Current Form"
             },
             "ChangeFormation": {
-                "Loose": "Loose",
-                "": ""
+                "Loose": {
+                    "Drawback": "Enemies' saving throws against the troop's damaging effects are one degree of success better than they roll.",
+                    "Label": "Loose"
+                },
+                "MarchingColumn": {
+                    "Label": "Marching Column"
+                },
+                "Wedge": {
+                    "Label": "Wedge"
+                }
             },
             "Charge": {
                 "AtLeastTen": "Moved at Least 10 feet"
