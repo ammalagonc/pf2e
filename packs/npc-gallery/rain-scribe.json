@@ -1331,7 +1331,7 @@
             "type": "consumable"
         },
         {
-            "_id": "Wa1g1vVpqtfk7oAL",
+            "_id": "lMjSPf4Er9RmHWAA",
             "_stats": {
                 "compendiumSource": "Compendium.pf2e.spell-effects.Item.PQHP7Oph3BQX1GhF"
             },
@@ -1355,6 +1355,7 @@
                     "license": "OGL",
                     "remaster": false,
                     "title": ""
+                    "title": "Pathfinder Core Rulebook"
                 },
                 "rules": [
                     {
@@ -1373,7 +1374,6 @@
                     "show": true
                 },
                 "traits": {
-                    "rarity": "common",
                     "value": []
                 }
             },
