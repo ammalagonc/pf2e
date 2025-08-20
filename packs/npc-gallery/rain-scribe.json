@@ -1331,7 +1331,7 @@
             "type": "consumable"
         },
         {
-            "_id": "lMjSPf4Er9RmHWAA",
+            "_id": "Y0QK1CKmo7UVAGFQ",
             "_stats": {
                 "compendiumSource": "Compendium.pf2e.spell-effects.Item.PQHP7Oph3BQX1GhF"
             },
@@ -1348,13 +1348,13 @@
                     "unit": "hours",
                     "value": 1
                 },
+                "fromSpell": false,
                 "level": {
                     "value": 1
                 },
                 "publication": {
                     "license": "OGL",
                     "remaster": false,
-                    "title": ""
                     "title": "Pathfinder Core Rulebook"
                 },
                 "rules": [
@@ -1365,7 +1365,7 @@
                         "value": 10
                     }
                 ],
-                "slug": "spell-effect-longstrider",
+                "slug": "spell-effect-tailwind",
                 "start": {
                     "initiative": null,
                     "value": 0
