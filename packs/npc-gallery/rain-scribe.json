@@ -1343,10 +1343,10 @@
                     "value": "<p>Granted by @UUID[Compendium.pf2e.spells-srd.Item.Tailwind]</p>\n<p>You gain a +10-foot status bonus to your Speed.</p>"
                 },
                 "duration": {
-                    "expiry": "turn-start",
+                    "expiry": null,
                     "sustained": false,
-                    "unit": "hours",
-                    "value": 1
+                    "unit": "unlimited",
+                    "value": -1
                 },
                 "fromSpell": false,
                 "level": {
