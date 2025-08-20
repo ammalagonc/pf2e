@@ -139,26 +139,6 @@
                         "toggleable": true
                     },
                     {
-                        "key": "Weakness",
-                        "predicate": [
-                            {
-                                "not": "change-formation:loose"
-                            }
-                        ],
-                        "type": "area-damage",
-                        "value": 10
-                    },
-                    {
-                        "key": "Weakness",
-                        "predicate": [
-                            {
-                                "not": "change-formation:loose"
-                            }
-                        ],
-                        "type": "splash-damage",
-                        "value": 10
-                    },
-                    {
                         "itemType": "action",
                         "key": "ItemAlteration",
                         "mode": "add",
@@ -177,6 +157,18 @@
                                 "text": "PF2E.NPCAbility.ChangeFormation.Loose.Drawback"
                             }
                         ]
+                    },
+                    {
+                        "key": "Weakness",
+                        "mode": "remove",
+                        "predicate": [
+                            "change-formation:loose"
+                        ],
+                        "type": [
+                            "area-damage",
+                            "splash-damage"
+                        ],
+                        "value": 10
                     },
                     {
                         "key": "FlatModifier",
