@@ -96,13 +96,12 @@
                 ],
                 "selector": "reflex",
                 "slug": "marching-column-reflex-penalty",
-                "type": "circumstance",
                 "value": -2
             },
             {
                 "key": "FlatModifier",
                 "predicate": [
-                    "ranged",
+                    "item:ranged",
                     "change-formation:turtle-shell"
                 ],
                 "selector": "ac",
@@ -126,7 +125,6 @@
                     "change-formation:turtle-shell"
                 ],
                 "selector": "all-speeds",
-                "type": "circumstance",
                 "value": -10
             },
             {

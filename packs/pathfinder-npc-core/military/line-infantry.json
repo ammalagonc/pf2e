@@ -224,7 +224,6 @@
                         ],
                         "selector": "reflex",
                         "slug": "marching-column-reflex-penalty",
-                        "type": "circumstance",
                         "value": -2
                     },
                     {

@@ -193,7 +193,6 @@
                             "change-formation:marching-column"
                         ],
                         "selector": "reflex",
-                        "type": "circumstance",
                         "value": -2
                     }
                 ],
