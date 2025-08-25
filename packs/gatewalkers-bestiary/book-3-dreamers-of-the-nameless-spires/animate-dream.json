@@ -716,7 +716,7 @@
                     "exceptions": [
                         "force",
                         "ghost-touch",
-                        "void"
+                        "spirit"
                     ],
                     "type": "all-damage",
                     "value": 5
