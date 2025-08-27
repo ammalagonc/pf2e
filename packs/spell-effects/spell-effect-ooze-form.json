@@ -249,7 +249,12 @@
                 "hideIfDisabled": true,
                 "key": "DamageDice",
                 "predicate": [
-                    "ooze-form:black-pudding"
+                    {
+                        "or": [
+                            "ooze-form:black-pudding",
+                            "ooze-form:ochre-jelly"
+                        ]
+                    }
                 ],
                 "selector": "strike-damage"
             },
@@ -876,17 +881,6 @@
                     ],
                     "field": "item|system.level.value"
                 }
-            },
-            {
-                "damageType": "acid",
-                "diceNumber": "ternary(gte(@item.level, 5), 2, 1)",
-                "dieSize": "d8",
-                "hideIfDisabled": true,
-                "key": "DamageDice",
-                "predicate": [
-                    "ooze-form:ochre-jelly"
-                ],
-                "selector": "strike-damage"
             },
             {
                 "key": "Note",
