@@ -6,7 +6,7 @@
             "_id": "VwFPof1dofh8yRFP",
             "img": "systems/pf2e/icons/default-icons/melee.svg",
             "name": "Thematic Action - Hero",
-            "sort": 200000,
+            "sort": 100000,
             "system": {
                 "attackEffects": {
                     "value": []
@@ -58,7 +58,7 @@
             "_id": "VkD8a3RdmP5PbcIN",
             "img": "systems/pf2e/icons/actions/OneAction.webp",
             "name": "Thematic Action - Ally",
-            "sort": 300000,
+            "sort": 200000,
             "system": {
                 "actionType": {
                     "value": "action"
@@ -105,7 +105,7 @@
             "_id": "jUDT9HKqaWRtEn1A",
             "img": "systems/pf2e/icons/actions/OneAction.webp",
             "name": "Thematic Action - Villain",
-            "sort": 400000,
+            "sort": 300000,
             "system": {
                 "actionType": {
                     "value": "action"
