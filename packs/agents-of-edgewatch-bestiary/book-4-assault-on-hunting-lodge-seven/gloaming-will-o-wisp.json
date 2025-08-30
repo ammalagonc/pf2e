@@ -130,14 +130,44 @@
                 },
                 "category": "defensive",
                 "description": {
-                    "value": "<p>A will-o'-wisp is immune to all spells except <em>faerie fire</em>, <em>glitterdust</em>, <em>magic missile</em>, and <em>maze</em>.</p>"
+                    "value": "<p>A will-o'-wisp is immune to all spells except @UUID[Compendium.pf2e.spells-srd.Item.Faerie Fire], @UUID[Compendium.pf2e.spells-srd.Item.Revealing Light], @UUID[Compendium.pf2e.spells-srd.Item.Force Barrage], and @UUID[Compendium.pf2e.spells-srd.Item.Quandary].</p>"
                 },
                 "publication": {
                     "license": "OGL",
                     "remaster": false,
                     "title": ""
                 },
-                "rules": [],
+                "rules": [
+                    {
+                        "definition": [
+                            {
+                                "or": [
+                                    "item:from-spell",
+                                    "item:trait:impulse",
+                                    "item:type:spell"
+                                ]
+                            },
+                            {
+                                "not": {
+                                    "and": [
+                                        "item:type:spell",
+                                        {
+                                            "or": [
+                                                "item:slug:faerie-fire",
+                                                "item:slug:force-barrage",
+                                                "item:slug:quandary",
+                                                "item:slug:revealing-light"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            }
+                        ],
+                        "key": "Immunity",
+                        "label": "PF2E.Damage.IWR.Type.magic",
+                        "type": "custom"
+                    }
+                ],
                 "slug": null,
                 "traits": {
                     "rarity": "common",

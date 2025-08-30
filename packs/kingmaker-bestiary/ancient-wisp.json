@@ -147,7 +147,37 @@
                     "remaster": false,
                     "title": ""
                 },
-                "rules": [],
+                "rules": [
+                    {
+                        "definition": [
+                            {
+                                "or": [
+                                    "item:from-spell",
+                                    "item:trait:impulse",
+                                    "item:type:spell"
+                                ]
+                            },
+                            {
+                                "not": {
+                                    "and": [
+                                        "item:type:spell",
+                                        {
+                                            "or": [
+                                                "item:slug:faerie-fire",
+                                                "item:slug:force-barrage",
+                                                "item:slug:quandary",
+                                                "item:slug:revealing-light"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            }
+                        ],
+                        "key": "Immunity",
+                        "label": "PF2E.Damage.IWR.Type.magic",
+                        "type": "custom"
+                    }
+                ],
                 "slug": null,
                 "traits": {
                     "rarity": "common",
