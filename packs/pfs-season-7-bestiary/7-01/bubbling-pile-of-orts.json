@@ -95,7 +95,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p><strong>Trigger</strong> The magic circle is broken</p><hr /><p><strong>Effect</strong> The pile disgorges orts and then rolls initiative</p>"
+                    "value": "<p><strong>Trigger</strong> The magic circle is broken</p><hr /><p><strong>Effect</strong> The pile disgorges orts and then rolls initiative.</p>"
                 },
                 "publication": {
                     "license": "OGL",
@@ -114,7 +114,10 @@
             "type": "action"
         }
     ],
-    "name": "Burning Pile of Orts",
+    "name": "Bubbling Pile of Orts",
+    "prototypeToken": {
+        "name": "Burning Pile of Orts"
+    },
     "system": {
         "attributes": {
             "ac": {
@@ -174,7 +177,7 @@
                 "title": "Pathfinder Society Scenario #7-01: Intro to the Year of Battle's Spark: Enough is Enough"
             },
             "reset": "",
-            "routine": "<p>(1 action) The Hellknight commands the orts, and the trap lashes out at each enemy creature in its space and adjacent, dealing @Damage[(1d10+6)[slashing]] damage (@Check[reflex|dc:18|basic] save) If no enemy is in reach, an ort emerges in an adjacent square</p>"
+            "routine": "<p>(1 action) The Hellknight commands the orts, and the trap lashes out at each enemy creature in its space and adjacent, dealing @Damage[(1d10+6)[slashing]] damage (@Check[reflex|dc:18|basic] save) If no enemy is in reach, an ort emerges in an adjacent square.</p>"
         },
         "saves": {
             "fortitude": {
