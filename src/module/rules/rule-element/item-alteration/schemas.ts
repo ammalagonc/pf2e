@@ -1,13 +1,14 @@
 import type { DataFieldOptions } from "@common/data/_types.d.mts";
-import type { ItemPF2e, WeaponPF2e } from "@item";
+import type { ItemPF2e } from "@item";
 import type { ItemSourcePF2e, ItemType } from "@item/base/data/index.ts";
 import type { ItemTrait } from "@item/base/types.ts";
+import type { PersistentDamageValueSchema } from "@item/condition/data.ts";
 import { itemIsOfType } from "@item/helpers.ts";
 import { PHYSICAL_ITEM_TYPES, PRECIOUS_MATERIAL_TYPES } from "@item/physical/values.ts";
 import { MANDATORY_RANGED_GROUPS } from "@item/weapon/values.ts";
 import { RARITIES } from "@module/data.ts";
 import { DamageRoll } from "@system/damage/roll.ts";
-import type { DamageDiceFaces, DamageType } from "@system/damage/types.ts";
+import type { DamageDiceFaces } from "@system/damage/types.ts";
 import { DAMAGE_DICE_FACES } from "@system/damage/values.ts";
 import { PredicateField, SlugField, StrictNumberField } from "@system/schema-data-fields.ts";
 import { objectHasKey, setHasElement, tupleHasValue } from "@util";
@@ -315,41 +316,37 @@ const ITEM_ALTERATION_VALIDATORS = {
         {
             validateForItem: (item, alteration): validation.DataModelValidationFailure | void => {
                 const group = alteration.value;
-                if (item.type === "armor") {
+                if (itemIsOfType(item, "armor")) {
                     if (group !== null && !objectHasKey(CONFIG.PF2E.armorGroups, group)) {
                         return new validation.DataModelValidationFailure({
                             message: `${group} is not a valid armor group`,
                         });
                     }
-                } else if (item.type === "weapon") {
+                } else if (itemIsOfType(item, "weapon")) {
                     if (group !== null && !objectHasKey(CONFIG.PF2E.weaponGroups, group)) {
                         return new validation.DataModelValidationFailure({
                             message: `${group} is not a valid weapon group`,
                         });
                     }
 
-                    const weapon = item as WeaponPF2e;
-
                     const rangedOnlyTraits = ["combination", "thrown"] as const;
                     const hasRangedOnlyTraits =
-                        rangedOnlyTraits.some((trait) => weapon.traits.has(trait)) ||
-                        weapon.traits.some((trait) => /^volley-\d+$/.test(trait));
-                    const hasMeleeOnlyTraits = weapon.traits.some((trait) => /^thrown-\d+$/.test(trait));
-
+                        rangedOnlyTraits.some((t) => item.system.traits.value.includes(t)) ||
+                        item.system.traits.value.some((t) => /^volley-\d+$/.test(t));
+                    const hasMeleeOnlyTraits = item.system.traits.value.some((t) => /^thrown-\d+$/.test(t));
                     const alterIsMandatoryRanged = setHasElement(MANDATORY_RANGED_GROUPS, group) || hasRangedOnlyTraits;
                     const originalIsMandatoryRanged =
-                        setHasElement(MANDATORY_RANGED_GROUPS, weapon.system.group) || hasRangedOnlyTraits;
-
+                        setHasElement(MANDATORY_RANGED_GROUPS, item.system.group) || hasRangedOnlyTraits;
                     const alterIsMandatoryMelee = !alterIsMandatoryRanged && hasMeleeOnlyTraits;
                     const originalIsMandatoryMelee = !originalIsMandatoryRanged && hasMeleeOnlyTraits;
 
                     if (alterIsMandatoryMelee !== originalIsMandatoryMelee) {
                         return new validation.DataModelValidationFailure({
-                            message: `Cannot alter ${weapon.system.group} into ${group} because of melee only traits.`,
+                            message: `Cannot alter ${item.system.group} into ${group} because of melee-only traits.`,
                         });
                     } else if (alterIsMandatoryRanged !== originalIsMandatoryRanged) {
                         return new validation.DataModelValidationFailure({
-                            message: `Cannot alter ${weapon.system.group} into ${group} because one is ranged only.`,
+                            message: `Cannot alter ${item.system.group} into ${group} because one is ranged only.`,
                         });
                     }
                 }
@@ -437,6 +434,7 @@ const ITEM_ALTERATION_VALIDATORS = {
                         nullable: false,
                         initial: 15,
                     }),
+                    criticalHit: new fields.BooleanField({ required: true, nullable: false, initial: false }),
                 },
                 { nullable: false } as const,
             ),
@@ -624,12 +622,6 @@ type AlterationSchema = {
     itemType: fields.StringField<ItemType, ItemType, true, false, false>;
     mode: fields.StringField<AELikeChangeMode, AELikeChangeMode, true, false, false>;
     value: fields.DataField<Exclude<JSONValue, undefined>, Exclude<JSONValue, undefined>, true, boolean, boolean>;
-};
-
-type PersistentDamageValueSchema = {
-    formula: fields.StringField<string, string, true, false, false>;
-    damageType: fields.StringField<DamageType, DamageType, true, false, false>;
-    dc: fields.NumberField<number, number, true, false, true>;
 };
 
 type DescriptionValueField = fields.ArrayField<

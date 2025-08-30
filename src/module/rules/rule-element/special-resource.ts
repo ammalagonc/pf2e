@@ -1,11 +1,11 @@
-import type { ActorType, CreaturePF2e } from "@actor";
+import type { ActorPF2e, ActorType, CreaturePF2e } from "@actor";
 import type { CharacterResources } from "@actor/character/data.ts";
 import { CORE_RESOURCES } from "@actor/character/values.ts";
 import { applyActorGroupUpdate, createActorGroupUpdate } from "@actor/helpers.ts";
 import type { ActorGroupUpdate } from "@actor/types.ts";
 import type { ItemUUID } from "@client/documents/_module.d.mts";
 import type Document from "@common/abstract/document.d.mts";
-import { ItemProxyPF2e, PhysicalItemPF2e } from "@item";
+import { ItemPF2e, ItemProxyPF2e, PhysicalItemPF2e } from "@item";
 import type { PhysicalItemSource } from "@item/base/data/index.ts";
 import { AnyChoiceField } from "@system/schema-data-fields.ts";
 import { sluggify } from "@util";
@@ -36,12 +36,15 @@ class SpecialResourceRuleElement extends RuleElementPF2e<SpecialResourceSchema> 
         if (this.level !== null && !this.itemUUID) {
             this.failValidation("level can only be set if itemUUID is set");
         }
+
+        // If unset, set to 0 for now. It'll gain an actual value during beforeCreateData()
+        this.value ??= 0;
     }
 
     static override defineSchema(): SpecialResourceSchema {
         return {
             ...super.defineSchema(),
-            value: new fields.NumberField({ required: false, nullable: false, initial: undefined }),
+            value: new fields.NumberField({ required: true, nullable: true, initial: null }),
             max: new ResolvableValueField({ required: true, nullable: false }),
             itemUUID: new fields.DocumentUUIDField({
                 required: false,
@@ -136,7 +139,7 @@ class SpecialResourceRuleElement extends RuleElementPF2e<SpecialResourceSchema> 
             } else if (!existingItem && uuid) {
                 const source = await this.#createItem(uuid, level);
                 if (source) {
-                    const item = new ItemProxyPF2e(fu.deepClone(source), { parent: this.actor });
+                    const item = new ItemProxyPF2e(fu.deepClone(source), { parent: this.actor }) as ItemPF2e<ActorPF2e>;
                     tempItems.push(item);
                     pendingItems.push(source);
                 }
@@ -181,8 +184,8 @@ class SpecialResourceRuleElement extends RuleElementPF2e<SpecialResourceSchema> 
             this.max = existing.max = max;
             const rawValue = this.itemUUID
                 ? (this.actor.inventory.find((i) => i.sourceId === this.itemUUID)?.quantity ?? 0)
-                : this.value;
-            this.value = existing.value = Math.min(rawValue ?? max, max);
+                : (this._source.value ?? max);
+            this.value = existing.value = Math.min(rawValue, max);
         } else {
             this.failValidation(`Missing resource system data for resource ${this.slug}`);
         }
@@ -219,6 +222,7 @@ interface SpecialResourceRuleElement
         ModelPropsFromRESchema<SpecialResourceSchema> {
     slug: string;
     max: number;
+    value: number;
     get actor(): CreaturePF2e;
 }
 
@@ -232,7 +236,7 @@ type SpecialResourceSource = RuleElementSource & {
 
 type SpecialResourceSchema = RuleElementSchema & {
     /** Current value. If not set, defaults to null */
-    value: fields.NumberField<number, number, false, false>;
+    value: fields.NumberField<number, number, true, true, true>;
     /** The maximum value attainable for this resource. */
     max: ResolvableValueField<true, false>;
     /** If this represents a physical resource, the UUID of the item to create */

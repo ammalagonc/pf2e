@@ -15,10 +15,10 @@ import type { TokenDocumentPF2e } from "@scene/index.ts";
 import type { Statistic } from "@system/statistic/index.ts";
 import { tupleHasValue } from "@util";
 import * as R from "remeda";
-import type { PartySource, PartySystemData } from "./data.ts";
+import type { PartyAttributes, PartySource, PartySystemData } from "./data.ts";
 import { Kingdom } from "./kingdom/model.ts";
 import type { PartySheetRenderOptions } from "./sheet.ts";
-import { PartyCampaign } from "./types.ts";
+import type { PartyCampaign } from "./types.ts";
 
 class PartyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends ActorPF2e<TParent> {
     override armorClass = null;
@@ -96,7 +96,10 @@ class PartyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
     override prepareBaseData(): void {
         // Provide base structure for parent method
         this.system.details.level = { value: 0 };
-        const partialSystem: DeepPartial<PartySystemData> = this.system;
+        interface PartialSystemData extends Omit<Partial<PartySystemData>, "attributes"> {
+            attributes: Partial<PartyAttributes>;
+        }
+        const partialSystem: PartialSystemData = this.system;
         partialSystem.attributes = {};
         super.prepareBaseData();
 
@@ -127,6 +130,13 @@ class PartyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
         );
         this.system.details.level.value = partyLevel;
 
+        // Derive a manipulate reach from the members
+        this.system.attributes.reach = {
+            base: 0,
+            manipulate: this.members.reduce((highest, a) => Math.max(a.system.attributes.reach.manipulate, highest), 0),
+        };
+
+        // Kingmaker things
         if (game.pf2e.settings.campaign.type === "kingmaker" && !this.campaign) {
             Object.defineProperty(this, "campaign", {
                 value: new Kingdom(fu.deepClone(this.system._source.campaign ?? {}), { parent: this.system }),
@@ -141,7 +151,6 @@ class PartyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
 
     override prepareDerivedData(): void {
         super.prepareDerivedData();
-        if (!game.ready) return; // exit early if game isn't ready yet
 
         // Compute travel speed. Creature travel speed isn't implemented yet
         const travelSpeed = Math.min(...this.members.map((m) => m.attributes.speed.total));
@@ -216,7 +225,7 @@ class PartyPF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | n
     /* -------------------------------------------- */
 
     protected override _preCreate(
-        data: this["_source"],
+        data: DeepPartial<this["_source"]>,
         options: DatabaseCreateCallbackOptions,
         user: fd.BaseUser,
     ): Promise<boolean | void> {

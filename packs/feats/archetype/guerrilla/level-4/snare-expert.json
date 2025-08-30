@@ -44,7 +44,7 @@
                     "item:trait:snare"
                 ],
                 "selector": "inline-dc",
-                "value": "@actor.system.attributes.classDC.dc"
+                "value": "@actor.system.attributes.classDC.totalModifier"
             }
         ],
         "subfeatures": {

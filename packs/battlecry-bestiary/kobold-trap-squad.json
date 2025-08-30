@@ -133,9 +133,9 @@
                     "value": "<p>The kobolds hastily prepare a handful of rudimentary traps in their vicinity until the beginning of their next turn. The next creature who moves adjacent to the trap squad triggers a trap and must attempt a @Check[reflex|dc:18] save. On a failure, the creature takes @Damage[1d4[persistent,bleed]] damage (@Damage[2d4[persistent,bleed]] damage on a critical failure). A creature taking persistent bleed damage from Hasty Traps takes a –5-foot enhancement penalty to its Speed. This occurs to as many creatures as the kobold trap squad has segments when it performed the action, but a single creature can trigger only one trap per turn.</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.Effect: Hasty Traps]</p>"
                 },
                 "publication": {
-                    "license": "OGL",
-                    "remaster": false,
-                    "title": ""
+                    "license": "ORC",
+                    "remaster": true,
+                    "title": "Pathfinder Battlecry!"
                 },
                 "rules": [],
                 "slug": null,

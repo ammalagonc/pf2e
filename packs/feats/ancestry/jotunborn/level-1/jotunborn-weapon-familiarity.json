@@ -59,28 +59,6 @@
                 "label": "PF2E.SpecificRule.MartialProficiency.AdvancedJotunbornWeapons",
                 "sameAs": "martial",
                 "slug": "advanced-jotunborn-weapons"
-            },
-            {
-                "key": "CriticalSpecialization",
-                "predicate": [
-                    {
-                        "gte": [
-                            "self:level",
-                            5
-                        ]
-                    },
-                    {
-                        "or": [
-                            "item:trait:jotunborn",
-                            "item:base:bola",
-                            "item:base:greataxe",
-                            "item:base:halberd",
-                            "item:base:maul",
-                            "item:base:longspear",
-                            "item:base:war-flail"
-                        ]
-                    }
-                ]
             }
         ],
         "subfeatures": {

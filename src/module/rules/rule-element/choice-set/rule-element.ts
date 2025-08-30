@@ -3,7 +3,7 @@ import { StrikeData } from "@actor/data/base.ts";
 import { iterateAllItems } from "@actor/helpers.ts";
 import type { ItemUUID } from "@client/documents/_module.d.mts";
 import type CompendiumCollection from "@client/documents/collections/compendium-collection.d.mts";
-import type { CompendiumIndex } from "@client/documents/collections/compendium-collection.d.mts";
+import type { CompendiumIndexData } from "@client/documents/collections/compendium-collection.d.mts";
 import type { DocumentUUID } from "@client/utils/_module.d.mts";
 import { ItemPF2e, ItemProxyPF2e } from "@item";
 import { ItemSourcePF2e } from "@item/base/data/index.ts";
@@ -458,7 +458,7 @@ class ChoiceSetRuleElement extends RuleElementPF2e<ChoiceSetSchema> {
         const increment = 1 / packs.length;
         const localize = localizer("PF2E.ProgressBar");
         // Retrieve index fields from matching compendiums and use them for predicate testing
-        const indexData: CompendiumIndex[] = [];
+        const indexData: Collection<string, CompendiumIndexData>[] = [];
         for (const pack of packs) {
             progress.update({
                 message: localize("LoadingPack", { pack: pack.metadata.label }),
@@ -490,11 +490,14 @@ class ChoiceSetRuleElement extends RuleElementPF2e<ChoiceSetSchema> {
         const parentRollOptions = this.item.getRollOptions("parent");
         const filteredItems = indexData
             .flatMap((d): { name: string; type: string; uuid: string }[] => d.contents)
-            .filter((s): s is PreCreate<ItemSourcePF2e> & { uuid: DocumentUUID } => s.type === itemType)
+            .filter(
+                (s): s is DeepPartial<ItemSourcePF2e> & { name: string; type: string; uuid: DocumentUUID } =>
+                    s.type === itemType,
+            )
             .map((source) => {
                 const parsedUUID = fu.parseUuid(source.uuid);
                 const pack =
-                    parsedUUID.collection instanceof fd.collections.CompendiumCollection
+                    parsedUUID?.collection instanceof fd.collections.CompendiumCollection
                         ? parsedUUID.collection.metadata.id
                         : null;
                 return new ItemProxyPF2e(fu.deepClone(source), { pack });

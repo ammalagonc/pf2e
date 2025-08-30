@@ -12,7 +12,7 @@
         },
         "category": "ancestry",
         "description": {
-            "value": "<p>You've mastered how to tap into your restorative powers at a higher frequency. You can use Caretaker's Restoration once per hour instead of once per day.</p>"
+            "value": "<p>You've mastered how to tap into your restorative powers at a higher frequency. You can use @UUID[Compendium.pf2e.feats-srd.Item.Caretaker's Restoration] once per hour instead of once per day.</p>"
         },
         "level": {
             "value": 13

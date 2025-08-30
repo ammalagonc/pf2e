@@ -28,9 +28,9 @@
             ]
         },
         "publication": {
-            "license": "OGL",
-            "remaster": false,
-            "title": "Pathfinder #165: Eyes of Empty Death"
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Battlecry!"
         },
         "rules": [
             {
@@ -70,7 +70,7 @@
                     }
                 ],
                 "selector": "inline-dc",
-                "value": "@actor.system.attributes.classDC.dc"
+                "value": "@actor.system.attributes.classDC.totalModifier"
             }
         ],
         "traits": {

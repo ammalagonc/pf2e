@@ -29,7 +29,23 @@
             "remaster": true,
             "title": "Pathfinder Battlecry!"
         },
-        "rules": [],
+        "rules": [
+            {
+                "key": "FlatModifier",
+                "predicate": [
+                    {
+                        "or": [
+                            "action:high-jump",
+                            "action:long-jump"
+                        ]
+                    },
+                    "pounding-leap"
+                ],
+                "selector": "athletics",
+                "type": "circumstance",
+                "value": 2
+            }
+        ],
         "subfeatures": {
             "proficiencies": {},
             "senses": {},

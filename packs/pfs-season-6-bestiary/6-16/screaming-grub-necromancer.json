@@ -1696,7 +1696,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p><strong>Requirements</strong> The necromancer isn't drained and has at least one undead entity active</p><hr /><p><strong>Effect</strong> The necromancer overloads their undead entities with void energy, causing all of them to explode. Each entity is destroyed, dealing @Damage[4d10[void]] damage to each creature in a @Template[type:emanation|distance:10] with a @Check[fortitude|dc:23|basic] save. A creature in more than one explosion is damaged only once. The necromancer becomes @UUID[Compendium.pf2e.conditionitems.Item.Drained]{Drained 1}.</p>"
+                    "value": "<p><strong>Requirements</strong> The necromancer isn't drained and has at least one undead entity active</p><hr /><p><strong>Effect</strong> The necromancer overloads their undead entities with void energy, causing all of them to explode. Each entity is destroyed, dealing @Damage[4d10[void]|options:area-damage] damage to each creature in a @Template[type:emanation|distance:10] with a @Check[fortitude|dc:23|basic|options:area-effect] save. A creature in more than one explosion is damaged only once. The necromancer becomes @UUID[Compendium.pf2e.conditionitems.Item.Drained]{Drained 1}.</p>"
                 },
                 "publication": {
                     "license": "OGL",

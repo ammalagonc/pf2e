@@ -267,8 +267,9 @@ class ConditionPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends
     }
 
     /** Log self in parent's conditions map */
-    override prepareActorData(this: ConditionPF2e<ActorPF2e>): void {
+    override prepareActorData(): void {
         super.prepareActorData();
+        if (!this.actor) return;
 
         if (this.active && this.system.persistent) {
             const { damageType } = this.system.persistent;
@@ -277,7 +278,7 @@ class ConditionPF2e<TParent extends ActorPF2e | null = ActorPF2e | null> extends
     }
 
     /** Withhold all rule elements if this condition is inactive */
-    override prepareRuleElements(options?: RuleElementOptions): RuleElementPF2e[] {
+    override prepareRuleElements(options?: Omit<RuleElementOptions, "parent">): RuleElementPF2e[] {
         return this.active ? super.prepareRuleElements(options) : [];
     }
 

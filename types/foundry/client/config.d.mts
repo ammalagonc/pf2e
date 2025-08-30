@@ -1,8 +1,8 @@
 import { DataSchema, Document, TypeDataModel } from "@common/abstract/_module.mjs";
 import { AudioFilePath, ImageFilePath, RollMode } from "@common/constants.mjs";
-import { DocumentConstructionContext, Point } from "../common/_types.mjs";
+import { DocumentConstructionContext } from "../common/_types.mjs";
 import { ActiveEffectSource } from "../common/documents/active-effect.mjs";
-import { applications, dice, documents } from "./_module.mjs";
+import { applications, dice, documents, TokenMovementActionConfig } from "./_module.mjs";
 import DocumentSheetV2 from "./applications/api/document-sheet.mjs";
 import CameraViews from "./applications/apps/av/cameras.mjs";
 import HTMLEnrichedContentElement from "./applications/elements/enriched-content.mjs";
@@ -18,8 +18,6 @@ import JournalSheet from "./appv1/sheets/journal-sheet.mjs";
 import { CanvasAnimationAttribute } from "./canvas/animation/_types.mjs";
 import ChatBubbles from "./canvas/animation/chat-bubbles.mjs";
 import { DoorControl, ParticleEffect } from "./canvas/containers/_module.mjs";
-import { PointSourcePolygon } from "./canvas/geometry/_module.mjs";
-import { PointSourcePolygonConfig } from "./canvas/geometry/_types.mjs";
 import ClockwiseSweepPolygon from "./canvas/geometry/clockwise-sweep.mjs";
 import {
     EffectsCanvasGroup,
@@ -48,6 +46,7 @@ import type {
     PointVisionSource,
 } from "./canvas/sources/_module.mjs";
 import ClientDatabaseBackend from "./data/client-backend.mjs";
+import { TokenMovementCostAggregator } from "./documents/_types.mjs";
 import WorldCollection from "./documents/abstract/world-collection.mjs";
 import * as collections from "./documents/collections/_module.mjs";
 
@@ -81,16 +80,13 @@ export interface TextEditorEnricherConfig {
 /**
  * A light source animation configuration object.
  */
-export type LightSourceAnimationConfig = Record<
-    string,
-    {
-        label: string;
-        animation: Function;
-        backgroundShader?: typeof AdaptiveBackgroundShader;
-        illuminationShader?: typeof AdaptiveIlluminationShader;
-        colorationShader: typeof AdaptiveColorationShader;
-    }
->;
+export interface LightSourceAnimationConfig {
+    label: string;
+    animation: Function;
+    backgroundShader?: typeof AdaptiveBackgroundShader;
+    illuminationShader?: typeof AdaptiveIlluminationShader;
+    colorationShader: typeof AdaptiveColorationShader;
+}
 
 /**
  * Available Weather Effects implementations
@@ -142,6 +138,10 @@ interface WallDoorAnimationConfig {
     postAnimate?: WallDoorAnimationHook;
     duration: number;
 }
+
+export interface PartialTokenMovementActionConfig
+    extends Pick<TokenMovementActionConfig, "label" | "icon" | "order">,
+        Partial<Omit<TokenMovementActionConfig, "label" | "icon" | "order">> {}
 
 export default interface Config<
     TAmbientLightDocument extends documents.AmbientLightDocument<TScene | null>,
@@ -449,6 +449,16 @@ export default interface Config<
         documentClass: ConstructorOf<TTokenDocument>;
         objectClass: ConstructorOf<NonNullable<TTokenDocument["object"]>>;
         prototypeSheetClass: ConstructorOf<PrototypeTokenConfig>;
+        movement: {
+            TerrainData: typeof foundry.data.TerrainData;
+            /** The movement cost aggregator. */
+            costAggregator: TokenMovementCostAggregator;
+            /** The default movement animation speed in grid spaces per second. */
+            defaultSpeed: number;
+            defaultAction: string;
+            actions: Record<string, PartialTokenMovementActionConfig>;
+        };
+        adjectivesPrefix: string;
         ring: TokenRingConfig;
     };
 
@@ -479,7 +489,7 @@ export default interface Config<
             CONTROLLED: number;
             SECRET: number;
         };
-        doorControlsClass: DoorControl;
+        doorControlClass: typeof DoorControl;
         exploredColor: number;
         unexploredColor: number;
         darknessToDaylightAnimationMS: number;
@@ -568,13 +578,7 @@ export default interface Config<
         polygonBackends: {
             sight: typeof ClockwiseSweepPolygon;
             light: typeof ClockwiseSweepPolygon;
-            sound: ConstructorOf<ClockwiseSweepPolygon> & {
-                create<C extends PointSourcePolygonConfig, T extends PointSourcePolygon<C>>(
-                    this: ConstructorOf<T>,
-                    origin: Point,
-                    config?: C,
-                ): T;
-            };
+            sound: typeof ClockwiseSweepPolygon;
             move: typeof ClockwiseSweepPolygon;
         };
         dragSpeedModifier: number;

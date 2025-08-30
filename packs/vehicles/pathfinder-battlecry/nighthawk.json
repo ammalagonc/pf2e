@@ -74,9 +74,9 @@
             "pilotingCheck": "Athletics (DC 29) or Piloting Lore (DC 27)",
             "price": 3000,
             "publication": {
-                "license": "OGL",
-                "remaster": false,
-                "title": ""
+                "license": "ORC",
+                "remaster": true,
+                "title": "Pathfinder Battlecry!"
             },
             "space": {
                 "high": 10,

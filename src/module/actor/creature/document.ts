@@ -46,7 +46,6 @@ import {
 } from "./data.ts";
 import { imposeEncumberedCondition, setImmunitiesFromTraits } from "./helpers.ts";
 import type {
-    CreatureTrait,
     CreatureType,
     CreatureUpdateCallbackOptions,
     CreatureUpdateOperation,
@@ -583,10 +582,9 @@ abstract class CreaturePF2e<
     }
 
     /**
-     * Roll a Recovery Check
-     * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
+     * Roll a Dying Recovery Check
      */
-    async rollRecovery(event?: MouseEvent): Promise<Rolled<CheckRoll> | null> {
+    async rollRecovery(event?: PointerEvent): Promise<Rolled<CheckRoll> | null> {
         const { dying } = this.attributes;
 
         if (!dying?.value) return null;
@@ -895,8 +893,6 @@ abstract class CreaturePF2e<
 interface CreaturePF2e<TParent extends TokenDocumentPF2e | null = TokenDocumentPF2e | null> extends ActorPF2e<TParent> {
     readonly _source: CreatureSource;
     system: CreatureSystemData;
-
-    get traits(): Set<CreatureTrait>;
 
     get hitPoints(): HitPointsSummary;
 

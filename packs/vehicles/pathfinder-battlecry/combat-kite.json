@@ -74,9 +74,9 @@
             "pilotingCheck": "Nature (DC 24) or Piloting Lore (DC 22)",
             "price": 750,
             "publication": {
-                "license": "OGL",
-                "remaster": false,
-                "title": ""
+                "license": "ORC",
+                "remaster": true,
+                "title": "Pathfinder Battlecry!"
             },
             "space": {
                 "high": 10,

@@ -19,12 +19,13 @@ class TokenLayerPF2e<TObject extends TokenPF2e> extends fc.layers.TokenLayer<TOb
         return super._onClickLeft(event);
     }
 
-    /** Cycle Z indices of a hovered token stack */
+    /** Cycle Z indices of a hovered token stack. */
     cycleStack(): boolean {
         const hovered = this.hover;
         if (!hovered) return false;
-
-        const stack = [...this.quadtree.getObjects(hovered.bounds)]
+        const bounds = hovered.mechanicalBounds;
+        const rectangle = new PIXI.Rectangle(bounds.x + 1, bounds.y + 1, bounds.width - 2, bounds.height - 2);
+        const stack = [...this.quadtree.getObjects(rectangle)]
             .filter((t) => !t.document.isSecret && hovered.document.elevation === t.document.elevation)
             .sort((a, b) => a.document.sort - b.document.sort);
         if (stack.length < 2) return false;
@@ -44,17 +45,13 @@ class TokenLayerPF2e<TObject extends TokenPF2e> extends fc.layers.TokenLayer<TOb
             for (let sort = stack.length - 1; sort >= 0; sort--) {
                 const token = stack[sort];
                 token.document.sort = sort;
-                token._onUpdate(
-                    { _id: token.document.id, sort },
-                    { broadcast: false, parent: token.document.scene, updates: [] },
-                    game.user.id,
-                );
+                token._onUpdate({ _id: token.document.id, sort }, { broadcast: false }, game.user.id);
             }
         }
 
         // Update which token is hovered after rotating the stack
         const newTop = stack.at(-1);
-        this.hover = newTop ?? null;
+        this.hover = (newTop ?? null) as TObject;
         for (const token of stack) {
             token.hover = token === newTop;
         }

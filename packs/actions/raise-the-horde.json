@@ -18,9 +18,9 @@
             "per": "PT10M"
         },
         "publication": {
-            "license": "OGL",
-            "remaster": false,
-            "title": ""
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Battlecry!"
         },
         "rules": [],
         "traits": {

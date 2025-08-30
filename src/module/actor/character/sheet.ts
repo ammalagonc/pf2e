@@ -2,8 +2,8 @@ import { CreatureSheetData, Language, ResourceData } from "@actor/creature/index
 import type { Sense } from "@actor/creature/sense.ts";
 import { isReallyPC } from "@actor/helpers.ts";
 import { MODIFIER_TYPES, createProficiencyModifier } from "@actor/modifiers.ts";
-import { SheetClickActionHandlers } from "@actor/sheet/base.ts";
-import { AbilityViewData, InventoryItem } from "@actor/sheet/data-types.ts";
+import type { SheetClickActionHandlers } from "@actor/sheet/base.ts";
+import type { AbilityViewData, InventoryItem } from "@actor/sheet/data-types.ts";
 import { condenseSenses, createAbilityViewData } from "@actor/sheet/helpers.ts";
 import type { AttributeString, SaveType, SkillSlug } from "@actor/types.ts";
 import { ATTRIBUTE_ABBREVIATIONS } from "@actor/values.ts";
@@ -23,17 +23,18 @@ import { TraitToggleViewData } from "@item/ability/trait-toggles.ts";
 import { ItemSourcePF2e } from "@item/base/data/index.ts";
 import { isSpellConsumable } from "@item/consumable/spell-consumables.ts";
 import { CoinsPF2e } from "@item/physical/coins.ts";
-import { MagicTradition } from "@item/spell/types.ts";
-import { SpellcastingSheetData } from "@item/spellcasting-entry/types.ts";
-import { BaseWeaponType, WeaponGroup } from "@item/weapon/types.ts";
+import type { MagicTradition } from "@item/spell/types.ts";
+import type { SpellcastingSheetData } from "@item/spellcasting-entry/types.ts";
+import type { BaseWeaponType, WeaponGroup } from "@item/weapon/types.ts";
 import { WEAPON_CATEGORIES } from "@item/weapon/values.ts";
 import { DropCanvasItemDataPF2e } from "@module/canvas/drop-canvas-data.ts";
 import { ChatMessagePF2e } from "@module/chat-message/document.ts";
-import { LabeledValueAndMax, ZeroToFour } from "@module/data.ts";
-import { eventToRollParams } from "@module/sheet/helpers.ts";
+import { createUseActionMessage } from "@module/chat-message/helpers.ts";
+import type { LabeledValueAndMax, ZeroToFour } from "@module/data.ts";
+import { eventToRollMode, eventToRollParams } from "@module/sheet/helpers.ts";
 import { craft } from "@system/action-macros/crafting/craft.ts";
-import { DamageType } from "@system/damage/types.ts";
-import { CheckDC } from "@system/degree-of-success.ts";
+import type { DamageType } from "@system/damage/types.ts";
+import type { CheckDC } from "@system/degree-of-success.ts";
 import { TextEditorPF2e } from "@system/text-editor.ts";
 import {
     ErrorPF2e,
@@ -69,9 +70,10 @@ import {
     ClassDCData,
     MartialProficiency,
 } from "./data.ts";
-import { CharacterPF2e } from "./document.ts";
+import type { CharacterPF2e } from "./document.ts";
 import { ElementalBlast, ElementalBlastConfig } from "./elemental-blast.ts";
 import type { FeatBrowserFilterProps, FeatGroup } from "./feats/index.ts";
+import { getItemProficiencyRank } from "./helpers.ts";
 import { PCSheetTabManager } from "./tab-manager.ts";
 import { CHARACTER_SHEET_TABS } from "./values.ts";
 
@@ -523,10 +525,16 @@ class CharacterSheetPF2e<TActor extends CharacterPF2e> extends CreatureSheetPF2e
         data.isInvestable = !item.isStowed && item.isIdentified && item.isInvested !== null;
 
         // If armor is equipped, and can be invested, hint at the user that it should be invested
-        const invested = this.actor.inventory.invested;
+        const actor = this.actor;
+        const invested = actor.inventory.invested;
         const canInvest = invested && invested.value < invested.max;
-        if (item.isOfType("armor") && item.isEquipped && !item.isInvested && data.isInvestable && canInvest) {
-            data.notifyInvestment = true;
+        if (item.isOfType("armor") && getItemProficiencyRank(actor, item) > 0) {
+            const isWearingArmor = !!actor.wornArmor;
+            if ((item.isEquipped || !isWearingArmor) && !item.isInvested && data.isInvestable && canInvest) {
+                data.notifyInvest = true;
+            } else if (!isWearingArmor) {
+                data.notifyEquip = true;
+            }
         }
 
         return data;
@@ -557,7 +565,7 @@ class CharacterSheetPF2e<TActor extends CharacterPF2e> extends CreatureSheetPF2e
 
         // Recheck for the presence of an encounter in case the button state has somehow fallen out of sync
         const rollInitiativeLink = htmlQuery(html, ".sidebar a[data-action=roll-initiative]");
-        rollInitiativeLink?.addEventListener("mouseenter", () => {
+        rollInitiativeLink?.addEventListener("pointerenter", () => {
             this.toggleInitiativeLink();
         });
 
@@ -900,6 +908,13 @@ class CharacterSheetPF2e<TActor extends CharacterPF2e> extends CreatureSheetPF2e
             await this.actor.update({ "system.exploration": [] });
         };
 
+        handlers["channel-elements"] = async (event) => {
+            const abilityItem = this.actor.itemTypes.action.find(
+                (i) => i.slug === "channel-elements" && i.system.selfEffect,
+            );
+            if (abilityItem) await createUseActionMessage(abilityItem, eventToRollMode(event));
+        };
+
         // INVENTORY
 
         handlers["toggle-invested"] = async (event) => {
@@ -1110,7 +1125,7 @@ class CharacterSheetPF2e<TActor extends CharacterPF2e> extends CreatureSheetPF2e
             }
         };
 
-        const adjustCraftQuantity = async (_: MouseEvent, anchor: HTMLElement) => {
+        const adjustCraftQuantity = async (_: PointerEvent, anchor: HTMLElement) => {
             const row = htmlClosest(anchor, "li");
             const quantityInput = htmlQuery<HTMLInputElement>(row, "input[data-craft-quantity]");
             const formula = this.#knownFormulas[row?.dataset.itemUuid ?? ""];

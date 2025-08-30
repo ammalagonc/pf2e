@@ -36,10 +36,8 @@
             "show": true
         },
         "traits": {
-            "rarity": "uncommon",
-            "value": [
-                "wizard"
-            ]
+            "otherTags": [],
+            "value": []
         }
     },
     "type": "effect"

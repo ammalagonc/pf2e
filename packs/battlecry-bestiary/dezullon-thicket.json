@@ -142,7 +142,7 @@
                 },
                 "category": "offensive",
                 "description": {
-                    "value": "<p>The dezullon thicket discharges a cascade of acidic digestive juices as a ranged attack, dealing @Damage[6d6[acid]|options:area-damage,inflicts:amnesia-venom] damage in a @Template[type:burst|distance:10] within 30 feet (@Check[reflex|dc:33|basic] save) and exposing any creature struck to amnesia venom. When the thicket is reduced to 2 segments, this area decreases to a @Template[type:burst|distance:5].</p>"
+                    "value": "<p>The dezullon thicket discharges a cascade of acidic digestive juices as a ranged attack, dealing @Damage[6d6[acid]|options:area-damage,inflicts:amnesia-venom] damage in a @Template[type:burst|distance:10] within 30 feet (@Check[reflex|dc:33|basic|options:area-effect] save) and exposing any creature struck to amnesia venom. When the thicket is reduced to 2 segments, this area decreases to a @Template[type:burst|distance:5].</p>"
                 },
                 "publication": {
                     "license": "OGL",

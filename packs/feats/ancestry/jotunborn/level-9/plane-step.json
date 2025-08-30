@@ -12,7 +12,7 @@
         },
         "category": "ancestry",
         "description": {
-            "value": "<p>You temporarily move just beyond the threshold of the current plane, granting you concealment until the end of your next turn. You remain clearly visible while stepping outside of a plane in this way and you can't use this concealment to Hide or @UUID[Compendium.pf2e.actionspf2e.Item.Sneak].</p>"
+            "value": "<p>You temporarily move just beyond the threshold of the current plane, granting you @UUID[Compendium.pf2e.conditionitems.Item.Concealed]{Concealment} until the end of your next turn. You remain clearly visible while stepping outside of a plane in this way and you can't use this concealment to @UUID[Compendium.pf2e.actionspf2e.Item.Hide] or @UUID[Compendium.pf2e.actionspf2e.Item.Sneak].</p>"
         },
         "level": {
             "value": 9
