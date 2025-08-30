@@ -139,33 +139,26 @@
                 },
                 "rules": [
                     {
-                        "definition": [
+                        "exceptions": [
                             {
-                                "or": [
-                                    "item:from-spell",
-                                    "item:trait:impulse",
-                                    "item:type:spell"
-                                ]
-                            },
-                            {
-                                "not": {
-                                    "and": [
-                                        "item:type:spell",
-                                        {
-                                            "or": [
-                                                "item:slug:faerie-fire",
-                                                "item:slug:force-barrage",
-                                                "item:slug:quandary",
-                                                "item:slug:revealing-light"
-                                            ]
-                                        }
-                                    ]
-                                }
+                                "definition": [
+                                    "item:type:spell",
+                                    {
+                                        "or": [
+                                            "item:slug:faerie-fire",
+                                            "item:slug:force-barrage",
+                                            "item:slug:quandary",
+                                            "item:slug:revealing-light",
+                                            "item:slug:holy-light",
+                                            "item:trait:vitality"
+                                        ]
+                                    }
+                                ],
+                                "label": "PF2E.NPCAbility.WillOWisp.DreadWispNote"
                             }
                         ],
                         "key": "Immunity",
-                        "label": "PF2E.Damage.IWR.Type.magic",
-                        "type": "custom"
+                        "type": "magic"
                     }
                 ],
                 "slug": null,
@@ -411,11 +404,7 @@
                 "temp": 0,
                 "value": 90
             },
-            "immunities": [
-                {
-                    "type": "magic"
-                }
-            ],
+            "immunities": [],
             "speed": {
                 "otherSpeeds": [
                     {

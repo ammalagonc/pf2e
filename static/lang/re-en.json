@@ -1543,6 +1543,13 @@
             "WeaverOfWebs": {
                 "InBrightLight": "In Bright Light"
             },
+            "WillOWisp": {
+                "MagicImmunity": {
+                    "DreadWispNote": "except faerie fire, force barrage, quandary, holy light, revealing light and spells with the vitality trait",
+                    "VariantNote": "except faerie fire, force barrage, quandary and revealing light",
+                    "Note": "except force barrage, quandary and revealing light"
+                }
+            },
             "WyvernRider": {
                 "WyvernsSwoop": {
                     "HigherElevation": "Began swoop at a higher elevation than the target"
