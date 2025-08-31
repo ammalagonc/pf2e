@@ -162,7 +162,7 @@
                                         ]
                                     }
                                 ],
-                                "label": "F2E.NPCAbility.WillOWisp.Note"
+                                "label": "PF2E.NPCAbility.WillOWisp.MagicImmunity.Note"
                             }
                         ],
                         "key": "Immunity",
