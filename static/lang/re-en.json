@@ -1545,8 +1545,7 @@
             },
             "WillOWisp": {
                 "MagicImmunity": {
-                    "DreadWispNote": "except faerie fire, force barrage, quandary, holy light, revealing light and spells with the vitality trait",
-                    "VariantNote": "except faerie fire, force barrage, quandary and revealing light",
+                    "DreadWispNote": "except force barrage, quandary, holy light, revealing light and spells with the vitality trait",
                     "Note": "except force barrage, quandary and revealing light"
                 }
             },
