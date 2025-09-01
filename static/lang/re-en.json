@@ -806,7 +806,11 @@
                 "Spirits": "spirits",
                 "Treerazer": "Treerazer",
                 "UnholyBludgeoningPiercingSlashing": "unholy bludgeoning, piercing and slashing damage",
-                "VoidZonKuthonFollowers": "void from followers of Zon-Kuthon"
+                "VoidZonKuthonFollowers": "void from followers of Zon-Kuthon",
+                "WispMagicImunity": {
+                    "DreadWisp": "force barrage, quandary, holy light, revealing light and spells with the vitality trait",
+                    "Note": "force barrage, quandary and revealing light"
+                }
             }
         },
         "Mutagens": {
@@ -1542,12 +1546,6 @@
             },
             "WeaverOfWebs": {
                 "InBrightLight": "In Bright Light"
-            },
-            "WillOWisp": {
-                "MagicImmunity": {
-                    "DreadWispNote": "except force barrage, quandary, holy light, revealing light and spells with the vitality trait",
-                    "Note": "except force barrage, quandary and revealing light"
-                }
             },
             "WyvernRider": {
                 "WyvernsSwoop": {

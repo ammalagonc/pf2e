@@ -134,7 +134,7 @@
                                         ]
                                     }
                                 ],
-                                "label": "PF2E.NPCAbility.WillOWisp.MagicImmunity.Note"
+                                "label": "PF2E.IWR.Custom.MagicImmunity.WispMagicImunity.Note"
                             }
                         ],
                         "key": "Immunity",
