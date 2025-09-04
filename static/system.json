@@ -620,6 +620,19 @@
             "flags": {}
         },
         {
+            "name": "standalone-adventures",
+            "label": "Standalone Adventures",
+            "path": "packs/standalone-adventures",
+            "type": "Actor",
+            "banner": "systems/pf2e/assets/compendium-banner/red.webp",
+            "system": "pf2e",
+            "ownership": {
+                "PLAYER": "LIMITED",
+                "ASSISTANT": "OWNER"
+            },
+            "flags": {}
+        },
+        {
             "name": "strength-of-thousands-bestiary",
             "label": "Strength of Thousands",
             "path": "packs/strength-of-thousands-bestiary",
@@ -1285,6 +1298,7 @@
                         "prey-for-death-bestiary",
                         "rusthenge-bestiary",
                         "shadows-at-sundown-bestiary",
+                        "standalone-adventures",
                         "the-enmity-cycle-bestiary",
                         "the-slithering-bestiary",
                         "troubles-in-otari-bestiary"
