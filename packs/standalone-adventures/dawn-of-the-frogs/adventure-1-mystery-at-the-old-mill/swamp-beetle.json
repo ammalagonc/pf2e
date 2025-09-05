@@ -88,7 +88,7 @@
                 "category": "defensive",
                 "deathNote": true,
                 "description": {
-                    "value": "<p>When a swamp beetle dies, it splatters everyone next to it with foul-smelling acid. PCs next to the swamp beetle take @Damage[1[acid]] damage. The other beetles are immune to this damage.</p>"
+                    "value": "<p>When a swamp beetle dies, it splatters everyone next to it with foul-smelling acid. PCs next to the swamp beetle take @Damage[1[acid]|options:area-damage] damage. The other beetles are immune to this damage.</p>"
                 },
                 "publication": {
                     "license": "OGL",
