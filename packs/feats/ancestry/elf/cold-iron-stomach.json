@@ -50,6 +50,16 @@
                 "selector": "saving-throw",
                 "type": "circumstance",
                 "value": 2
+            },
+            {
+                "itemType": "condition",
+                "key": "ItemAlteration",
+                "mode": "subtract",
+                "predicate": [
+                    "item:slug:sickened"
+                ],
+                "property": "badge-value",
+                "value": 1
             }
         ],
         "traits": {

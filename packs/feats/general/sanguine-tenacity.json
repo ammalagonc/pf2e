@@ -44,6 +44,26 @@
                 ],
                 "property": "pd-recovery-dc",
                 "value": 11
+            },
+            {
+                "itemType": "condition",
+                "key": "ItemAlteration",
+                "mode": "subtract",
+                "predicate": [
+                    "item:slug:enfeebled"
+                ],
+                "property": "badge-value",
+                "value": 1
+            },
+            {
+                "itemType": "condition",
+                "key": "ItemAlteration",
+                "mode": "subtract",
+                "predicate": [
+                    "item:slug:drained"
+                ],
+                "property": "badge-value",
+                "value": 1
             }
         ],
         "traits": {
