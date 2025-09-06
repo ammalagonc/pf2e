@@ -4,9 +4,9 @@
         "color": null,
         "description": "",
         "flags": {},
-        "folder": "Yn1729WYAocCbR6j",
+        "folder": null,
         "name": "Adventure 1: Mystery at the Old Mill",
-        "sort": 0,
+        "sort": 100000,
         "sorting": "a",
         "type": "Actor"
     },
@@ -15,9 +15,9 @@
         "color": null,
         "description": "",
         "flags": {},
-        "folder": "Yn1729WYAocCbR6j",
+        "folder": null,
         "name": "Adventure 2: Swamp Stalkers",
-        "sort": 0,
+        "sort": 200000,
         "sorting": "a",
         "type": "Actor"
     },
@@ -26,20 +26,9 @@
         "color": null,
         "description": "",
         "flags": {},
-        "folder": "Yn1729WYAocCbR6j",
-        "name": "Adventure 3: A Dirge for Dunmire",
-        "sort": 0,
-        "sorting": "a",
-        "type": "Actor"
-    },
-    {
-        "_id": "Yn1729WYAocCbR6j",
-        "color": null,
-        "description": "",
-        "flags": {},
         "folder": null,
-        "name": "Dawn of the Frogs",
-        "sort": 0,
+        "name": "Adventure 3: A Dirge for Dunmire",
+        "sort": 300000,
         "sorting": "a",
         "type": "Actor"
     }
