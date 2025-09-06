@@ -134,7 +134,7 @@
                                         ]
                                     }
                                 ],
-                                "label": "PF2E.IWR.Custom.WispMagicImmunity"
+                                "label": "PF2E.IWR.Custom.WispVulnerabilities"
                             }
                         ],
                         "key": "Immunity",

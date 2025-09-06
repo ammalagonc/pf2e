@@ -807,8 +807,7 @@
                 "Treerazer": "Treerazer",
                 "UnholyBludgeoningPiercingSlashing": "unholy bludgeoning, piercing and slashing damage",
                 "VoidZonKuthonFollowers": "void from followers of Zon-Kuthon",
-                "WispMagicImmunity": "wisp vulnerabilities"
-                
+                "WispVulnerabilities": "wisp vulnerabilities"
             }
         },
         "Mutagens": {
