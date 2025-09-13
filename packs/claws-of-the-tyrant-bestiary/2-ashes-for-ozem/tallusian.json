@@ -538,7 +538,10 @@
                         "predicate": [
                             "rubble"
                         ],
-                        "selector": "deception-dc",
+                        "selector": [
+                            "deception-dc",
+                            "deception"
+                        ],
                         "slug": "rubble-bonus",
                         "value": 19
                     },
